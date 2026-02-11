@@ -3,100 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - VIP 100% CAPA</title>
+    <title>VITORZIN - PRIVATE ORIGINAL</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
         body { background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
         
         .box { 
-            background: #050505; 
-            border: 3px solid #00d4ff; 
-            border-radius: 20px; 
+            background: #000; 
+            border: 2px solid #00d4ff; 
+            border-radius: 5px; 
             padding: 25px; 
-            width: 92%; 
-            max-width: 380px; 
+            width: 95%; 
+            max-width: 400px; 
             text-align: center; 
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.2);
+            position: relative;
         }
 
-        h1 { color: #fff; text-shadow: 0 0 15px #00d4ff; margin-bottom: 5px; font-size: 32px; text-transform: uppercase; letter-spacing: 5px; }
-        .sub-title { color: #fff; font-size: 10px; margin-bottom: 20px; letter-spacing: 2px; }
+        .box::before { content: "ORIGINAL DATABASE"; position: absolute; top: -10px; left: 20px; background: #000; padding: 0 10px; color: #00d4ff; font-size: 10px; }
 
+        h1 { color: #fff; text-shadow: 0 0 10px #00d4ff; margin-bottom: 5px; font-size: 28px; text-transform: uppercase; letter-spacing: 2px; }
+        
         input { 
-            width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; 
+            width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 4px; 
             border: 1px solid #00d4ff; background: #000; color: #fff; text-align: center; outline: none; 
         }
 
         button { 
             width: 100%; padding: 15px; background: #00d4ff; color: #000; border: none; 
-            border-radius: 10px; font-weight: 1000; cursor: pointer; text-transform: uppercase; 
-            margin-bottom: 10px; transition: 0.3s;
+            font-weight: 1000; cursor: pointer; text-transform: uppercase; margin-bottom: 8px;
         }
 
         .hidden { display: none; }
 
         .btn-func { 
-            background: #111; border: 1px solid #fff; color: #fff; 
-            font-size: 12px; text-align: left; padding-left: 20px; 
-            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+            background: #050505; border: 1px solid #222; color: #00d4ff; 
+            font-size: 11px; text-align: left; padding-left: 15px; 
         }
 
         .active { 
-            background: #fff !important; color: #000 !important; 
-            border-color: #00d4ff !important; box-shadow: 0 0 25px #fff;
-            transform: scale(1.02);
+            background: #00d4ff !important; color: #000 !important; 
+            box-shadow: 0 0 15px #00d4ff;
         }
 
-        .tag { font-size: 9px; color: #555; margin-top: 15px; text-transform: uppercase; }
-        .status { color: #00ff00; font-weight: bold; font-size: 12px; margin-bottom: 10px; }
+        #console { 
+            background: #050505; color: #00ff00; font-size: 9px; text-align: left; 
+            padding: 10px; margin-bottom: 10px; border: 1px solid #111; height: 60px; overflow-y: hidden;
+        }
     </style>
 </head>
 <body>
 
     <div id="login-screen" class="box">
         <h1>VITORZIN</h1>
-        <p class="sub-title">SISTEMA ANTI-PINAR V4</p>
+        <p style="font-size: 10px; color: #888; margin-bottom: 15px;">LOGIN: vitorzin | SENHA: 1</p>
         <input type="text" id="user" placeholder="USUÁRIO">
         <input type="password" id="pass" placeholder="SENHA">
-        <button onclick="verificarLogin()">LOGAR NO PAINEL</button>
+        <button onclick="verificarLogin()">EXECUTAR LOGIN</button>
     </div>
 
     <div id="painel" class="box hidden">
         <h1>VITORZIN</h1>
-        <div id="status-text" class="status">AGUARDANDO INJEÇÃO...</div>
+        <div id="console">> SYSTEM READY...<br>> WAITING INJECTION...</div>
         
-        <button class="btn-func" onclick="ativar(this, 'AIMBOT')">🔘 AIMBOT (FULL CAPA)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMLOCK')">🔘 AIMLOCK (GRUDAR PERTO)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMFOV')">🔘 AIMFOV (MIRA LIMPA)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMNECK')">🔘 AIMNECK (FOCO CABEÇA)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMLECK')">🔘 AIMLECK (ESTABILIZADOR)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMSNECK')">🔘 AIMSNECK (NO PINAR 100%)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMLOCKMIRA')">🔘 AIMLOCKMIRA (SEM TREMER)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMBOT_FORCE_BONE_6')">🔘 AIMBOT HEAD (ORIGINAL CHZ)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMLOCK_CLOSE_RANGE_90')">🔘 AIMLOCK CLOSE (SIELZADA)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMFOV_EXTERNAL_XY')">🔘 AIMFOV EXTERNAL (STABLE)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMNECK_LOCK_V2')">🔘 AIMNECK LOCK (ORIGINAL)</button>
+        <button class="btn-func" onclick="ativar(this, 'REGEDIT_MOUSE_LL_V4')">🔘 AIMLECK (REGEDIT MOUSE)</button>
+        <button class="btn-func" onclick="ativar(this, 'NO_PINAR_SYSTEM_FIX')">🔘 AIMSNECK (NO-PINAR FIXED)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMLOCK_MIRA_VIP_MAX')">🔘 AIMLOCK MIRA (MAGNÉTICO)</button>
 
-        <button style="margin-top: 15px; background: transparent; color: #fff; border: 1px solid #555; font-size: 10px;" onclick="window.location.reload()">SAIR</button>
-        <p class="tag">Vitorzinw V4 &copy; 2026 - Anti-Pinar System</p>
+        <button style="margin-top: 10px; background: #fff; color: #000;" onclick="window.location.reload()">SAIR</button>
     </div>
 
     <script>
         function verificarLogin() {
-            var u = document.getElementById('user').value;
-            var p = document.getElementById('pass').value;
-            if (u === "vitorzin" && p === "1") {
+            if (document.getElementById('user').value === "vitorzin" && document.getElementById('pass').value === "1") {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('painel').classList.remove('hidden');
-            } else { alert("ACESSO NEGADO!"); }
+            } else { alert("INVALID KEY!"); }
         }
 
-        function ativar(btn, nome) {
+        function ativar(btn, arq) {
             btn.classList.toggle('active');
+            let con = document.getElementById('console');
             if(btn.classList.contains('active')) {
-                btn.innerText = "✅ " + nome + " ATIVO";
-                document.getElementById('status-text').innerText = "INJETANDO: " + nome + "...";
-                setTimeout(() => {
-                   document.getElementById('status-text').innerText = "MIRA ESTABILIZADA!";
-                }, 1000);
+                btn.innerText = "✅ " + arq + " [ON]";
+                con.innerHTML += `<br>> INJECTING: ${arq}...<br>> BYPASSING SECURITY...<br>> SUCCESS!`;
             } else {
-                btn.innerText = "🔘 " + nome;
+                btn.innerText = "🔘 " + arq;
             }
         }
     </script>
