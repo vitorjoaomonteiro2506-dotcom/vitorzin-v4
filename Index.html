@@ -3,44 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZINW V4 - MOBILE VIP</title>
+    <title>VITORZINW V4 - OFICIAL</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
         body { background: #050505; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
         .box { background: #111; border: 2px solid #ff0000; border-radius: 15px; padding: 30px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 20px #ff0000; }
         h1 { color: #ff0000; margin-bottom: 20px; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; }
         input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #333; background: #222; color: #fff; text-align: center; outline: none; }
-        input:focus { border-color: #ff0000; }
-        button { width: 100%; padding: 12px; background: #ff0000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
-        button:hover { background: #b30000; transform: scale(1.02); }
+        button { width: 100%; padding: 12px; background: #ff0000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
         .hidden { display: none; }
-        .func { background: #1a1a1a; padding: 12px; margin: 10px 0; border-radius: 8px; border-left: 5px solid #ff0000; text-align: left; font-size: 14px; }
+        .func-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 15px; }
+        .func { background: #1a1a1a; padding: 10px; border-radius: 8px; border-left: 4px solid #ff0000; text-align: left; font-size: 13px; }
         .func span { color: #ff0000; float: right; font-weight: bold; }
-        .status { font-size: 11px; color: #00ff00; margin-top: 10px; }
+        .dev-tag { font-size: 10px; color: #555; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <div id="login-screen" class="box">
         <h1>VITORZINW V4</h1>
-        <p style="margin-bottom: 15px; font-size: 12px; color: #888;">PAINEL MOBILE 2026</p>
+        <p style="margin-bottom: 15px; font-size: 12px; color: #888;">LOGIN: vitorzin | SENHA: 1</p>
         <input type="text" id="user" placeholder="USUÁRIO">
         <input type="password" id="pass" placeholder="SENHA">
         <button onclick="verificarLogin()">ENTRAR NO PAINEL</button>
     </div>
 
     <div id="painel" class="box hidden">
-        <h1>FUNÇÕES ATIVAS</h1>
+        <h1 style="font-size: 18px;">VITORZINW + SIEL + CHZ</h1>
         
-        <div class="func">SENSI GERAL <span>141%</span></div>
-        <div class="func">SENSI X/Y <span>75.65 / 0.85</span></div>
-        <div class="func">AJUSTE VIP <span>16450</span></div>
-        <div class="func">REGISTRO (HITREG) <span>ATIVADO</span></div>
-        <div class="func">NO RECOIL <span>ATIVADO</span></div>
-        
-        <p class="status">● Sistema Anti-Ban Atualizado</p>
+        <div class="func-grid">
+            <div class="func">SENSI VITORZIN <span>X: 75.65 / Y: 50</span></div>
+            <div class="func">AJUSTE SIELZADA <span>16450</span></div>
+            <div class="func">GRUDAR CABEÇA (CHZ) <span>99%</span></div>
+            <div class="func">ANTI-TREMOR <span>ATIVO</span></div>
+            <div class="func">BYPASS MOBILE <span>OFFLINE</span></div>
+            <div class="func">SENSI GERAL <span>141</span></div>
+        </div>
+
         <br>
-        <button onclick="alert('Configurações aplicadas com sucesso!')">INJETAR SENSI</button>
+        <button onclick="alert('Sensi Injetada! Abra o jogo agora.')">ATIVAR TUDO VIP</button>
+        <p class="dev-tag">Vitorzinw V4 &copy; 2026</p>
     </div>
 
     <script>
@@ -48,12 +50,11 @@
             var usuario = document.getElementById('user').value;
             var senha = document.getElementById('pass').value;
 
-            // LOGIN: vitorzin | SENHA: 1
             if (usuario === "vitorzin" && senha === "1") {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('painel').classList.remove('hidden');
             } else {
-                alert("ACESSO NEGADO! Usuário ou senha incorretos.");
+                alert("ACESSO NEGADO!");
             }
         }
     </script>
