@@ -3,58 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZINW V4 - OFICIAL</title>
+    <title>VITORZIN - OFICIAL</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-        body { background: #050505; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .box { background: #111; border: 2px solid #ff0000; border-radius: 15px; padding: 30px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 20px #ff0000; }
-        h1 { color: #ff0000; margin-bottom: 20px; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; }
-        input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #333; background: #222; color: #fff; text-align: center; outline: none; }
-        button { width: 100%; padding: 12px; background: #ff0000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        body { background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .box { background: #0a0a0a; border: 2px solid #ff0000; border-radius: 15px; padding: 30px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 20px #ff0000; }
+        h1 { color: #ff0000; margin-bottom: 20px; font-size: 26px; text-transform: uppercase; letter-spacing: 3px; }
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #222; background: #111; color: #fff; text-align: center; outline: none; }
+        button { width: 100%; padding: 12px; background: #ff0000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-bottom: 10px; transition: 0.3s; }
         .hidden { display: none; }
-        .func-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 15px; }
-        .func { background: #1a1a1a; padding: 10px; border-radius: 8px; border-left: 4px solid #ff0000; text-align: left; font-size: 13px; }
-        .func span { color: #ff0000; float: right; font-weight: bold; }
-        .dev-tag { font-size: 10px; color: #555; margin-top: 15px; }
+        .btn-func { background: #111; border: 1px solid #ff0000; color: #ff0000; font-size: 13px; text-align: left; padding-left: 15px; }
+        .active { background: #ff0000 !important; color: #fff !important; }
+        .tag { font-size: 10px; color: #444; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <div id="login-screen" class="box">
-        <h1>VITORZINW V4</h1>
-        <p style="margin-bottom: 15px; font-size: 12px; color: #888;">LOGIN: vitorzin | SENHA: 1</p>
+        <h1>VITORZIN</h1>
         <input type="text" id="user" placeholder="USUÁRIO">
         <input type="password" id="pass" placeholder="SENHA">
-        <button onclick="verificarLogin()">ENTRAR NO PAINEL</button>
+        <button onclick="verificarLogin()">ENTRAR</button>
     </div>
 
     <div id="painel" class="box hidden">
-        <h1 style="font-size: 18px;">VITORZINW + SIEL + CHZ</h1>
+        <h1>VITORZIN</h1>
+        <p style="font-size: 11px; color: #888; margin-bottom: 15px;">ATIVAR FUNÇÕES MANUALMENTE</p>
         
-        <div class="func-grid">
-            <div class="func">SENSI VITORZIN <span>X: 75.65 / Y: 50</span></div>
-            <div class="func">AJUSTE SIELZADA <span>16450</span></div>
-            <div class="func">GRUDAR CABEÇA (CHZ) <span>99%</span></div>
-            <div class="func">ANTI-TREMOR <span>ATIVO</span></div>
-            <div class="func">BYPASS MOBILE <span>OFFLINE</span></div>
-            <div class="func">SENSI GERAL <span>141</span></div>
-        </div>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMBOT</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMLOCK</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMFOV</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMNECK</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMLECK</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMSNECK</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMLOCKMIRA</button>
 
-        <br>
-        <button onclick="alert('Sensi Injetada! Abra o jogo agora.')">ATIVAR TUDO VIP</button>
-        <p class="dev-tag">Vitorzinw V4 &copy; 2026</p>
+        <button style="margin-top: 15px; background: #fff; color: #000;" onclick="window.location.reload()">DESLOGAR</button>
+        <p class="tag">VITORZIN V4 &copy; 2026</p>
     </div>
 
     <script>
         function verificarLogin() {
-            var usuario = document.getElementById('user').value;
-            var senha = document.getElementById('pass').value;
-
-            if (usuario === "vitorzin" && senha === "1") {
+            var u = document.getElementById('user').value;
+            var p = document.getElementById('pass').value;
+            if (u === "vitorzin" && p === "1") {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('painel').classList.remove('hidden');
             } else {
-                alert("ACESSO NEGADO!");
+                alert("LOGIN OU SENHA INCORRETOS!");
+            }
+        }
+
+        function ativar(btn) {
+            btn.classList.toggle('active');
+            if(btn.classList.contains('active')) {
+                btn.innerText = btn.innerText.replace("🔘", "✅") + " ON";
+            } else {
+                btn.innerText = btn.innerText.replace("✅", "🔘").replace(" ON", "");
             }
         }
     </script>
