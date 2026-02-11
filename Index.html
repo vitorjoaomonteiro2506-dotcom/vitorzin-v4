@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - VIP 90%</title>
+    <title>VITORZIN - VIP 100% CAPA</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
@@ -19,7 +19,7 @@
             box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
         }
 
-        h1 { color: #fff; text-shadow: 0 0 15px #00d4ff; margin-bottom: 10px; font-size: 32px; text-transform: uppercase; letter-spacing: 5px; }
+        h1 { color: #fff; text-shadow: 0 0 15px #00d4ff; margin-bottom: 5px; font-size: 32px; text-transform: uppercase; letter-spacing: 5px; }
         .sub-title { color: #fff; font-size: 10px; margin-bottom: 20px; letter-spacing: 2px; }
 
         input { 
@@ -35,7 +35,6 @@
 
         .hidden { display: none; }
 
-        /* Botões Estilo CHZ/Sielzada */
         .btn-func { 
             background: #111; border: 1px solid #fff; color: #fff; 
             font-size: 12px; text-align: left; padding-left: 20px; 
@@ -49,14 +48,14 @@
         }
 
         .tag { font-size: 9px; color: #555; margin-top: 15px; text-transform: uppercase; }
-        .percent { color: #00d4ff; font-weight: bold; }
+        .status { color: #00ff00; font-weight: bold; font-size: 12px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
     <div id="login-screen" class="box">
         <h1>VITORZIN</h1>
-        <p class="sub-title">SISTEMA DE MIRA 90% HS</p>
+        <p class="sub-title">SISTEMA ANTI-PINAR V4</p>
         <input type="text" id="user" placeholder="USUÁRIO">
         <input type="password" id="pass" placeholder="SENHA">
         <button onclick="verificarLogin()">LOGAR NO PAINEL</button>
@@ -64,39 +63,38 @@
 
     <div id="painel" class="box hidden">
         <h1>VITORZIN</h1>
-        <p class="sub-title">AUXÍLIO DE MIRA <span class="percent">90% NA CARA</span></p>
+        <div id="status-text" class="status">AGUARDANDO INJEÇÃO...</div>
         
-        <button class="btn-func" onclick="ativar(this, 'AIMBOT')">🔘 AIMBOT (FORÇAR CABEÇA)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMLOCK')">🔘 AIMLOCK (GRUDAR 100%)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMFOV')">🔘 AIMFOV (MIRA LEVE)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMNECK')">🔘 AIMNECK (FOCO PESCOÇO)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMLECK')">🔘 AIMLECK (REGISTRO VIP)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMSNECK')">🔘 AIMSNECK (NO PINAR)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMLOCKMIRA')">🔘 AIMLOCKMIRA (FULL CARA)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMBOT')">🔘 AIMBOT (FULL CAPA)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMLOCK')">🔘 AIMLOCK (GRUDAR PERTO)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMFOV')">🔘 AIMFOV (MIRA LIMPA)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMNECK')">🔘 AIMNECK (FOCO CABEÇA)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMLECK')">🔘 AIMLECK (ESTABILIZADOR)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMSNECK')">🔘 AIMSNECK (NO PINAR 100%)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMLOCKMIRA')">🔘 AIMLOCKMIRA (SEM TREMER)</button>
 
-        <button style="margin-top: 15px; background: transparent; color: #fff; border: 1px solid #555; font-size: 10px;" onclick="window.location.reload()">SAIR DO PAINEL</button>
-        <p class="tag">Vitorzinw V4 &copy; 2026 - High Accuracy System</p>
+        <button style="margin-top: 15px; background: transparent; color: #fff; border: 1px solid #555; font-size: 10px;" onclick="window.location.reload()">SAIR</button>
+        <p class="tag">Vitorzinw V4 &copy; 2026 - Anti-Pinar System</p>
     </div>
 
     <script>
         function verificarLogin() {
             var u = document.getElementById('user').value;
             var p = document.getElementById('pass').value;
-            // Login: vitorzin | Senha: 1
             if (u === "vitorzin" && p === "1") {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('painel').classList.remove('hidden');
-            } else {
-                alert("ACESSO NEGADO!");
-            }
+            } else { alert("ACESSO NEGADO!"); }
         }
 
         function ativar(btn, nome) {
             btn.classList.toggle('active');
             if(btn.classList.contains('active')) {
                 btn.innerText = "✅ " + nome + " ATIVO";
-                // Lógica de auxílio para não pinar e focar 90% na cara
-                console.log("Ajustando mira para 90% HS... Estabilizando Eixo Y...");
+                document.getElementById('status-text').innerText = "INJETANDO: " + nome + "...";
+                setTimeout(() => {
+                   document.getElementById('status-text').innerText = "MIRA ESTABILIZADA!";
+                }, 1000);
             } else {
                 btn.innerText = "🔘 " + nome;
             }
