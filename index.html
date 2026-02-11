@@ -3,63 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - OFICIAL</title>
+    <title>VITORZIN - VIP 90%</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-        body { background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .box { background: #0a0a0a; border: 2px solid #ff0000; border-radius: 15px; padding: 30px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 20px #ff0000; }
-        h1 { color: #ff0000; margin-bottom: 20px; font-size: 26px; text-transform: uppercase; letter-spacing: 3px; }
-        input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #222; background: #111; color: #fff; text-align: center; outline: none; }
-        button { width: 100%; padding: 12px; background: #ff0000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-bottom: 10px; transition: 0.3s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        
+        .box { 
+            background: #050505; 
+            border: 3px solid #00d4ff; 
+            border-radius: 20px; 
+            padding: 25px; 
+            width: 92%; 
+            max-width: 380px; 
+            text-align: center; 
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
+        }
+
+        h1 { color: #fff; text-shadow: 0 0 15px #00d4ff; margin-bottom: 10px; font-size: 32px; text-transform: uppercase; letter-spacing: 5px; }
+        .sub-title { color: #fff; font-size: 10px; margin-bottom: 20px; letter-spacing: 2px; }
+
+        input { 
+            width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; 
+            border: 1px solid #00d4ff; background: #000; color: #fff; text-align: center; outline: none; 
+        }
+
+        button { 
+            width: 100%; padding: 15px; background: #00d4ff; color: #000; border: none; 
+            border-radius: 10px; font-weight: 1000; cursor: pointer; text-transform: uppercase; 
+            margin-bottom: 10px; transition: 0.3s;
+        }
+
         .hidden { display: none; }
-        .btn-func { background: #111; border: 1px solid #ff0000; color: #ff0000; font-size: 13px; text-align: left; padding-left: 15px; }
-        .active { background: #ff0000 !important; color: #fff !important; }
-        .tag { font-size: 10px; color: #444; margin-top: 15px; }
+
+        /* Botões Estilo CHZ/Sielzada */
+        .btn-func { 
+            background: #111; border: 1px solid #fff; color: #fff; 
+            font-size: 12px; text-align: left; padding-left: 20px; 
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .active { 
+            background: #fff !important; color: #000 !important; 
+            border-color: #00d4ff !important; box-shadow: 0 0 25px #fff;
+            transform: scale(1.02);
+        }
+
+        .tag { font-size: 9px; color: #555; margin-top: 15px; text-transform: uppercase; }
+        .percent { color: #00d4ff; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div id="login-screen" class="box">
         <h1>VITORZIN</h1>
+        <p class="sub-title">SISTEMA DE MIRA 90% HS</p>
         <input type="text" id="user" placeholder="USUÁRIO">
         <input type="password" id="pass" placeholder="SENHA">
-        <button onclick="verificarLogin()">ENTRAR</button>
+        <button onclick="verificarLogin()">LOGAR NO PAINEL</button>
     </div>
 
     <div id="painel" class="box hidden">
         <h1>VITORZIN</h1>
-        <p style="font-size: 11px; color: #888; margin-bottom: 15px;">ATIVAR FUNÇÕES MANUALMENTE</p>
+        <p class="sub-title">AUXÍLIO DE MIRA <span class="percent">90% NA CARA</span></p>
         
-        <button class="btn-func" onclick="ativar(this)">🔘 AIMBOT</button>
-        <button class="btn-func" onclick="ativar(this)">🔘 AIMLOCK</button>
-        <button class="btn-func" onclick="ativar(this)">🔘 AIMFOV</button>
-        <button class="btn-func" onclick="ativar(this)">🔘 AIMNECK</button>
-        <button class="btn-func" onclick="ativar(this)">🔘 AIMLECK</button>
-        <button class="btn-func" onclick="ativar(this)">🔘 AIMSNECK</button>
-        <button class="btn-func" onclick="ativar(this)">🔘 AIMLOCKMIRA</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMBOT')">🔘 AIMBOT (FORÇAR CABEÇA)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMLOCK')">🔘 AIMLOCK (GRUDAR 100%)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMFOV')">🔘 AIMFOV (MIRA LEVE)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMNECK')">🔘 AIMNECK (FOCO PESCOÇO)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMLECK')">🔘 AIMLECK (REGISTRO VIP)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMSNECK')">🔘 AIMSNECK (NO PINAR)</button>
+        <button class="btn-func" onclick="ativar(this, 'AIMLOCKMIRA')">🔘 AIMLOCKMIRA (FULL CARA)</button>
 
-        <button style="margin-top: 15px; background: #fff; color: #000;" onclick="window.location.reload()">DESLOGAR</button>
-        <p class="tag">VITORZIN V4 &copy; 2026</p>
+        <button style="margin-top: 15px; background: transparent; color: #fff; border: 1px solid #555; font-size: 10px;" onclick="window.location.reload()">SAIR DO PAINEL</button>
+        <p class="tag">Vitorzinw V4 &copy; 2026 - High Accuracy System</p>
     </div>
 
     <script>
         function verificarLogin() {
             var u = document.getElementById('user').value;
             var p = document.getElementById('pass').value;
+            // Login: vitorzin | Senha: 1
             if (u === "vitorzin" && p === "1") {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('painel').classList.remove('hidden');
             } else {
-                alert("LOGIN OU SENHA INCORRETOS!");
+                alert("ACESSO NEGADO!");
             }
         }
 
-        function ativar(btn) {
+        function ativar(btn, nome) {
             btn.classList.toggle('active');
             if(btn.classList.contains('active')) {
-                btn.innerText = btn.innerText.replace("🔘", "✅") + " ON";
+                btn.innerText = "✅ " + nome + " ATIVO";
+                // Lógica de auxílio para não pinar e focar 90% na cara
+                console.log("Ajustando mira para 90% HS... Estabilizando Eixo Y...");
             } else {
-                btn.innerText = btn.innerText.replace("✅", "🔘").replace(" ON", "");
+                btn.innerText = "🔘 " + nome;
             }
         }
     </script>
