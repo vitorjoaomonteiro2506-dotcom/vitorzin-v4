@@ -3,96 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - PRIVATE ORIGINAL</title>
+    <title>VITORZIN - BLUE EDITION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
-        body { background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        :root { --primary: #007bff; --bg: #f0f2f5; --card: #ffffff; --text: #333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
+        body { background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
-        .box { 
-            background: #000; 
-            border: 2px solid #00d4ff; 
-            border-radius: 5px; 
-            padding: 25px; 
-            width: 95%; 
-            max-width: 400px; 
-            text-align: center; 
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.2);
-            position: relative;
-        }
+        #login-screen { position: fixed; width: 100%; height: 100%; background: var(--bg); z-index: 100; display: flex; justify-content: center; align-items: center; }
+        .login-card { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,123,255,0.2); border: 1px solid var(--primary); }
 
-        .box::before { content: "ORIGINAL DATABASE"; position: absolute; top: -10px; left: 20px; background: #000; padding: 0 10px; color: #00d4ff; font-size: 10px; }
+        .container { display: none; width: 95%; max-width: 450px; background: var(--card); border-radius: 20px; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 5px solid var(--primary); }
+        h1 { color: var(--primary); text-align: center; margin-bottom: 20px; font-weight: 700; letter-spacing: 1px; }
 
-        h1 { color: #fff; text-shadow: 0 0 10px #00d4ff; margin-bottom: 5px; font-size: 28px; text-transform: uppercase; letter-spacing: 2px; }
+        .status-bar { background: #e7f3ff; padding: 12px; border-radius: 8px; font-size: 11px; color: var(--primary); margin-bottom: 15px; border-left: 4px solid var(--primary); font-weight: bold; }
+
+        .section-tag { font-size: 10px; color: #999; margin: 15px 0 8px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         
-        input { 
-            width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 4px; 
-            border: 1px solid #00d4ff; background: #000; color: #fff; text-align: center; outline: none; 
-        }
+        .btn { background: #fff; border: 1px solid #ddd; color: #555; padding: 12px; border-radius: 10px; cursor: pointer; font-size: 10px; transition: all 0.3s ease; }
+        .btn:hover { border-color: var(--primary); color: var(--primary); }
+        .btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,123,255,0.4); }
 
-        button { 
-            width: 100%; padding: 15px; background: #00d4ff; color: #000; border: none; 
-            font-weight: 1000; cursor: pointer; text-transform: uppercase; margin-bottom: 8px;
-        }
-
-        .hidden { display: none; }
-
-        .btn-func { 
-            background: #050505; border: 1px solid #222; color: #00d4ff; 
-            font-size: 11px; text-align: left; padding-left: 15px; 
-        }
-
-        .active { 
-            background: #00d4ff !important; color: #000 !important; 
-            box-shadow: 0 0 15px #00d4ff;
-        }
-
-        #console { 
-            background: #050505; color: #00ff00; font-size: 9px; text-align: left; 
-            padding: 10px; margin-bottom: 10px; border: 1px solid #111; height: 60px; overflow-y: hidden;
-        }
+        input { width: 100%; background: #fff; border: 1px solid #ddd; padding: 15px; color: #333; border-radius: 10px; margin-bottom: 12px; text-align: center; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--primary); }
     </style>
 </head>
 <body>
 
-    <div id="login-screen" class="box">
-        <h1>VITORZIN</h1>
-        <p style="font-size: 10px; color: #888; margin-bottom: 15px;">LOGIN: vitorzin | SENHA: 1</p>
-        <input type="text" id="user" placeholder="USUÁRIO">
-        <input type="password" id="pass" placeholder="SENHA">
-        <button onclick="verificarLogin()">EXECUTAR LOGIN</button>
+    <div id="login-screen">
+        <div class="login-card">
+            <h1>VITORZIN</h1>
+            <input type="text" id="user" placeholder="USUÁRIO">
+            <input type="password" id="pass" placeholder="SENHA">
+            <button onclick="logar()" class="btn active" style="width:100%; font-size: 14px;">ENTRAR NO SISTEMA</button>
+        </div>
     </div>
 
-    <div id="painel" class="box hidden">
+    <div class="container" id="panel">
         <h1>VITORZIN</h1>
-        <div id="console">> SYSTEM READY...<br>> WAITING INJECTION...</div>
-        
-        <button class="btn-func" onclick="ativar(this, 'AIMBOT_FORCE_BONE_6')">🔘 AIMBOT HEAD (ORIGINAL CHZ)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMLOCK_CLOSE_RANGE_90')">🔘 AIMLOCK CLOSE (SIELZADA)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMFOV_EXTERNAL_XY')">🔘 AIMFOV EXTERNAL (STABLE)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMNECK_LOCK_V2')">🔘 AIMNECK LOCK (ORIGINAL)</button>
-        <button class="btn-func" onclick="ativar(this, 'REGEDIT_MOUSE_LL_V4')">🔘 AIMLECK (REGEDIT MOUSE)</button>
-        <button class="btn-func" onclick="ativar(this, 'NO_PINAR_SYSTEM_FIX')">🔘 AIMSNECK (NO-PINAR FIXED)</button>
-        <button class="btn-func" onclick="ativar(this, 'AIMLOCK_MIRA_VIP_MAX')">🔘 AIMLOCK MIRA (MAGNÉTICO)</button>
+        <div class="status-bar" id="st">CONECTADO AO NÚCLEO... AGUARDANDO ATIVAÇÃO</div>
 
-        <button style="margin-top: 10px; background: #fff; color: #000;" onclick="window.location.reload()">SAIR</button>
+        <span class="section-tag">Módulos de Combate</span>
+        <div class="grid">
+            <button class="btn" onclick="act(this, 'AIMLOCK', 'LIB_V2')">AIMLOCK PURO</button>
+            <button class="btn" onclick="act(this, 'EASY HS', '99%')">EASY HEADSHOT</button>
+            <button class="btn" onclick="act(this, 'ESTABILIZAR', 'FIX')">FIX WEAPON</button>
+            <button class="btn" onclick="act(this, 'AUX AIM', 'ENABLED')">AUX AIM HS</button>
+        </div>
+
+        <span class="section-tag">Ajustes de Sistema</span>
+        <div class="grid">
+            <button class="btn" onclick="act(this, 'DPI INFINITA', '740')">DPI INFINITA</button>
+            <button class="btn" onclick="act(this, '800% SENSI', 'MAX')">SENSI 800%</button>
+            <button class="btn" onclick="act(this, 'TOUCH BOOST', 'REG')">TOUCH SENSY</button>
+            <button class="btn" onclick="act(this, 'PELICINHA', 'ON')">PELICINHA</button>
+        </div>
+
+        <span class="section-tag">Segurança Avançada</span>
+        <div class="grid">
+            <button class="btn" onclick="act(this, 'ANTI-BAN', 'JSON')">EVITAR BAN</button>
+            <button class="btn" onclick="act(this, 'INJECTOR', 'ESX1')">SYSTEM INJECT</button>
+        </div>
+
+        <p style="text-align:center; font-size:10px; color:#aaa; margin-top:20px;">VITORZIN - TECNOLOGIA PRIVADA © 2026</p>
     </div>
 
     <script>
-        function verificarLogin() {
-            if (document.getElementById('user').value === "vitorzin" && document.getElementById('pass').value === "1") {
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('painel').classList.remove('hidden');
-            } else { alert("INVALID KEY!"); }
+        function logar() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            // Validando com sua senha "vitorzin senha 1" ou as credenciais simples do painel anterior
+            if((u === "vitorzin" && p === "1") || (u === "vitorzin" && p === "senha 1")) {
+                document.getElementById('login-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('panel').style.display = 'block';
+                }, 300);
+            } else { alert("ACESSO NEGADO: CREDENCIAIS INCORRETAS"); }
         }
 
-        function ativar(btn, arq) {
+        function act(btn, name, info) {
             btn.classList.toggle('active');
-            let con = document.getElementById('console');
+            const st = document.getElementById('st');
             if(btn.classList.contains('active')) {
-                btn.innerText = "✅ " + arq + " [ON]";
-                con.innerHTML += `<br>> INJECTING: ${arq}...<br>> BYPASSING SECURITY...<br>> SUCCESS!`;
+                st.innerText = `ATIVADO: ${name} [${info}]`;
+                st.style.color = "#007bff";
             } else {
-                btn.innerText = "🔘 " + arq;
+                st.innerText = `DESATIVADO: ${name}`;
+                st.style.color = "#888";
             }
         }
     </script>
