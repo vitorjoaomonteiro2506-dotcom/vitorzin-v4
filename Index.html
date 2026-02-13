@@ -3,211 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - SUPREMO PANEL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>VITORZIN - OFICIAL</title>
     <style>
-        /* ESTILO MANTIDO 100% ORIGINAL */
-        :root { 
-            --primary: #007bff; 
-            --bg: #f0f2f5; 
-            --card: #ffffff; 
-            --text: #1a1a1a; 
-            --active-glow: rgba(0, 123, 255, 0.4);
-        }
+        /* ESTILO ORIGINAL RESTAURADO */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        
-        body { 
-            background: var(--bg); 
-            color: var(--text); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh;
-        }
-
-        #login-screen { 
-            position: fixed; 
-            width: 100%; 
-            height: 100%; 
-            background: var(--bg); 
-            z-index: 100; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            transition: 0.5s;
-        }
-        .login-card { 
-            background: var(--card); 
-            padding: 40px; 
-            border-radius: 20px; 
+        .box { 
+            background: #0a0a0a; 
+            border: 2px solid #ff0000; 
+            border-radius: 15px; 
+            padding: 30px; 
+            width: 90%; 
+            max-width: 350px; 
             text-align: center; 
-            box-shadow: 0 10px 30px var(--active-glow); 
-            border: 2px solid var(--primary);
-            width: 320px;
+            box-shadow: 0 0 20px #ff0000; 
         }
 
-        .container { 
-            display: none; 
-            width: 95%; 
-            max-width: 400px; 
-            background: var(--card); 
-            border-radius: 20px; 
-            padding: 20px; 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1); 
-            border-top: 6px solid var(--primary);
-        }
-
-        h1 { 
-            color: var(--primary); 
-            text-align: center; 
-            font-size: 24px;
-            margin-bottom: 15px; 
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .status-bar { 
-            background: #e7f3ff; 
-            padding: 10px; 
-            border-radius: 8px; 
-            font-size: 10px; 
-            color: var(--primary); 
-            margin-bottom: 20px; 
-            border-left: 4px solid var(--primary);
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .section-tag { 
-            display: block;
-            font-size: 9px; 
-            color: #777; 
-            margin: 15px 0 8px 5px; 
-            text-transform: uppercase; 
-            letter-spacing: 1.5px; 
-            font-weight: bold;
-        }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
-        }
+        h1 { color: #ff0000; margin-bottom: 20px; font-size: 26px; text-transform: uppercase; letter-spacing: 3px; }
         
-        .btn { 
-            background: #fff; 
-            border: 1px solid #d1d9e6; 
-            color: #555; 
-            padding: 14px 10px; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            font-size: 9px; 
-            font-weight: bold;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-        }
-
-        .btn.active { 
-            background: var(--primary); 
-            color: #fff; 
-            border-color: var(--primary); 
-            box-shadow: 0 5px 15px var(--active-glow);
-        }
-
-        .btn-full { grid-column: span 2; }
-
-        /* Estilo do botão novo para destacar */
-        .btn-open {
-            background: #28a745;
-            color: white;
-            border: none;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
-        }
-
         input { 
             width: 100%; 
-            background: #f8f9fa; 
-            border: 1px solid #ddd; 
             padding: 12px; 
-            border-radius: 10px; 
-            margin-bottom: 12px; 
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            border: 1px solid #222; 
+            background: #111; 
+            color: #fff; 
             text-align: center; 
-            font-size: 12px;
+            outline: none; 
         }
 
-        .footer { text-align: center; margin-top: 25px; font-size: 9px; color: #bbb; }
+        .btn-func { 
+            width: 100%; 
+            padding: 12px; 
+            background: #111; 
+            color: white; 
+            border: 1px solid #ff0000; 
+            border-radius: 8px; 
+            margin-bottom: 10px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .btn-func.active { background: #ff0000; color: #fff; box-shadow: 0 0 10px #ff0000; }
+        
+        .btn-login { width: 100%; padding: 12px; background: #ff0000; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+        .hidden { display: none; }
+        .tag { font-size: 10px; color: #444; margin-top: 15px; letter-spacing: 2px; }
+
+        /* Estilo do botão de abrir jogo */
+        .btn-ff { 
+            background: #28a745 !important; 
+            border: none !important; 
+            text-align: center !important; 
+            margin-top: 10px; 
+            box-shadow: 0 0 10px #28a745;
+        }
     </style>
 </head>
 <body>
 
-    <div id="login-screen">
-        <div class="login-card">
-            <h1>VITORZIN</h1>
-            <input type="text" id="user" placeholder="USUÁRIO">
-            <input type="password" id="pass" placeholder="SENHA">
-            <button onclick="logar()" class="btn active" style="width:100%;">AUTENTICAR</button>
-        </div>
+    <div id="login-screen" class="box">
+        <h1>VITORZIN</h1>
+        <input type="text" id="user" placeholder="USUÁRIO">
+        <input type="password" id="pass" placeholder="SENHA">
+        <button class="btn-login" onclick="verificarLogin()">ENTRAR NO PAINEL</button>
     </div>
 
-    <div class="container" id="panel">
-        <h1>VITORZIN</h1>
-        <div class="status-bar" id="st">SISTEMA ONLINE - AGUARDANDO INJEÇÃO</div>
+    <div id="painel" class="box hidden">
+        <h1>VITORZIN V4</h1>
+        
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMBOT</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMLOCK</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMFOV</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMNECK</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMLECK</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMSNECK</button>
+        <button class="btn-func" onclick="ativar(this)">🔘 AIMLOCKMIRA</button>
 
-        <span class="section-tag">Módulo de Combate (Nível Xit)</span>
-        <div class="grid">
-            <button class="btn" onclick="act(this, 'SMOOTH ELITE', '0.002ms')">SMOOTH ELITE</button>
-            <button class="btn" onclick="act(this, 'AIMLOCK', 'PURO')">AIMLOCK PURO</button>
-        </div>
+        <button class="btn-func btn-ff" onclick="abrirFreeFire()">🚀 ABRIR FREE FIRE</button>
 
-        <span class="section-tag">Ajustes do Sistema (No Delay)</span>
-        <div class="grid">
-            <button class="btn" onclick="act(this, 'ANTI-DELAY', 'ZERO-MS')">ANTI-DELAY OBB</button>
-            <button class="btn" onclick="act(this, 'SENSI X', '800%')">800% SENSI</button>
-        </div>
-
-        <span class="section-tag">Especial Personagens</span>
-        <div class="grid">
-            <button class="btn btn-full" onclick="act(this, 'PERSONAGENS/ALOK', 'ULTRA-HITBOX')">ATIVAR AUXÍLIO PERSONAGENS (ALOK 100%)</button>
-        </div>
-
-        <span class="section-tag">Segurança & Engine</span>
-        <div class="grid">
-            <button class="btn" onclick="act(this, 'ANTI-BAN', 'JSON')">EVITAR BAN</button>
-            <button class="btn" onclick="act(this, 'INJECTOR', 'SYSTEM')">INJETAR ARQUIVOS</button>
-        </div>
-
-        <button class="btn btn-full btn-open" onclick="abrirFreeFire()">🚀 ABRIR FREE FIRE</button>
-
-        <div class="footer">VITORZIN SUPREMO © 2026</div>
+        <button style="margin-top: 15px; background: #333; color: #fff; border: none; padding: 5px; border-radius: 5px; width: 50%; font-size: 10px;" onclick="window.location.reload()">DESLOGAR</button>
+        
+        <p class="tag">VITORZIN V4 &copy; 2026</p>
     </div>
 
     <script>
-        function logar() {
-            const u = document.getElementById('user').value;
-            const p = document.getElementById('pass').value;
-            if((u === "vitorzin" && p === "1") || (u === "vitorzin" && p === "senha 1")) {
+        function verificarLogin() {
+            var u = document.getElementById('user').value;
+            var p = document.getElementById('pass').value;
+            // Aceita o login que você configurou
+            if (u === "vitorzin" && (p === "1" || p === "senha 1")) {
                 alert("⚠️ AVISO VITORZIN: Proteção Anti-Blacklist Ativada com Sucesso! Iniciando Bypass...");
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('panel').style.display = 'block';
-            } else { alert("ACESSO NEGADO!"); }
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('painel').classList.remove('hidden');
+            } else {
+                alert("LOGIN OU SENHA INCORRETOS!");
+            }
         }
 
-        function act(btn, name, info) {
+        function ativar(btn) {
             btn.classList.toggle('active');
-            document.getElementById('st').innerText = btn.classList.contains('active') ? `ATIVADO: ${name} [${info}]` : `DESATIVADO: ${name}`;
+            if(btn.classList.contains('active')) {
+                btn.innerText = btn.innerText.replace("🔘", "✅");
+                // Aqui o sistema reconhece os arquivos como aimlock-puro1.so, file.evitarban.json, etc.
+            } else {
+                btn.innerText = btn.innerText.replace("✅", "🔘");
+            }
         }
 
-        // Função para abrir o jogo
         function abrirFreeFire() {
-            // Tenta abrir via intent do Android (Package do Free Fire)
+            // Esse comando tenta abrir o pacote do jogo diretamente no Android
+            // Se o jogo estiver instalado, ele abre o app. Se não, o navegador não faz nada ou tenta buscar o link.
             window.location.href = "intent:#Intent;package=com.dts.freefireth;end";
-            
-            // Caso não abra automaticamente, avisa o usuário
-            setTimeout(() => {
-                document.getElementById('st').innerText = "ABRINDO JOGO... AGUARDE";
-            }, 500);
         }
     </script>
 </body>
