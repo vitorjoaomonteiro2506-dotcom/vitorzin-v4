@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - SECURITY SHIELD</title>
+    <title>VITORZIN - URIEL ELITE</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #007bff; --bg: #0b0e14; --card: #151921; --text: #ffffff; }
@@ -11,38 +11,54 @@
         body { background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         #login-screen { position: fixed; width: 100%; height: 100%; background: var(--bg); z-index: 100; display: flex; justify-content: center; align-items: center; }
         .login-card { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; border: 2px solid var(--primary); width: 320px; }
-        .container { display: none; width: 95%; max-width: 400px; background: var(--card); border-radius: 20px; padding: 30px; box-shadow: 0 15px 50px rgba(0,0,0,0.5); }
-        h1 { color: var(--primary); text-align: center; font-size: 20px; margin-bottom: 25px; letter-spacing: 2px; }
-        .status-bar { background: rgba(0, 123, 255, 0.1); padding: 12px; border-radius: 8px; font-size: 10px; color: var(--primary); margin-bottom: 25px; border: 1px solid var(--primary); text-align: center; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 18px; border-radius: 12px; cursor: pointer; font-size: 10px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
-        .btn.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 123, 255, 0.4); }
+        .container { display: none; width: 95%; max-width: 400px; background: var(--card); border-radius: 20px; padding: 25px; box-shadow: 0 15px 50px rgba(0,0,0,0.5); border: 1px solid #333; }
+        h1 { color: var(--primary); text-align: center; font-size: 20px; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
+        .status-bar { background: rgba(0, 123, 255, 0.1); padding: 10px; border-radius: 8px; font-size: 9px; color: var(--primary); margin-bottom: 20px; border: 1px solid var(--primary); text-align: center; font-weight: bold; }
+        .section-tag { display: block; font-size: 9px; color: #555; margin: 15px 0 8px 5px; text-transform: uppercase; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 14px 8px; border-radius: 10px; cursor: pointer; font-size: 8px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
+        .btn.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); }
+        .btn-full { grid-column: span 2; }
+        .btn-elite { background: #ffc107; color: #000; border: none; }
         input { width: 100%; background: #1c222d; border: 1px solid #333; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; color: #fff; outline: none; }
-        .footer { text-align: center; margin-top: 30px; font-size: 9px; color: #555; }
+        .footer { text-align: center; margin-top: 25px; font-size: 9px; color: #444; }
     </style>
 </head>
 <body>
 
     <div id="login-screen">
         <div class="login-card">
-            <h1>VITORZIN</h1>
+            <h1>URIEL MODS</h1>
             <input type="text" id="user" placeholder="USUÁRIO">
             <input type="password" id="pass" placeholder="SENHA">
-            <button onclick="logar()" class="btn active" style="width:100%;">ENTRAR</button>
+            <button onclick="logar()" class="btn active" style="width:100%;">ACESSAR FUNÇÕES</button>
         </div>
     </div>
 
     <div class="container" id="panel">
-        <h1>SECURITY SHIELD</h1>
-        <div class="status-bar" id="st">PROTEÇÃO DESATIVADA</div>
+        <h1>VITORZIN x URIEL</h1>
+        <div class="status-bar" id="st">🛡️ BLINDAGEM ANTI-BAN ATIVA</div>
 
+        <span class="section-tag">Combate Brutal (Uriel Xiter)</span>
         <div class="grid">
-            <button class="btn" id="btn1" onclick="act(this, 'ANTI-BAN', 'Bypass_Kernel_V9.json')">🛡️ ATIVAR ANTI-BAN (V9)</button>
-            <button class="btn" id="id2" onclick="act(this, 'ANTI-BLACKLIST', 'Deep_AntiBlacklist.so')">🛡️ ATIVAR ANTI-BLACKLIST</button>
-            <button class="btn" onclick="act(this, 'CLEANER', 'Auto_Clean_Rastro.so')">🧹 LIMPEZA DE LOGS AUTOMÁTICA</button>
+            <button class="btn btn-full btn-elite" onclick="act(this, 'GRUDAR CABEÇA', 'Uriel_Stick_Head_Elite.so')">🎯 XIT GRUDAR CABEÇA (URIEL)</button>
+            <button class="btn" onclick="act(this, 'AIMLOCK REAL', 'Uriel_Aimlock_Elite.so')">AIMLOCK REAL</button>
+            <button class="btn" onclick="act(this, 'AIMFOV REAL', 'Uriel_AimFov_Full.json')">AIMFOV REAL</button>
+            <button class="btn btn-full" style="background: #6f42c1;" onclick="act(this, 'FAKE LAG', 'Uriel_FakeLag_Duro.system')">👻 FAKE LAG (MOV. DURA)</button>
         </div>
 
-        <div class="footer">VITORZIN SUPREMO © 2026<br>0% RASTREAMENTO - PROTEÇÃO PURA</div>
+        <span class="section-tag">Visual & Informação</span>
+        <div class="grid">
+            <button class="btn btn-full" onclick="act(this, 'ESP AURA', 'Uriel_Esp_Aura_V5.so')">✨ ESP AURA (BRILHO)</button>
+        </div>
+
+        <span class="section-tag">Segurança 100% (Uriel)</span>
+        <div class="grid">
+            <button class="btn btn-full active" onclick="act(this, 'ANTI-BAN', 'Uriel_Bypass_Kernel_V9.json')">🛡️ ANTI-BAN REFORÇADO</button>
+            <button class="btn btn-full active" onclick="act(this, 'ANTI-BLACKLIST', 'Uriel_AntiBlacklist_Deep.so')">🛡️ ANTI-BLACKLIST TOTAL</button>
+        </div>
+
+        <div class="footer">VITORZIN SUPREMO © 2026<br>ESTILO URIEL XITER ATIVADO</div>
     </div>
 
     <script>
@@ -52,6 +68,7 @@
             if(u === "vitorzin" && (p === "1" || p === "vitorzin senha 1")) {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('panel').style.display = 'block';
+                alert("URIEL MODS: Funções e arquivos carregados!");
             } else { alert("ACESSO NEGADO!"); }
         }
 
@@ -59,14 +76,14 @@
             const st = document.getElementById('st');
             if(!btn.classList.contains('active')) {
                 btn.classList.add('active');
-                st.innerText = `${name} INJETADO COM SUCESSO`;
+                st.innerText = `INJETADO: ${file}`;
                 st.style.color = "#28a745";
             } else {
                 btn.classList.remove('active');
-                st.innerText = `REMOVENDO ${name}...`;
+                st.innerText = `LIMPANDO: ${name}...`;
                 st.style.color = "#ff4444";
                 setTimeout(() => {
-                    st.innerText = `SISTEMA LIMPO`;
+                    st.innerText = `SISTEMA URIEL DISFARÇADO`;
                     st.style.color = "#007bff";
                 }, 800);
             }
