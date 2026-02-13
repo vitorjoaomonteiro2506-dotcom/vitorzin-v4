@@ -6,141 +6,23 @@
     <title>VITORZIN - SUPREMO PANEL</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* [ESTILO MANTIDO 100% ORIGINAL] */
-        :root { 
-            --primary: #007bff; 
-            --bg: #f0f2f5; 
-            --card: #ffffff; 
-            --text: #1a1a1a; 
-            --active-glow: rgba(0, 123, 255, 0.4);
-        }
-        
+        :root { --primary: #007bff; --bg: #f0f2f5; --card: #ffffff; --text: #1a1a1a; --active-glow: rgba(0, 123, 255, 0.4); }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        
-        body { 
-            background: var(--bg); 
-            color: var(--text); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        #login-screen { 
-            position: fixed; 
-            width: 100%; 
-            height: 100%; 
-            background: var(--bg); 
-            z-index: 100; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            transition: 0.5s;
-        }
-        .login-card { 
-            background: var(--card); 
-            padding: 40px; 
-            border-radius: 20px; 
-            text-align: center; 
-            box-shadow: 0 10px 30px var(--active-glow); 
-            border: 2px solid var(--primary);
-            width: 320px;
-        }
-
-        .container { 
-            display: none; 
-            width: 95%; 
-            max-width: 400px; 
-            background: var(--card); 
-            border-radius: 20px; 
-            padding: 20px; 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1); 
-            border-top: 6px solid var(--primary);
-        }
-
-        h1 { 
-            color: var(--primary); 
-            text-align: center; 
-            font-size: 24px;
-            margin-bottom: 15px; 
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .status-bar { 
-            background: #e7f3ff; 
-            padding: 10px; 
-            border-radius: 8px; 
-            font-size: 10px; 
-            color: var(--primary); 
-            margin-bottom: 20px; 
-            border-left: 4px solid var(--primary);
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .section-tag { 
-            display: block;
-            font-size: 9px; 
-            color: #777; 
-            margin: 15px 0 8px 5px; 
-            text-transform: uppercase; 
-            letter-spacing: 1.5px; 
-            font-weight: bold;
-        }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
-        }
-        
-        .btn { 
-            background: #fff; 
-            border: 1px solid #d1d9e6; 
-            color: #555; 
-            padding: 14px 10px; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            font-size: 9px; 
-            font-weight: bold;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-        }
-
-        .btn:hover { border-color: var(--primary); }
-
-        .btn.active { 
-            background: var(--primary); 
-            color: #fff; 
-            border-color: var(--primary); 
-            box-shadow: 0 5px 15px var(--active-glow);
-            transform: translateY(-2px);
-        }
-
+        body { background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        #login-screen { position: fixed; width: 100%; height: 100%; background: var(--bg); z-index: 100; display: flex; justify-content: center; align-items: center; transition: 0.5s; }
+        .login-card { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px var(--active-glow); border: 2px solid var(--primary); width: 320px; }
+        .container { display: none; width: 95%; max-width: 400px; background: var(--card); border-radius: 20px; padding: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); border-top: 6px solid var(--primary); }
+        h1 { color: var(--primary); text-align: center; font-size: 24px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 3px; }
+        .status-bar { background: #e7f3ff; padding: 10px; border-radius: 8px; font-size: 10px; color: var(--primary); margin-bottom: 20px; border-left: 4px solid var(--primary); font-weight: bold; text-align: center; }
+        .section-tag { display: block; font-size: 9px; color: #777; margin: 15px 0 8px 5px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn { background: #fff; border: 1px solid #d1d9e6; color: #555; padding: 14px 10px; border-radius: 12px; cursor: pointer; font-size: 9px; font-weight: bold; transition: all 0.2s ease; text-transform: uppercase; }
+        .btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 5px 15px var(--active-glow); }
         .btn-full { grid-column: span 2; }
-
-        input { 
-            width: 100%; 
-            background: #f8f9fa; 
-            border: 1px solid #ddd; 
-            padding: 12px; 
-            color: #333; 
-            border-radius: 10px; 
-            margin-bottom: 12px; 
-            text-align: center; 
-            outline: none; 
-            font-size: 12px;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            font-size: 9px;
-            color: #bbb;
-            letter-spacing: 1px;
-        }
+        .btn-hs { background: #ffc107; color: #000; border: none; }
+        .btn-lag { background: #6f42c1; color: #fff; border: none; }
+        input { width: 100%; background: #f8f9fa; border: 1px solid #ddd; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; font-size: 12px; }
+        .footer { text-align: center; margin-top: 25px; font-size: 9px; color: #bbb; }
     </style>
 </head>
 <body>
@@ -148,10 +30,9 @@
     <div id="login-screen">
         <div class="login-card">
             <h1>VITORZIN</h1>
-            <p style="font-size: 9px; margin-bottom: 15px; color: #888;">INSIRA SUA CHAVE DE ACESSO</p>
             <input type="text" id="user" placeholder="USUÁRIO">
             <input type="password" id="pass" placeholder="SENHA">
-            <button onclick="logar()" class="btn active" style="width:100%; font-size: 11px; margin-top: 10px;">AUTENTICAR</button>
+            <button onclick="logar()" class="btn active" style="width:100%;">AUTENTICAR</button>
         </div>
     </div>
 
@@ -159,70 +40,46 @@
         <h1>VITORZIN</h1>
         <div class="status-bar" id="st">SISTEMA ONLINE - AGUARDANDO INJEÇÃO</div>
 
-        <span class="section-tag">Módulo de Combate (Nível Xit)</span>
+        <span class="section-tag">Módulo Supremo (Novas)</span>
         <div class="grid">
-            <button class="btn" onclick="act(this, 'SMOOTH ELITE', '0.002ms')">SMOOTH ELITE</button>
-            <button class="btn" onclick="act(this, 'AIMLOCK', 'PURO')">AIMLOCK PURO</button>
-            <button class="btn" onclick="act(this, 'EASY HS', '99%')">EASY HEADSHOT</button>
-            <button class="btn" onclick="act(this, 'AUX AIM', 'ON')">AUX AIM HS</button>
+            <button class="btn btn-full btn-hs" onclick="act(this, 'ULTRA HS', 'Ultra_HS_Pescoço_Vitorzin.so')">🎯 ULTRA HS (PESCOÇO/SIDE HEAD)</button>
+            <button class="btn btn-full btn-lag" onclick="act(this, 'FAKE LAG', 'GhostMode_V4_Original.system')">👻 FAKE LAG (GHOST MODE)</button>
         </div>
 
-        <span class="section-tag">Ajustes do Sistema (No Delay)</span>
+        <span class="section-tag">Combate (Arquivos Originais)</span>
         <div class="grid">
-            <button class="btn" onclick="act(this, 'ANTI-DELAY', 'ZERO-MS')">ANTI-DELAY OBB</button>
-            <button class="btn" onclick="act(this, 'FIX WEAPON', 'BUG')">ESTABILIZAR</button>
-            <button class="btn" onclick="act(this, 'DPI BOOST', '740')">DPI INFINITA</button>
-            <button class="btn" onclick="act(this, 'SENSI X', '800%')">800% SENSI</button>
-        </div>
-
-        <span class="section-tag">Especial Personagens</span>
-        <div class="grid">
-            <button class="btn btn-full" onclick="act(this, 'PERSONAGENS/ALOK', 'ULTRA-HITBOX')">ATIVAR AUXÍLIO PERSONAGENS (ALOK 100%)</button>
+            <button class="btn" onclick="act(this, 'SMOOTH', 'aimlock-puro1.so')">SMOOTH ELITE</button>
+            <button class="btn" onclick="act(this, 'AIMFOV', 'AINFOVV.ObpshOON...')">AIMFOV</button>
         </div>
 
         <span class="section-tag">Segurança & Engine</span>
         <div class="grid">
-            <button class="btn" onclick="act(this, 'ANTI-BAN', 'JSON')">EVITAR BAN</button>
-            <button class="btn" onclick="act(this, 'INJECTOR', 'SYSTEM')">INJETAR ARQUIVOS</button>
+            <button class="btn btn-full" onclick="act(this, 'ANTI-BAN ATIVO', 'file.evitarban.json')">🛡️ ATIVAR ANTI-BAN (JSON ORIGINAL)</button>
         </div>
 
-        <div class="footer">
-            VITORZIN SUPREMO © 2026<br>
-            TECNOLOGIA DE ALTO DESEMPENHO
-        </div>
+        <div class="footer">VITORZIN SUPREMO © 2026</div>
     </div>
 
     <script>
         function logar() {
             const u = document.getElementById('user').value;
             const p = document.getElementById('pass').value;
-            
-            if((u === "vitorzin" && p === "1") || (u === "vitorzin" && p === "senha 1")) {
-                
-                // AVISO SOLICITADO (NÃO MUDA NADA NO DESIGN)
-                alert("⚠️ AVISO VITORZIN: Proteção Anti-Blacklist Ativada com Sucesso! Iniciando Bypass...");
-
-                document.getElementById('login-screen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('login-screen').style.display = 'none';
-                    document.getElementById('panel').style.display = 'block';
-                }, 300);
-            } else { 
-                alert("ACESSO NEGADO!"); 
-            }
+            if((u === "vitorzin" && p === "1") || (u === "vitorzin" && p === "vitorzin senha 1")) {
+                alert("⚠️ AVISO VITORZIN: Proteção Anti-Blacklist Ativada com Sucesso!");
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('panel').style.display = 'block';
+            } else { alert("ACESSO NEGADO!"); }
         }
 
-        function act(btn, name, info) {
+        function act(btn, name, file) {
             btn.classList.toggle('active');
             const st = document.getElementById('st');
             if(btn.classList.contains('active')) {
-                st.innerText = `ATIVADO: ${name} [${info}]`;
-                st.style.color = "#007bff";
-                st.style.background = "#e7f3ff";
+                st.innerText = `INJETADO: ${file}`;
+                st.style.color = "#28a745"; 
             } else {
                 st.innerText = `DESATIVADO: ${name}`;
-                st.style.color = "#777";
-                st.style.background = "#f8f9fa";
+                st.style.color = "#007bff";
             }
         }
     </script>
