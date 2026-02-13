@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - SUPREMO PANEL</title>
+    <title>VITORZIN - SUPREMO PANEL ELITE</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #007bff; --bg: #f0f2f5; --card: #ffffff; --text: #1a1a1a; --active-glow: rgba(0, 123, 255, 0.4); }
@@ -19,7 +19,7 @@
         .btn { background: #fff; border: 1px solid #d1d9e6; color: #555; padding: 14px 10px; border-radius: 12px; cursor: pointer; font-size: 8px; font-weight: bold; transition: 0.2s; text-transform: uppercase; }
         .btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 5px 15px var(--active-glow); }
         .btn-full { grid-column: span 2; }
-        .btn-aux { background: #ffc107; color: #000; border: none; }
+        .btn-elite { background: #ffc107; color: #000; border: none; }
         .btn-lag { background: #6f42c1; color: #fff; border: none; }
         input { width: 100%; background: #f8f9fa; border: 1px solid #ddd; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; font-size: 12px; }
         .footer { text-align: center; margin-top: 25px; font-size: 9px; color: #bbb; }
@@ -38,32 +38,29 @@
 
     <div class="container" id="panel">
         <h1>VITORZIN</h1>
-        <div class="status-bar" id="st">SISTEMA BLINDADO - V3.0</div>
+        <div class="status-bar" id="st">🛡️ AGUARDANDO COMANDO...</div>
 
-        <span class="section-tag">Módulo VIP (Ultra Disfarçado)</span>
+        <span class="section-tag">Módulo Elite (Gruda Cabeça)</span>
         <div class="grid">
-            <button class="btn btn-full btn-aux" onclick="act(this, 'AUXÍLIO CABEÇA', 'Auxilio_Mira_Head_Smooth.so')">🎯 AUXÍLIO DE MIRA (CABEÇA/DISFARÇADO)</button>
-            <button class="btn btn-full btn-lag" onclick="act(this, 'FAKE LAG V2', 'FakeLag_PingNormal.system')">👻 FAKE LAG (ESTILO V2)</button>
+            <button class="btn btn-full btn-elite" onclick="act(this, 'GRUDAR CABEÇA', 'Elite_Head_Stick_V4.so')">🎯 XIT GRUDAR CABEÇA (DISFARÇADO)</button>
+            <button class="btn btn-full btn-lag" onclick="act(this, 'FAKE LAG ELITE', 'Hard_Movement_Lag.system')">👻 FAKE LAG (MOVIMENTAÇÃO DURA)</button>
         </div>
 
-        <span class="section-tag">Combate (Arquivos Originais)</span>
+        <span class="section-tag">Combate (Arquivos Reais)</span>
         <div class="grid">
-            <button class="btn" onclick="act(this, 'AIMBOT', 'AIMBOT SKILL.ObpshOON')">AIMBOT 100%</button>
-            <button class="btn" onclick="act(this, 'AIMLOCK', 'aimlock-puro1.so')">AIMLOCK HEAD</button>
-            <button class="btn" onclick="act(this, 'AIMFOV', 'AINFOVV.ObpshOON')">AIMFOV</button>
-            <button class="btn" onclick="act(this, 'AIMNECK', 'AimNeck.so')">AIMNECK</button>
-            <button class="btn" onclick="act(this, 'AIMLECK', 'AimLeck.so')">AIMLECK</button>
-            <button class="btn" onclick="act(this, 'AIMSNECK', 'AimSneck.so')">AIMSNECK</button>
+            <button class="btn" onclick="act(this, 'AIMBOT REAL', 'Aimbot_Elite_Real.ObpshOON')">AIMBOT REAL</button>
+            <button class="btn" onclick="act(this, 'AIMLOCK REAL', 'Aimlock_Head_Stick.so')">AIMLOCK REAL</button>
+            <button class="btn" onclick="act(this, 'AIMFOV REAL', 'AimFov_Full_Elite.ObpshOON')">AIMFOV REAL</button>
+            <button class="btn" onclick="act(this, 'MODO CS/RANK', 'Ranked_Optimizer.so')">MODO RANQUEADA</button>
         </div>
 
-        <span class="section-tag">Sistema & Segurança</span>
+        <span class="section-tag">Segurança Blindada (AUTO)</span>
         <div class="grid">
-            <button class="btn" onclick="act(this, 'ANTI-DELAY', 'FixBugWeapon.EE6iXd')">ANTI-DELAY OBB</button>
-            <button class="btn" onclick="act(this, 'DPI BOOST', '740 DPI')">DPI INFINITA</button>
-            <button class="btn btn-full" onclick="act(this, 'ANTI-BAN ATIVO', 'file.evitarban.json')">🛡️ ATIVAR ANTI-BAN (LIMPEZA TOTAL)</button>
+            <button class="btn btn-full active" id="btn-anti" onclick="act(this, 'ANTI-BAN', 'Bypass_Supreme_V3.json')">🛡️ ANTI-BAN ATIVO</button>
+            <button class="btn btn-full active" id="btn-clean" onclick="act(this, 'LIMPAR LOGS', 'Clean_System_Rastro.so')">🧹 ANTI-BLACKLIST ATIVO</button>
         </div>
 
-        <div class="footer">VITORZIN SUPREMO © 2026<br>ESTILO DISFARÇADO V1 & V2</div>
+        <div class="footer">VITORZIN SUPREMO © 2026<br>SEGURANÇA AUTOMÁTICA ATIVADA</div>
     </div>
 
     <script>
@@ -73,7 +70,14 @@
             if(u === "vitorzin" && (p === "1" || p === "vitorzin senha 1")) {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('panel').style.display = 'block';
-                alert("SISTEMA VITORZIN: Auxílio de Cabeça Disfarçado Ativo!");
+                
+                // INJEÇÃO AUTOMÁTICA AO ENTRAR
+                const st = document.getElementById('st');
+                st.innerText = "🛡️ BYPASS & ANTI-BLACKLIST ATIVADOS!";
+                st.style.color = "#28a745";
+                console.log("Auto-Injeção: Bypass_Supreme_V3.json e Clean_System_Rastro.so carregados.");
+                
+                alert("LOGIN SUCESSO! Blindagem invisível já está ativa.");
             } else { alert("ACESSO NEGADO!"); }
         }
 
@@ -81,16 +85,16 @@
             const st = document.getElementById('st');
             if(!btn.classList.contains('active')) {
                 btn.classList.add('active');
-                st.innerText = `INJETADO: ${file}`;
+                st.innerText = `ATIVADO: ${name}`;
                 st.style.color = "#28a745";
             } else {
                 btn.classList.remove('active');
-                st.innerText = `REMOVENDO RASTROS...`;
+                st.innerText = `DESATIVANDO E LIMPANDO...`;
                 st.style.color = "#ff0000";
                 setTimeout(() => {
-                    st.innerText = `SISTEMA LIMPO (MODO DISFARÇADO)`;
+                    st.innerText = `SISTEMA LIMPO E DISFARÇADO`;
                     st.style.color = "#007bff";
-                }, 700);
+                }, 800);
             }
         }
     </script>
