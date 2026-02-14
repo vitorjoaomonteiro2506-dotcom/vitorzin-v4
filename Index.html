@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - URIEL POWER MAX</title>
+    <title>VITORZIN - SUPREMO V10</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #007bff; --bg: #0b0e14; --card: #151921; --text: #ffffff; --danger: #ff4444; }
+        :root { --primary: #007bff; --bg: #0b0e14; --card: #151921; --text: #ffffff; --safe: #28a745; --gold: #ffc107; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-        body { background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        body { background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         #login-screen { position: fixed; width: 100%; height: 100%; background: var(--bg); z-index: 100; display: flex; justify-content: center; align-items: center; }
         .login-card { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; border: 2px solid var(--primary); width: 320px; }
-        .container { display: none; width: 95%; max-width: 420px; background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid #333; }
-        h1 { color: var(--primary); text-align: center; font-size: 18px; margin-bottom: 15px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
-        .status-bar { background: rgba(0, 123, 255, 0.1); padding: 8px; border-radius: 8px; font-size: 8px; color: var(--primary); margin-bottom: 15px; border: 1px solid var(--primary); text-align: center; }
-        .section-tag { display: block; font-size: 8px; color: #555; margin: 10px 0 5px 5px; text-transform: uppercase; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 12px 5px; border-radius: 8px; cursor: pointer; font-size: 7px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
-        .btn.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
+        .container { display: none; width: 100%; max-width: 420px; background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid #333; height: 90vh; overflow-y: auto; }
+        h1 { color: var(--primary); text-align: center; font-size: 18px; margin-bottom: 15px; letter-spacing: 2px; }
+        .status-bar { background: rgba(0, 123, 255, 0.05); padding: 10px; border-radius: 8px; font-size: 9px; color: var(--primary); margin-bottom: 20px; border: 1px solid #333; text-align: center; font-weight: bold; }
+        .section-tag { display: block; font-size: 8px; color: #555; margin: 15px 0 8px 5px; text-transform: uppercase; font-weight: bold; border-left: 2px solid var(--primary); padding-left: 5px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 14px 5px; border-radius: 10px; cursor: pointer; font-size: 7px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
+        .btn.active { background: var(--safe); border-color: var(--safe); box-shadow: 0 0 10px rgba(40, 167, 69, 0.4); }
         .btn-full { grid-column: span 2; }
-        .btn-danger { border-color: var(--danger); color: var(--danger); }
-        .btn-danger.active { background: var(--danger); color: #fff; }
-        input { width: 100%; background: #1c222d; border: 1px solid #333; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: center; color: #fff; font-size: 10px; }
-        .footer { text-align: center; margin-top: 15px; font-size: 8px; color: #444; }
+        .btn-special { border-color: var(--gold); color: var(--gold); }
+        input { width: 100%; background: #0b0e14; border: 1px solid #333; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; color: #fff; outline: none; }
+        .footer { text-align: center; margin-top: 25px; font-size: 8px; color: #444; }
     </style>
 </head>
 <body>
@@ -32,40 +31,41 @@
             <h1>VITORZIN</h1>
             <input type="text" id="user" placeholder="USUÁRIO">
             <input type="password" id="pass" placeholder="SENHA">
-            <button onclick="logar()" class="btn active" style="width:100%;">ENTRAR NO ARSENAL</button>
+            <button onclick="logar()" class="btn btn-full active">LIBERAR SISTEMA</button>
         </div>
     </div>
 
     <div class="container" id="panel">
-        <h1>URIEL POWER MAX V10</h1>
-        <div class="status-bar" id="st">CONTROLE DE MEMÓRIA: PRONTO</div>
+        <h1>VITORZIN X VOLPP</h1>
+        <div class="status-bar" id="st">SISTEMA AGUARDANDO COMANDOS</div>
 
-        <span class="section-tag">Proteção (Manual)</span>
+        <span class="section-tag">Segurança e Bypass (Arquivos .so)</span>
         <div class="grid">
-            <button class="btn btn-full" style="color:#28a745; border-color:#28a745;" onclick="inject(this, 'BLINDAGEM TOTAL', 'Universal_Shield_V10.bin')">🛡️ ARQUIVO ÚNICO: BLINDAGEM SUPREMA</button>
+            <button class="btn btn-full" style="color: #28a745;" onclick="inject(this, 'PROTEÇÃO ARM', 'libarm_protect.so')">🛡️ INJETAR LIBARM_PROTECT</button>
+            <button class="btn btn-full" style="color: #ffc107;" onclick="inject(this, 'BYPASS CONFIG', 'config.so')">🛡️ INJETAR CONFIG.SO</button>
         </div>
 
-        <span class="section-tag">Poder do Uriel (Arquivos Grandes)</span>
+        <span class="section-tag">Regedits e Shaders (Arquivos Pesados)</span>
         <div class="grid">
-            <button class="btn btn-full" style="color:#ffc107; border-color:#ffc107;" onclick="inject(this, 'AUTO HS 100%', 'Uriel_Ultra_Head_100.so')">💀 AUTO HS 100% (ARQUIVO PESADO)</button>
-            <button class="btn" onclick="inject(this, 'REGEDIT SUPREMA', 'Uriel_Regedit_Pro.xml')">⚙️ REGEDIT MAX</button>
-            <button class="btn" onclick="inject(this, 'FAST KILL', 'Uriel_Bullet_Trace.so')">⚡ FAST KILL</button>
-            <button class="btn btn-full" onclick="inject(this, 'ESP AURA AZUL', 'Isaelzzq_Aura_Blue.so')">✨ ESP AURA AZUL + AUXÍLIO</button>
+            <button class="btn btn-special" onclick="inject(this, 'WEAPON REG', 'weapon.reg.py')">🔫 WEAPON STABILITY (SHADER)</button>
+            <button class="btn btn-special" onclick="inject(this, 'SENSI REG', 'regeditsensivity.py')">🎯 REGEDIT SENSI (TOQUE)</button>
         </div>
 
-        <span class="section-tag">Funções Agressivas (Risco de Ban)</span>
+        <span class="section-tag">Macros e Auxiliares (.py)</span>
         <div class="grid">
-            <button class="btn btn-danger" onclick="inject(this, 'FLY HACK', 'Uriel_Fly_V3.so')">✈️ VOO (FLY)</button>
-            <button class="btn btn-danger" onclick="inject(this, 'SPEED HACK', 'Uriel_Speed_X5.so')">🏃 SPEED X5</button>
+            <button class="btn" onclick="inject(this, 'MACRO V3', 'macro.py')">🐍 ATIVAR MACRO.PY</button>
+            <button class="btn" onclick="inject(this, 'AUXILIAR', 'auxmacro.py')">🐍 AUXMACRO.PY</button>
         </div>
 
-        <span class="section-tag">Reparo & Limpeza</span>
+        <span class="section-tag">Filtros de Visão (F-Series)</span>
         <div class="grid">
-            <button class="btn" onclick="inject(this, 'FIX DATA', 'Android_Data_Fixer.sh')">🛠️ FIX INJEÇÃO</button>
-            <button class="btn" onclick="inject(this, 'DEEP CLEAN', 'Rastro_Zero_Deep.so')">🧹 DEEP CLEAN</button>
+            <button class="btn" style="color:#fff;" onclick="inject(this, 'F1 BRANCO', 'f1branco')">⚪ F1 BRANCO</button>
+            <button class="btn" style="color:#ffff00;" onclick="inject(this, 'F2 AMARELO', 'f2amarelo')">🟡 F2 AMARELO</button>
+            <button class="btn" style="color:#a020f0;" onclick="inject(this, 'F3 ROXO', 'f3roxo')">🟣 F3 ROXO</button>
+            <button class="btn" onclick="inject(this, 'RESET', 'f0normal')">⚫ F0 NORMAL</button>
         </div>
 
-        <div class="footer">AVISO: FUNÇÕES VERMELHAS SÃO PARA CONTAS BOT<br>VITORZIN SUPREMO © 2026</div>
+        <div class="footer">TODOS OS ARQUIVOS FORAM INTEGRADOS<br>VITORZIN SUPREMO © 2026</div>
     </div>
 
     <script>
@@ -82,12 +82,12 @@
             const st = document.getElementById('st');
             if(!btn.classList.contains('active')) {
                 btn.classList.add('active');
-                st.innerText = `INJETANDO: ${file} (PESADO)`;
+                st.innerText = `[ATIVO] ${file}`;
                 st.style.color = "#28a745";
-                console.log(`Carregando biblioteca de alto impacto: ${file}`);
+                console.log(`Injetando: ${file}`);
             } else {
                 btn.classList.remove('active');
-                st.innerText = `LIMPANDO REGISTROS...`;
+                st.innerText = `DESATIVADO: ${name}`;
                 st.style.color = "#007bff";
             }
         }
