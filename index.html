@@ -3,127 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN SUPREMO V14 | ULTRA PREMIUM</title>
+    <title>VITORZIN SUPREMO V16 | THE ULTIMATE PANEL</title>
     <style>
-        :root { --p: #a020f0; --bg: #030303; --card: #0a0a0a; --txt: #ffffff; --ok: #00ff7f; --bad: #ff3e3e; }
-        body { background: var(--bg); color: var(--txt); font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        :root {
+            --p: #a020f0; --bg: #020202; --card: #080808; 
+            --ok: #00ff7f; --cyan: #00ced1; --warning: #ff8c00;
+        }
+
+        body {
+            background: var(--bg); color: #fff; font-family: 'Courier New', monospace;
+            margin: 0; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND ANIMATION --- */
+        .matrix-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            z-index: -1;
+        }
+
+        .container {
+            width: 700px; background: var(--card); border: 2px solid var(--p);
+            border-radius: 10px; box-shadow: 0 0 50px rgba(160, 32, 240, 0.4);
+            display: flex; flex-direction: column; position: relative;
+        }
+
+        /* --- LOGIN SYSTEM --- */
+        .login-overlay {
+            position: absolute; inset: 0; background: var(--bg); z-index: 100;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-radius: 10px;
+        }
+
+        .login-box { width: 300px; text-align: center; }
+        .login-box h2 { color: var(--p); letter-spacing: 5px; margin-bottom: 30px; }
+        
+        input {
+            width: 100%; padding: 15px; margin: 10px 0; background: #000;
+            border: 1px solid #333; color: var(--p); border-radius: 5px; outline: none;
+            text-align: center; font-weight: bold;
+        }
+        input:focus { border-color: var(--p); box-shadow: 0 0 10px var(--p); }
+
+        /* --- HEADER & STATS --- */
+        header {
+            padding: 30px; border-bottom: 1px solid #1a1a1a; background: #000;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .brand h1 { margin: 0; font-size: 2rem; color: var(--p); text-shadow: 0 0 15px var(--p); }
+        .system-status { font-size: 0.7rem; color: var(--ok); text-align: right; }
+
+        /* --- LAYOUT GIGANTE --- */
+        .main-wrapper { display: flex; height: 550px; }
+
+        .sidebar {
+            width: 180px; background: #050505; border-right: 1px solid #1a1a1a;
+            display: flex; flex-direction: column;
+        }
+
+        .menu-btn {
+            padding: 20px; border: none; background: transparent; color: #555;
+            text-align: left; cursor: pointer; font-weight: bold; font-size: 0.8rem;
+            border-left: 3px solid transparent; transition: 0.3s;
+        }
+        .menu-btn:hover, .menu-btn.active { color: var(--p); background: #0a0a0a; border-left-color: var(--p); }
+
+        .content-area { flex: 1; padding: 30px; overflow-y: auto; }
+
+        /* --- CARDS DE FUNÇÃO --- */
+        .feature-card {
+            background: #0d0d0d; border: 1px solid #1a1a1a; padding: 20px;
+            border-radius: 8px; margin-bottom: 20px; position: relative;
+            transition: 0.3s; cursor: pointer;
+        }
+        .feature-card:hover { border-color: var(--p); transform: translateY(-3px); }
+        .feature-card h3 { margin: 0; font-size: 1rem; color: var(--cyan); }
+        .feature-card p { margin: 10px 0; font-size: 0.75rem; color: #777; line-height: 1.4; }
+        
+        .status-pill {
+            position: absolute; top: 15px; right: 15px; font-size: 0.6rem;
+            background: #1a1a1a; padding: 4px 8px; border-radius: 4px; color: #555;
+        }
+
+        /* --- TERMINAL HACKER --- */
+        .terminal-zone {
+            height: 150px; background: #000; border-top: 2px solid var(--p);
+            padding: 15px; font-size: 0.75rem; overflow-y: auto; color: var(--ok);
+        }
+
         .hidden { display: none !important; }
         
-        /* --- Login Estilizado --- */
-        .login-box { width: 350px; padding: 40px; background: var(--card); border: 1px solid var(--p); border-radius: 20px; text-align: center; box-shadow: 0 0 30px rgba(160, 32, 240, 0.2); }
-        input { width: 100%; padding: 15px; margin: 10px 0; background: #000; border: 1px solid #222; color: #fff; border-radius: 10px; box-sizing: border-box; }
-        
-        /* --- Painel Gigante --- */
-        .panel { width: 500px; height: 750px; background: var(--card); border: 2px solid var(--p); border-radius: 25px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-        header { padding: 25px; background: #000; border-bottom: 1px solid #1a1a1a; text-align: center; }
-        header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 4px; color: var(--p); text-shadow: 0 0 15px var(--p); }
-        
-        .nav { display: flex; background: #080808; border-bottom: 1px solid #1a1a1a; }
-        .nav-btn { flex: 1; padding: 15px; border: none; background: transparent; color: #555; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .nav-btn.active { color: var(--p); background: #0f0f0f; border-bottom: 3px solid var(--p); }
-
-        .main-content { flex: 1; padding: 25px; overflow-y: auto; }
-        .section-title { font-size: 0.75rem; color: var(--p); text-transform: uppercase; margin: 20px 0 10px; display: flex; align-items: center; gap: 10px; opacity: 0.8; }
-        .section-title::after { content: ""; flex: 1; height: 1px; background: #1a1a1a; }
-
-        /* --- Botões de Injeção --- */
-        .btn-inj { width: 100%; padding: 18px; margin-bottom: 12px; background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 12px; color: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
-        .btn-inj:hover { border-color: var(--p); background: #111; transform: scale(1.02); }
-        .btn-inj span { font-weight: 600; font-size: 0.95rem; }
-        .btn-inj .info { font-size: 0.65rem; color: #555; border: 1px solid #222; padding: 3px 7px; border-radius: 5px; }
-
-        /* --- Terminal de Logs --- */
-        .terminal { height: 120px; background: #000; border-top: 2px solid #1a1a1a; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--ok); overflow-y: auto; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--p); }
     </style>
 </head>
 <body>
 
-<div id="login" class="login-box">
-    <h1>VITORZIN V14</h1>
-    <input type="text" id="u" placeholder="USUÁRIO">
-    <input type="password" id="s" placeholder="SENHA">
-    <button onclick="auth()" style="width:100%; padding: 15px; background: var(--p); border:none; color:white; border-radius:10px; cursor:pointer; font-weight:bold;">LOGIN</button>
-</div>
+<div class="matrix-bg"></div>
 
-<div id="panel" class="panel hidden">
+<div class="container">
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-box">
+            <h2>VITORZIN SUPREMO</h2>
+            <input type="text" id="userInput" placeholder="ROOT_USER">
+            <input type="password" id="passInput" placeholder="ROOT_PASS">
+            <button onclick="checkLogin()" style="width:100%; padding: 15px; background: var(--p); border:none; color:white; font-weight:bold; cursor:pointer; margin-top:10px; border-radius:5px;">INITIALIZE_SYSTEM</button>
+        </div>
+    </div>
+
     <header>
-        <h1>VITORZIN SUPREMO</h1>
-        <div id="ping" style="font-size: 0.7rem; color: #444;">LATENCY: 12ms | BYPASS: ACTIVE</div>
+        <div class="brand">
+            <h1>VITORZIN <span style="color:white; font-size: 1rem;">V16.0</span></h1>
+        </div>
+        <div class="system-status">
+            <div>SERVER: ONLINE</div>
+            <div>SECURITY: BYPASS V16 ENABLED</div>
+            <div id="clock">00:00:00</div>
+        </div>
     </header>
 
-    <div class="nav">
-        <button class="nav-btn active" onclick="tab('t1')">AIM</button>
-        <button class="nav-btn" onclick="tab('t2')">VISUAL</button>
-        <button class="nav-btn" onclick="tab('t3')">SAFE</button>
+    <div class="main-wrapper">
+        <div class="sidebar">
+            <button class="menu-btn active" onclick="showTab('weapons')">WEAPONRY</button>
+            <button class="menu-btn" onclick="showTab('aimbot')">AIM_ASSIST</button>
+            <button class="menu-btn" onclick="showTab('visual')">VISUALS</button>
+            <button class="menu-btn" onclick="showTab('system')">CORE_SYS</button>
+        </div>
+
+        <div class="content-area" id="weapons">
+            <div class="feature-card" onclick="process('UMP/XM8 HYBRID', '0xEB4570', '0170A0E9')">
+                <div class="status-pill">OFF: 0xEB4570</div>
+                <h3>🔥 UMP & XM8 (M1887 POWER)</h3>
+                <p>Fusão de arquivos M1887. Melhora o peso do disparo, remove a tremedeira e aplica 90% de taxa de headshot automático.</p>
+                <div style="color: var(--p); font-size: 0.6rem;">[ESTADO: OTIMIZADO E LEVE]</div>
+            </div>
+
+            <div class="feature-card" onclick="process('M1887 ONE-TAP', '0xEB4570', '0170A0E9')">
+                <h3>🔫 M1887 ONE-TAP PRO</h3>
+                <p>Configuração Master extraída dos arquivos .so. Força o dano máximo no primeiro tiro.</p>
+            </div>
+        </div>
+
+        <div class="content-area hidden" id="aimbot">
+            <div class="feature-card" onclick="process('STICK 💎', '0x30667008', '1000A0E3')">
+                <h3>💎 STICK MAGNETICO 100%</h3>
+                <p>O melhor corretor de mira. A mira gruda no inimigo e trava no pescoço/cabeça sem passar.</p>
+            </div>
+            <div class="feature-card" onclick="process('AIMLOCK RAGE', '0xEB4570', '0100A0E3')">
+                <h3>🎯 AIMLOCK RAGE MODE</h3>
+                <p>Modo agressivo. Puxada instantânea para o alvo mais próximo.</p>
+            </div>
+        </div>
+
+        <div class="content-area hidden" id="visual">
+            <div class="feature-card" onclick="process('CHAMS V1', '0x30667008', 'FFFFFFFF')">
+                <h3>⚪ CHAMS BRANCO (F1)</h3>
+                <p>Ver inimigos através das paredes com cor sólida branca.</p>
+            </div>
+        </div>
+
+        <div class="content-area hidden" id="system">
+            <div class="feature-card" onclick="process('SENSI 12GB+', '0xA7D378', '00009642')">
+                <h3>🖱️ REGEDIT 12GB RAM</h3>
+                <p>Melhora o tempo de resposta do touch em 50%. Deixa a movimentação extremamente leve.</p>
+            </div>
+            <button onclick="process('CLEAR LOGS', 'Internal', 'Clean')" style="width:100%; padding:15px; background:#200; color:#f55; border:1px solid #400; cursor:pointer;">🧹 CLEAN SYSTEM (ANTI-BLACKLIST)</button>
+        </div>
     </div>
 
-    <div class="main-content" id="t1">
-        <div class="section-title">Memory Aim Control</div>
-        <button class="btn-inj" onclick="run('STICK 💎', '0x30667008', '1000A0E3')">
-            <span>💎 STICK MAGNETICO</span> <div class="info">LIBIL2CPP</div>
-        </button>
-        <button class="btn-inj" onclick="run('AIMLOCK RAGE', '0xEB4570', '0100A0E3')">
-            <span>🎯 AIMLOCK PURO</span> <div class="info">ACTIVE</div>
-        </button>
-        <button class="btn-inj" onclick="run('AIM FOV', '0x30667015', '0.5;0.5;0.84')">
-            <span>⭕ AIM FOV GERAL</span> <div class="info">360°</div>
-        </button>
-
-        <div class="section-title">Weapon Specific</div>
-        <button class="btn-inj" onclick="run('M1887 SPEC', '0xEB4570', '0170A0E9')">
-            <span>🔫 M1887 ONE-TAP</span> <div class="info">OFFSET</div>
-        </button>
+    <div class="terminal-zone" id="term">
+        > SYSTEM_READY: Waiting for user command...
     </div>
-
-    <div class="main-content hidden" id="t2">
-        <div class="section-title">ESP & Chams</div>
-        <button class="btn-inj" onclick="run('CHAMS F1', '0x30667008', 'Patch')">
-            <span>⚪ JOGADOR BRANCO</span>
-        </button>
-        <button class="btn-inj" onclick="run('CHAMS F3', '0x30667012', 'Patch')">
-            <span>🟣 JOGADOR ROXO</span>
-        </button>
-    </div>
-
-    <div class="main-content hidden" id="t3">
-        <div class="section-title">System & Anti-Ban</div>
-        <button class="btn-inj" onclick="run('BYPASS', 'libarm_protect', 'V3')">
-            <span>🛡️ ATIVAR BYPASS REAL</span>
-        </button>
-        <button class="btn-inj" onclick="run('SENSI 12GB', '0xA7D378', '00009642')">
-            <span>🖱️ SENSI + REGEDIT 12GB</span>
-        </button>
-        <button class="btn-inj" onclick="run('CLEAR', 'Blacklist', 'Clean')">
-            <span>🧹 LIMPAR LOGS (ANTI-BLK)</span>
-        </button>
-    </div>
-
-    <div id="term" class="terminal">> System initialized. Waiting for injection...</div>
 </div>
 
 <script>
-    function auth() {
-        if(document.getElementById('u').value === "vitorzin" && document.getElementById('s').value === "1") {
-            document.getElementById('login').classList.add('hidden');
-            document.getElementById('panel').classList.remove('hidden');
-        } else { alert("Falha no login!"); }
+    // RELÓGIO EM TEMPO REAL
+    setInterval(() => {
+        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+    }, 1000);
+
+    function checkLogin() {
+        const u = document.getElementById('userInput').value;
+        const p = document.getElementById('passInput').value;
+        if(u === "vitorzin" && p === "1") {
+            document.getElementById('loginOverlay').style.display = 'none';
+        } else { alert("ACCESS_DENIED"); }
     }
 
-    function tab(id) {
-        document.querySelectorAll('.main-content').forEach(c => c.classList.add('hidden'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.remove('hidden');
+    function showTab(tabId) {
+        document.querySelectorAll('.content-area').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.remove('hidden');
         event.currentTarget.classList.add('active');
     }
 
-    function run(name, off, hex) {
+    function process(name, off, hex) {
         const t = document.getElementById('term');
-        t.innerHTML += `<br>> Executing ${name}...`;
-        setTimeout(() => {
-            t.innerHTML += `<br><span style="color:var(--p)">> [SUCCESS] Address: ${off} | Value: ${hex}</span>`;
-            t.scrollTop = t.scrollHeight;
-            if(window.Android) { window.Android.inject(off, hex); }
-        }, 800);
+        const lines = [
+            `> Executing: ${name}...`,
+            `> Targeting Offset: ${off}`,
+            `> Injecting Hex: ${hex}`,
+            `> [OPTIMIZING] Re-calculating weight for UMP/XM8...`,
+            `> [SUCCESS] ${name} is now 100% active and optimized.`
+        ];
+
+        let i = 0;
+        const interval = setInterval(() => {
+            if(i < lines.length) {
+                t.innerHTML += `<br><span style="color:${i === 4 ? 'var(--p)' : 'var(--ok)'}">${lines[i]}</span>`;
+                t.scrollTop = t.scrollHeight;
+                i++;
+            } else { clearInterval(interval); }
+        }, 400);
+
+        if(window.Android) { window.Android.inject(off, hex); }
     }
 </script>
 </body>
