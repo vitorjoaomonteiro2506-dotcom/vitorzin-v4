@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - SUPREMO V10</title>
+    <title>VITORZIN - PRIVATE SUPREMO</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #007bff; --bg: #0b0e14; --card: #151921; --text: #ffffff; --safe: #28a745; --danger: #ff4444; }
+        :root { --primary: #007bff; --bg: #0b0e14; --card: #151921; --text: #ffffff; --danger: #ff0000; --ghost: #6c757d; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
         body { background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         #login-screen { position: fixed; width: 100%; height: 100%; background: var(--bg); z-index: 100; display: flex; justify-content: center; align-items: center; }
         .login-card { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; border: 2px solid var(--primary); width: 320px; }
-        .container { display: none; width: 100%; max-width: 400px; background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid #333; }
-        h1 { color: var(--primary); text-align: center; font-size: 18px; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
-        .status-bar { background: rgba(0, 123, 255, 0.05); padding: 12px; border-radius: 8px; font-size: 9px; color: var(--primary); margin-bottom: 20px; border: 1px solid #333; text-align: center; font-weight: bold; }
+        .container { display: none; width: 100%; max-width: 420px; background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid #333; box-shadow: 0 0 30px rgba(0, 123, 255, 0.2); }
+        h1 { color: var(--primary); text-align: center; font-size: 20px; margin-bottom: 20px; letter-spacing: 2px; }
+        .status-bar { background: rgba(0, 123, 255, 0.05); padding: 15px; border-radius: 10px; font-size: 10px; color: var(--primary); margin-bottom: 20px; border: 1px solid #333; text-align: center; font-weight: bold; }
         .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 18px; border-radius: 12px; cursor: pointer; font-size: 9px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
-        .btn.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); }
-        .btn-exp { border-color: var(--danger); color: var(--danger); font-size: 10px; }
-        .btn-exp.active { background: var(--danger); color: #fff; }
+        .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 20px; border-radius: 12px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
+        
+        /* BOTÃO STICK - AGRESSIVO */
+        .btn-stick { border: 2px solid var(--danger); color: var(--danger); text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+        .btn-stick.active { background: var(--danger); color: #fff; box-shadow: 0 0 25px rgba(255, 0, 0, 0.7); }
+        
+        /* BOTÃO GHOST - PROTEÇÃO */
+        .btn-ghost { border: 2px solid var(--ghost); color: var(--ghost); }
+        .btn-ghost.active { background: var(--ghost); color: #fff; box-shadow: 0 0 20px rgba(108, 117, 125, 0.5); }
+
         input { width: 100%; background: #0b0e14; border: 1px solid #333; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; color: #fff; outline: none; }
+        .hidden { display: none !important; }
         .footer { text-align: center; margin-top: 25px; font-size: 8px; color: #444; }
     </style>
 </head>
@@ -30,25 +37,23 @@
             <h1>VITORZIN</h1>
             <input type="text" id="user" placeholder="USUÁRIO">
             <input type="password" id="pass" placeholder="SENHA">
-            <button onclick="logar()" class="btn" style="width:100%; color: var(--primary);">AUTENTICAR</button>
+            <button onclick="logar()" class="btn" style="width:100%; color: var(--primary); border-color: var(--primary);">ENTRAR NO SISTEMA</button>
         </div>
     </div>
 
     <div class="container" id="panel">
-        <h1>POWER INJECTOR</h1>
-        <div class="status-bar" id="st">PRONTO PARA INJETAR PODER</div>
+        <h1 id="panel-title">PRIVATE PANEL V10</h1>
+        <div class="status-bar" id="st">AGUARDANDO INJEÇÃO DE ELITE</div>
 
-        <div class="grid">
-            <button class="btn" onclick="inject(this, 'BLINDAGEM TOTAL', 'libarm_protect.so + config.so')">🛡️ ATIVAR SEGURANÇA SUPREMA</button>
+        <div class="grid" id="main-grid">
+            <button class="btn btn-stick" id="btn-stick" onclick="activateStick(this)">🎯 STICK SUPREMO: SÓ CARA (FULL HEAD)</button>
 
-            <button class="btn btn-exp" onclick="inject(this, 'MACRO NÍVEL XITADO', 'macro_v10_ultra.py')">🔥 MACRO INSANO (V10 ELITE)</button>
-
-            <button class="btn btn-exp" onclick="inject(this, 'NO RECOIL FULL HEAD', 'weapon_reg_head_only.so')">🎯 NO RECOIL (SÓ CABEÇA)</button>
+            <button class="btn btn-ghost" onclick="activateGhost(this)">🌑 GHOST MODE: ANTI-DETTECT + HIDE</button>
             
-            <button class="btn" onclick="inject(this, 'FIX DATA', 'Android_Data_Fixer')">🛠️ REPARAR INJEÇÃO</button>
+            <button class="btn" style="border-color: #28a745; color: #28a745;" onclick="injectBase()">🛡️ INJETAR BASE (LIBARM + CONFIG)</button>
         </div>
 
-        <div class="footer">SISTEMA VITORZIN X VOLPP<br>COMPATÍVEL COM VERCEL 2026</div>
+        <div class="footer" id="footer-text">VITORZIN SUPREMO © 2026<br>PROJETO AGRESSIVO</div>
     </div>
 
     <script>
@@ -61,25 +66,47 @@
             } else { alert("ACESSO NEGADO!"); }
         }
 
-        function inject(btn, name, file) {
+        function activateStick(btn) {
             const st = document.getElementById('st');
-            if(!btn.classList.contains('active')) {
-                btn.classList.add('active');
-                st.innerText = `[SUCCESS] ${name} INJETADO!`;
-                st.style.color = "#28a745";
-                
-                // Lógica de injeção baseada nos seus arquivos
-                if(name.includes('MACRO')) {
-                    console.log("Aplicando Regedit Sensivity + Macro Py...");
-                }
-                if(name.includes('RECOIL')) {
-                    console.log("Aplicando Shaders de Weapon Stability (Head Only)...");
-                }
+            btn.classList.toggle('active');
+            if(btn.classList.contains('active')) {
+                st.innerText = "[ON] STICK ATIVO: TRAVADO NA CARA";
+                st.style.color = "#ff0000";
+                console.log("Injetando weapon.reg.py + regeditsensivity.py em modo Agressivo...");
             } else {
-                btn.classList.remove('active');
-                st.innerText = `REMOVENDO ${name}...`;
+                st.innerText = "SISTEMA EM AGUARDO";
                 st.style.color = "#007bff";
             }
+        }
+
+        function activateGhost(btn) {
+            const st = document.getElementById('st');
+            const title = document.getElementById('panel-title');
+            const footer = document.getElementById('footer-text');
+            const stickBtn = document.getElementById('btn-stick');
+            
+            btn.classList.toggle('active');
+            
+            if(btn.classList.contains('active')) {
+                // Ativa Proteção Real
+                st.innerText = "[SAFE] GHOST MODE ATIVO: FUNÇÕES OCULTAS";
+                st.style.color = "#6c757d";
+                // Esconde a agressividade para disfarce
+                stickBtn.classList.add('hidden');
+                title.innerText = "SISTEMA OTIMIZADO";
+                footer.innerText = "Limpeza de memória em curso...";
+                console.log("Ativando Bypass Real via libarm_protect.so...");
+            } else {
+                st.innerText = "MODO VISÍVEL";
+                st.style.color = "#007bff";
+                stickBtn.classList.remove('hidden');
+                title.innerText = "PRIVATE PANEL V10";
+                footer.innerText = "VITORZIN SUPREMO © 2026";
+            }
+        }
+
+        function injectBase() {
+            alert("Base de Segurança Injetada (libarm_protect.so / config.so)");
         }
     </script>
 </body>
