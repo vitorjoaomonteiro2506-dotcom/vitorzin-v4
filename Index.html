@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN - SUPREMO MANUAL</title>
+    <title>VITORZIN - SUPREMO V10 ULTRA</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #007bff; --bg: #0b0e14; --card: #151921; --text: #ffffff; }
@@ -13,7 +13,7 @@
         .login-card { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; border: 2px solid var(--primary); width: 320px; }
         .container { display: none; width: 95%; max-width: 400px; background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid #333; }
         h1 { color: var(--primary); text-align: center; font-size: 20px; margin-bottom: 20px; letter-spacing: 2px; }
-        .status-bar { background: rgba(0, 123, 255, 0.1); padding: 10px; border-radius: 8px; font-size: 9px; color: var(--primary); margin-bottom: 20px; border: 1px solid var(--primary); text-align: center; font-weight: bold; height: 45px; display: flex; align-items: center; justify-content: center; }
+        .status-bar { background: rgba(0, 123, 255, 0.1); padding: 10px; border-radius: 8px; font-size: 9px; color: var(--primary); margin-bottom: 20px; border: 1px solid var(--primary); text-align: center; font-weight: bold; height: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 14px 8px; border-radius: 10px; cursor: pointer; font-size: 8px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
         .btn.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); }
@@ -21,7 +21,7 @@
         .btn-safety { border: 1px solid #28a745; color: #28a745; }
         .btn-safety.active { background: #28a745; color: #fff; }
         .btn-ghost { border: 2px solid #6c757d; color: #adb5bd; background: rgba(108, 117, 125, 0.1); }
-        .btn-ghost.active { background: #6c757d; color: #fff; box-shadow: 0 0 20px rgba(108, 117, 125, 0.6); }
+        .btn-ghost.active { background: #6c757d; color: #fff; }
         input { width: 100%; background: #1c222d; border: 1px solid #333; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; color: #fff; outline: none; }
         .footer { text-align: center; margin-top: 25px; font-size: 9px; color: #444; }
     </style>
@@ -38,26 +38,28 @@
     </div>
 
     <div class="container" id="panel">
-        <h1>SISTEMA VITORZIN</h1>
-        <div class="status-bar" id="st">⚠️ AGUARDANDO ATIVAÇÃO MANUAL</div>
+        <h1>VITORZIN SUPREMO</h1>
+        <div class="status-bar" id="st">
+            <span id="st-text">AGUARDANDO PROCESSO FF...</span>
+            <span id="st-sub" style="font-size: 7px; opacity: 0.7;">MOTOR DE INJEÇÃO V10 ATIVO</span>
+        </div>
 
-        <span style="font-size: 9px; color: #777; margin-bottom: 10px; display: block; text-align: center;">PROTEÇÃO AVANÇADA (DISFARÇADA)</span>
+        <span style="font-size: 9px; color: #777; margin-bottom: 10px; display: block; text-align: center;">SEGURANÇA (MANUAL)</span>
         <div class="grid">
-            <button class="btn btn-full btn-ghost" onclick="inject(this, 'BLINDAGEM TOTAL', '0xGHOST_BYPASS', 'Universal_Shield_V10.bin')">🌑 ARQUIVO ÚNICO: BLINDAGEM TOTAL (V10)</button>
-            
-            <button class="btn btn-safety" onclick="inject(this, 'ANTI-BAN', 'Bypass_Kernel_V9', 'V9_STABLE')">🛡️ ANTI-BAN V9</button>
-            <button class="btn btn-safety" onclick="inject(this, 'ANTI-BLACKLIST', 'Deep_Scan_AB', 'AB_ELITE')">🛡️ ANTI-BLACKLIST</button>
+            <button class="btn btn-full btn-ghost" onclick="inject(this, 'BLINDAGEM TOTAL', 'com.dts.freefireth', 'Universal_Shield_V10.bin')">🌑 ARQUIVO ÚNICO: BLINDAGEM TOTAL (V10)</button>
+            <button class="btn btn-safety" onclick="inject(this, 'ANTI-BAN', '0xPROTECT', 'Bypass_Kernel_V9')">🛡️ ANTI-BAN V9</button>
+            <button class="btn btn-safety" onclick="inject(this, 'ANTI-BLACKLIST', '0xAB_SCAN', 'AB_ELITE')">🛡️ ANTI-BLACKLIST</button>
         </div>
 
         <span style="font-size: 9px; color: #777; margin: 15px 0 10px 0; display: block; text-align: center;">FUNÇÕES ISAELZZQ & URIEL</span>
         <div class="grid">
-            <button class="btn btn-full" style="color: #00f2ff; border-color: #00f2ff;" onclick="inject(this, 'ESP AURA AZUL', '0x7C3B9', 'Aura_Blue_Legit')">✨ ESP AURA AZUL + AUXÍLIO</button>
-            <button class="btn" onclick="inject(this, 'GRUDAR CABEÇA', '0xHead_99', 'Stick_Full')">🎯 GRUDAR CABEÇA</button>
-            <button class="btn" onclick="inject(this, 'FAKE LAG', '0xLag_V2', 'Lag_Hard')">👻 FAKE LAG</button>
-            <button class="btn btn-full" onclick="inject(this, 'LIMPEZA PROFUNDA', 'Clean_Deep', 'Rastro_Zero')">🧹 LIMPAR RASTROS (DEEP CLEAN)</button>
+            <button class="btn btn-full" style="color: #00f2ff; border-color: #00f2ff;" onclick="inject(this, 'ESP AURA AZUL', '0xGlowBlue', 'Isaelzzq_Aura.so')">✨ ESP AURA AZUL + AUXÍLIO</button>
+            <button class="btn" onclick="inject(this, 'GRUDAR CABEÇA', '0xHead_99', 'Uriel_Stick')">🎯 GRUDAR CABEÇA</button>
+            <button class="btn" onclick="inject(this, 'FAKE LAG', '0xLag_Real', 'Lag_Hard')">👻 FAKE LAG</button>
+            <button class="btn btn-full" onclick="inject(this, 'FIX INJEÇÃO', 'PERM_FIX', 'Android_Data_Fix')">🛠️ REPARAR INJEÇÃO (FIX DATA)</button>
         </div>
 
-        <div class="footer">PROTOCOLO DE SEGURANÇA MANUAL<br>ARQUIVO ÚNICO GHOST V10</div>
+        <div class="footer">INJEÇÃO FORÇADA ATIVA<br>STATUS: PRONTO PARA COMBATE</div>
     </div>
 
     <script>
@@ -70,20 +72,28 @@
             } else { alert("ACESSO NEGADO!"); }
         }
 
-        function inject(btn, name, offset, file) {
-            const st = document.getElementById('st');
+        function inject(btn, name, target, file) {
+            const stText = document.getElementById('st-text');
+            const stSub = document.getElementById('st-sub');
+            
             if(!btn.classList.contains('active')) {
                 btn.classList.add('active');
-                st.innerText = `[SUCCESS] ${name} ATIVADO`;
-                st.style.color = "#28a745";
+                stText.innerText = `BUSCANDO PROCESSO...`;
+                stText.style.color = "#ffc107";
                 
-                if(file === 'Universal_Shield_V10.bin') {
-                    console.log("Injetando Blindagem Híbrida (Anti-Ban + Anti-Blacklist + Stealth)...");
-                }
+                // Simulação de busca forçada de processo e injeção de memória
+                setTimeout(() => {
+                    stText.innerText = `[OK] ${name} INJETADO!`;
+                    stText.style.color = "#28a745";
+                    stSub.innerText = `Endereço: ${target} | Arquivo: ${file}`;
+                    console.log(`Forçando injeção em com.dts.freefireth via ${target}`);
+                }, 1000);
+                
             } else {
                 btn.classList.remove('active');
-                st.innerText = `SISTEMA AGUARDANDO...`;
-                st.style.color = "#007bff";
+                stText.innerText = `AGUARDANDO PROCESSO FF...`;
+                stText.style.color = "#007bff";
+                stSub.innerText = `MOTOR DE INJEÇÃO V10 ATIVO`;
             }
         }
     </script>
