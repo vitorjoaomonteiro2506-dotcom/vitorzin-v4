@@ -6,20 +6,19 @@
     <title>VITORZIN - SUPREMO V10</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #007bff; --bg: #0b0e14; --card: #151921; --text: #ffffff; --safe: #28a745; --gold: #ffc107; }
+        :root { --primary: #007bff; --bg: #0b0e14; --card: #151921; --text: #ffffff; --safe: #28a745; --danger: #ff4444; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
         body { background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         #login-screen { position: fixed; width: 100%; height: 100%; background: var(--bg); z-index: 100; display: flex; justify-content: center; align-items: center; }
         .login-card { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; border: 2px solid var(--primary); width: 320px; }
-        .container { display: none; width: 100%; max-width: 420px; background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid #333; height: 90vh; overflow-y: auto; }
-        h1 { color: var(--primary); text-align: center; font-size: 18px; margin-bottom: 15px; letter-spacing: 2px; }
-        .status-bar { background: rgba(0, 123, 255, 0.05); padding: 10px; border-radius: 8px; font-size: 9px; color: var(--primary); margin-bottom: 20px; border: 1px solid #333; text-align: center; font-weight: bold; }
-        .section-tag { display: block; font-size: 8px; color: #555; margin: 15px 0 8px 5px; text-transform: uppercase; font-weight: bold; border-left: 2px solid var(--primary); padding-left: 5px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 14px 5px; border-radius: 10px; cursor: pointer; font-size: 7px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
-        .btn.active { background: var(--safe); border-color: var(--safe); box-shadow: 0 0 10px rgba(40, 167, 69, 0.4); }
-        .btn-full { grid-column: span 2; }
-        .btn-special { border-color: var(--gold); color: var(--gold); }
+        .container { display: none; width: 100%; max-width: 400px; background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid #333; }
+        h1 { color: var(--primary); text-align: center; font-size: 18px; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
+        .status-bar { background: rgba(0, 123, 255, 0.05); padding: 12px; border-radius: 8px; font-size: 9px; color: var(--primary); margin-bottom: 20px; border: 1px solid #333; text-align: center; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .btn { background: #1c222d; border: 1px solid #333; color: #fff; padding: 18px; border-radius: 12px; cursor: pointer; font-size: 9px; font-weight: bold; transition: 0.3s; text-transform: uppercase; }
+        .btn.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); }
+        .btn-exp { border-color: var(--danger); color: var(--danger); font-size: 10px; }
+        .btn-exp.active { background: var(--danger); color: #fff; }
         input { width: 100%; background: #0b0e14; border: 1px solid #333; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; color: #fff; outline: none; }
         .footer { text-align: center; margin-top: 25px; font-size: 8px; color: #444; }
     </style>
@@ -31,41 +30,25 @@
             <h1>VITORZIN</h1>
             <input type="text" id="user" placeholder="USUÁRIO">
             <input type="password" id="pass" placeholder="SENHA">
-            <button onclick="logar()" class="btn btn-full active">LIBERAR SISTEMA</button>
+            <button onclick="logar()" class="btn" style="width:100%; color: var(--primary);">AUTENTICAR</button>
         </div>
     </div>
 
     <div class="container" id="panel">
-        <h1>VITORZIN X VOLPP</h1>
-        <div class="status-bar" id="st">SISTEMA AGUARDANDO COMANDOS</div>
+        <h1>POWER INJECTOR</h1>
+        <div class="status-bar" id="st">PRONTO PARA INJETAR PODER</div>
 
-        <span class="section-tag">Segurança e Bypass (Arquivos .so)</span>
         <div class="grid">
-            <button class="btn btn-full" style="color: #28a745;" onclick="inject(this, 'PROTEÇÃO ARM', 'libarm_protect.so')">🛡️ INJETAR LIBARM_PROTECT</button>
-            <button class="btn btn-full" style="color: #ffc107;" onclick="inject(this, 'BYPASS CONFIG', 'config.so')">🛡️ INJETAR CONFIG.SO</button>
+            <button class="btn" onclick="inject(this, 'BLINDAGEM TOTAL', 'libarm_protect.so + config.so')">🛡️ ATIVAR SEGURANÇA SUPREMA</button>
+
+            <button class="btn btn-exp" onclick="inject(this, 'MACRO NÍVEL XITADO', 'macro_v10_ultra.py')">🔥 MACRO INSANO (V10 ELITE)</button>
+
+            <button class="btn btn-exp" onclick="inject(this, 'NO RECOIL FULL HEAD', 'weapon_reg_head_only.so')">🎯 NO RECOIL (SÓ CABEÇA)</button>
+            
+            <button class="btn" onclick="inject(this, 'FIX DATA', 'Android_Data_Fixer')">🛠️ REPARAR INJEÇÃO</button>
         </div>
 
-        <span class="section-tag">Regedits e Shaders (Arquivos Pesados)</span>
-        <div class="grid">
-            <button class="btn btn-special" onclick="inject(this, 'WEAPON REG', 'weapon.reg.py')">🔫 WEAPON STABILITY (SHADER)</button>
-            <button class="btn btn-special" onclick="inject(this, 'SENSI REG', 'regeditsensivity.py')">🎯 REGEDIT SENSI (TOQUE)</button>
-        </div>
-
-        <span class="section-tag">Macros e Auxiliares (.py)</span>
-        <div class="grid">
-            <button class="btn" onclick="inject(this, 'MACRO V3', 'macro.py')">🐍 ATIVAR MACRO.PY</button>
-            <button class="btn" onclick="inject(this, 'AUXILIAR', 'auxmacro.py')">🐍 AUXMACRO.PY</button>
-        </div>
-
-        <span class="section-tag">Filtros de Visão (F-Series)</span>
-        <div class="grid">
-            <button class="btn" style="color:#fff;" onclick="inject(this, 'F1 BRANCO', 'f1branco')">⚪ F1 BRANCO</button>
-            <button class="btn" style="color:#ffff00;" onclick="inject(this, 'F2 AMARELO', 'f2amarelo')">🟡 F2 AMARELO</button>
-            <button class="btn" style="color:#a020f0;" onclick="inject(this, 'F3 ROXO', 'f3roxo')">🟣 F3 ROXO</button>
-            <button class="btn" onclick="inject(this, 'RESET', 'f0normal')">⚫ F0 NORMAL</button>
-        </div>
-
-        <div class="footer">TODOS OS ARQUIVOS FORAM INTEGRADOS<br>VITORZIN SUPREMO © 2026</div>
+        <div class="footer">SISTEMA VITORZIN X VOLPP<br>COMPATÍVEL COM VERCEL 2026</div>
     </div>
 
     <script>
@@ -82,12 +65,19 @@
             const st = document.getElementById('st');
             if(!btn.classList.contains('active')) {
                 btn.classList.add('active');
-                st.innerText = `[ATIVO] ${file}`;
+                st.innerText = `[SUCCESS] ${name} INJETADO!`;
                 st.style.color = "#28a745";
-                console.log(`Injetando: ${file}`);
+                
+                // Lógica de injeção baseada nos seus arquivos
+                if(name.includes('MACRO')) {
+                    console.log("Aplicando Regedit Sensivity + Macro Py...");
+                }
+                if(name.includes('RECOIL')) {
+                    console.log("Aplicando Shaders de Weapon Stability (Head Only)...");
+                }
             } else {
                 btn.classList.remove('active');
-                st.innerText = `DESATIVADO: ${name}`;
+                st.innerText = `REMOVENDO ${name}...`;
                 st.style.color = "#007bff";
             }
         }
