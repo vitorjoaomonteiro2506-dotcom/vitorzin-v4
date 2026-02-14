@@ -2,161 +2,157 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JORDAN-X V19 | VITORZIN AIMLOCK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JORDAN-X | VITORZIN</title>
     <style>
-        :root { --red: #ff0000; --dark: #020202; --card: #080808; --gray: #555; }
+        :root { --red: #ff0000; --dark: #020202; --card: #0a0a0a; --gray: #666; }
         
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
         body {
             background: var(--dark); color: #fff; font-family: 'Arial Black', sans-serif;
-            margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; overflow: hidden;
         }
 
         .watermark {
-            position: fixed; font-size: 6rem; color: rgba(255, 0, 0, 0.04);
-            transform: rotate(-20deg); z-index: -2; pointer-events: none;
+            position: fixed; font-size: 4rem; color: rgba(255, 0, 0, 0.05);
+            transform: rotate(-25deg); z-index: -1; pointer-events: none;
             white-space: nowrap; font-weight: 900; text-transform: uppercase;
         }
 
+        /* --- AJUSTE DE LARGURA (SLIM MODE) --- */
         .jordan-container {
-            width: 980px; height: 850px; background: var(--card);
-            border: 1px solid var(--red); box-shadow: 0 0 150px rgba(255, 0, 0, 0.4);
-            display: flex; flex-direction: column; position: relative;
+            width: 380px; /* Largura de celular */
+            height: 90vh; /* Altura quase total */
+            max-height: 750px;
+            background: var(--card);
+            border: 2px solid var(--red);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border-radius: 15px;
         }
 
-        /* --- TELA DE LOGIN --- */
-        #authScreen { position: absolute; inset: 0; background: #000; z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .login-btn { background: var(--red); color: #fff; padding: 20px 60px; border: none; cursor: pointer; font-weight: 900; letter-spacing: 2px; border-radius: 5px; }
+        /* --- LOGIN SLIM --- */
+        #authScreen { 
+            position: absolute; inset: 0; background: #000; z-index: 1000; 
+            display: flex; flex-direction: column; justify-content: center; 
+            align-items: center; border-radius: 13px;
+            padding: 20px;
+        }
 
         header {
-            background: #000; padding: 40px; border-bottom: 2px solid var(--red);
-            display: flex; justify-content: space-between; align-items: center;
+            background: #000; padding: 20px; border-bottom: 2px solid var(--red);
+            text-align: center; border-top-left-radius: 13px; border-top-right-radius: 13px;
         }
-        header h1 { margin: 0; font-size: 3.8rem; letter-spacing: -4px; color: #fff; line-height: 0.8; }
-        .status-header { text-align: right; color: var(--red); font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; }
+        header h1 { margin: 0; font-size: 1.8rem; letter-spacing: -2px; color: #fff; }
+        .logo span { color: var(--red); font-size: 0.7rem; font-weight: bold; letter-spacing: 3px; }
 
-        .main-grid { display: flex; flex: 1; overflow: hidden; }
-        
-        /* --- SIDEBAR --- */
-        .sidebar { width: 300px; background: #000; border-right: 1px solid #111; display: flex; flex-direction: column; }
-        .side-btn {
-            padding: 30px 40px; border: none; background: transparent;
-            color: var(--gray); text-align: left; font-size: 1.1rem; cursor: pointer;
-            transition: 0.3s; font-weight: 900; text-transform: uppercase; border-left: 5px solid transparent;
+        /* --- MENU DE NAVEGAÇÃO HORIZONTAL (Melhor para Apps) --- */
+        .nav-tabs {
+            display: flex; background: #000; border-bottom: 1px solid #111;
         }
-        .side-btn:hover, .side-btn.active { color: #fff; background: rgba(255,0,0,0.15); border-left-color: var(--red); }
+        .tab-btn {
+            flex: 1; padding: 15px 5px; border: none; background: transparent;
+            color: var(--gray); font-size: 0.7rem; cursor: pointer; font-weight: 900;
+            text-transform: uppercase; transition: 0.3s;
+        }
+        .tab-btn.active { color: #fff; border-bottom: 2px solid var(--red); background: rgba(255,0,0,0.1); }
 
-        .content { flex: 1; padding: 50px; overflow-y: auto; background: linear-gradient(to bottom, transparent, #050000); }
+        .content-area { flex: 1; padding: 15px; overflow-y: auto; background: #050505; }
 
-        /* --- FUNÇÕES V19 --- */
+        /* --- CARDS SLIM --- */
         .j-card {
-            background: #000; border: 1px solid #1a1a1a; padding: 40px;
-            margin-bottom: 35px; transition: 0.4s; cursor: pointer; position: relative;
+            background: #000; border: 1px solid #1a1a1a; padding: 20px;
+            margin-bottom: 15px; transition: 0.3s; cursor: pointer; border-radius: 8px;
         }
-        .j-card:hover { border-color: var(--red); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,0,0,0.2); }
-        .j-card h2 { margin: 0; font-size: 2rem; color: #fff; letter-spacing: -1px; }
-        .j-card p { color: #666; font-size: 0.9rem; margin-top: 15px; font-weight: bold; text-transform: uppercase; }
+        .j-card:hover { border-color: var(--red); }
+        .j-card h2 { margin: 0; font-size: 1.1rem; color: #fff; }
+        .j-card p { color: #555; font-size: 0.7rem; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
 
-        /* --- TERMINAL JORDAN-X --- */
+        /* --- TERMINAL --- */
         .j-terminal {
-            height: 220px; background: #000; border-top: 2px solid var(--red);
-            padding: 25px; font-family: 'Courier New', monospace; font-size: 0.95rem; color: var(--red);
-            overflow-y: auto; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
+            height: 120px; background: #000; border-top: 1px solid var(--red);
+            padding: 15px; font-family: monospace; font-size: 0.7rem; color: var(--red);
+            overflow-y: auto; border-bottom-left-radius: 13px; border-bottom-right-radius: 13px;
         }
 
         .hidden { display: none !important; }
-        input { padding: 22px; width: 380px; background: #0a0a0a; border: 1px solid #222; color: #fff; margin-bottom: 20px; text-align: center; font-size: 1.1rem; }
+        input { padding: 15px; width: 100%; background: #0a0a0a; border: 1px solid #222; color: #fff; margin-bottom: 15px; text-align: center; border-radius: 5px; }
+        .login-btn { background: var(--red); color: #fff; padding: 15px; width: 100%; border: none; cursor: pointer; font-weight: 900; border-radius: 5px; }
     </style>
 </head>
 <body>
 
-<div class="watermark">vitorzin aimlock vitorzin aimlock vitorzin aimlock</div>
+<div class="watermark">vitorzin aimlock vitorzin aimlock</div>
 
 <div class="jordan-container">
     <div id="authScreen">
-        <div style="font-size: 4rem; color: var(--red); margin-bottom: 40px; font-weight: 900; text-shadow: 0 0 30px var(--red);">JORDAN-X</div>
-        <input type="text" id="u" placeholder="VITORZIN_USER">
-        <input type="password" id="s" placeholder="VITORZIN_PASS">
-        <button class="login-btn" onclick="auth()">CONNECT TO SERVER</button>
+        <div style="font-size: 2.2rem; color: var(--red); margin-bottom: 30px; font-weight: 900;">JORDAN-X</div>
+        <input type="text" id="u" placeholder="USER">
+        <input type="password" id="s" placeholder="PASS">
+        <button class="login-btn" onclick="auth()">LOG IN</button>
     </div>
 
     <header>
-        <div class="logo">
-            <h1>JORDAN-X</h1>
-            <span style="color: var(--red); font-size: 1rem; font-weight: bold; letter-spacing: 5px;">VITORZIN SUPREME V19</span>
-        </div>
-        <div class="status-header">100% FUNCTIONAL<br>BYPASS V19 ACTIVE</div>
+        <h1>JORDAN-X</h1>
+        <span>VITORZIN SUPREME V21</span>
     </header>
 
-    <div class="main-grid">
-        <div class="sidebar">
-            <button class="side-btn active" onclick="tab('aim')">COMBAT UNIT</button>
-            <button class="side-btn" onclick="tab('weapon')">WEAPONRY</button>
-            <button class="side-btn" onclick="tab('sys')">INTERNAL</button>
-        </div>
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="tab('aim', this)">Combat</button>
+        <button class="tab-btn" onclick="tab('weapon', this)">Weapons</button>
+        <button class="tab-btn" onclick="tab('sys', this)">Config</button>
+    </nav>
 
-        <div class="content" id="aim">
-            <div class="j-card" onclick="run('JORDAN-LOCK 🩸', '0xEB4570', '0100A0E3')">
-                <h2>JORDAN-LOCK 🩸</h2>
-                <p>Trava magnética absoluta. A mira foca no hitbox da cabeça e não solta. Puxada idêntica ao vídeo.</p>
-            </div>
-            <div class="j-card" onclick="run('STICK-X 💎', '0x30667008', '1000A0E3')">
-                <h2>STICK-X 💎</h2>
-                <p>Grude de mira aprimorado para 2026. Estabiliza o cursor para não passar do alvo.</p>
-            </div>
+    <div class="content-area" id="aim">
+        <div class="j-card" onclick="run('JORDAN-LOCK', '0xEB4570', '0100A0E3')">
+            <h2>JORDAN-LOCK 🩸</h2>
+            <p>Mira fixa na cabeça (Headshot focus).</p>
         </div>
-
-        <div class="content hidden" id="weapon">
-            <div class="j-card" onclick="run('UMP-XM8 (ONE-TAP)', '0xEB4570', '0170A0E9')">
-                <h2>UMP-XM8 (V19)</h2>
-                <p>Fusão M1887 One-Tap. Balas com peso zero e recoil nulo. Foco total em agrupamento central.</p>
-            </div>
-        </div>
-
-        <div class="content hidden" id="sys">
-            <div class="j-card" onclick="run('REGEDIT 12GB', '0xA7D378', '00009642')">
-                <h2>REGEDIT 12GB+</h2>
-                <p>Reduz latência do touch para 0ms. Permite a subida de capa "light" igual no clip.</p>
-            </div>
+        <div class="j-card" onclick="run('STICK-X', '0x30667008', '1000A0E3')">
+            <h2>STICK-X 💎</h2>
+            <p>Magnetismo dinâmico avançado.</p>
         </div>
     </div>
 
-    <div class="j-terminal" id="t">
-        > [SYSTEM] JORDAN-X INITIALIZED. AGUARDANDO COMANDO DE VITORZIN...
+    <div class="content-area hidden" id="weapon">
+        <div class="j-card" onclick="run('UMP-XM8', '0xEB4570', '0170A0E9')">
+            <h2>UMP-XM8 (V21)</h2>
+            <p>Fusão One-Tap + No Recoil total.</p>
+        </div>
     </div>
+
+    <div class="content-area hidden" id="sys">
+        <div class="j-card" onclick="run('REGEDIT 12GB', '0xA7D378', '00009642')">
+            <h2>REGEDIT 12GB</h2>
+            <p>Touch delay 0ms (Puxada leve).</p>
+        </div>
+    </div>
+
+    <div class="j-terminal" id="t">> SYSTEM: READY...</div>
 </div>
 
 <script>
     function auth() {
         if(document.getElementById('u').value === "vitorzin" && document.getElementById('s').value === "1") {
             document.getElementById('authScreen').classList.add('hidden');
-        } else { alert("ACCESS DENIED"); }
+        } else { alert("WRONG PASS"); }
     }
 
-    function tab(id) {
-        document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
-        document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+    function tab(id, btn) {
+        document.querySelectorAll('.content-area').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(id).classList.remove('hidden');
-        event.currentTarget.classList.add('active');
+        btn.classList.add('active');
     }
 
     function run(n, o, h) {
         const term = document.getElementById('t');
-        const logs = [
-            `> BOOTING: ${n}`,
-            `> TARGET OFFSET: ${o}`,
-            `> STABILIZING RECOIL PATTERN...`,
-            `> INJECTING JORDAN-X V19 CODE...`,
-            `> [SUCESSO] ${n} ATIVADO COM PERFORMANCE MÁXIMA.`
-        ];
-        let i = 0;
-        const iv = setInterval(() => {
-            if(i < logs.length) {
-                term.innerHTML += `<br><span style="color:${i === 4 ? '#fff' : 'var(--red)'}">${logs[i]}</span>`;
-                term.scrollTop = term.scrollHeight;
-                i++;
-            } else { clearInterval(iv); }
-        }, 300);
+        term.innerHTML += `<br>> ${n}: OK!`;
+        term.scrollTop = term.scrollHeight;
         if(window.Android) window.Android.inject(o, h);
     }
 </script>
