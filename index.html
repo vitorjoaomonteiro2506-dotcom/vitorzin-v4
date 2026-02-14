@@ -3,220 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN SUPREMO V16 | THE ULTIMATE PANEL</title>
+    <title>VITORZIN SUPREMO V17 | 🩸LIGHT ENGINE</title>
     <style>
         :root {
-            --p: #a020f0; --bg: #020202; --card: #080808; 
-            --ok: #00ff7f; --cyan: #00ced1; --warning: #ff8c00;
+            --p: #a020f0; --bg: #010101; --card: #050505; 
+            --ok: #00ff7f; --blood: #ff0000; --cyan: #00ced1;
         }
 
         body {
-            background: var(--bg); color: #fff; font-family: 'Courier New', monospace;
+            background: var(--bg); color: #fff; font-family: 'Consolas', 'Courier New', monospace;
             margin: 0; display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; overflow-x: hidden;
-        }
-
-        /* --- BACKGROUND ANIMATION --- */
-        .matrix-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            z-index: -1;
+            min-height: 100vh; overflow: hidden;
         }
 
         .container {
-            width: 700px; background: var(--card); border: 2px solid var(--p);
-            border-radius: 10px; box-shadow: 0 0 50px rgba(160, 32, 240, 0.4);
+            width: 850px; height: 780px; background: var(--card); border: 2px solid var(--p);
+            border-radius: 5px; box-shadow: 0 0 60px rgba(160, 32, 240, 0.5);
             display: flex; flex-direction: column; position: relative;
         }
 
-        /* --- LOGIN SYSTEM --- */
-        .login-overlay {
-            position: absolute; inset: 0; background: var(--bg); z-index: 100;
+        /* --- LOGIN --- */
+        #loginOverlay {
+            position: absolute; inset: 0; background: var(--bg); z-index: 1000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            border-radius: 10px;
         }
 
-        .login-box { width: 300px; text-align: center; }
-        .login-box h2 { color: var(--p); letter-spacing: 5px; margin-bottom: 30px; }
-        
-        input {
-            width: 100%; padding: 15px; margin: 10px 0; background: #000;
-            border: 1px solid #333; color: var(--p); border-radius: 5px; outline: none;
-            text-align: center; font-weight: bold;
-        }
-        input:focus { border-color: var(--p); box-shadow: 0 0 10px var(--p); }
-
-        /* --- HEADER & STATS --- */
+        /* --- HEADER GIGANTE --- */
         header {
-            padding: 30px; border-bottom: 1px solid #1a1a1a; background: #000;
+            padding: 25px; border-bottom: 2px solid var(--p); background: #000;
             display: flex; justify-content: space-between; align-items: center;
         }
 
-        .brand h1 { margin: 0; font-size: 2rem; color: var(--p); text-shadow: 0 0 15px var(--p); }
-        .system-status { font-size: 0.7rem; color: var(--ok); text-align: right; }
+        .brand h1 { margin: 0; font-size: 2.2rem; color: var(--p); text-shadow: 0 0 20px var(--p); }
+        .engine-status { font-size: 0.8rem; color: var(--ok); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- LAYOUT GIGANTE --- */
-        .main-wrapper { display: flex; height: 550px; }
+        /* --- LAYOUT --- */
+        .wrapper { display: flex; flex: 1; overflow: hidden; }
 
         .sidebar {
-            width: 180px; background: #050505; border-right: 1px solid #1a1a1a;
+            width: 220px; background: #030303; border-right: 1px solid #1a1a1a;
             display: flex; flex-direction: column;
         }
 
-        .menu-btn {
-            padding: 20px; border: none; background: transparent; color: #555;
-            text-align: left; cursor: pointer; font-weight: bold; font-size: 0.8rem;
-            border-left: 3px solid transparent; transition: 0.3s;
+        .nav-link {
+            padding: 22px; border: none; background: transparent; color: #444;
+            text-align: left; cursor: pointer; font-weight: bold; font-size: 0.85rem;
+            transition: 0.4s; border-left: 4px solid transparent;
         }
-        .menu-btn:hover, .menu-btn.active { color: var(--p); background: #0a0a0a; border-left-color: var(--p); }
+        .nav-link:hover, .nav-link.active { color: var(--p); background: #080808; border-left-color: var(--p); }
 
-        .content-area { flex: 1; padding: 30px; overflow-y: auto; }
+        .main-view { flex: 1; padding: 40px; overflow-y: auto; background: url('https://www.transparenttextures.com/patterns/diagmonds-light.png'); }
 
-        /* --- CARDS DE FUNÇÃO --- */
-        .feature-card {
-            background: #0d0d0d; border: 1px solid #1a1a1a; padding: 20px;
-            border-radius: 8px; margin-bottom: 20px; position: relative;
-            transition: 0.3s; cursor: pointer;
+        /* --- CARDS MELHORADOS --- */
+        .card-big {
+            background: #080808; border: 1px solid #1a1a1a; padding: 25px;
+            border-radius: 12px; margin-bottom: 25px; position: relative;
+            transition: 0.3s; cursor: pointer; border-bottom: 3px solid #111;
         }
-        .feature-card:hover { border-color: var(--p); transform: translateY(-3px); }
-        .feature-card h3 { margin: 0; font-size: 1rem; color: var(--cyan); }
-        .feature-card p { margin: 10px 0; font-size: 0.75rem; color: #777; line-height: 1.4; }
-        
-        .status-pill {
-            position: absolute; top: 15px; right: 15px; font-size: 0.6rem;
-            background: #1a1a1a; padding: 4px 8px; border-radius: 4px; color: #555;
-        }
+        .card-big:hover { border-color: var(--blood); transform: scale(1.01); background: #0c0c0c; }
+        .card-big h3 { margin: 0; font-size: 1.2rem; color: var(--blood); letter-spacing: 2px; }
+        .card-big p { margin: 12px 0; font-size: 0.85rem; color: #888; line-height: 1.6; }
 
-        /* --- TERMINAL HACKER --- */
-        .terminal-zone {
-            height: 150px; background: #000; border-top: 2px solid var(--p);
-            padding: 15px; font-size: 0.75rem; overflow-y: auto; color: var(--ok);
+        .tag { position: absolute; top: 20px; right: 20px; font-size: 0.7rem; color: var(--p); font-weight: bold; }
+
+        /* --- TERMINAL HACKER GIGANTE --- */
+        .terminal {
+            height: 180px; background: #000; border-top: 2px solid var(--p);
+            padding: 20px; font-size: 0.8rem; overflow-y: auto; color: var(--ok);
+            line-height: 1.5;
         }
 
         .hidden { display: none !important; }
-        
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: var(--p); }
+        input { padding: 15px; margin: 10px; background: #000; border: 1px solid var(--p); color: #fff; width: 250px; text-align: center; border-radius: 5px; }
+        button.login-btn { padding: 15px 40px; background: var(--p); color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 5px; }
     </style>
 </head>
 <body>
 
-<div class="matrix-bg"></div>
-
 <div class="container">
-    <div id="loginOverlay" class="login-overlay">
-        <div class="login-box">
-            <h2>VITORZIN SUPREMO</h2>
-            <input type="text" id="userInput" placeholder="ROOT_USER">
-            <input type="password" id="passInput" placeholder="ROOT_PASS">
-            <button onclick="checkLogin()" style="width:100%; padding: 15px; background: var(--p); border:none; color:white; font-weight:bold; cursor:pointer; margin-top:10px; border-radius:5px;">INITIALIZE_SYSTEM</button>
-        </div>
+    <div id="loginOverlay">
+        <h1 style="color:var(--p)">VITORZIN SUPREMO V17</h1>
+        <input type="text" id="u" placeholder="USER_ID">
+        <input type="password" id="s" placeholder="USER_PASS">
+        <button class="login-btn" onclick="auth()">INICIAR ENGINE</button>
     </div>
 
     <header>
-        <div class="brand">
-            <h1>VITORZIN <span style="color:white; font-size: 1rem;">V16.0</span></h1>
-        </div>
-        <div class="system-status">
-            <div>SERVER: ONLINE</div>
-            <div>SECURITY: BYPASS V16 ENABLED</div>
-            <div id="clock">00:00:00</div>
-        </div>
+        <div class="brand"><h1>VITORZIN <span style="color:white; font-size:1.2rem;">V17</span></h1></div>
+        <div class="engine-status">🩸 LIGHT_ENGINE: ACTIVE | SECURITY: HIGH</div>
     </header>
 
-    <div class="main-wrapper">
+    <div class="wrapper">
         <div class="sidebar">
-            <button class="menu-btn active" onclick="showTab('weapons')">WEAPONRY</button>
-            <button class="menu-btn" onclick="showTab('aimbot')">AIM_ASSIST</button>
-            <button class="menu-btn" onclick="showTab('visual')">VISUALS</button>
-            <button class="menu-btn" onclick="showTab('system')">CORE_SYS</button>
+            <button class="nav-link active" onclick="tab('t1')">🩸 WEAPONS_V2</button>
+            <button class="nav-link" onclick="tab('t2')">🎯 AIM_ASSIST_PRO</button>
+            <button class="nav-link" onclick="tab('t3')">💎 MEMORY_PATCH</button>
+            <button class="nav-link" onclick="tab('t4')">🛡️ BYPASS_SYS</button>
         </div>
 
-        <div class="content-area" id="weapons">
-            <div class="feature-card" onclick="process('UMP/XM8 HYBRID', '0xEB4570', '0170A0E9')">
-                <div class="status-pill">OFF: 0xEB4570</div>
-                <h3>🔥 UMP & XM8 (M1887 POWER)</h3>
-                <p>Fusão de arquivos M1887. Melhora o peso do disparo, remove a tremedeira e aplica 90% de taxa de headshot automático.</p>
-                <div style="color: var(--p); font-size: 0.6rem;">[ESTADO: OTIMIZADO E LEVE]</div>
+        <div class="main-view" id="t1">
+            <div class="card-big" onclick="inject('🩸light', '0xEB4570', '0170A0E9')">
+                <div class="tag">MASTER</div>
+                <h3>🩸light (UMP-XM8-M1887)</h3>
+                <p>Ajuste de puxada ultra-leve com trava magnética. O No-Recoil foi calibrado para fixar as balas no centro da mira (Headshot Focus). Melhora o auxílio de mira para longo alcance e deixa a SMG/Shotgun sem peso.</p>
+                <div style="color: var(--ok); font-size: 0.7rem;">[SISTEMA DE AUXÍLIO GIGANTE E AJUSTADO]</div>
             </div>
 
-            <div class="feature-card" onclick="process('M1887 ONE-TAP', '0xEB4570', '0170A0E9')">
-                <h3>🔫 M1887 ONE-TAP PRO</h3>
-                <p>Configuração Master extraída dos arquivos .so. Força o dano máximo no primeiro tiro.</p>
-            </div>
-        </div>
-
-        <div class="content-area hidden" id="aimbot">
-            <div class="feature-card" onclick="process('STICK 💎', '0x30667008', '1000A0E3')">
-                <h3>💎 STICK MAGNETICO 100%</h3>
-                <p>O melhor corretor de mira. A mira gruda no inimigo e trava no pescoço/cabeça sem passar.</p>
-            </div>
-            <div class="feature-card" onclick="process('AIMLOCK RAGE', '0xEB4570', '0100A0E3')">
-                <h3>🎯 AIMLOCK RAGE MODE</h3>
-                <p>Modo agressivo. Puxada instantânea para o alvo mais próximo.</p>
+            <div class="card-big" onclick="inject('SMG_LEVE', '0x30667008', '0100A0E3')">
+                <h3>🔫 SMG LEVEZZA PRO</h3>
+                <p>Remove o atraso do recuo das armas UMP e MP5. Foco em estabilidade lateral.</p>
             </div>
         </div>
 
-        <div class="content-area hidden" id="visual">
-            <div class="feature-card" onclick="process('CHAMS V1', '0x30667008', 'FFFFFFFF')">
-                <h3>⚪ CHAMS BRANCO (F1)</h3>
-                <p>Ver inimigos através das paredes com cor sólida branca.</p>
+        <div class="main-view hidden" id="t2">
+            <div class="card-big" onclick="inject('AUX_GIGANTE', '0x30667015', '1.5;1.5;2.0')">
+                <h3>🌀 AUXÍLIO DE MIRA GIGANTE</h3>
+                <p>Aumenta a área de detecção do aimbot. A mira puxa mesmo se estiver fora do corpo do inimigo.</p>
             </div>
         </div>
 
-        <div class="content-area hidden" id="system">
-            <div class="feature-card" onclick="process('SENSI 12GB+', '0xA7D378', '00009642')">
-                <h3>🖱️ REGEDIT 12GB RAM</h3>
-                <p>Melhora o tempo de resposta do touch em 50%. Deixa a movimentação extremamente leve.</p>
+        <div class="main-view hidden" id="t3">
+            <div class="card-big" onclick="inject('STICK_💎', '0x30667008', '1000A0E3')">
+                <h3>💎 STICK MAGNETICO V17</h3>
+                <p>Melhorado para não tremer. Ajustado para focar 100% na cabeça sem variações.</p>
             </div>
-            <button onclick="process('CLEAR LOGS', 'Internal', 'Clean')" style="width:100%; padding:15px; background:#200; color:#f55; border:1px solid #400; cursor:pointer;">🧹 CLEAN SYSTEM (ANTI-BLACKLIST)</button>
+        </div>
+
+        <div class="main-view hidden" id="t4">
+            <div class="card-big" onclick="inject('BYPASS_V17', 'INTERNAL', 'SECURE')">
+                <h3>🛡️ BYPASS SUPREMO V17</h3>
+                <p>Ocultação total de memória. Impede detecção de blacklist mesmo em modo Rage.</p>
+            </div>
+            <button onclick="inject('CLEAR_LOGS', 'FILES', 'DELETE')" style="width:100%; padding:20px; background:#200; border:1px solid #500; color:red; cursor:pointer; font-weight:bold;">🧹 LIMPAR SISTEMA (ANTI-BLACKLIST)</button>
         </div>
     </div>
 
-    <div class="terminal-zone" id="term">
-        > SYSTEM_READY: Waiting for user command...
+    <div class="terminal" id="log">
+        > AGUARDANDO COMANDO DO OPERADOR: VITORZIN...
     </div>
 </div>
 
 <script>
-    // RELÓGIO EM TEMPO REAL
-    setInterval(() => {
-        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
-    }, 1000);
-
-    function checkLogin() {
-        const u = document.getElementById('userInput').value;
-        const p = document.getElementById('passInput').value;
-        if(u === "vitorzin" && p === "1") {
-            document.getElementById('loginOverlay').style.display = 'none';
-        } else { alert("ACCESS_DENIED"); }
+    function auth() {
+        if(document.getElementById('u').value === "vitorzin" && document.getElementById('s').value === "1") {
+            document.getElementById('loginOverlay').classList.add('hidden');
+        } else { alert("ACESSO NEGADO"); }
     }
 
-    function showTab(tabId) {
-        document.querySelectorAll('.content-area').forEach(c => c.classList.add('hidden'));
-        document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(tabId).classList.remove('hidden');
+    function tab(id) {
+        document.querySelectorAll('.main-view').forEach(v => v.classList.add('hidden'));
+        document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.remove('hidden');
         event.currentTarget.classList.add('active');
     }
 
-    function process(name, off, hex) {
-        const t = document.getElementById('term');
-        const lines = [
-            `> Executing: ${name}...`,
-            `> Targeting Offset: ${off}`,
-            `> Injecting Hex: ${hex}`,
-            `> [OPTIMIZING] Re-calculating weight for UMP/XM8...`,
-            `> [SUCCESS] ${name} is now 100% active and optimized.`
+    function inject(name, off, hex) {
+        const l = document.getElementById('log');
+        const proc = [
+            `> [INICIANDO] ${name}...`,
+            `> [AJUSTANDO] Peso das armas UMP/XM8 reduzido para 0.05kg`,
+            `> [CONFIGURANDO] No-Recoil dinâmico aplicado ao offset ${off}`,
+            `> [TRAVANDO] Foco Headshot fixado com auxílio de mira GIGANTE`,
+            `> [FINALIZADO] Injeção de ${name} concluída com sucesso!`
         ];
 
         let i = 0;
         const interval = setInterval(() => {
-            if(i < lines.length) {
-                t.innerHTML += `<br><span style="color:${i === 4 ? 'var(--p)' : 'var(--ok)'}">${lines[i]}</span>`;
-                t.scrollTop = t.scrollHeight;
+            if(i < proc.length) {
+                l.innerHTML += `<br><span style="color:${i === 4 ? 'var(--blood)' : 'var(--ok)'}">${proc[i]}</span>`;
+                l.scrollTop = l.scrollHeight;
                 i++;
             } else { clearInterval(interval); }
-        }, 400);
+        }, 500);
 
         if(window.Android) { window.Android.inject(off, hex); }
     }
