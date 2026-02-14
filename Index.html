@@ -3,187 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN SUPREMO V12</title>
+    <title>VITORZIN SUPREMO V14 | ULTRA PREMIUM</title>
     <style>
-        :root {
-            --primary: #8a2be2;
-            --bg: #0a0a0a;
-            --card: #151515;
-            --text: #ffffff;
-            --safe: #00ff7f;
-            --danger: #ff4500;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .panel, .login-box {
-            width: 350px;
-            background: var(--card);
-            border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
-        }
-
-        .hidden { display: none; }
-
-        header {
-            text-align: center;
-            border-bottom: 1px solid #333;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-        }
-
-        h1 { font-size: 1.4rem; color: var(--primary); margin: 0; }
-        .status { font-size: 0.8rem; color: var(--safe); }
-
-        .module { margin-bottom: 20px; }
-        .module-title { 
-            font-size: 0.9rem; 
-            color: #888; 
-            margin-bottom: 10px; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        input[type="password"] {
-            width: 90%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #000;
-            border: 1px solid var(--primary);
-            color: white;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin: 5px 0;
-            border: none;
-            border-radius: 8px;
-            background: #222;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        button:active { transform: scale(0.98); }
-        button:hover { background: #333; border: 1px solid var(--primary); }
-
-        .btn-safe { border-left: 4px solid var(--safe); }
-        .btn-stick { border-left: 4px solid #00ced1; background: #1a2a2a; }
+        :root { --p: #a020f0; --bg: #030303; --card: #0a0a0a; --txt: #ffffff; --ok: #00ff7f; --bad: #ff3e3e; }
+        body { background: var(--bg); color: var(--txt); font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .hidden { display: none !important; }
         
-        #log {
-            background: #000;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.75rem;
-            color: var(--safe);
-            height: 60px;
-            overflow-y: auto;
-            border: 1px solid #222;
-        }
+        /* --- Login Estilizado --- */
+        .login-box { width: 350px; padding: 40px; background: var(--card); border: 1px solid var(--p); border-radius: 20px; text-align: center; box-shadow: 0 0 30px rgba(160, 32, 240, 0.2); }
+        input { width: 100%; padding: 15px; margin: 10px 0; background: #000; border: 1px solid #222; color: #fff; border-radius: 10px; box-sizing: border-box; }
+        
+        /* --- Painel Gigante --- */
+        .panel { width: 500px; height: 750px; background: var(--card); border: 2px solid var(--p); border-radius: 25px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        header { padding: 25px; background: #000; border-bottom: 1px solid #1a1a1a; text-align: center; }
+        header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 4px; color: var(--p); text-shadow: 0 0 15px var(--p); }
+        
+        .nav { display: flex; background: #080808; border-bottom: 1px solid #1a1a1a; }
+        .nav-btn { flex: 1; padding: 15px; border: none; background: transparent; color: #555; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .nav-btn.active { color: var(--p); background: #0f0f0f; border-bottom: 3px solid var(--p); }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .main-content { flex: 1; padding: 25px; overflow-y: auto; }
+        .section-title { font-size: 0.75rem; color: var(--p); text-transform: uppercase; margin: 20px 0 10px; display: flex; align-items: center; gap: 10px; opacity: 0.8; }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: #1a1a1a; }
+
+        /* --- Botões de Injeção --- */
+        .btn-inj { width: 100%; padding: 18px; margin-bottom: 12px; background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 12px; color: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+        .btn-inj:hover { border-color: var(--p); background: #111; transform: scale(1.02); }
+        .btn-inj span { font-weight: 600; font-size: 0.95rem; }
+        .btn-inj .info { font-size: 0.65rem; color: #555; border: 1px solid #222; padding: 3px 7px; border-radius: 5px; }
+
+        /* --- Terminal de Logs --- */
+        .terminal { height: 120px; background: #000; border-top: 2px solid #1a1a1a; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--ok); overflow-y: auto; }
     </style>
 </head>
 <body>
 
-<div id="login-screen" class="login-box">
-    <header>
-        <h1>VITORZIN LOGIN</h1>
-    </header>
-    <input type="password" id="passInput" placeholder="Digite sua senha...">
-    <button onclick="verificarSenha()" style="background: var(--primary);">ENTRAR NO PAINEL</button>
+<div id="login" class="login-box">
+    <h1>VITORZIN V14</h1>
+    <input type="text" id="u" placeholder="USUÁRIO">
+    <input type="password" id="s" placeholder="SENHA">
+    <button onclick="auth()" style="width:100%; padding: 15px; background: var(--p); border:none; color:white; border-radius:10px; cursor:pointer; font-weight:bold;">LOGIN</button>
 </div>
 
-<div id="main-panel" class="panel hidden">
+<div id="panel" class="panel hidden">
     <header>
-        <h1>VITORZIN SUPREMO V12</h1>
-        <div class="status">🛡️ BYPASS SYSTEM: ACTIVE</div>
+        <h1>VITORZIN SUPREMO</h1>
+        <div id="ping" style="font-size: 0.7rem; color: #444;">LATENCY: 12ms | BYPASS: ACTIVE</div>
     </header>
 
-    <div class="module">
-        <div class="module-title">Segurança & Anti-Ban</div>
-        <button class="btn-safe" onclick="exec('bypass')">🛡️ ATIVAR BYPASS (LIB PROTECT)</button>
-        <button class="btn-safe" onclick="exec('antiblk')">🧹 ANTI-BLACKLIST (CLEANER)</button>
+    <div class="nav">
+        <button class="nav-btn active" onclick="tab('t1')">AIM</button>
+        <button class="nav-btn" onclick="tab('t2')">VISUAL</button>
+        <button class="nav-btn" onclick="tab('t3')">SAFE</button>
     </div>
 
-    <div class="module">
-        <div class="module-title">Funções VIP</div>
-        <button class="btn-stick" onclick="exec('stick')">💎 ATIVAR STICK (MAGNETIC)</button>
-        <div class="grid">
-            <button onclick="exec('macro')">🔥 MACRO GELO</button>
-            <button onclick="exec('sensi')">🖱️ SENSI 12GB</button>
-        </div>
+    <div class="main-content" id="t1">
+        <div class="section-title">Memory Aim Control</div>
+        <button class="btn-inj" onclick="run('STICK 💎', '0x30667008', '1000A0E3')">
+            <span>💎 STICK MAGNETICO</span> <div class="info">LIBIL2CPP</div>
+        </button>
+        <button class="btn-inj" onclick="run('AIMLOCK RAGE', '0xEB4570', '0100A0E3')">
+            <span>🎯 AIMLOCK PURO</span> <div class="info">ACTIVE</div>
+        </button>
+        <button class="btn-inj" onclick="run('AIM FOV', '0x30667015', '0.5;0.5;0.84')">
+            <span>⭕ AIM FOV GERAL</span> <div class="info">360°</div>
+        </button>
+
+        <div class="section-title">Weapon Specific</div>
+        <button class="btn-inj" onclick="run('M1887 SPEC', '0xEB4570', '0170A0E9')">
+            <span>🔫 M1887 ONE-TAP</span> <div class="info">OFFSET</div>
+        </button>
     </div>
 
-    <div class="module">
-        <div class="module-title">Visual Chams</div>
-        <div class="grid">
-            <button style="color: #fff;" onclick="exec('f1')">F1 BRANCO</button>
-            <button style="color: #a020f0;" onclick="exec('f3')">F3 ROXO</button>
-        </div>
+    <div class="main-content hidden" id="t2">
+        <div class="section-title">ESP & Chams</div>
+        <button class="btn-inj" onclick="run('CHAMS F1', '0x30667008', 'Patch')">
+            <span>⚪ JOGADOR BRANCO</span>
+        </button>
+        <button class="btn-inj" onclick="run('CHAMS F3', '0x30667012', 'Patch')">
+            <span>🟣 JOGADOR ROXO</span>
+        </button>
     </div>
 
-    <div id="log">Acesso autorizado.</div>
+    <div class="main-content hidden" id="t3">
+        <div class="section-title">System & Anti-Ban</div>
+        <button class="btn-inj" onclick="run('BYPASS', 'libarm_protect', 'V3')">
+            <span>🛡️ ATIVAR BYPASS REAL</span>
+        </button>
+        <button class="btn-inj" onclick="run('SENSI 12GB', '0xA7D378', '00009642')">
+            <span>🖱️ SENSI + REGEDIT 12GB</span>
+        </button>
+        <button class="btn-inj" onclick="run('CLEAR', 'Blacklist', 'Clean')">
+            <span>🧹 LIMPAR LOGS (ANTI-BLK)</span>
+        </button>
+    </div>
+
+    <div id="term" class="terminal">> System initialized. Waiting for injection...</div>
 </div>
 
 <script>
-    // SISTEMA DE SENHA PERSONALIZADO
-    function verificarSenha() {
-        const p = document.getElementById('passInput').value;
-        if (p === "vitorzin senha 1") {
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('main-panel').classList.remove('hidden');
-        } else {
-            alert("Senha Incorreta!");
-        }
+    function auth() {
+        if(document.getElementById('u').value === "vitorzin" && document.getElementById('s').value === "1") {
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('panel').classList.remove('hidden');
+        } else { alert("Falha no login!"); }
     }
 
-    function exec(cmd) {
-        const log = document.getElementById('log');
-        switch(cmd) {
-            case 'bypass':
-                log.innerText = "> Injetando Bypass...\n> Proteção de Memória OK!";
-                break;
-            case 'antiblk':
-                log.innerText = "> Limpando logs...\n> UID Masked ✅";
-                break;
-            case 'stick':
-                log.innerText = "> 💎 STICK ATIVO: Mira colada no inimigo!";
-                break;
-            case 'macro':
-                log.innerText = "> Macro de agachamento/gelo rápido ON";
-                break;
-            case 'sensi':
-                log.innerText = "> DPI 12GB RAM Aplicada (180%)";
-                break;
-            case 'f1':
-                log.innerText = "> Chams F1 Branco ativado";
-                break;
-            case 'f3':
-                log.innerText = "> Chams F3 Roxo ativado";
-                break;
-        }
+    function tab(id) {
+        document.querySelectorAll('.main-content').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.remove('hidden');
+        event.currentTarget.classList.add('active');
+    }
+
+    function run(name, off, hex) {
+        const t = document.getElementById('term');
+        t.innerHTML += `<br>> Executing ${name}...`;
+        setTimeout(() => {
+            t.innerHTML += `<br><span style="color:var(--p)">> [SUCCESS] Address: ${off} | Value: ${hex}</span>`;
+            t.scrollTop = t.scrollHeight;
+            if(window.Android) { window.Android.inject(off, hex); }
+        }, 800);
     }
 </script>
-
 </body>
 </html>
