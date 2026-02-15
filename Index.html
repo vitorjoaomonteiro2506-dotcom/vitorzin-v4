@@ -3,157 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JORDAN-X | VITORZIN</title>
+    <title>VITORZIN SUPREME V23</title>
     <style>
-        :root { --red: #ff0000; --dark: #020202; --card: #0a0a0a; --gray: #666; }
+        :root { --red: #ff0000; --dark: rgba(0,0,0,0.95); }
         
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; }
 
         body {
-            background: var(--dark); color: #fff; font-family: 'Arial Black', sans-serif;
-            margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; 
-            min-height: 100vh; overflow: hidden;
+            background: transparent; margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center; 
+            height: 100vh; font-family: 'Arial', sans-serif;
+            overflow: hidden;
         }
 
-        .watermark {
-            position: fixed; font-size: 4rem; color: rgba(255, 0, 0, 0.05);
-            transform: rotate(-25deg); z-index: -1; pointer-events: none;
-            white-space: nowrap; font-weight: 900; text-transform: uppercase;
-        }
-
-        /* --- AJUSTE DE LARGURA (SLIM MODE) --- */
-        .jordan-container {
-            width: 380px; /* Largura de celular */
-            height: 90vh; /* Altura quase total */
-            max-height: 750px;
-            background: var(--card);
-            border: 2px solid var(--red);
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            border-radius: 15px;
-        }
-
-        /* --- LOGIN SLIM --- */
-        #authScreen { 
-            position: absolute; inset: 0; background: #000; z-index: 1000; 
-            display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; border-radius: 13px;
-            padding: 20px;
+        /* --- MENU FLUTUANTE COM GESTO --- */
+        #mainMenu {
+            width: 320px; background: var(--dark); border: 2px solid var(--red);
+            border-radius: 12px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            display: none; flex-direction: column; position: relative;
+            z-index: 9999; transition: opacity 0.3s;
         }
 
         header {
-            background: #000; padding: 20px; border-bottom: 2px solid var(--red);
-            text-align: center; border-top-left-radius: 13px; border-top-right-radius: 13px;
+            background: #000; padding: 12px; border-bottom: 2px solid var(--red);
+            text-align: center; border-top-left-radius: 10px; border-top-right-radius: 10px;
         }
-        header h1 { margin: 0; font-size: 1.8rem; letter-spacing: -2px; color: #fff; }
-        .logo span { color: var(--red); font-size: 0.7rem; font-weight: bold; letter-spacing: 3px; }
+        header h1 { margin: 0; font-size: 1rem; color: #fff; letter-spacing: 2px; }
 
-        /* --- MENU DE NAVEGAÇÃO HORIZONTAL (Melhor para Apps) --- */
-        .nav-tabs {
-            display: flex; background: #000; border-bottom: 1px solid #111;
-        }
+        .tab-nav { display: flex; background: #080808; }
         .tab-btn {
-            flex: 1; padding: 15px 5px; border: none; background: transparent;
-            color: var(--gray); font-size: 0.7rem; cursor: pointer; font-weight: 900;
-            text-transform: uppercase; transition: 0.3s;
+            flex: 1; padding: 10px; border: none; background: transparent;
+            color: #555; font-size: 0.65rem; cursor: pointer; font-weight: bold;
+            text-transform: uppercase;
         }
-        .tab-btn.active { color: #fff; border-bottom: 2px solid var(--red); background: rgba(255,0,0,0.1); }
+        .tab-btn.active { color: var(--red); border-bottom: 2px solid var(--red); }
 
-        .content-area { flex: 1; padding: 15px; overflow-y: auto; background: #050505; }
+        .content { height: 350px; overflow-y: auto; padding: 12px; background: #050505; }
 
-        /* --- CARDS SLIM --- */
-        .j-card {
-            background: #000; border: 1px solid #1a1a1a; padding: 20px;
-            margin-bottom: 15px; transition: 0.3s; cursor: pointer; border-radius: 8px;
+        /* --- BOTÃO DE PÂNICO --- */
+        .panic-btn {
+            background: #200; color: #f00; border: 1px solid #500;
+            padding: 10px; font-weight: bold; font-size: 0.7rem;
+            text-align: center; cursor: pointer; margin-bottom: 10px; border-radius: 5px;
         }
-        .j-card:hover { border-color: var(--red); }
-        .j-card h2 { margin: 0; font-size: 1.1rem; color: #fff; }
-        .j-card p { color: #555; font-size: 0.7rem; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
+        .panic-btn:active { background: #f00; color: #000; }
 
-        /* --- TERMINAL --- */
-        .j-terminal {
-            height: 120px; background: #000; border-top: 1px solid var(--red);
-            padding: 15px; font-family: monospace; font-size: 0.7rem; color: var(--red);
-            overflow-y: auto; border-bottom-left-radius: 13px; border-bottom-right-radius: 13px;
+        .func-box {
+            background: #0d0d0d; border: 1px solid #1a1a1a; padding: 10px;
+            border-radius: 6px; margin-bottom: 8px;
+            display: flex; justify-content: space-between; align-items: center;
         }
+        .func-info h3 { margin: 0; font-size: 0.8rem; color: #eee; }
+        .func-info p { margin: 2px 0 0; font-size: 0.6rem; color: var(--red); font-weight: bold; }
 
-        .hidden { display: none !important; }
-        input { padding: 15px; width: 100%; background: #0a0a0a; border: 1px solid #222; color: #fff; margin-bottom: 15px; text-align: center; border-radius: 5px; }
-        .login-btn { background: var(--red); color: #fff; padding: 15px; width: 100%; border: none; cursor: pointer; font-weight: 900; border-radius: 5px; }
+        /* SLIDER COMPACTO */
+        .switch { position: relative; display: inline-block; width: 34px; height: 18px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; inset: 0;
+            background-color: #333; transition: .4s; border-radius: 20px;
+        }
+        input:checked + .slider { background-color: var(--red); }
+        .slider:before {
+            position: absolute; content: ""; height: 12px; width: 12px;
+            left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider:before { transform: translateX(16px); }
+
+        #loginScreen { position: absolute; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        input[type="text"], input[type="password"] { padding: 12px; width: 80%; background: #0a0a0a; border: 1px solid #222; color: #fff; margin-bottom: 10px; text-align: center; border-radius: 5px; }
     </style>
 </head>
-<body>
+<body ontouchstart="handleTouch(event)">
 
-<div class="watermark">vitorzin aimlock vitorzin aimlock</div>
+<div id="loginScreen">
+    <h1 style="color:var(--red); font-size: 1.5rem; margin-bottom: 20px;">JORDAN-X V23</h1>
+    <input type="text" id="u" placeholder="ADMIN_USER">
+    <input type="password" id="s" placeholder="ADMIN_PASS">
+    <button onclick="auth()" style="background:var(--red); color:#fff; border:none; padding:12px 40px; font-weight:bold; border-radius:5px;">LOGIN</button>
+    <p style="color:#333; font-size:0.6rem; margin-top:20px;">3-FINGER TAP TO TOGGLE AFTER LOGIN</p>
+</div>
 
-<div class="jordan-container">
-    <div id="authScreen">
-        <div style="font-size: 2.2rem; color: var(--red); margin-bottom: 30px; font-weight: 900;">JORDAN-X</div>
-        <input type="text" id="u" placeholder="USER">
-        <input type="password" id="s" placeholder="PASS">
-        <button class="login-btn" onclick="auth()">LOG IN</button>
-    </div>
-
+<div id="mainMenu">
     <header>
-        <h1>JORDAN-X</h1>
-        <span>VITORZIN SUPREME V21</span>
+        <h1>VITORZIN AIMLOCK</h1>
+        <span style="color:#555; font-size:0.5rem;">SUEZA • CHARLIZADA • WESS</span>
     </header>
 
-    <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="tab('aim', this)">Combat</button>
-        <button class="tab-btn" onclick="tab('weapon', this)">Weapons</button>
-        <button class="tab-btn" onclick="tab('sys', this)">Config</button>
-    </nav>
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="tab('combat', this)">COMBAT</button>
+        <button class="tab-btn" onclick="tab('visual', this)">VISUAL</button>
+        <button class="tab-btn" onclick="tab('safety', this)">BYPASS</button>
+    </div>
 
-    <div class="content-area" id="aim">
-        <div class="j-card" onclick="run('JORDAN-LOCK', '0xEB4570', '0100A0E3')">
-            <h2>JORDAN-LOCK 🩸</h2>
-            <p>Mira fixa na cabeça (Headshot focus).</p>
+    <div id="combat" class="content">
+        <div class="panic-btn" onclick="panic()">🚨 PANIC MODE (CLEAN ALL)</div>
+        
+        <div class="func-box">
+            <div class="func-info"><h3>HS PESCOÇO</h3><p>DISFARÇADO</p></div>
+            <label class="switch"><input type="checkbox" id="f1" onchange="run('HS_NECK', '0xEB4570', '0100A0E3')"><span class="slider"></span></label>
         </div>
-        <div class="j-card" onclick="run('STICK-X', '0x30667008', '1000A0E3')">
-            <h2>STICK-X 💎</h2>
-            <p>Magnetismo dinâmico avançado.</p>
+        <div class="func-box">
+            <div class="func-info"><h3>AUTO-TRACK</h3><p>SEGUIR CABEÇA</p></div>
+            <label class="switch"><input type="checkbox" id="f2" onchange="run('TRACK', '0x30667008', '1000A0E3')"><span class="slider"></span></label>
+        </div>
+        <div class="func-box">
+            <div class="func-info"><h3>XIT NO TALO</h3><p>UMP/XM8 FORCE</p></div>
+            <label class="switch"><input type="checkbox" id="f3" onchange="run('FORCE', '0xEB4570', '0170A0E9')"><span class="slider"></span></label>
         </div>
     </div>
 
-    <div class="content-area hidden" id="weapon">
-        <div class="j-card" onclick="run('UMP-XM8', '0xEB4570', '0170A0E9')">
-            <h2>UMP-XM8 (V21)</h2>
-            <p>Fusão One-Tap + No Recoil total.</p>
+    <div id="visual" class="content hidden">
+        <div class="func-box">
+            <div class="func-info"><h3>ESP LINE</h3><p>LINHA SUEZA</p></div>
+            <label class="switch"><input type="checkbox" id="f4" onchange="run('LINE', 'MEM', 'ON')"><span class="slider"></span></label>
+        </div>
+        <div class="func-box">
+            <div class="func-info"><h3>ESP HEALTH</h3><p>VIDA WESS</p></div>
+            <label class="switch"><input type="checkbox" id="f5" onchange="run('HP', 'MEM', 'ON')"><span class="slider"></span></label>
         </div>
     </div>
 
-    <div class="content-area hidden" id="sys">
-        <div class="j-card" onclick="run('REGEDIT 12GB', '0xA7D378', '00009642')">
-            <h2>REGEDIT 12GB</h2>
-            <p>Touch delay 0ms (Puxada leve).</p>
-        </div>
+    <div id="safety" class="content hidden">
+        <div class="func-box"><div class="func-info"><h3>ANTI-BAN</h3><p>V19 ACTIVE</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+        <div class="func-box"><div class="func-info"><h3>ANTI-BL</h3><p>CLEAN LOGS</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
     </div>
-
-    <div class="j-terminal" id="t">> SYSTEM: READY...</div>
 </div>
 
 <script>
+    let loggedIn = false;
+
     function auth() {
         if(document.getElementById('u').value === "vitorzin" && document.getElementById('s').value === "1") {
-            document.getElementById('authScreen').classList.add('hidden');
-        } else { alert("WRONG PASS"); }
+            loggedIn = true;
+            document.getElementById('loginScreen').style.display = 'none';
+            alert("LOGADO! USE 3 DEDOS PARA ABRIR O MENU.");
+        } else { alert("ACESSO NEGADO"); }
+    }
+
+    function handleTouch(e) {
+        if(!loggedIn) return;
+        if (e.touches.length === 3) {
+            const menu = document.getElementById('mainMenu');
+            menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'flex' : 'none';
+        }
     }
 
     function tab(id, btn) {
-        document.querySelectorAll('.content-area').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(id).classList.remove('hidden');
         btn.classList.add('active');
     }
 
     function run(n, o, h) {
-        const term = document.getElementById('t');
-        term.innerHTML += `<br>> ${n}: OK!`;
-        term.scrollTop = term.scrollHeight;
         if(window.Android) window.Android.inject(o, h);
+    }
+
+    function panic() {
+        const checks = document.querySelectorAll('input[type="checkbox"]');
+        checks.forEach(c => { if(c.id !== "") c.checked = false; });
+        document.getElementById('mainMenu').style.display = 'none';
+        alert("SISTEMA LIMPO! TUDO DESATIVADO.");
+        if(window.Android) window.Android.inject("CLEAR", "ALL");
     }
 </script>
 </body>
