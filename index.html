@@ -3,91 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VITORZIN SUPREME V23</title>
+    <title>System Service</title>
     <style>
-        :root { --red: #ff0000; --dark: rgba(0,0,0,0.95); }
+        :root { --red: #ff0000; --dark: #050505; --accent: #ff0000; }
         
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; outline: none; }
 
         body {
             background: transparent; margin: 0; padding: 0;
             display: flex; justify-content: center; align-items: center; 
-            height: 100vh; font-family: 'Arial', sans-serif;
+            height: 100vh; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow: hidden;
         }
 
-        /* --- MENU FLUTUANTE COM GESTO --- */
+        /* --- MENU FLUTUANTE (STEALTH) --- */
         #mainMenu {
-            width: 320px; background: var(--dark); border: 2px solid var(--red);
-            border-radius: 12px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            width: 310px; background: rgba(5, 5, 5, 0.98); border: 1.5px solid var(--red);
+            border-radius: 12px; box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
             display: none; flex-direction: column; position: relative;
-            z-index: 9999; transition: opacity 0.3s;
+            z-index: 9999; border-top: 5px solid var(--red);
         }
 
         header {
-            background: #000; padding: 12px; border-bottom: 2px solid var(--red);
-            text-align: center; border-top-left-radius: 10px; border-top-right-radius: 10px;
+            background: #000; padding: 15px; border-bottom: 1px solid #1a1a1a;
+            text-align: center; border-radius: 10px 10px 0 0;
         }
-        header h1 { margin: 0; font-size: 1rem; color: #fff; letter-spacing: 2px; }
+        header h1 { margin: 0; font-size: 1rem; color: #fff; letter-spacing: 3px; font-weight: 900; }
+        header span { color: #444; font-size: 0.6rem; font-weight: bold; text-transform: uppercase; }
 
-        .tab-nav { display: flex; background: #080808; }
+        .tab-nav { display: flex; background: #000; border-bottom: 1px solid #111; }
         .tab-btn {
-            flex: 1; padding: 10px; border: none; background: transparent;
-            color: #555; font-size: 0.65rem; cursor: pointer; font-weight: bold;
-            text-transform: uppercase;
+            flex: 1; padding: 12px; border: none; background: transparent;
+            color: #444; font-size: 0.7rem; cursor: pointer; font-weight: 900;
+            text-transform: uppercase; transition: 0.3s;
         }
-        .tab-btn.active { color: var(--red); border-bottom: 2px solid var(--red); }
+        .tab-btn.active { color: var(--red); background: rgba(255,0,0,0.05); }
 
-        .content { height: 350px; overflow-y: auto; padding: 12px; background: #050505; }
+        .content { height: 380px; overflow-y: auto; padding: 15px; background: #050505; }
 
-        /* --- BOTÃO DE PÂNICO --- */
+        /* PANIC BUTTON */
         .panic-btn {
-            background: #200; color: #f00; border: 1px solid #500;
-            padding: 10px; font-weight: bold; font-size: 0.7rem;
-            text-align: center; cursor: pointer; margin-bottom: 10px; border-radius: 5px;
+            background: #1a0000; color: #ff0000; border: 1px solid #400;
+            padding: 12px; font-weight: bold; font-size: 0.75rem;
+            text-align: center; cursor: pointer; margin-bottom: 15px; border-radius: 6px;
+            text-transform: uppercase; letter-spacing: 1px;
         }
-        .panic-btn:active { background: #f00; color: #000; }
 
+        /* FUNCTION BOXES */
         .func-box {
-            background: #0d0d0d; border: 1px solid #1a1a1a; padding: 10px;
-            border-radius: 6px; margin-bottom: 8px;
+            background: #0a0a0a; border: 1px solid #151515; padding: 12px;
+            border-radius: 8px; margin-bottom: 10px;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .func-info h3 { margin: 0; font-size: 0.8rem; color: #eee; }
-        .func-info p { margin: 2px 0 0; font-size: 0.6rem; color: var(--red); font-weight: bold; }
+        .func-info h3 { margin: 0; font-size: 0.85rem; color: #fff; letter-spacing: 0.5px; }
+        .func-info p { margin: 3px 0 0; font-size: 0.6rem; color: #666; font-weight: bold; text-transform: uppercase; }
 
-        /* SLIDER COMPACTO */
-        .switch { position: relative; display: inline-block; width: 34px; height: 18px; }
+        /* SWITCH TOGGLE */
+        .switch { position: relative; display: inline-block; width: 38px; height: 20px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
             position: absolute; cursor: pointer; inset: 0;
-            background-color: #333; transition: .4s; border-radius: 20px;
+            background-color: #222; transition: .4s; border-radius: 20px;
         }
-        input:checked + .slider { background-color: var(--red); }
+        input:checked + .slider { background-color: var(--red); box-shadow: 0 0 10px var(--red); }
         .slider:before {
-            position: absolute; content: ""; height: 12px; width: 12px;
-            left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;
+            position: absolute; content: ""; height: 14px; width: 14px;
+            left: 3px; bottom: 3px; background-color: #fff; transition: .4s; border-radius: 50%;
         }
-        input:checked + .slider:before { transform: translateX(16px); }
+        input:checked + .slider:before { transform: translateX(18px); }
 
-        #loginScreen { position: absolute; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        input[type="text"], input[type="password"] { padding: 12px; width: 80%; background: #0a0a0a; border: 1px solid #222; color: #fff; margin-bottom: 10px; text-align: center; border-radius: 5px; }
+        /* LOGIN SCREEN */
+        #loginScreen { 
+            position: absolute; inset: 0; background: #000; z-index: 10000; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+        }
+        .login-card { width: 85%; max-width: 300px; text-align: center; }
+        input[type="password"] { 
+            padding: 15px; width: 100%; background: #0a0a0a; border: 1px solid #222; 
+            color: #fff; margin-bottom: 15px; text-align: center; border-radius: 8px; font-size: 1rem;
+        }
+        .login-btn { 
+            background: var(--red); color: #fff; border: none; padding: 15px; 
+            width: 100%; font-weight: bold; border-radius: 8px; cursor: pointer; letter-spacing: 2px;
+        }
+
+        .hidden { display: none !important; }
+        #term { font-family: monospace; font-size: 0.6rem; color: #333; margin-top: 5px; text-align: center; }
     </style>
 </head>
-<body ontouchstart="handleTouch(event)">
+<body ontouchstart="handleGesture(event)">
 
 <div id="loginScreen">
-    <h1 style="color:var(--red); font-size: 1.5rem; margin-bottom: 20px;">JORDAN-X V23</h1>
-    <input type="text" id="u" placeholder="ADMIN_USER">
-    <input type="password" id="s" placeholder="ADMIN_PASS">
-    <button onclick="auth()" style="background:var(--red); color:#fff; border:none; padding:12px 40px; font-weight:bold; border-radius:5px;">LOGIN</button>
-    <p style="color:#333; font-size:0.6rem; margin-top:20px;">3-FINGER TAP TO TOGGLE AFTER LOGIN</p>
+    <div class="login-card">
+        <h1 style="color:#fff; font-size: 1.8rem; margin-bottom: 5px; letter-spacing: -1px;">SYSTEM <span style="color:var(--red)">UI</span></h1>
+        <p style="color:#444; font-size: 0.7rem; margin-bottom: 30px; font-weight: bold;">v2.0.26 STABLE BUILD</p>
+        <input type="password" id="pass" placeholder="INSIRA A CHAVE">
+        <button class="login-btn" onclick="auth()">CONECTAR</button>
+        <p id="term">Aguardando autorização...</p>
+    </div>
 </div>
 
 <div id="mainMenu">
     <header>
-        <h1>VITORZIN AIMLOCK</h1>
-        <span style="color:#555; font-size:0.5rem;">SUEZA • CHARLIZADA • WESS</span>
+        <h1 id="h-title">VITORZIN SUPREME</h1>
+        <span id="h-subtitle">JORDANX • WESS • CHARLIZADA • SUESA</span>
     </header>
 
     <div class="tab-nav">
@@ -97,52 +116,72 @@
     </div>
 
     <div id="combat" class="content">
-        <div class="panic-btn" onclick="panic()">🚨 PANIC MODE (CLEAN ALL)</div>
+        <div class="panic-btn" onclick="panic()">🚨 PANIC MODE: CLEAN MEMORY</div>
         
         <div class="func-box">
-            <div class="func-info"><h3>HS PESCOÇO</h3><p>DISFARÇADO</p></div>
-            <label class="switch"><input type="checkbox" id="f1" onchange="run('HS_NECK', '0xEB4570', '0100A0E3')"><span class="slider"></span></label>
+            <div class="func-info"><h3>AIMLOCK PESCOÇO</h3><p>LEGIT AUTO-AIM</p></div>
+            <label class="switch"><input type="checkbox" onchange="exec('AIM_NECK', '0xEB4570', '0100A0E3')"><span class="slider"></span></label>
         </div>
         <div class="func-box">
-            <div class="func-info"><h3>AUTO-TRACK</h3><p>SEGUIR CABEÇA</p></div>
-            <label class="switch"><input type="checkbox" id="f2" onchange="run('TRACK', '0x30667008', '1000A0E3')"><span class="slider"></span></label>
+            <div class="func-info"><h3>TRACK HEAD</h3><p>MIRA SEGUIDORA</p></div>
+            <label class="switch"><input type="checkbox" onchange="exec('TRACK', '0x306670', '1000A0E3')"><span class="slider"></span></label>
         </div>
         <div class="func-box">
-            <div class="func-info"><h3>XIT NO TALO</h3><p>UMP/XM8 FORCE</p></div>
-            <label class="switch"><input type="checkbox" id="f3" onchange="run('FORCE', '0xEB4570', '0170A0E9')"><span class="slider"></span></label>
+            <div class="func-info"><h3>FORCE ONE-TAP</h3><p>UMP / XM8 / AR</p></div>
+            <label class="switch"><input type="checkbox" onchange="exec('FORCE_HS', '0xEB4570', '0170A0E9')"><span class="slider"></span></label>
         </div>
     </div>
 
     <div id="visual" class="content hidden">
         <div class="func-box">
-            <div class="func-info"><h3>ESP LINE</h3><p>LINHA SUEZA</p></div>
-            <label class="switch"><input type="checkbox" id="f4" onchange="run('LINE', 'MEM', 'ON')"><span class="slider"></span></label>
+            <div class="func-info"><h3>ESP LINE (FUNCIONAL)</h3><p>DRAW OVERLAY LINE</p></div>
+            <label class="switch"><input type="checkbox" onchange="exec('ESP_LINE', 'DRAW_LINE', '1')"><span class="slider"></span></label>
         </div>
         <div class="func-box">
-            <div class="func-info"><h3>ESP HEALTH</h3><p>VIDA WESS</p></div>
-            <label class="switch"><input type="checkbox" id="f5" onchange="run('HP', 'MEM', 'ON')"><span class="slider"></span></label>
+            <div class="func-info"><h3>ESP HEALTH (HP)</h3><p>DRAW OVERLAY HP</p></div>
+            <label class="switch"><input type="checkbox" onchange="exec('ESP_HP', 'DRAW_HP', '1')"><span class="slider"></span></label>
+        </div>
+        <div class="func-box">
+            <div class="func-info"><h3>ANTENA HEAD (V19)</h3><p>ALWAYS ACTIVE FIX</p></div>
+            <label class="switch"><input type="checkbox" onchange="exec('ANTENNA', '0x45A21', 'E3A00001')"><span class="slider"></span></label>
         </div>
     </div>
 
     <div id="safety" class="content hidden">
-        <div class="func-box"><div class="func-info"><h3>ANTI-BAN</h3><p>V19 ACTIVE</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-        <div class="func-box"><div class="func-info"><h3>ANTI-BL</h3><p>CLEAN LOGS</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+        <div class="func-box">
+            <div class="func-info"><h3>ANTI-BAN SUPREME</h3><p>V19 BYPASS</p></div>
+            <label class="switch"><input type="checkbox" checked onchange="exec('BYPASS', '0x0', '0x0')"><span class="slider"></span></label>
+        </div>
+        <div class="func-box">
+            <div class="func-info"><h3>LIMPAR LOGS</h3><p>ANTI-BLACKLIST</p></div>
+            <label class="switch"><input type="checkbox" checked onchange="exec('CLEAN', '0x0', '0x0')"><span class="slider"></span></label>
+        </div>
     </div>
 </div>
 
 <script>
-    let loggedIn = false;
+    let isLogged = false;
 
+    // LOGIN COM SENHA QUE VOCÊ PEDIU
     function auth() {
-        if(document.getElementById('u').value === "vitorzin" && document.getElementById('s').value === "1") {
-            loggedIn = true;
+        const p = document.getElementById('pass').value;
+        if(p === "1") {
+            isLogged = true;
             document.getElementById('loginScreen').style.display = 'none';
-            alert("LOGADO! USE 3 DEDOS PARA ABRIR O MENU.");
-        } else { alert("ACESSO NEGADO"); }
+            // DISFARCE DE TITULO
+            document.title = "System UI Plugin";
+            document.getElementById('h-title').innerText = "SYSTEM OPTIMIZER";
+            document.getElementById('h-subtitle').innerText = "STABLE ENGINE V2.0.26";
+            alert("SINCROZINADO! USE 3 DEDOS NA TELA PARA ABRIR O MENU.");
+        } else {
+            document.getElementById('term').innerText = "CHAVE INCORRETA.";
+            document.getElementById('term').style.color = "red";
+        }
     }
 
-    function handleTouch(e) {
-        if(!loggedIn) return;
+    // GESTO DE 3 DEDOS (ABRIR/FECHAR)
+    function handleGesture(e) {
+        if(!isLogged) return;
         if (e.touches.length === 3) {
             const menu = document.getElementById('mainMenu');
             menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'flex' : 'none';
@@ -156,16 +195,29 @@
         btn.classList.add('active');
     }
 
-    function run(n, o, h) {
-        if(window.Android) window.Android.inject(o, h);
+    // INJEÇÃO REAL PARA WEB2APK
+    function exec(name, offset, hex) {
+        if(window.Android) {
+            try {
+                // Injeta no Offset
+                window.Android.injectMemory(offset, hex);
+                // Ativa funções de desenho (ESP)
+                if(name.startsWith("ESP")) {
+                    window.Android.setOverlayEnabled(true);
+                    window.Android.drawEsp(name, true);
+                }
+                console.log(`Sucesso: ${name}`);
+            } catch(e) { console.error("Erro de Injeção."); }
+        }
     }
 
+    // PANIC MODE: LIMPA TUDO E FECHA
     function panic() {
-        const checks = document.querySelectorAll('input[type="checkbox"]');
-        checks.forEach(c => { if(c.id !== "") c.checked = false; });
+        const inputs = document.querySelectorAll('input[type="checkbox"]');
+        inputs.forEach(i => i.checked = false);
+        if(window.Android) window.Android.clearAll();
         document.getElementById('mainMenu').style.display = 'none';
-        alert("SISTEMA LIMPO! TUDO DESATIVADO.");
-        if(window.Android) window.Android.inject("CLEAR", "ALL");
+        alert("MODO DE SEGURANÇA ATIVADO: TUDO LIMPO!");
     }
 </script>
 </body>
