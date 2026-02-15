@@ -3,57 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>VITORZIN V30 VIP</title>
+    <title>VITORZIN V30 ULTRA VIP</title>
     <style>
-        body { background: transparent; font-family: sans-serif; margin: 0; padding: 5px; }
-        .menu { width: 210px; background: rgba(10, 10, 10, 0.95); border: 2px solid #ff0000; border-radius: 12px; padding: 10px; box-shadow: 0 0 20px #ff0000; }
-        .title { color: #ff0000; font-size: 18px; text-align: center; font-weight: bold; text-shadow: 0 0 10px #ff0000; margin-bottom: 10px; }
-        .tab-name { color: #555; font-size: 10px; margin-top: 10px; border-bottom: 1px solid #333; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 5px; }
-        button { background: #222; color: #fff; border: 1px solid #444; padding: 8px 2px; border-radius: 5px; font-size: 11px; cursor: pointer; transition: 0.3s; }
-        button.active { background: #ff0000; color: #fff; box-shadow: 0 0 10px #ff0000; border: none; }
-        .full { grid-column: span 2; background: #b10000; }
+        :root { --main-color: #ff00ff; --bg-dark: #0a0a0a; }
+        body { background: transparent; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 5px; }
+        .menu { width: 240px; background: var(--bg-dark); border: 2px solid var(--main-color); border-radius: 15px; padding: 12px; box-shadow: 0 0 30px var(--main-color); overflow-y: auto; max-height: 500px; }
+        .header { color: var(--main-color); font-size: 22px; text-align: center; font-weight: 900; text-shadow: 0 0 15px var(--main-color); margin-bottom: 15px; border-bottom: 2px solid #222; }
+        .tab-title { color: #fff; font-size: 11px; margin: 15px 0 8px; text-transform: uppercase; letter-spacing: 1px; border-left: 3px solid var(--main-color); padding-left: 5px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        button { background: #151515; color: #ccc; border: 1px solid #333; padding: 10px 2px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; transition: 0.4s; }
+        button.active { background: var(--main-color); color: #fff; box-shadow: 0 0 15px var(--main-color); border: none; transform: scale(1.05); }
+        .footer-btn { grid-column: span 2; background: #440044; margin-top: 15px; border: 1px solid var(--main-color); }
+        .status { font-size: 9px; color: #00ff00; text-align: center; margin-top: 5px; }
     </style>
 </head>
 <body>
     <div class="menu">
-        <div class="title">VITORZIN V30 VIP</div>
-        
-        <div class="tab-name">AIM ASSIST (FAMOSOS)</div>
+        <div class="header">VITORZIN V30 VIP</div>
+        <div class="status">● SISTEMA ONLINE & ANTI-BAN</div>
+
+        <div class="tab-title">🎯 AIMBOT & REGEDIT (FILES)</div>
         <div class="grid">
-            <button onclick="toggle(this)">AIMBOT 100%</button>
-            <button onclick="toggle(this)">AIMLOCK VIP</button>
-            <button onclick="toggle(this)">REGEDIT EXT</button>
-            <button onclick="toggle(this)">SENSY EMULADOR</button>
+            <button onclick="toggle(this)">AIMBOT 100% HS</button>
+            <button onclick="toggle(this)">AIMLOCK FOV</button>
+            <button onclick="toggle(this)">REGEDIT DARK</button>
+            <button onclick="toggle(this)">SENSY IPHONE</button>
+            <button onclick="toggle(this)">AUTO HEADSHOT</button>
+            <button onclick="toggle(this)">CURSOR VIP</button>
         </div>
 
-        <div class="tab-name">VISUAL & ESP (APELÃO)</div>
+        <div class="tab-title">👁️ ESP VISUAL (WALLHACK)</div>
         <div class="grid">
-            <button onclick="toggle(this)">ESP LINE</button>
-            <button onclick="toggle(this)">ESP BOX</button>
-            <button onclick="toggle(this)">ESP DISTANCE</button>
+            <button onclick="toggle(this)">ESP LINE V3</button>
+            <button onclick="toggle(this)">ESP BOX 3D</button>
             <button onclick="toggle(this)">ESP NAME</button>
+            <button onclick="toggle(this)">ESP DISTANCE</button>
+            <button onclick="toggle(this)">ESP SKELETON</button>
+            <button onclick="toggle(this)">ESP GRANADA</button>
         </div>
 
-        <div class="tab-name">AUXÍLIO DE TIRO</div>
+        <div class="tab-title">⚡ SUPREMACIA & MOVIMENTAÇÃO</div>
         <div class="grid">
-            <button onclick="toggle(this)">NO RECOIL</button>
+            <button onclick="toggle(this)">NO RECOIL 100%</button>
+            <button onclick="toggle(this)">SPEED HACK 2X</button>
             <button onclick="toggle(this)">FAST RELOAD</button>
-            <button onclick="toggle(this)">TIRO RÁPIDO</button>
             <button onclick="toggle(this)">GELO RÁPIDO</button>
+            <button onclick="toggle(this)">MEDKIT CORRENDO</button>
+            <button onclick="toggle(this)">REPARAR COLETE</button>
         </div>
 
-        <div class="tab-name">SISTEMA PROTECT</div>
+        <div class="tab-title">🛡️ SEGURANÇA AVANÇADA</div>
         <div class="grid">
-            <button onclick="toggle(this)">ANTI-BAN 2.0</button>
-            <button onclick="toggle(this)">BYPASS LOGS</button>
+            <button onclick="toggle(this)">LIMPAR LOGS</button>
+            <button onclick="toggle(this)">BYPASS SECURITY</button>
+            <button class="footer-btn" onclick="fechar()">FECHAR E DELETAR RASTROS</button>
         </div>
-
-        <button class="full" style="margin-top:15px;" onclick="fechar()">FECHAR E LIMPAR</button>
     </div>
 
     <script>
-        function toggle(e) { e.classList.toggle('active'); }
+        function toggle(e) { 
+            e.classList.toggle('active'); 
+            if(window.XitVitorzin) { window.XitVitorzin.injetarFuncao(e.innerText); }
+        }
         function fechar() { if(window.Android) window.Android.fecharPainel(); }
     </script>
 </body>
