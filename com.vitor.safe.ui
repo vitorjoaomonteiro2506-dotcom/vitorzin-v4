@@ -5,75 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>System UI</title>
     <style>
-        :root { --red: #ff0000; }
+        :root { --red: #ff0000; --dark: #050505; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; margin: 0; padding: 0; }
-        body { background: transparent; font-family: sans-serif; height: 100vh; overflow: hidden; }
+        
+        /* FUNDO PRETO PARA ACABAR COM A TELA BRANCA */
+        body { background: #000; font-family: 'Segoe UI', sans-serif; height: 100vh; overflow: hidden; color: white; }
 
-        /* TELA DE LOGIN APARECE NA HORA */
-        #loginScreen { 
+        /* TELA DE LOGIN */
+        #login { 
             position: fixed; inset: 0; background: #000; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
             z-index: 10000;
         }
-
         input[type="password"] { 
-            padding: 15px; width: 75%; background: #0a0a0a; border: 1px solid var(--red); 
-            color: #fff; text-align: center; border-radius: 8px; margin-bottom: 20px; font-size: 16px;
+            padding: 15px; width: 75%; background: #0a0a0a; border: 1.5px solid var(--red); 
+            color: #fff; text-align: center; border-radius: 8px; margin-bottom: 20px; outline: none;
+        }
+        .btn-auth { 
+            background: var(--red); color: white; border: none; padding: 15px 60px; 
+            border-radius: 8px; font-weight: bold; text-transform: uppercase;
         }
 
-        .btn-login { 
-            background: var(--red); color: white; border: none; padding: 15px 50px; 
-            border-radius: 8px; font-weight: bold; cursor: pointer;
+        /* BOTÃO FLUTUANTE */
+        #floatBtn {
+            width: 50px; height: 50px; background: rgba(255, 0, 0, 0.5);
+            border: 2px solid #fff; border-radius: 50%;
+            position: fixed; top: 20%; left: 15px; z-index: 9998;
+            display: none; justify-content: center; align-items: center; font-size: 10px; font-weight: bold;
         }
 
-        /* MENU QUE FICA ESCONDIDO ATÉ LOGAR */
-        #mainMenu {
-            display: none; width: 280px; background: #000; border: 2px solid var(--red);
+        /* MENU PRINCIPAL */
+        #menu {
+            width: 290px; background: rgba(5, 5, 5, 0.98); border: 2px solid var(--red);
             border-radius: 12px; position: absolute; left: 50%; top: 50%;
-            transform: translate(-50%, -50%); z-index: 9999;
+            transform: translate(-50%, -50%); display: none; flex-direction: column; z-index: 9999;
         }
+        header { padding: 15px; border-bottom: 1px solid #222; text-align: center; background: #000; border-radius: 10px 10px 0 0; }
+        header h2 { font-size: 14px; letter-spacing: 3px; color: var(--red); }
 
-        .float-icon {
-            width: 45px; height: 45px; background: rgba(255,0,0,0.5);
-            position: fixed; top: 20%; left: 10px; border-radius: 50%;
-            display: none; z-index: 10001; border: 1px solid #fff;
+        .content { padding: 15px; height: 300px; overflow-y: auto; }
+        .option { 
+            background: #0a0a0a; border: 1px solid #1a1a1a; padding: 12px; 
+            border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
         }
+        .option span { font-size: 12px; font-weight: bold; }
+
+        /* SWITCH */
+        .switch { position: relative; width: 36px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; inset: 0; background: #333; border-radius: 20px; transition: .4s; }
+        input:checked + .slider { background: var(--red); }
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .4s; }
+        input:checked + .slider:before { transform: translateX(16px); }
     </style>
 </head>
 <body>
 
-<div id="loginScreen">
-    <h2 style="color:white; margin-bottom: 20px;">SYSTEM <span style="color:red">LOGIN</span></h2>
-    <input type="password" id="pass" placeholder="DIGITE A CHAVE">
-    <button class="btn-login" onclick="entrar()">ENTRAR</button>
+<div id="login">
+    <h1 style="margin-bottom:30px; letter-spacing: 2px;">VITORZIN <span style="color:red">SUPREME</span></h1>
+    <input type="password" id="key" placeholder="SUA SENHA">
+    <button class="btn-auth" onclick="check()">ACESSAR</button>
 </div>
 
-<div id="floatIcon" onclick="abrir()" class="float-icon"></div>
+<div id="floatBtn" onclick="toggle()">MENU</div>
 
-<div id="mainMenu">
-    <div style="padding:15px; text-align:center; border-bottom:1px solid #222;">
-        <h3 style="color:white; font-size:14px;">VITORZIN SUPREME</h3>
-    </div>
-    <div style="padding:20px;">
-        <button onclick="alert('Ativado')" style="width:100%; padding:10px; background:#111; color:red; border:1px solid red; border-radius:5px;">ATIVAR ANTI-BAN</button>
-        <button onclick="fechar()" style="width:100%; padding:10px; background:#222; color:white; border:none; border-radius:5px; margin-top:10px;">FECHAR</button>
+<div id="menu">
+    <header><h2>PAINEL V28</h2></header>
+    <div class="content">
+        <div class="option"><span>🎯 AIMLOCK (HEAD)</span><label class="switch"><input type="checkbox" onchange="exec('AIM')"><span class="slider"></span></label></div>
+        <div class="option"><span>📏 ESP LINE</span><label class="switch"><input type="checkbox" onchange="exec('ESP')"><span class="slider"></span></label></div>
+        <div class="option"><span>📡 ANTENA HEAD</span><label class="switch"><input type="checkbox" onchange="exec('ANT')"><span class="slider"></span></label></div>
+        <div class="option" style="border-color: green;"><span>🛡️ ANTI-BAN (AUTO)</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+        <button onclick="toggle()" style="width:100%; padding:10px; background:#222; color:white; border:none; border-radius:5px; margin-top:10px;">ESCONDER</button>
     </div>
 </div>
 
 <script>
-    function entrar() {
-        const p = document.getElementById('pass').value;
-        if(p === "1") {
-            document.getElementById('loginScreen').style.display = 'none'; // Some o login
-            document.getElementById('floatIcon').style.display = 'block'; // Aparece o botão do menu
-            alert("SUCESSO!");
-        } else {
-            alert("SENHA ERRADA");
-        }
+    function check() {
+        if(document.getElementById('key').value === "1") {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('floatBtn').style.display = 'flex';
+        } else { alert("Senha Incorreta!"); }
     }
 
-    function abrir() { document.getElementById('mainMenu').style.display = 'block'; }
-    function fechar() { document.getElementById('mainMenu').style.display = 'none'; }
-</script>
-</body>
-</html>
+    function toggle() {
+        let m = document.getElementById('menu');
+        m.style.display =
