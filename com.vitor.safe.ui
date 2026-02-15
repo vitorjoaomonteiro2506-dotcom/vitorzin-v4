@@ -3,124 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>System Optimizer</title>
+    <title>System UI</title>
     <style>
-        :root { --red: #ff0000; --dark: #050505; }
+        :root { --red: #ff0000; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; margin: 0; padding: 0; }
-        body { background: transparent; font-family: 'Roboto', sans-serif; height: 100vh; overflow: hidden; }
+        body { background: transparent; font-family: sans-serif; height: 100vh; overflow: hidden; }
 
-        /* ÍCONE FLUTUANTE DISCRETO */
-        #floatBtn {
-            width: 45px; height: 45px; background: rgba(255, 0, 0, 0.4);
-            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
-            position: fixed; top: 15%; left: 10px; z-index: 10001;
-            display: none; justify-content: center; align-items: center;
-            backdrop-filter: blur(5px); color: white; font-size: 8px; font-weight: bold;
+        /* TELA DE LOGIN APARECE NA HORA */
+        #loginScreen { 
+            position: fixed; inset: 0; background: #000; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            z-index: 10000;
         }
 
-        /* MENU PRINCIPAL */
-        #menu {
-            width: 280px; background: #000; border: 1.5px solid var(--red);
+        input[type="password"] { 
+            padding: 15px; width: 75%; background: #0a0a0a; border: 1px solid var(--red); 
+            color: #fff; text-align: center; border-radius: 8px; margin-bottom: 20px; font-size: 16px;
+        }
+
+        .btn-login { 
+            background: var(--red); color: white; border: none; padding: 15px 50px; 
+            border-radius: 8px; font-weight: bold; cursor: pointer;
+        }
+
+        /* MENU QUE FICA ESCONDIDO ATÉ LOGAR */
+        #mainMenu {
+            display: none; width: 280px; background: #000; border: 2px solid var(--red);
             border-radius: 12px; position: absolute; left: 50%; top: 50%;
-            transform: translate(-50%, -50%); display: none; flex-direction: column; z-index: 9999;
-            box-shadow: 0 0 25px rgba(255,0,0,0.5);
+            transform: translate(-50%, -50%); z-index: 9999;
         }
 
-        header { padding: 10px; border-bottom: 1px solid #222; text-align: center; }
-        header h2 { color: white; font-size: 14px; letter-spacing: 2px; }
-
-        .content { height: 320px; overflow-y: auto; padding: 12px; }
-        
-        /* BOTÕES DE FUNÇÃO */
-        .card {
-            background: #0a0a0a; border: 1px solid #1a1a1a; padding: 10px;
-            border-radius: 8px; margin-bottom: 8px; display: flex;
-            justify-content: space-between; align-items: center;
+        .float-icon {
+            width: 45px; height: 45px; background: rgba(255,0,0,0.5);
+            position: fixed; top: 20%; left: 10px; border-radius: 50%;
+            display: none; z-index: 10001; border: 1px solid #fff;
         }
-        .card span { color: #ccc; font-size: 11px; font-weight: bold; }
-
-        /* TOGGLE */
-        .switch { position: relative; width: 34px; height: 18px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; inset: 0; background: #222; border-radius: 20px; transition: .4s; }
-        input:checked + .slider { background: var(--red); }
-        .slider:before { position: absolute; content: ""; height: 12px; width: 12px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .4s; }
-        input:checked + .slider:before { transform: translateX(16px); }
-
-        /* LOGIN */
-        #login { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        input[type="password"] { padding: 12px; width: 70%; background: #0a0a0a; border: 1px solid #333; color: #fff; text-align: center; border-radius: 5px; margin-bottom: 15px; }
-        .btn-auth { background: var(--red); color: white; border: none; padding: 10px 30px; border-radius: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div id="login">
-    <h1 style="color:white; font-size: 20px; margin-bottom: 20px;">VITORZIN <span style="color:red">V27</span></h1>
-    <input type="password" id="key" placeholder="CHAVE DE ACESSO">
-    <button class="btn-auth" onclick="login()">ENTRAR</button>
+<div id="loginScreen">
+    <h2 style="color:white; margin-bottom: 20px;">SYSTEM <span style="color:red">LOGIN</span></h2>
+    <input type="password" id="pass" placeholder="DIGITE A CHAVE">
+    <button class="btn-login" onclick="entrar()">ENTRAR</button>
 </div>
 
-<div id="floatBtn" onclick="toggle()">MENU</div>
+<div id="floatIcon" onclick="abrir()" class="float-icon"></div>
 
-<div id="menu">
-    <header><h2>ANTI-BLACKLIST V27</h2></header>
-    <div class="content">
-        <div class="card" style="border-color: #00ff00;">
-            <span>🛡️ BYPASS ANTI-BAN</span>
-            <label class="switch"><input type="checkbox" checked onchange="exec('BYPASS', '0x0', '0x0')"><span class="slider"></span></label>
-        </div>
-        <div class="card">
-            <span>🎯 AIMLOCK (HEAD)</span>
-            <label class="switch"><input type="checkbox" onchange="exec('AIM', '0xEB4570', '0100A0E3')"><span class="slider"></span></label>
-        </div>
-        <div class="card">
-            <span>📏 ESP LINE (FIX)</span>
-            <label class="switch"><input type="checkbox" onchange="exec('ESP', 'DRAW', '1')"><span class="slider"></span></label>
-        </div>
-        <div class="card">
-            <span>📡 ANTENA 100%</span>
-            <label class="switch"><input type="checkbox" onchange="exec('ANT', '0x45A21', 'E3A00001')"><span class="slider"></span></label>
-        </div>
-        <button onclick="panic()" style="width:100%; background:red; color:white; border:none; padding:8px; margin-top:10px; border-radius:5px; font-weight:bold;">SAIR / LIMPAR TUDO</button>
+<div id="mainMenu">
+    <div style="padding:15px; text-align:center; border-bottom:1px solid #222;">
+        <h3 style="color:white; font-size:14px;">VITORZIN SUPREME</h3>
+    </div>
+    <div style="padding:20px;">
+        <button onclick="alert('Ativado')" style="width:100%; padding:10px; background:#111; color:red; border:1px solid red; border-radius:5px;">ATIVAR ANTI-BAN</button>
+        <button onclick="fechar()" style="width:100%; padding:10px; background:#222; color:white; border:none; border-radius:5px; margin-top:10px;">FECHAR</button>
     </div>
 </div>
 
 <script>
-    function login() {
-        if(document.getElementById('key').value === "1") {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('floatBtn').style.display = 'flex';
-            // ANTI-BLACKLIST: Limpa logs de navegação do WebView
-            if(window.localStorage) window.localStorage.clear();
-        } else { alert("Chave Inválida!"); }
-    }
-
-    function toggle() {
-        const m = document.getElementById('menu');
-        m.style.display = (m.style.display === 'none') ? 'flex' : 'none';
-    }
-
-    function exec(n, o, h) {
-        if(window.Android) {
-            // Envia o comando de injeção e o comando de Bypass
-            window.Android.injectMemory(o, h);
-            window.Android.setBypass(true); 
+    function entrar() {
+        const p = document.getElementById('pass').value;
+        if(p === "1") {
+            document.getElementById('loginScreen').style.display = 'none'; // Some o login
+            document.getElementById('floatIcon').style.display = 'block'; // Aparece o botão do menu
+            alert("SUCESSO!");
+        } else {
+            alert("SENHA ERRADA");
         }
-        console.log("Exec: " + n);
     }
 
-    function panic() {
-        location.reload(); // Reseta o painel e limpa memória
-    }
-
-    // ARRASTAR BOTÃO
-    const b = document.getElementById('floatBtn');
-    b.ontouchmove = (e) => {
-        let t = e.touches[0];
-        b.style.left = t.clientX - 22 + 'px';
-        b.style.top = t.clientY - 22 + 'px';
-    };
+    function abrir() { document.getElementById('mainMenu').style.display = 'block'; }
+    function fechar() { document.getElementById('mainMenu').style.display = 'none'; }
 </script>
 </body>
 </html>
