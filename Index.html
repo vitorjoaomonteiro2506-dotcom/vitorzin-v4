@@ -1,79 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <style>
-        body { background: transparent; margin: 0; padding: 0; font-family: sans-serif; }
-        
-        /* BOTÃO FLUTUANTE */
-        #floatBtn {
-            width: 55px; height: 55px; background: rgba(255, 0, 0, 0.7);
-            border: 2px solid #fff; border-radius: 50%; position: fixed;
-            top: 100px; left: 20px; z-index: 9999; display: flex;
-            justify-content: center; align-items: center; color: white;
-            font-weight: bold; font-size: 11px; box-shadow: 0 0 10px #000;
-        }
-
-        /* MENU */
-        #menu {
-            width: 260px; background: rgba(0, 0, 0, 0.9); border: 1.5px solid red;
-            border-radius: 10px; position: fixed; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); display: none; z-index: 10000;
-            color: white; padding: 15px;
-        }
-
-        .item { display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center; }
-        .switch { width: 40px; height: 20px; background: #444; border-radius: 20px; position: relative; }
-        .switch.on { background: red; }
-        .switch:after { content: ''; width: 16px; height: 16px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: 0.3s; }
-        .switch.on:after { left: 22px; }
-    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VITORZIN V30</title>
+<style>
+  body {
+    background: transparent; /* Fundo transparente para o APK */
+    font-family: 'Arial', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Evita barras de rolagem */
+  }
+  .menu-container {
+    width: 150px; /* Largura do menu */
+    background: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); /* Sombra verde */
+    text-align: center;
+  }
+  .menu-button {
+    background: linear-gradient(45deg, #00ff00, #00aa00); /* Botão verde */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    width: 90%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .menu-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, #00aa00, #00ff00);
+  }
+  .close-button {
+    background: linear-gradient(45deg, #ff0000, #aa0000); /* Botão vermelho */
+  }
+  .close-button:hover {
+    background: linear-gradient(45deg, #aa0000, #ff0000);
+  }
+  .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #00ff00; /* Título verde */
+    text-shadow: 0 0 5px #00ff00;
+  }
+</style>
 </head>
 <body>
 
-<div id="floatBtn" onclick="toggle()">MENU</div>
-
-<div id="menu">
-    <h3 style="text-align:center; color:red; margin-top:0;">VITORZIN V30</h3>
-    
-    <div class="item">
-        <span>ESP LINE (LINHAS)</span>
-        <div class="switch" id="esp" onclick="exec('ESP', 'esp_line', this)"></div>
-    </div>
-    
-    <div class="item">
-        <span>AIMLOCK (100%)</span>
-        <div class="switch" id="aim" onclick="exec('AIM', 'aim_lock', this)"></div>
-    </div>
-
-    <button onclick="toggle()" style="width:100%; padding:8px; background:#333; color:white; border:none; border-radius:5px;">FECHAR</button>
+<div class="menu-container">
+  <div class="title">VITORZIN V30</div>
+  <button class="menu-button" onclick="activateAimbot()">AIMBOT 100% HS</button>
+  <button class="menu-button" onclick="activateAimLock()">AIMLOCK</button>
+  <button class="menu-button" onclick="activateNoRecoil()">NO RECOIL</button>
+  <button class="menu-button" onclick="activateAntenna()">ANTENA</button>
+  <button class="menu-button" onclick="activateFastReload()">FAST RELOAD</button>
+  <button class="menu-button close-button" onclick="Android.fecharPainel()">FECHAR</button>
 </div>
 
 <script>
-    function toggle() {
-        var m = document.getElementById('menu');
-        m.style.display = (m.style.display === 'none' || m.style.display === '') ? 'block' : 'none';
+  // Funções para ativar o Aimbot (elas conversam com o APK)
+  function activateAimbot() {
+    alert('AIMBOT 100% HS ATIVADO!'); // Confirma no site
+    if (typeof AndroidAimbot !== 'undefined') {
+      AndroidAimbot.activateAimbotHS(); // Chama a função no APK
     }
+  }
 
-    function exec(nome, cmd, el) {
-        el.classList.toggle('on');
-        var status = el.classList.contains('on');
-        
-        // COMANDO PARA O ANDROID (SKETCHWARE)
-        if(window.Android) {
-            window.Android.injectMemory(cmd, status ? "ON" : "OFF");
-        }
-        console.log(nome + " está " + (status ? "LIGADO" : "DESLIGADO"));
-    }
+  function activateAimLock() {
+    alert('AIMLOCK ATIVADO!');
+    // Adicione a lógica de AimLock aqui (se o APK tiver uma função específica)
+  }
 
-    // ARRASTAR BOTÃO
-    var btn = document.getElementById('floatBtn');
-    btn.ontouchmove = function(e) {
-        var t = e.touches[0];
-        btn.style.left = t.clientX - 27 + 'px';
-        btn.style.top = t.clientY - 27 + 'px';
-    }
+  function activateNoRecoil() {
+    alert('NO RECOIL ATIVADO!');
+    // Adicione a lógica de No Recoil aqui
+  }
+
+  function activateAntenna() {
+    alert('ANTENA ATIVADA!');
+    // Adicione a lógica de Antena aqui
+  }
+
+  function activateFastReload() {
+    alert('FAST RELOAD ATIVADO!');
+    // Adicione a lógica de Fast Reload aqui
+  }
+
+  // Não precisa de função para fechar, pois o botão já chama Android.fecharPainel()
 </script>
+
 </body>
 </html>
