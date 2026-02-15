@@ -90,4 +90,21 @@
 
     function toggle() {
         let m = document.getElementById('menu');
-        m.style.display =
+        m.style.display = (m.style.display === 'none' || m.style.display === '') ? 'flex' : 'none';
+    }
+
+    function exec(func) {
+        if(window.Android) { window.Android.injectMemory('0x0', '0x0'); }
+        console.log("Ativado: " + func);
+    }
+
+    // Tornar o ícone arrastável
+    const btn = document.getElementById('floatBtn');
+    btn.ontouchmove = function(e) {
+        let t = e.touches[0];
+        btn.style.left = t.clientX - 25 + 'px';
+        btn.style.top = t.clientY - 25 + 'px';
+    };
+</script>
+</body>
+</html>
