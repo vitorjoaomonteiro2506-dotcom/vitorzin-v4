@@ -4,49 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
-        body { background: transparent; font-family: 'Courier New', monospace; color: #ff0000; margin: 0; padding: 10px; }
-        .painel { width: 260px; background: rgba(0, 0, 0, 0.95); border: 2px solid #ff0000; border-radius: 5px; padding: 15px; box-shadow: 0 0 30px #ff0000; }
-        .title { text-align: center; font-size: 22px; font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; border-bottom: 2px solid #ff0000; }
-        .section { font-size: 10px; color: #fff; margin-top: 10px; text-transform: uppercase; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        button { background: #000; color: #ff0000; border: 1px solid #ff0000; padding: 12px 5px; font-size: 11px; font-weight: bold; cursor: pointer; }
-        button.active { background: #ff0000; color: #000; box-shadow: 0 0 20px #ff0000; }
-        .full { grid-column: span 2; background: #330000; margin-top: 10px; }
+        body { background: transparent; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; margin: 0; }
+        .menu { 
+            width: 240px; background: rgba(0, 0, 0, 0.95); border: 2px solid #00ffff; 
+            border-radius: 15px; padding: 15px; box-shadow: 0 0 20px #00ffff; margin-top: 20px;
+        }
+        h2 { color: #00ffff; text-align: center; font-size: 18px; text-shadow: 0 0 10px #00ffff; margin: 0 0 15px 0; }
+        .section { color: #555; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid #222; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 15px; }
+        button { 
+            background: #111; color: white; border: 1px solid #00ffff; padding: 10px; 
+            border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        button:active { background: #00ffff; color: #000; box-shadow: 0 0 15px #00ffff; }
+        .btn-safe { border-color: #00ff00; color: #00ff00; }
+        .btn-danger { border-color: #ff0000; color: #ff0000; margin-top: 10px; width: 100%; }
     </style>
 </head>
 <body>
-    <div class="painel">
-        <div class="title">VITORZIN x GRANEJO</div>
+    <div class="menu">
+        <h2>VITORZIN V30 VIP</h2>
         
-        <div class="section">MODO APELAÇÃO (HS 100%)</div>
+        <div class="section">Segurança</div>
         <div class="grid">
-            <button onclick="toggle(this, 'AIM_HEAD')">AIMBOT 100% HS</button>
-            <button onclick="toggle(this, 'AIM_LOCK')">AIMLOCK BRABO</button>
-            <button onclick="toggle(this, 'REG_GRANEJO')">REGEDIT GRANEJO</button>
-            <button onclick="toggle(this, 'DPI_EMU')">DPI EMULADOR</button>
+            <button class="btn-safe" onclick="XitVitorzin.injetarFuncao('ANTI-BAN VIP')">🛡️ ATIVAR ANTI-BAN</button>
+            <button class="btn-safe" onclick="XitVitorzin.injetarFuncao('ANTI-BLACKLIST')">🧹 LIMPAR BLACKLIST</button>
         </div>
 
-        <div class="section">VISUAL & ESP (WALLHACK)</div>
+        <div class="section">Ajustes de Mira</div>
         <div class="grid">
-            <button onclick="toggle(this, 'ESP_LINE')">ESP LINHA VIP</button>
-            <button onclick="toggle(this, 'ESP_BOX')">ESP BOX 4D</button>
-            <button onclick="toggle(this, 'ESP_SKEL')">ESP ESQUELETO</button>
-            <button onclick="toggle(this, 'ESP_DIST')">DISTÂNCIA</button>
+            <button onclick="XitVitorzin.injetarFuncao('AIMBOT 100% HS')">🎯 AIMBOT MAGNÉTICO</button>
+            <button onclick="XitVitorzin.injetarFuncao('REGEDIT GRANEJO')">🔧 REGEDIT EXTREME</button>
         </div>
 
-        <div class="section">BYPASS & SEGURANÇA</div>
+        <div class="section">Visuais</div>
         <div class="grid">
-            <button class="full" onclick="toggle(this, 'ANTI_BAN')">ANTI-BAN ULTRA (BYPASS)</button>
-            <button class="full" style="color:white;" onclick="fechar()">DELETAR RASTROS E SAIR</button>
+            <button onclick="XitVitorzin.injetarFuncao('ANTENA HEAD')">📍 ANTENA NA CABEÇA</button>
+            <button onclick="XitVitorzin.injetarFuncao('ESP LINE')">🖼️ ESP LINHA (WALL)</button>
         </div>
+
+        <button class="btn-danger" onclick="location.reload()">FECHAR PAINEL</button>
     </div>
-
-    <script>
-        function toggle(e, func) { 
-            e.classList.toggle('active');
-            if(window.XitVitorzin) { window.XitVitorzin.injetarFuncao(func); }
-        }
-        function fechar() { if(window.Android) window.Android.fecharPainel(); }
-    </script>
 </body>
 </html>
