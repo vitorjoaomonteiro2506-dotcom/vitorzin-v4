@@ -1,49 +1,294 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <style>
-        body { background: transparent; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; margin: 0; }
-        .menu { 
-            width: 240px; background: rgba(0, 0, 0, 0.95); border: 2px solid #00ffff; 
-            border-radius: 15px; padding: 15px; box-shadow: 0 0 20px #00ffff; margin-top: 20px;
-        }
-        h2 { color: #00ffff; text-align: center; font-size: 18px; text-shadow: 0 0 10px #00ffff; margin: 0 0 15px 0; }
-        .section { color: #555; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid #222; }
-        .grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 15px; }
-        button { 
-            background: #111; color: white; border: 1px solid #00ffff; padding: 10px; 
-            border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
-        button:active { background: #00ffff; color: #000; box-shadow: 0 0 15px #00ffff; }
-        .btn-safe { border-color: #00ff00; color: #00ff00; }
-        .btn-danger { border-color: #ff0000; color: #ff0000; margin-top: 10px; width: 100%; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Beast Store</title>
+
+<style>
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+#hacker{
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
+
+.login{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:5;
+}
+
+.login-box{
+  width:320px;
+  padding:20px;
+  background:linear-gradient(180deg,#0d0d14,#050508);
+  border:1px solid #ff2e2e;
+  border-radius:14px;
+  box-shadow:0 0 25px rgba(255,0,0,.7);
+}
+
+.login-box h2{
+  text-align:center;
+  color:#ff2e2e;
+  margin-bottom:12px;
+}
+
+.login-box input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  background:#0b0b12;
+  border:1px solid #ff2e2e;
+  color:#fff;
+  border-radius:8px;
+}
+
+.login-box button{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(180deg,#ff3b3b,#b80000);
+  border:none;
+  border-radius:10px;
+  color:#fff;
+  font-weight:bold;
+}
+
+.error{
+  color:#ff4d4d;
+  font-size:12px;
+  text-align:center;
+  display:none;
+}
+
+.wrapper{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0.75);
+  transform-origin:center;
+  z-index:2;
+  display:none;
+}
+
+.panel{
+  width:380px;
+  padding:16px;
+  background:linear-gradient(180deg,#0d0d14,#050508);
+  border-radius:14px;
+  border:1px solid #ff2e2e;
+  box-shadow:0 0 25px rgba(255,0,0,.7), inset 0 0 10px rgba(255,0,0,.3);
+}
+
+.header{
+  text-align:center;
+  color:#ff2e2e;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,#ff2e2e,transparent);
+  margin:10px 0;
+}
+
+.section{
+  color:#ff6a6a;
+  font-size:13px;
+}
+
+.option{
+  display:flex;
+  justify-content:space-between;
+  padding:6px 0;
+  color:#fff;
+}
+
+input[type=checkbox]{
+  width:18px;
+  height:18px;
+  accent-color:#ff2e2e;
+}
+
+.range-box{
+  background:#0b0b12;
+  border:1px solid #ff2e2e;
+  border-radius:8px;
+  padding:8px;
+}
+
+.range-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:#ccc;
+}
+
+input[type=range]{ width:100%; }
+
+select{
+  width:100%;
+  margin-top:8px;
+  padding:6px;
+  background:#0b0b12;
+  color:#fff;
+  border:1px solid #ff2e2e;
+  border-radius:6px;
+}
+
+.inject{
+  margin-top:14px;
+  width:100%;
+  padding:12px;
+  background:linear-gradient(180deg,#ff3b3b,#b80000);
+  border:none;
+  border-radius:10px;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.inject-bar{
+  margin-top:8px;
+  width:100%;
+  height:8px;
+  background:#111;
+  border-radius:6px;
+  overflow:hidden;
+  border:1px solid #ff2e2e;
+  display:none;
+}
+
+.inject-progress{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#ff2e2e,#ff6a6a);
+}
+</style>
 </head>
+
 <body>
-    <div class="menu">
-        <h2>VITORZIN V30 VIP</h2>
-        
-        <div class="section">Segurança</div>
-        <div class="grid">
-            <button class="btn-safe" onclick="XitVitorzin.injetarFuncao('ANTI-BAN VIP')">🛡️ ATIVAR ANTI-BAN</button>
-            <button class="btn-safe" onclick="XitVitorzin.injetarFuncao('ANTI-BLACKLIST')">🧹 LIMPAR BLACKLIST</button>
-        </div>
 
-        <div class="section">Ajustes de Mira</div>
-        <div class="grid">
-            <button onclick="XitVitorzin.injetarFuncao('AIMBOT 100% HS')">🎯 AIMBOT MAGNÉTICO</button>
-            <button onclick="XitVitorzin.injetarFuncao('REGEDIT GRANEJO')">🔧 REGEDIT EXTREME</button>
-        </div>
+<canvas id="hacker"></canvas>
 
-        <div class="section">Visuais</div>
-        <div class="grid">
-            <button onclick="XitVitorzin.injetarFuncao('ANTENA HEAD')">📍 ANTENA NA CABEÇA</button>
-            <button onclick="XitVitorzin.injetarFuncao('ESP LINE')">🖼️ ESP LINHA (WALL)</button>
-        </div>
+<div class="login" id="login">
+  <div class="login-box">
+    <h2>Isaelzzq</h2>
+    <input placeholder="Usuário">
+    <input type="password" id="senha" placeholder="Senha">
+    <div class="error" id="erro">Senha incorreta</div>
+    <button onclick="entrar()">ENTRAR</button>
+  </div>
+</div>
 
-        <button class="btn-danger" onclick="location.reload()">FECHAR PAINEL</button>
+<div class="wrapper" id="app">
+  <div class="panel">
+    <div class="header">Isaelzzq</div>
+
+    <div class="divider"></div>
+    <div class="section">PRECISION</div>
+
+    <div class="option"><span>Ativar precisão</span><input type="checkbox"></div>
+    <div class="option"><span>Sem recuo</span><input type="checkbox"></div>
+    <div class="option"><span>Aumentar precisão</span><input type="checkbox"></div>
+    <div class="option"><span>Ignorar derrubados</span><input type="checkbox"></div>
+
+    <div class="divider"></div>
+    <div class="section">CONFIGURAÇÕES</div>
+
+    <div class="range-box">
+      <div class="range-top">
+        <span>FOV</span>
+        <span id="fovValue">0</span>
+      </div>
+      <input type="range" min="0" max="360" value="0" id="fov">
     </div>
+
+    <select>
+      <option>Cabeça</option>
+      <option>Pescoço</option>
+      <option>Peito</option>
+      <option selected>Aleatório</option>
+    </select>
+
+    <button class="inject" onclick="injectar()">INJECTAR</button>
+
+    <div class="inject-bar" id="injectBar">
+      <div class="inject-progress" id="injectProgress"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function entrar(){
+  if(senha.value === "707"){
+    login.style.display="none";
+    app.style.display="block";
+  }else{
+    erro.style.display="block";
+  }
+}
+
+const fov = document.getElementById("fov");
+const fovValue = document.getElementById("fovValue");
+fov.oninput = () => fovValue.textContent = fov.value;
+
+function injectar(){
+  const barBox = document.getElementById("injectBar");
+  const bar = document.getElementById("injectProgress");
+  barBox.style.display = "block";
+  let p = 0;
+
+  const i = setInterval(()=>{
+    p += 2;
+    bar.style.width = p + "%";
+    if(p >= 100){
+      clearInterval(i);
+      setTimeout(()=>{
+        window.location.href = "freefire://";
+      },300);
+    }
+  },40);
+}
+
+const canvas = document.getElementById("hacker");
+const ctx = canvas.getContext("2d");
+const chars = "01X#@$%アカサタナハマヤラワ";
+const fontSize = 14;
+let drops = [];
+
+function resize(){
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  drops = Array(Math.floor(canvas.width/fontSize)).fill(1);
+}
+resize();
+addEventListener("resize", resize);
+
+setInterval(()=>{
+  ctx.fillStyle = "rgba(0,0,0,.15)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "#ff2e2e";
+  ctx.font = fontSize + "px monospace";
+  drops.forEach((y,i)=>{
+    ctx.fillText(chars[Math.random()*chars.length|0], i*fontSize, y*fontSize);
+    drops[i] = y*fontSize > canvas.height && Math.random()>.97 ? 0 : y+1;
+  });
+},40);
+</script>
+
 </body>
 </html>
