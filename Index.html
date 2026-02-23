@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN SUPREMO v6.0 | FULL FUNCTIONAL PANEL</title>
+    <title>VITORZIN SUPREMO v6.0 | FULL POWER PANEL</title>
     <style>
-        /* CONFIGURAÇÕES DE NÚCLEO */
+        /* CONFIGURAÇÕES TÉCNICAS E CORES */
         :root {
             --primary: #ff0000;
             --secondary: #0a0a0a;
@@ -13,7 +13,7 @@
             --warning: #ffcc00;
             --text-main: #ffffff;
             --text-dim: #888888;
-            --panel-w: 390px;
+            --panel-w: 400px;
         }
 
         * { box-sizing: border-box; outline: none; }
@@ -30,46 +30,64 @@
             overflow: hidden;
         }
 
-        /* CONTAINER PRINCIPAL (LARGURA AJUSTADA) */
+        /* CONTAINER PRINCIPAL COM EFEITO SCANNER */
         .injector-frame {
             width: var(--panel-w);
             background: var(--secondary);
             border: 2px solid var(--primary);
             border-radius: 12px;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             position: relative;
             z-index: 5;
+            overflow: hidden;
         }
 
-        /* CABEÇALHO VIP */
+        /* LINHA DE SCANNER QUE SOBE E DESCE */
+        .injector-frame::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            animation: scan 4s linear infinite;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
         .header {
             background: linear-gradient(180deg, #000 0%, #1a0000 100%);
-            padding: 25px 15px;
+            padding: 20px;
             text-align: center;
             border-bottom: 2px solid var(--primary);
         }
 
         .header h1 {
             margin: 0;
-            font-size: 26px;
-            letter-spacing: 4px;
-            text-shadow: 0 0 15px var(--primary);
+            font-size: 28px;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px var(--primary);
             font-weight: 900;
         }
 
-        .header .sub {
-            font-size: 10px;
-            color: var(--text-dim);
+        .sub-header {
+            font-size: 9px;
+            color: var(--accent);
+            letter-spacing: 2px;
             margin-top: 5px;
             text-transform: uppercase;
         }
 
-        /* STATUS REAL-TIME */
         .status-strip {
             background: #000;
-            padding: 8px 15px;
+            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             font-size: 11px;
@@ -80,10 +98,10 @@
         .status-online { color: var(--accent); animation: blink 1.5s infinite; }
         @keyframes blink { 50% { opacity: 0.3; } }
 
-        /* TERMINAL DE INJEÇÃO (MAIOR E DETALHADO) */
+        /* TERMINAL DE LOGS */
         .terminal-box {
             background: #000;
-            height: 160px;
+            height: 180px;
             margin: 15px;
             padding: 12px;
             border-radius: 6px;
@@ -93,22 +111,23 @@
             color: var(--accent);
             overflow-y: auto;
             line-height: 1.4;
+            box-shadow: inset 0 0 10px #00ff0022;
         }
 
-        /* LISTA DE FUNÇÕES ATIVÁVEIS */
+        /* LISTA DE FUNÇÕES */
         .functions-container {
-            padding: 0 15px 20px 15px;
+            padding: 0 15px 15px 15px;
             flex-grow: 1;
             overflow-y: auto;
-            max-height: 380px;
+            max-height: 350px;
         }
 
         .function-item {
             background: #111;
             border: 1px solid #222;
-            padding: 14px;
+            padding: 12px;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -117,56 +136,28 @@
 
         .function-item:hover {
             border-color: var(--primary);
-            background: #161616;
+            background: #1a0505;
+            transform: scale(1.01);
         }
 
-        .func-label b {
-            display: block;
-            font-size: 14px;
-            color: #fff;
-        }
+        .func-label b { display: block; font-size: 13px; color: #fff; }
+        .func-label span { font-size: 9px; color: var(--primary); text-transform: uppercase; }
 
-        .func-label span {
-            font-size: 9px;
-            color: var(--primary);
-            text-transform: uppercase;
-        }
-
-        /* SWITCH TOGGLE */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 44px;
-            height: 22px;
-        }
-
+        /* SWITCH TOGGLE CUSTOMIZADO */
+        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-
         .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #333;
-            transition: .4s;
-            border-radius: 34px;
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #333; transition: .4s; border-radius: 34px;
         }
-
         .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
+            position: absolute; content: ""; height: 14px; width: 14px;
+            left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;
         }
+        input:checked + .slider { background-color: var(--primary); box-shadow: 0 0 10px var(--primary); }
+        input:checked + .slider:before { transform: translateX(20px); }
 
-        input:checked + .slider { background-color: var(--primary); }
-        input:checked + .slider:before { transform: translateX(22px); }
-
-        /* ÁREA DE LOGIN E ARQUIVOS */
+        /* FOOTER E CREDENCIAIS */
         .footer-info {
             background: #000;
             padding: 15px;
@@ -175,18 +166,10 @@
             text-align: center;
         }
 
-        .credenciais {
-            color: var(--text-dim);
-            margin-top: 8px;
-            background: #0a0a0a;
-            padding: 5px;
-            border: 1px solid #1a1a1a;
-        }
-
         .btn-update {
             background: var(--primary);
             color: #fff;
-            padding: 10px;
+            padding: 12px;
             border: none;
             width: 100%;
             border-radius: 4px;
@@ -194,13 +177,23 @@
             cursor: pointer;
             text-transform: uppercase;
             margin-bottom: 10px;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+        .btn-update:hover { background: #ff3333; letter-spacing: 1px; }
+
+        .credenciais {
+            color: var(--text-dim);
+            background: #0a0a0a;
+            padding: 8px;
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
         }
 
-        /* DECORAÇÃO BACKGROUND */
         .bg-effect {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(255,0,0,0.05) 0%, rgba(0,0,0,1) 80%);
+            background: radial-gradient(circle, rgba(255,0,0,0.08) 0%, rgba(0,0,0,1) 90%);
             z-index: 1;
         }
     </style>
@@ -211,33 +204,44 @@
 
 <div class="injector-frame">
     <div class="header">
-        <h1>VITORZIN VIP</h1>
-        <div class="sub">Engine: Tralha x Combo Xereca</div>
+        <h1>VITORZIN SUPREMO</h1>
+        <div class="sub-header">ESTADO: INDETECTÁVEL | KERNEL V6.0</div>
     </div>
 
     <div class="status-strip">
-        <span>ESTADO: <span class="status-online">CONECTADO</span></span>
-        <span>PING: 14ms</span>
-        <span>VER: 6.0.4</span>
+        <span>SISTEMA: <span class="status-online">ATIVO</span></span>
+        <span>PING: 12ms</span>
+        <span>FPS: 144</span>
     </div>
 
     <div class="terminal-box" id="term">
-        [SYSTEM] Inicializando kernel...<br>
-        [SYSTEM] Mapeando ComboXerecaCracrekd.rar...<br>
-        [SYSTEM] Verificando Tralha.painel.rar...<br>
-        [SYSTEM] Guna.UI.dll vinculada ao processo.<br>
-        [AUTH] Login 'vitorzin' reconhecido.<br>
-        [INFO] Pronto para injeção em FreeFire.exe
+        [SYS] Inicializando Kernel Engine...<br>
+        [SYS] Carregando ComboXereca.exe.exe... OK<br>
+        [SYS] Injetando Guna.UI2.dll... OK<br>
+        [SYS] Mapeando Memory.dll (Offsets atualizados)...<br>
+        [AUTH] Login 'vitorzin' confirmado.<br>
+        [READY] Painel 1000% funcional.
     </div>
 
     <div class="functions-container">
         <div class="function-item">
             <div class="func-label">
-                <b>AIMBOT SUPREMO</b>
-                <span>Foco: Cabeça | Smooth: 0</span>
+                <b>MIRA LEVE (SMOOTH AIM)</b>
+                <span>Ajuste Dinâmico | Memory.dll</span>
             </div>
             <label class="switch">
-                <input type="checkbox" onchange="runCmd('AIMBOT_INJECT', this)">
+                <input type="checkbox" onchange="runCmd('SMOOTH_AIM', this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="function-item">
+            <div class="func-label">
+                <b>AUTO HEADSHOT</b>
+                <span>Source: Tralha Painel v6.0</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" onchange="runCmd('AUTO_HS', this)">
                 <span class="slider"></span>
             </label>
         </div>
@@ -245,7 +249,7 @@
         <div class="function-item">
             <div class="func-label">
                 <b>REGEDIT EXTERNA</b>
-                <span>Modificar Registros Windows</span>
+                <span>DPI Turbo & Latência Zero</span>
             </div>
             <label class="switch">
                 <input type="checkbox" onchange="runCmd('REGEDIT_MOD', this)">
@@ -255,33 +259,11 @@
 
         <div class="function-item">
             <div class="func-label">
-                <b>AUTO HEADSHOT</b>
-                <span>Source: Tralha Painel</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" onchange="runCmd('HS_AUTO', this)">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="function-item">
-            <div class="func-label">
                 <b>ESP LINE & BOX</b>
-                <span>Desenhar linhas no Player</span>
+                <span>Renderização via Guna.UI</span>
             </div>
             <label class="switch">
-                <input type="checkbox" onchange="runCmd('ESP_DRAW', this)">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="function-item">
-            <div class="func-label">
-                <b>NO RECOIL / SPREAD</b>
-                <span>Recuo Zero - 100% Estável</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" onchange="runCmd('RECOIL_ZERO', this)">
+                <input type="checkbox" onchange="runCmd('ESP_RENDER', this)">
                 <span class="slider"></span>
             </label>
         </div>
@@ -289,7 +271,7 @@
         <div class="function-item">
             <div class="func-label">
                 <b>TELEPORT KILL</b>
-                <span>Aproximar inimigo (Risco Alto)</span>
+                <span>Aproximação 0.1ms (Risco)</span>
             </div>
             <label class="switch">
                 <input type="checkbox" onchange="runCmd('TELE_KILL', this)">
@@ -299,21 +281,21 @@
     </div>
 
     <div class="footer-info">
-        <button class="btn-update" onclick="location.reload()">Sincronizar Arquivos</button>
+        <button class="btn-update" onclick="sincronizar()">SINCRONIZAR ARQUIVOS (TRIPLO POWER)</button>
         <div class="credenciais">
             USER: <b>vitorzin</b> | PASS: <b>vitorzin senha 1</b><br>
-            <span style="color:var(--primary)">RAR PASS: 1</span>
+            <span style="color:var(--accent)">RAR PASS: 1 | STATUS: 1000% FUNCIONAL</span>
         </div>
     </div>
 </div>
 
 <script>
-    // LÓGICA DE EXECUÇÃO 200% FUNCIONAL
     const term = document.getElementById('term');
 
+    // Função para escrever no terminal com cores
     function writeTerminal(text, type = 'success') {
         const time = new Date().toLocaleTimeString();
-        let color = "#00ff00"; // success
+        let color = "#00ff00"; // sucesso
         if(type === 'error') color = "#ff0000";
         if(type === 'process') color = "#ffff00";
 
@@ -321,38 +303,56 @@
         term.scrollTop = term.scrollHeight;
     }
 
+    // Lógica de Sincronização (Melhoria de Arquivos)
+    function sincronizar() {
+        writeTerminal("Limpando cache de registros...", "process");
+        setTimeout(() => writeTerminal("Otimizando ComboXereca.exe.exe...", "process"), 600);
+        setTimeout(() => writeTerminal("Memory.dll: Injetando novos Offsets...", "process"), 1200);
+        setTimeout(() => writeTerminal("Guna.UI2.dll: Interface sincronizada!", "success"), 1800);
+        setTimeout(() => writeTerminal(">>> SISTEMA 1000% FUNCIONAL <<<", "success"), 2200);
+    }
+
+    // Lógica de Execução de Comandos
     function runCmd(cmd, element) {
         if(element.checked) {
-            writeTerminal(`Iniciando processo ${cmd}...`, 'process');
+            writeTerminal(`Iniciando protocolo ${cmd}...`, 'process');
             
-            // Simula a comunicação com a Guna.UI.dll e os arquivos RAR
+            // Simulação de injeção técnica
             setTimeout(() => {
-                writeTerminal(`Endereço de memória localizado via Tralha.painel!`);
-            }, 600);
+                writeTerminal(`Mapeando endereços de memória...`);
+            }, 500);
 
             setTimeout(() => {
-                writeTerminal(`${cmd} ATIVADO E FUNCIONAL!`, 'success');
+                if(cmd === 'SMOOTH_AIM') {
+                    writeTerminal(`MIRA LEVE ATIVADA: Sensibilidade Suave aplicada!`, 'success');
+                } else {
+                    writeTerminal(`${cmd} ATIVADO E ESTABILIZADO!`, 'success');
+                }
+                // Muda a cor da borda para indicar atividade
+                element.parentElement.parentElement.style.borderColor = "var(--accent)";
             }, 1200);
         } else {
-            writeTerminal(`${cmd} DESATIVADO / LIMPEZA DE CACHE...`, 'error');
+            writeTerminal(`${cmd} DESATIVADO / CACHE LIMPO`, 'error');
+            element.parentElement.parentElement.style.borderColor = "#222";
         }
     }
 
-    // Sistema de Auto-Bypass (Simulado para funcionalidade)
+    // Bypass Automático em Tempo Real (Loop)
     setInterval(() => {
         const logs = [
-            "Limpando logs de report da Garena...",
-            "Injetando Bypass anti-detecção...",
-            "Verificando integridade da Guna.UI.dll...",
-            "Anticheat Bypass: STATUS OK"
+            "Bypass Anti-cheat atualizado...",
+            "Limpando logs de report...",
+            "Proteção Vitorzin: STATUS OK",
+            "Verificando integridade da Memory.dll...",
+            "Injetando Dummy Data para camuflagem..."
         ];
         const randomLog = logs[Math.floor(Math.random() * logs.length)];
         writeTerminal(randomLog, 'process');
-    }, 10000);
+    }, 12000);
 
-    // Efeito de inicialização
+    // Efeito de Inicialização
     window.onload = () => {
-        writeTerminal("Conectando ao banco de dados privado...", "process");
+        writeTerminal("Conectando ao banco de dados VIP...", "process");
         setTimeout(() => writeTerminal("Acesso Master concedido para VITORZIN."), 1000);
     };
 </script>
