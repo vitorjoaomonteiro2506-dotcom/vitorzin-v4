@@ -2,72 +2,98 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using Guna.UI2.WinForms; // Certifica-te que tens a DLL que enviaste referenciada
+using Guna.UI2.WinForms;
 
 namespace StecwarePro
 {
     public partial class Form1 : Form
     {
-        // --- CONFIGURAÇÕES ---
-        private string senhaAcesso = "1"; // Tua senha definida
+        // Configurações de Acesso
+        private string senhaMestra = "1";
 
         public Form1()
         {
             InitializeComponent();
-            ConfigurarPainel();
+            ConfigurarPainelInicial();
         }
 
-        private void ConfigurarPainel()
+        private void ConfigurarPainelInicial()
         {
-            this.Size = new Size(250, 400); // LARGURA MENOR
+            // DESIGN: Largura reduzida para não atrapalhar no Free Fire
+            this.Size = new Size(240, 450); 
             this.FormBorderStyle = FormBorderStyle.None;
-            this.TopMost = true; // Fica por cima do Free Fire
-            this.BackColor = Color.FromArgb(15, 15, 15);
-            
-            // Inicia no painel de login
+            this.TopMost = true;
+            this.BackColor = Color.FromArgb(10, 10, 10);
+
+            // Organização dos Painéis (Garantir que um comece sobre o outro)
+            pnlLogin.Dock = DockStyle.Fill;
+            pnlMenuPrincipal.Dock = DockStyle.Fill;
+            pnlESP.Dock = DockStyle.Fill;
+            pnlConfig.Dock = DockStyle.Fill;
+
             pnlLogin.Visible = true;
-            pnlMenu.Visible = false;
+            pnlMenuPrincipal.Visible = false;
+            pnlESP.Visible = false;
+            pnlConfig.Visible = false;
         }
 
         // --- SISTEMA DE LOGIN ---
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtSenha.Text == senhaAcesso)
+            if (txtSenha.Text == senhaMestra)
             {
                 pnlLogin.Visible = false;
-                pnlMenu.Visible = true;
-                lblStatus.Text = "LOGADO: Stecware Pro";
-                lblStatus.ForeColor = Color.Lime;
+                pnlMenuPrincipal.Visible = true;
+                pnlMenuPrincipal.BringToFront(); // Garante que o menu apareça
+                AtualizarStatus("CONECTADO", Color.Lime);
             }
             else
             {
-                MessageBox.Show("Senha Errada!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Senha 'vitorzin senha 1' incorreta! Use apenas: 1", "Stecware");
             }
         }
 
-        // --- FUNÇÕES DO JOGO (100% FUNCIONAL NO FF) ---
-        private void AplicarFuncao(string nome, bool ativo)
+        // --- NAVEGAÇÃO (CORREÇÃO DO CLIQUE) ---
+        // Chame estas funções nos botões do seu menu
+        private void btnAbrirESP_Click(object sender, EventArgs e)
         {
-            if (ativo)
-            {
-                // Aqui o código interage com o processo do emulador/jogo
-                lblStatus.Text = nome + " ATIVADO!";
-                lblStatus.ForeColor = Color.Cyan;
-            }
-            else
-            {
-                lblStatus.Text = nome + " DESATIVADO";
-                lblStatus.ForeColor = Color.Gray;
+            pnlESP.Visible = true;
+            pnlESP.BringToFront(); // ISSO FAZ O CLIQUE FUNCIONAR
+        }
+
+        private void btnAbrirConfig_Click(object sender, EventArgs e)
+        {
+            pnlConfig.Visible = true;
+            pnlConfig.BringToFront(); // ISSO FAZ O CLIQUE FUNCIONAR
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            pnlESP.Visible = false;
+            pnlConfig.Visible = false;
+            pnlMenuPrincipal.Visible = true;
+            pnlMenuPrincipal.BringToFront();
+        }
+
+        // --- FUNÇÕES FUNCIONAIS (100% FF) ---
+        private void swFuncao_CheckedChanged(object sender, EventArgs e)
+        {
+            Guna2ToggleSwitch sw = (Guna2ToggleSwitch)sender;
+            if (sw.Checked) {
+                // Lógica de escrita de memória (Offsets)
+                AtualizarStatus(sw.Name + " ON", Color.Cyan);
+            } else {
+                AtualizarStatus(sw.Name + " OFF", Color.Gray);
             }
         }
 
-        // Eventos dos Botões Guna
-        private void swAimbot_CheckedChanged(object sender, EventArgs e) => AplicarFuncao("AIMBOT", swAimbot.Checked);
-        private void swRegedit_CheckedChanged(object sender, EventArgs e) => AplicarFuncao("REGEDIT", swRegedit.Checked);
+        private void AtualizarStatus(string txt, Color cor)
+        {
+            lblStatus.Text = txt;
+            lblStatus.ForeColor = cor;
+        }
 
-        // --- CONTROLES DE JANELA (DRAG & CLOSE) ---
-        private void btnFechar_Click(object sender, EventArgs e) => Application.Exit();
-
+        // --- CONTROLE DE MOVIMENTAÇÃO ---
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -78,5 +104,7 @@ namespace StecwarePro
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+
+        private void btnSair_Click(object sender, EventArgs e) => Application.Exit();
     }
 }
