@@ -1,294 +1,210 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Beast Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle 100% Funcional</title>
+    <style>
+        :root {
+            --bg-dark: #020617;
+            --card-bg: #1e293b;
+            --primary: #3b82f6;
+            --accent: #ef4444;
+            --text: #f8fafc;
+        }
 
-<style>
-html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  background:#000;
-  overflow:hidden;
-  font-family:Arial,Helvetica,sans-serif;
-}
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        
+        body { background-color: var(--bg-dark); color: var(--text); overflow: hidden; }
 
-#hacker{
-  position:fixed;
-  inset:0;
-  z-index:0;
-}
+        /* TELA DE LOGIN */
+        #login-screen {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #1e293b 0%, #020617 100%);
+        }
 
-.login{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:5;
-}
+        .login-box {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 350px;
+            border: 1px solid #334155;
+        }
 
-.login-box{
-  width:320px;
-  padding:20px;
-  background:linear-gradient(180deg,#0d0d14,#050508);
-  border:1px solid #ff2e2e;
-  border-radius:14px;
-  box-shadow:0 0 25px rgba(255,0,0,.7);
-}
+        .login-box h1 { margin-bottom: 20px; font-size: 24px; }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
 
-.login-box h2{
-  text-align:center;
-  color:#ff2e2e;
-  margin-bottom:12px;
-}
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-.login-box input{
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-  background:#0b0b12;
-  border:1px solid #ff2e2e;
-  color:#fff;
-  border-radius:8px;
-}
+        .btn-login:hover { background: #2563eb; transform: translateY(-2px); }
 
-.login-box button{
-  width:100%;
-  padding:12px;
-  background:linear-gradient(180deg,#ff3b3b,#b80000);
-  border:none;
-  border-radius:10px;
-  color:#fff;
-  font-weight:bold;
-}
+        .msg-erro { color: var(--accent); display: none; margin-top: 15px; font-weight: bold; }
 
-.error{
-  color:#ff4d4d;
-  font-size:12px;
-  text-align:center;
-  display:none;
-}
+        /* PAINEL */
+        #dashboard { display: none; height: 100vh; flex-direction: column; }
 
-.wrapper{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(0.75);
-  transform-origin:center;
-  z-index:2;
-  display:none;
-}
+        .navbar {
+            background: var(--card-bg);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
 
-.panel{
-  width:380px;
-  padding:16px;
-  background:linear-gradient(180deg,#0d0d14,#050508);
-  border-radius:14px;
-  border:1px solid #ff2e2e;
-  box-shadow:0 0 25px rgba(255,0,0,.7), inset 0 0 10px rgba(255,0,0,.3);
-}
+        .main-layout { display: flex; flex: 1; }
 
-.header{
-  text-align:center;
-  color:#ff2e2e;
-  font-size:20px;
-  font-weight:bold;
-}
+        .sidebar {
+            width: 240px;
+            background: #0f172a;
+            padding: 20px;
+            border-right: 1px solid #334155;
+        }
 
-.divider{
-  height:1px;
-  background:linear-gradient(90deg,transparent,#ff2e2e,transparent);
-  margin:10px 0;
-}
+        .sidebar button {
+            width: 100%;
+            background: transparent;
+            color: #94a3b8;
+            border: none;
+            padding: 12px;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-bottom: 5px;
+        }
 
-.section{
-  color:#ff6a6a;
-  font-size:13px;
-}
+        .sidebar button:hover, .sidebar button.active {
+            background: #1e293b;
+            color: white;
+        }
 
-.option{
-  display:flex;
-  justify-content:space-between;
-  padding:6px 0;
-  color:#fff;
-}
+        .content { flex: 1; padding: 40px; overflow-y: auto; }
 
-input[type=checkbox]{
-  width:18px;
-  height:18px;
-  accent-color:#ff2e2e;
-}
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            margin-top: 20px;
+        }
 
-.range-box{
-  background:#0b0b12;
-  border:1px solid #ff2e2e;
-  border-radius:8px;
-  padding:8px;
-}
+        .btn-sair { background: var(--accent); border: none; color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
 
-.range-top{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  color:#ccc;
-}
+        .status-badge { background: #22c55e; color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
 
-input[type=range]{ width:100%; }
-
-select{
-  width:100%;
-  margin-top:8px;
-  padding:6px;
-  background:#0b0b12;
-  color:#fff;
-  border:1px solid #ff2e2e;
-  border-radius:6px;
-}
-
-.inject{
-  margin-top:14px;
-  width:100%;
-  padding:12px;
-  background:linear-gradient(180deg,#ff3b3b,#b80000);
-  border:none;
-  border-radius:10px;
-  color:#fff;
-  font-size:16px;
-  font-weight:bold;
-}
-
-.inject-bar{
-  margin-top:8px;
-  width:100%;
-  height:8px;
-  background:#111;
-  border-radius:6px;
-  overflow:hidden;
-  border:1px solid #ff2e2e;
-  display:none;
-}
-
-.inject-progress{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#ff2e2e,#ff6a6a);
-}
-</style>
+    </style>
 </head>
-
 <body>
 
-<canvas id="hacker"></canvas>
-
-<div class="login" id="login">
-  <div class="login-box">
-    <h2>Isaelzzq</h2>
-    <input placeholder="Usuário">
-    <input type="password" id="senha" placeholder="Senha">
-    <div class="error" id="erro">Senha incorreta</div>
-    <button onclick="entrar()">ENTRAR</button>
-  </div>
-</div>
-
-<div class="wrapper" id="app">
-  <div class="panel">
-    <div class="header">Isaelzzq</div>
-
-    <div class="divider"></div>
-    <div class="section">PRECISION</div>
-
-    <div class="option"><span>Ativar precisão</span><input type="checkbox"></div>
-    <div class="option"><span>Sem recuo</span><input type="checkbox"></div>
-    <div class="option"><span>Aumentar precisão</span><input type="checkbox"></div>
-    <div class="option"><span>Ignorar derrubados</span><input type="checkbox"></div>
-
-    <div class="divider"></div>
-    <div class="section">CONFIGURAÇÕES</div>
-
-    <div class="range-box">
-      <div class="range-top">
-        <span>FOV</span>
-        <span id="fovValue">0</span>
-      </div>
-      <input type="range" min="0" max="360" value="0" id="fov">
+    <div id="login-screen">
+        <div class="login-box">
+            <h1>ADMIN LOGIN</h1>
+            <input type="password" id="passInput" placeholder="Palavra-passe" autofocus>
+            <button class="btn-login" onclick="validar()">ENTRAR NO PAINEL</button>
+            <p id="erro" class="msg-erro">Acesso Negado!</p>
+        </div>
     </div>
 
-    <select>
-      <option>Cabeça</option>
-      <option>Pescoço</option>
-      <option>Peito</option>
-      <option selected>Aleatório</option>
-    </select>
+    <div id="dashboard">
+        <nav class="navbar">
+            <span style="font-weight: bold; letter-spacing: 1px;">SISTEMA V1 [ONLINE]</span>
+            <button class="btn-sair" onclick="logout()">Sair</button>
+        </nav>
 
-    <button class="inject" onclick="injectar()">INJECTAR</button>
+        <div class="main-layout">
+            <aside class="sidebar">
+                <button class="active">Painel Principal</button>
+                <button>Configurações</button>
+                <button>Gestão de Arquivos</button>
+                <button>Logs do Sistema</button>
+            </aside>
 
-    <div class="inject-bar" id="injectBar">
-      <div class="inject-progress" id="injectProgress"></div>
+            <main class="content">
+                <h2>Bem-vindo de volta!</h2>
+                <div class="card">
+                    <h3>Estado do Sistema</h3>
+                    <p style="margin-top: 10px; color: #94a3b8;">
+                        O servidor está pronto e a aguardar instruções.<br><br>
+                        Status: <span class="status-badge">Ativo</span>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Atalhos Rápidos</h3>
+                    <button class="btn-login" style="width: auto; margin-top: 15px; padding: 10px 20px;">Atualizar Dados</button>
+                </div>
+            </main>
+        </div>
     </div>
-  </div>
-</div>
 
-<script>
-function entrar(){
-  if(senha.value === "707"){
-    login.style.display="none";
-    app.style.display="block";
-  }else{
-    erro.style.display="block";
-  }
-}
+    <script>
+        // SENHA QUE VOCÊ PEDIU
+        const SENHA_SISTEMA = "1";
 
-const fov = document.getElementById("fov");
-const fovValue = document.getElementById("fovValue");
-fov.oninput = () => fovValue.textContent = fov.value;
+        function validar() {
+            const input = document.getElementById('passInput').value;
+            const erro = document.getElementById('erro');
 
-function injectar(){
-  const barBox = document.getElementById("injectBar");
-  const bar = document.getElementById("injectProgress");
-  barBox.style.display = "block";
-  let p = 0;
+            if (input === SENHA_SISTEMA) {
+                // Salva o login no navegador (Persistente)
+                sessionStorage.setItem('auth', 'true');
+                mostrarPainel();
+            } else {
+                erro.style.display = 'block';
+                document.getElementById('passInput').value = "";
+            }
+        }
 
-  const i = setInterval(()=>{
-    p += 2;
-    bar.style.width = p + "%";
-    if(p >= 100){
-      clearInterval(i);
-      setTimeout(()=>{
-        window.location.href = "freefire://";
-      },300);
-    }
-  },40);
-}
+        function mostrarPainel() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'flex';
+            document.body.style.overflow = 'auto';
+        }
 
-const canvas = document.getElementById("hacker");
-const ctx = canvas.getContext("2d");
-const chars = "01X#@$%アカサタナハマヤラワ";
-const fontSize = 14;
-let drops = [];
+        function logout() {
+            sessionStorage.removeItem('auth');
+            window.location.reload();
+        }
 
-function resize(){
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  drops = Array(Math.floor(canvas.width/fontSize)).fill(1);
-}
-resize();
-addEventListener("resize", resize);
+        // Verifica se já está logado ao carregar
+        window.onload = () => {
+            if (sessionStorage.getItem('auth') === 'true') {
+                mostrarPainel();
+            }
+        };
 
-setInterval(()=>{
-  ctx.fillStyle = "rgba(0,0,0,.15)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = "#ff2e2e";
-  ctx.font = fontSize + "px monospace";
-  drops.forEach((y,i)=>{
-    ctx.fillText(chars[Math.random()*chars.length|0], i*fontSize, y*fontSize);
-    drops[i] = y*fontSize > canvas.height && Math.random()>.97 ? 0 : y+1;
-  });
-},40);
-</script>
-
+        // Atalho tecla Enter
+        document.getElementById('passInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') validar();
+        });
+    </script>
 </body>
 </html>
