@@ -8,87 +8,91 @@ namespace StecwarePro
 {
     public partial class Form1 : Form
     {
-        // Senha configurada como solicitado
-        private string senhaMestra = "1";
+        // Login configurado conforme sua solicitação
+        private string minhaSenha = "1";
 
         public Form1()
         {
             InitializeComponent();
-            ConfiguracaoIncial();
+            ConfigurarEstilo();
         }
 
-        private void ConfiguracaoIncial()
+        private void ConfigurarEstilo()
         {
-            // Ajusta a largura para ser menor (240px)
-            this.Size = new Size(240, 450);
+            // 1. LARGURA REDUZIDA (220px é o ideal para o FF)
+            this.Size = new Size(220, 400);
             this.FormBorderStyle = FormBorderStyle.None;
-            this.TopMost = true;
+            this.TopMost = true; // Sempre visível sobre o jogo
 
-            // Garante que os painéis ocupem o mesmo espaço
+            // 2. CONFIGURAR PAINÉIS (Coloque todos na mesma posição no Designer)
+            // Certifique-se que no Designer os painéis tenham esses nomes:
             pnlLogin.Dock = DockStyle.Fill;
-            pnlMenuPrincipal.Dock = DockStyle.Fill;
+            pnlFuncoes.Dock = DockStyle.Fill;
             pnlESP.Dock = DockStyle.Fill;
             pnlConfig.Dock = DockStyle.Fill;
 
-            // Começa apenas com o login visível
-            MostrarPainel(pnlLogin);
+            // Inicia apenas o Login
+            MostrarAba(pnlLogin);
         }
 
         // --- SISTEMA DE LOGIN ---
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtSenha.Text == senhaMestra)
+            if (txtSenha.Text == minhaSenha)
             {
-                MostrarPainel(pnlMenuPrincipal);
-                lblStatus.Text = "STATUS: LOGADO";
+                MostrarAba(pnlFuncoes);
+                lblStatus.Text = "ONLINE";
                 lblStatus.ForeColor = Color.Lime;
             }
             else
             {
-                MessageBox.Show("Senha incorreta! Use: 1", "Stecware Pro");
+                MessageBox.Show("Senha incorreta!", "Stecware");
             }
         }
 
-        // --- NAVEGAÇÃO ENTRE ABAS (AQUI ESTAVA O ERRO) ---
-        private void btnAbaESP_Click(object sender, EventArgs e) => MostrarPainel(pnlESP);
-        private void btnAbaConfig_Click(object sender, EventArgs e) => MostrarPainel(pnlConfig);
-        private void btnVoltar_Click(object sender, EventArgs e) => MostrarPainel(pnlMenuPrincipal);
-
-        private void MostrarPainel(Panel painel)
+        // --- NAVEGAÇÃO ENTRE FUNÇÕES (O QUE ESTAVA DANDO ERRO) ---
+        // Clique no botão de ESP no seu menu e aponte para este evento:
+        private void btnIrParaESP_Click(object sender, EventArgs e)
         {
-            // Esconde todos
+            MostrarAba(pnlESP);
+        }
+
+        // Clique no botão de Configurações e aponte para este:
+        private void btnIrParaConfig_Click(object sender, EventArgs e)
+        {
+            MostrarAba(pnlConfig);
+        }
+
+        // Botão voltar em qualquer aba
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            MostrarAba(pnlFuncoes);
+        }
+
+        // FUNÇÃO QUE RESOLVE O PROBLEMA DE "NÃO APARECER"
+        private void MostrarAba(Panel aba)
+        {
             pnlLogin.Visible = false;
-            pnlMenuPrincipal.Visible = false;
+            pnlFuncoes.Visible = false;
             pnlESP.Visible = false;
             pnlConfig.Visible = false;
 
-            // Mostra o selecionado e traz para a frente para o clique funcionar
-            painel.Visible = true;
-            painel.BringToFront();
+            aba.Visible = true;
+            aba.BringToFront(); // Isso faz os botões dentro dele ficarem clicáveis!
+            aba.Focus();
         }
 
-        // --- FUNÇÕES DE CHEAT (100% FUNCIONAL NO FF) ---
-        private void AtivarFuncao(string nome, string offset, bool ligado)
+        // --- LÓGICA DE FUNÇÕES FF ---
+        private void switchAimbot_CheckedChanged(object sender, EventArgs e)
         {
-            if (ligado)
-            {
-                // Aqui o painel escreve na memória do processo 'HD-Player' (BlueStacks/MSI)
-                lblStatus.Text = nome + " ON";
-                lblStatus.ForeColor = Color.Cyan;
-            }
-            else
-            {
-                lblStatus.Text = nome + " OFF";
-                lblStatus.ForeColor = Color.Gray;
+            if (switchAimbot.Checked) {
+                lblStatus.Text = "AIMBOT ATIVO";
+                // Lógica de Memória aqui
             }
         }
 
-        // Eventos dos botões (Exemplos)
-        private void swAimbot_CheckedChanged(object sender, EventArgs e) => AtivarFuncao("AIMBOT", "0x01", swAimbot.Checked);
-        private void swEspLines_CheckedChanged(object sender, EventArgs e) => AtivarFuncao("ESP", "0x02", swEspLines.Checked);
-
-        // --- CONTROLES DE JANELA ---
-        private void btnSair_Click(object sender, EventArgs e) => Application.Exit();
+        // --- CONTROLES DE INTERFACE ---
+        private void btnFechar_Click(object sender, EventArgs e) => Application.Exit();
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
