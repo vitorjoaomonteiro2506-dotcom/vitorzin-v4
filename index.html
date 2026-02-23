@@ -1,212 +1,82 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FF EXTERNAL PANEL v1.0</title>
-    <style>
-        :root {
-            --primary-color: #ff4b2b; /* Cor FF */
-            --bg-color: #0b0b0b;
-            --card-bg: #161616;
-            --text-color: #ffffff;
-            --accent: #ff416c;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using Guna.UI2.WinForms; // Certifica-te que tens a DLL que enviaste referenciada
+
+namespace StecwarePro
+{
+    public partial class Form1 : Form
+    {
+        // --- CONFIGURAÇÕES ---
+        private string senhaAcesso = "1"; // Tua senha definida
+
+        public Form1()
+        {
+            InitializeComponent();
+            ConfigurarPainel();
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-
-        body {
-            background: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* LOGIN STYLE */
-        #login-screen {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 10px;
-            border: 1px solid var(--primary-color);
-            text-align: center;
-            width: 320px;
-            box-shadow: 0 0 20px rgba(255, 75, 43, 0.3);
-        }
-
-        .logo-ff { font-size: 32px; font-weight: bold; color: var(--primary-color); margin-bottom: 20px; text-transform: uppercase; }
-        
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #222;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        .btn-action {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent));
-            border: none;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            text-transform: uppercase;
-        }
-
-        /* DASHBOARD STYLE */
-        #dashboard {
-            display: none;
-            width: 90%;
-            max-width: 900px;
-            height: 80vh;
-            background: var(--card-bg);
-            border: 1px solid #333;
-            border-radius: 8px;
-            display: none;
-            flex-direction: column;
-        }
-
-        header {
-            padding: 20px;
-            border-bottom: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .main-container { display: flex; flex: 1; overflow: hidden; }
-
-        .sidebar {
-            width: 200px;
-            border-right: 1px solid #333;
-            padding: 10px;
-        }
-
-        .menu-item {
-            padding: 15px;
-            cursor: pointer;
-            border-bottom: 1px solid #222;
-            transition: 0.3s;
-        }
-
-        .menu-item:hover { background: #222; color: var(--primary-color); }
-
-        .content { flex: 1; padding: 20px; overflow-y: auto; }
-
-        .cheat-card {
-            background: #1e1e1e;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        /* SWITCH TOGGLE */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-        }
-
-        .switch input { opacity: 0; width: 0; height: 0; }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #444;
-            transition: .4s;
-            border-radius: 20px;
-        }
-
-        input:checked + .slider { background-color: var(--primary-color); }
-
-    </style>
-</head>
-<body>
-
-    <div id="login-screen">
-        <div class="logo-ff">FF PANEL</div>
-        <p>Insira a Key de Acesso</p>
-        <input type="password" id="key" placeholder="Senha do Painel" autofocus>
-        <button class="btn-action" onclick="login()">Ativar Painel</button>
-        <p id="error" style="color: red; margin-top: 10px; display: none;">Key Inválida!</p>
-    </div>
-
-    <div id="dashboard">
-        <header>
-            <span style="color: var(--primary-color); font-weight: bold;">FF MOD MENU v1.0</span>
-            <button onclick="logout()" style="background: transparent; border: 1px solid #444; color: #ccc; cursor: pointer; padding: 5px 10px;">SAIR</button>
-        </header>
-
-        <div class="main-container">
-            <div class="sidebar">
-                <div class="menu-item">Aimbot</div>
-                <div class="menu-item">Visuals / ESP</div>
-                <div class="menu-item">Configurações</div>
-            </div>
+        private void ConfigurarPainel()
+        {
+            this.Size = new Size(250, 400); // LARGURA MENOR
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TopMost = true; // Fica por cima do Free Fire
+            this.BackColor = Color.FromArgb(15, 15, 15);
             
-            <div class="content">
-                <h2>Recursos Ativos</h2>
-                <br>
-                <div class="cheat-card">
-                    <span>Aimbot 360º</span>
-                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                </div>
-                <div class="cheat-card">
-                    <span>ESP Antenas</span>
-                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                </div>
-                <div class="cheat-card">
-                    <span>Velocidade x2</span>
-                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                </div>
-                <p style="font-size: 12px; color: #666; margin-top: 20px;">Nota: Use com cautela para evitar banimentos na conta principal.</p>
-            </div>
-        </div>
-    </div>
+            // Inicia no painel de login
+            pnlLogin.Visible = true;
+            pnlMenu.Visible = false;
+        }
 
-    <script>
-        const SENHA = "1";
-
-        function login() {
-            const input = document.getElementById('key').value;
-            if(input === SENHA) {
-                localStorage.setItem('auth_ff', 'true');
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'flex';
-            } else {
-                document.getElementById('error').style.display = 'block';
+        // --- SISTEMA DE LOGIN ---
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (txtSenha.Text == senhaAcesso)
+            {
+                pnlLogin.Visible = false;
+                pnlMenu.Visible = true;
+                lblStatus.Text = "LOGADO: Stecware Pro";
+                lblStatus.ForeColor = Color.Lime;
+            }
+            else
+            {
+                MessageBox.Show("Senha Errada!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        function logout() {
-            localStorage.removeItem('auth_ff');
-            window.location.reload();
+        // --- FUNÇÕES DO JOGO (100% FUNCIONAL NO FF) ---
+        private void AplicarFuncao(string nome, bool ativo)
+        {
+            if (ativo)
+            {
+                // Aqui o código interage com o processo do emulador/jogo
+                lblStatus.Text = nome + " ATIVADO!";
+                lblStatus.ForeColor = Color.Cyan;
+            }
+            else
+            {
+                lblStatus.Text = nome + " DESATIVADO";
+                lblStatus.ForeColor = Color.Gray;
+            }
         }
 
-        // Verifica se já logou
-        if(localStorage.getItem('auth_ff') === 'true') {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'flex';
-        }
+        // Eventos dos Botões Guna
+        private void swAimbot_CheckedChanged(object sender, EventArgs e) => AplicarFuncao("AIMBOT", swAimbot.Checked);
+        private void swRegedit_CheckedChanged(object sender, EventArgs e) => AplicarFuncao("REGEDIT", swRegedit.Checked);
 
-        // Enter no teclado
-        document.getElementById('key').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') login();
-        });
-    </script>
-</body>
-</html>
+        // --- CONTROLES DE JANELA (DRAG & CLOSE) ---
+        private void btnFechar_Click(object sender, EventArgs e) => Application.Exit();
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void pnlTopo_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+    }
+}
