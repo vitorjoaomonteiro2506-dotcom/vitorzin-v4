@@ -1,209 +1,211 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Controle 100% Funcional</title>
+    <title>FF EXTERNAL PANEL v1.0</title>
     <style>
         :root {
-            --bg-dark: #020617;
-            --card-bg: #1e293b;
-            --primary: #3b82f6;
-            --accent: #ef4444;
-            --text: #f8fafc;
+            --primary-color: #ff4b2b; /* Cor FF */
+            --bg-color: #0b0b0b;
+            --card-bg: #161616;
+            --text-color: #ffffff;
+            --accent: #ff416c;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        
-        body { background-color: var(--bg-dark); color: var(--text); overflow: hidden; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
 
-        /* TELA DE LOGIN */
-        #login-screen {
-            height: 100vh;
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle, #1e293b 0%, #020617 100%);
+            height: 100vh;
+            overflow: hidden;
         }
 
-        .login-box {
+        /* LOGIN STYLE */
+        #login-screen {
             background: var(--card-bg);
             padding: 40px;
-            border-radius: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-color);
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            width: 100%;
-            max-width: 350px;
-            border: 1px solid #334155;
+            width: 320px;
+            box-shadow: 0 0 20px rgba(255, 75, 43, 0.3);
         }
 
-        .login-box h1 { margin-bottom: 20px; font-size: 24px; }
+        .logo-ff { font-size: 32px; font-weight: bold; color: var(--primary-color); margin-bottom: 20px; text-transform: uppercase; }
         
         input {
             width: 100%;
-            padding: 14px;
-            margin: 15px 0;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            background: #0f172a;
+            padding: 12px;
+            margin: 10px 0;
+            background: #222;
+            border: 1px solid #444;
             color: white;
-            font-size: 16px;
-            outline: none;
+            border-radius: 5px;
+            text-align: center;
         }
 
-        .btn-login {
+        .btn-action {
             width: 100%;
-            padding: 14px;
-            background: var(--primary);
-            color: white;
+            padding: 12px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent));
             border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            color: white;
             font-weight: bold;
-            transition: 0.3s;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
         }
 
-        .btn-login:hover { background: #2563eb; transform: translateY(-2px); }
-
-        .msg-erro { color: var(--accent); display: none; margin-top: 15px; font-weight: bold; }
-
-        /* PAINEL */
-        #dashboard { display: none; height: 100vh; flex-direction: column; }
-
-        .navbar {
+        /* DASHBOARD STYLE */
+        #dashboard {
+            display: none;
+            width: 90%;
+            max-width: 900px;
+            height: 80vh;
             background: var(--card-bg);
-            padding: 15px 30px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            display: none;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #333;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #334155;
         }
 
-        .main-layout { display: flex; flex: 1; }
+        .main-container { display: flex; flex: 1; overflow: hidden; }
 
         .sidebar {
-            width: 240px;
-            background: #0f172a;
-            padding: 20px;
-            border-right: 1px solid #334155;
+            width: 200px;
+            border-right: 1px solid #333;
+            padding: 10px;
         }
 
-        .sidebar button {
-            width: 100%;
-            background: transparent;
-            color: #94a3b8;
-            border: none;
-            padding: 12px;
-            text-align: left;
+        .menu-item {
+            padding: 15px;
             cursor: pointer;
-            border-radius: 6px;
-            margin-bottom: 5px;
+            border-bottom: 1px solid #222;
+            transition: 0.3s;
         }
 
-        .sidebar button:hover, .sidebar button.active {
-            background: #1e293b;
-            color: white;
+        .menu-item:hover { background: #222; color: var(--primary-color); }
+
+        .content { flex: 1; padding: 20px; overflow-y: auto; }
+
+        .cheat-card {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary-color);
         }
 
-        .content { flex: 1; padding: 40px; overflow-y: auto; }
-
-        .card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            margin-top: 20px;
+        /* SWITCH TOGGLE */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
         }
 
-        .btn-sair { background: var(--accent); border: none; color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
+        .switch input { opacity: 0; width: 0; height: 0; }
 
-        .status-badge { background: #22c55e; color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #444;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        input:checked + .slider { background-color: var(--primary-color); }
 
     </style>
 </head>
 <body>
 
     <div id="login-screen">
-        <div class="login-box">
-            <h1>ADMIN LOGIN</h1>
-            <input type="password" id="passInput" placeholder="Palavra-passe" autofocus>
-            <button class="btn-login" onclick="validar()">ENTRAR NO PAINEL</button>
-            <p id="erro" class="msg-erro">Acesso Negado!</p>
-        </div>
+        <div class="logo-ff">FF PANEL</div>
+        <p>Insira a Key de Acesso</p>
+        <input type="password" id="key" placeholder="Senha do Painel" autofocus>
+        <button class="btn-action" onclick="login()">Ativar Painel</button>
+        <p id="error" style="color: red; margin-top: 10px; display: none;">Key Inválida!</p>
     </div>
 
     <div id="dashboard">
-        <nav class="navbar">
-            <span style="font-weight: bold; letter-spacing: 1px;">SISTEMA V1 [ONLINE]</span>
-            <button class="btn-sair" onclick="logout()">Sair</button>
-        </nav>
+        <header>
+            <span style="color: var(--primary-color); font-weight: bold;">FF MOD MENU v1.0</span>
+            <button onclick="logout()" style="background: transparent; border: 1px solid #444; color: #ccc; cursor: pointer; padding: 5px 10px;">SAIR</button>
+        </header>
 
-        <div class="main-layout">
-            <aside class="sidebar">
-                <button class="active">Painel Principal</button>
-                <button>Configurações</button>
-                <button>Gestão de Arquivos</button>
-                <button>Logs do Sistema</button>
-            </aside>
-
-            <main class="content">
-                <h2>Bem-vindo de volta!</h2>
-                <div class="card">
-                    <h3>Estado do Sistema</h3>
-                    <p style="margin-top: 10px; color: #94a3b8;">
-                        O servidor está pronto e a aguardar instruções.<br><br>
-                        Status: <span class="status-badge">Ativo</span>
-                    </p>
+        <div class="main-container">
+            <div class="sidebar">
+                <div class="menu-item">Aimbot</div>
+                <div class="menu-item">Visuals / ESP</div>
+                <div class="menu-item">Configurações</div>
+            </div>
+            
+            <div class="content">
+                <h2>Recursos Ativos</h2>
+                <br>
+                <div class="cheat-card">
+                    <span>Aimbot 360º</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
                 </div>
-
-                <div class="card">
-                    <h3>Atalhos Rápidos</h3>
-                    <button class="btn-login" style="width: auto; margin-top: 15px; padding: 10px 20px;">Atualizar Dados</button>
+                <div class="cheat-card">
+                    <span>ESP Antenas</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
                 </div>
-            </main>
+                <div class="cheat-card">
+                    <span>Velocidade x2</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 20px;">Nota: Use com cautela para evitar banimentos na conta principal.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // SENHA QUE VOCÊ PEDIU
-        const SENHA_SISTEMA = "1";
+        const SENHA = "1";
 
-        function validar() {
-            const input = document.getElementById('passInput').value;
-            const erro = document.getElementById('erro');
-
-            if (input === SENHA_SISTEMA) {
-                // Salva o login no navegador (Persistente)
-                sessionStorage.setItem('auth', 'true');
-                mostrarPainel();
+        function login() {
+            const input = document.getElementById('key').value;
+            if(input === SENHA) {
+                localStorage.setItem('auth_ff', 'true');
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'flex';
             } else {
-                erro.style.display = 'block';
-                document.getElementById('passInput').value = "";
+                document.getElementById('error').style.display = 'block';
             }
-        }
-
-        function mostrarPainel() {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'flex';
-            document.body.style.overflow = 'auto';
         }
 
         function logout() {
-            sessionStorage.removeItem('auth');
+            localStorage.removeItem('auth_ff');
             window.location.reload();
         }
 
-        // Verifica se já está logado ao carregar
-        window.onload = () => {
-            if (sessionStorage.getItem('auth') === 'true') {
-                mostrarPainel();
-            }
-        };
+        // Verifica se já logou
+        if(localStorage.getItem('auth_ff') === 'true') {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'flex';
+        }
 
-        // Atalho tecla Enter
-        document.getElementById('passInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') validar();
+        // Enter no teclado
+        document.getElementById('key').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') login();
         });
     </script>
 </body>
