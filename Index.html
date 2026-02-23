@@ -2,98 +2,85 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using Guna.UI2.WinForms;
+using Guna.UI2.WinForms; 
 
 namespace StecwarePro
 {
     public partial class Form1 : Form
     {
-        // Login configurado conforme sua solicitação
-        private string minhaSenha = "1";
+        // 1. SENHA DEFINIDA
+        private string senhaMestra = "1";
 
         public Form1()
         {
             InitializeComponent();
-            ConfigurarEstilo();
+            ConfiguracaoInicial();
         }
 
-        private void ConfigurarEstilo()
+        private void ConfiguracaoInicial()
         {
-            // 1. LARGURA REDUZIDA (220px é o ideal para o FF)
-            this.Size = new Size(220, 400);
+            // 2. LARGURA MENOR (220px) - Estilo Slim
+            this.Size = new Size(220, 430); 
             this.FormBorderStyle = FormBorderStyle.None;
-            this.TopMost = true; // Sempre visível sobre o jogo
+            this.TopMost = true; // Sempre acima do jogo
 
-            // 2. CONFIGURAR PAINÉIS (Coloque todos na mesma posição no Designer)
-            // Certifique-se que no Designer os painéis tenham esses nomes:
+            // 3. ORGANIZAÇÃO DAS FUNÇÕES (DOCK FILL)
+            // Isso garante que todos os painéis fiquem no mesmo lugar
             pnlLogin.Dock = DockStyle.Fill;
-            pnlFuncoes.Dock = DockStyle.Fill;
+            pnlMenu.Dock = DockStyle.Fill;
             pnlESP.Dock = DockStyle.Fill;
             pnlConfig.Dock = DockStyle.Fill;
 
-            // Inicia apenas o Login
-            MostrarAba(pnlLogin);
+            // Começa mostrando apenas o Login
+            TrocarDeAba(pnlLogin);
         }
 
         // --- SISTEMA DE LOGIN ---
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtSenha.Text == minhaSenha)
+            if (txtSenha.Text == senhaMestra)
             {
-                MostrarAba(pnlFuncoes);
-                lblStatus.Text = "ONLINE";
-                lblStatus.ForeColor = Color.Lime;
+                TrocarDeAba(pnlMenu);
+                lblStatus.Text = "STEWARE ATIVO";
+                lblStatus.ForeColor = Color.SpringGreen;
             }
             else
             {
-                MessageBox.Show("Senha incorreta!", "Stecware");
+                MessageBox.Show("Senha Incorreta! Use: 1", "Stecware");
             }
         }
 
-        // --- NAVEGAÇÃO ENTRE FUNÇÕES (O QUE ESTAVA DANDO ERRO) ---
-        // Clique no botão de ESP no seu menu e aponte para este evento:
-        private void btnIrParaESP_Click(object sender, EventArgs e)
-        {
-            MostrarAba(pnlESP);
-        }
+        // --- NAVEGAÇÃO (AQUI AS FUNÇÕES CLICAM E APARECEM) ---
+        private void btnAbaESP_Click(object sender, EventArgs e) => TrocarDeAba(pnlESP);
+        private void btnAbaConfig_Click(object sender, EventArgs e) => TrocarDeAba(pnlConfig);
+        private void btnVoltar_Click(object sender, EventArgs e) => TrocarDeAba(pnlMenu);
 
-        // Clique no botão de Configurações e aponte para este:
-        private void btnIrParaConfig_Click(object sender, EventArgs e)
+        private void TrocarDeAba(Panel abaAlvo)
         {
-            MostrarAba(pnlConfig);
-        }
-
-        // Botão voltar em qualquer aba
-        private void btnVoltar_Click(object sender, EventArgs e)
-        {
-            MostrarAba(pnlFuncoes);
-        }
-
-        // FUNÇÃO QUE RESOLVE O PROBLEMA DE "NÃO APARECER"
-        private void MostrarAba(Panel aba)
-        {
+            // Esconde tudo para o clique não bugar
             pnlLogin.Visible = false;
-            pnlFuncoes.Visible = false;
+            pnlMenu.Visible = false;
             pnlESP.Visible = false;
             pnlConfig.Visible = false;
 
-            aba.Visible = true;
-            aba.BringToFront(); // Isso faz os botões dentro dele ficarem clicáveis!
-            aba.Focus();
+            // Mostra a aba clicada e joga ela pra frente de tudo
+            abaAlvo.Visible = true;
+            abaAlvo.BringToFront();
+            abaAlvo.Focus();
         }
 
-        // --- LÓGICA DE FUNÇÕES FF ---
-        private void switchAimbot_CheckedChanged(object sender, EventArgs e)
+        // --- LÓGICA DE FUNÇÕES FF (EXEMPLO) ---
+        private void swAimbot_CheckedChanged(object sender, EventArgs e)
         {
-            if (switchAimbot.Checked) {
-                lblStatus.Text = "AIMBOT ATIVO";
-                // Lógica de Memória aqui
+            if (swAimbot.Checked) {
+                lblStatus.Text = "AIMBOT: ON";
+                lblStatus.ForeColor = Color.Cyan;
+            } else {
+                lblStatus.Text = "AIMBOT: OFF";
             }
         }
 
-        // --- CONTROLES DE INTERFACE ---
-        private void btnFechar_Click(object sender, EventArgs e) => Application.Exit();
-
+        // --- CONTROLE DE MOVIMENTAÇÃO DO PAINEL ---
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -104,5 +91,7 @@ namespace StecwarePro
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+
+        private void btnFechar_Click(object sender, EventArgs e) => Application.Exit();
     }
 }
