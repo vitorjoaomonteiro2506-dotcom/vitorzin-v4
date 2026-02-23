@@ -1,94 +1,116 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN VIP | PAINEL DE CONTROLE FF</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>VITORZIN SUPREMACY v5.0 | PRIVATE INJECTOR</title>
     <style>
-        :root { --primary: #ff0000; --bg: #050505; --card: #111; }
-        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
-        .header { background: var(--card); border-bottom: 2px solid var(--primary); padding: 20px; text-align: center; }
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+        :root { --red: #ff0000; --glow: #ff3333; --bg: #050505; --panel: #111; }
+        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* Grid de Funções */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid #222; padding: 20px; border-radius: 8px; transition: 0.3s; }
-        .card:hover { border-color: var(--primary); box-shadow: 0 0 15px rgba(255,0,0,0.2); }
+        /* Cabeçalho Gigante */
+        .top-nav { background: #000; border-bottom: 3px solid var(--red); padding: 25px; text-align: center; box-shadow: 0 0 30px var(--red); }
+        .top-nav h1 { margin: 0; font-size: 45px; letter-spacing: 10px; text-transform: uppercase; text-shadow: 0 0 15px var(--red); }
         
-        h2 { color: var(--primary); text-transform: uppercase; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
-        
-        .status-badge { background: #00ff0022; color: #00ff00; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; }
-        
-        .btn-main { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; 
-                    cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; text-align: center; margin-top: 15px; }
-        .btn-main:hover { background: #cc0000; }
+        /* Layout Principal */
+        .main-grid { display: grid; grid-template-columns: 300px 1fr 300px; gap: 20px; padding: 20px; height: calc(100vh - 120px); }
 
-        .info-box { background: #000; border-left: 4px solid var(--primary); padding: 15px; margin-top: 10px; font-size: 14px; }
-        .info-box b { color: var(--primary); }
+        /* Colunas Laterais */
+        .side-panel { background: var(--panel); border: 1px solid #222; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .side-panel h3 { color: var(--red); border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 0; }
 
-        .feature-list { list-style: none; padding: 0; font-size: 13px; color: #aaa; }
-        .feature-list li { margin: 5px 0; display: flex; align-items: center; gap: 8px; }
-        .feature-list li::before { content: '✓'; color: var(--primary); }
+        /* Área Central de Injeção */
+        .center-panel { background: #000; border: 2px solid #222; border-radius: 15px; display: flex; flex-direction: column; position: relative; }
+        #terminal { flex-grow: 1; padding: 20px; font-family: 'Consolas', monospace; color: #00ff00; overflow-y: auto; font-size: 14px; line-height: 1.6; }
+
+        /* Botões de Função */
+        .func-btn { background: #151515; border: 1px solid #333; color: white; padding: 15px; border-radius: 5px; cursor: pointer; text-align: left; transition: 0.3s; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .func-btn:hover { border-color: var(--red); background: #200; box-shadow: inset 0 0 10px var(--red); }
+        .func-btn.active { border-color: #00ff00; color: #00ff00; }
+        .dot { height: 10px; width: 10px; background-color: #444; border-radius: 50%; display: inline-block; }
+        .active .dot { background-color: #00ff00; box-shadow: 0 0 10px #00ff00; }
+
+        /* Rodapé de Status */
+        .status-footer { background: var(--red); color: black; font-weight: bold; padding: 10px; position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; }
+
+        .btn-action { background: var(--red); color: white; border: none; padding: 15px; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1><i class="fa-solid fa-skull-crossbones"></i> VITORZIN PRIVATE PANEL</h1>
-    <span class="status-badge">SISTEMA ONLINE - BYPASS ATUALIZADO</span>
+<div class="top-nav">
+    <h1>VITORZIN SUPREMACY</h1>
+    <div style="color: #666; font-size: 12px;">ENGINE: BYPASS V2 | ARQUIVOS: TRALHA & COMBO XERECA</div>
 </div>
 
-<div class="container">
-    <div class="grid">
+<div class="main-grid">
+    <div class="side-panel">
+        <h3>CONTROLE DE ACESSO</h3>
+        <p>Login: <span style="color: var(--red);">vitorzin</span></p>
+        <p>Status: <span style="color: #00ff00;">MASTER ADMIN</span></p>
+        <div style="background: #000; padding: 10px; border-radius: 5px; font-size: 12px;">
+            <strong>LOGS DE ACESSO:</strong><br>
+            > Autenticado via "vitorzin senha 1"<br>
+            > HWID Reconhecido
+        </div>
+        <hr style="border: 0.5px solid #333; width: 100%;">
+        <h3>CONFIGURAÇÕES</h3>
+        <button class="btn-action" onclick="limparLogs()">Limpar Cache FF</button>
+        <button class="btn-action" style="background: #444;" onclick="window.location.reload()">Resetar Painel</button>
+    </div>
+
+    <div class="center-panel">
+        <div style="background: #111; padding: 10px; border-bottom: 1px solid #222; font-size: 12px;">TERMINAL DE OPERAÇÕES EM TEMPO REAL</div>
+        <div id="terminal">
+            [SISTEMA] Inicializando motor de injeção...<br>
+            [SISTEMA] Carregando Guna.UI.dll... OK!<br>
+            [SISTEMA] Mapeando ComboXerecaCracrekd.rar... OK!<br>
+            [SISTEMA] Mapeando Tralha.painel.rar... OK!<br>
+            [SISTEMA] Aguardando comando do usuário..._
+        </div>
+    </div>
+
+    <div class="side-panel">
+        <h3>FUNÇÕES DO PAINEL</h3>
+        <button class="func-btn" onclick="ativar('Aimbot 100% Head', this)">AIMBOT <span class="dot"></span></button>
+        <button class="func-btn" onclick="ativar('Regedit VIP Internal', this)">REGEDIT <span class="dot"></span></button>
+        <button class="func-btn" onclick="ativar('ESP Box & Line', this)">ESP MENU <span class="dot"></span></button>
+        <button class="func-btn" onclick="ativar('No Recoil Global', this)">NO RECOIL <span class="dot"></span></button>
+        <button class="func-btn" onclick="ativar('Antena Hand Fix', this)">ANTENA <span class="dot"></span></button>
+        <button class="func-btn" onclick="ativar('Speed Run x3', this)">SPEED <span class="dot"></span></button>
+        <div style="margin-top: auto; font-size: 10px; color: #444;">SENHA DOS ARQUIVOS: 1</div>
+    </div>
+</div>
+
+<div class="status-footer">
+    <span>CONEXÃO: ESTÁVEL</span>
+    <span>BYPASS: ATIVADO</span>
+    <span>VERSÃO: 5.0.1</span>
+</div>
+
+<script>
+    function ativar(nome, btn) {
+        const term = document.getElementById('terminal');
+        const time = new Date().toLocaleTimeString();
         
-        <div class="card">
-            <h2><i class="fa-solid fa-box-open"></i> COMBO CRACREKD</h2>
-            <ul class="feature-list">
-                <li>Aimbot 95% Smooth</li>
-                <li>Regedit Interna</li>
-                <li>Anti-Ban Temporário</li>
-                <li>Otimização de FPS</li>
-            </ul>
-            <div class="info-box">
-                Senha do Arquivo: <b>1</b>
-            </div>
-            <a href="ComboXerecaCracrekd.rar" class="btn-main"><i class="fa-solid fa-download"></i> BAIXAR COMBO COMPLETO</a>
-        </div>
+        btn.classList.toggle('active');
+        
+        if(btn.classList.contains('active')) {
+            term.innerHTML += `<br><span style="color:#ffff00">[${time}] -> Localizando endereço de memória para ${nome}...</span>`;
+            setTimeout(() => {
+                term.innerHTML += `<br><span style="color:#00ff00">[${time}] -> ${nome} INJETADO COM SUCESSO!</span>`;
+                term.scrollTop = term.scrollHeight;
+            }, 1000);
+        } else {
+            term.innerHTML += `<br><span style="color:#ff0000">[${time}] -> ${nome} DESATIVADO.</span>`;
+            term.scrollTop = term.scrollHeight;
+        }
+    }
 
-        <div class="card">
-            <h2><i class="fa-solid fa-microchip"></i> TRALHA INJECTOR</h2>
-            <ul class="feature-list">
-                <li>Interface Guna UI VIP</li>
-                <li>ESP Line & Box</li>
-                <li>No Recoil 100%</li>
-                <li>Auto Headshot</li>
-            </ul>
-            <div class="info-box">
-                Senha do Arquivo: <b>1</b>
-            </div>
-            <a href="Tralha.painel.rar" class="btn-main"><i class="fa-solid fa-download"></i> BAIXAR INJETOR (.EXE)</a>
-        </div>
-
-        <div class="card">
-            <h2><i class="fa-solid fa-user-lock"></i> CREDENCIAIS DE LOGIN</h2>
-            <p style="font-size: 14px; color: #ccc;">Use estes dados dentro dos executáveis:</p>
-            <div class="info-box" style="border-color: #555;">
-                USUÁRIO: <b>vitorzin</b><br>
-                SENHA: <b>vitorzin senha 1</b>
-            </div>
-            <p style="font-size: 12px; color: #777; margin-top: 10px;">
-                * Se o painel fechar sozinho, verifique se a <b>Guna.UI.dll</b> está na mesma pasta.
-            </p>
-        </div>
-
-    </div>
-
-    <div style="text-align: center; margin-top: 40px; color: #444; font-size: 12px;">
-        <p>Desenvolvido para uso privado. Todos os direitos reservados ao Vitorzin.</p>
-    </div>
-</div>
+    function limparLogs() {
+        alert("Logs do Free Fire limpos com sucesso! Bypass renovado.");
+    }
+</script>
 
 </body>
 </html>
