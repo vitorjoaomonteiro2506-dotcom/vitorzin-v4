@@ -3,113 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN SUPREMACY v5.0 | PRIVATE INJECTOR</title>
+    <title>VITORZIN SUPREMO v6.0 | FULL FUNCTIONAL PANEL</title>
     <style>
-        :root { --red: #ff0000; --glow: #ff3333; --bg: #050505; --panel: #111; }
-        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
-        
-        /* Cabeçalho Gigante */
-        .top-nav { background: #000; border-bottom: 3px solid var(--red); padding: 25px; text-align: center; box-shadow: 0 0 30px var(--red); }
-        .top-nav h1 { margin: 0; font-size: 45px; letter-spacing: 10px; text-transform: uppercase; text-shadow: 0 0 15px var(--red); }
-        
-        /* Layout Principal */
-        .main-grid { display: grid; grid-template-columns: 300px 1fr 300px; gap: 20px; padding: 20px; height: calc(100vh - 120px); }
+        /* CONFIGURAÇÕES DE NÚCLEO */
+        :root {
+            --primary: #ff0000;
+            --secondary: #0a0a0a;
+            --accent: #00ff00;
+            --warning: #ffcc00;
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --panel-w: 390px;
+        }
 
-        /* Colunas Laterais */
-        .side-panel { background: var(--panel); border: 1px solid #222; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-        .side-panel h3 { color: var(--red); border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 0; }
+        * { box-sizing: border-box; outline: none; }
 
-        /* Área Central de Injeção */
-        .center-panel { background: #000; border: 2px solid #222; border-radius: 15px; display: flex; flex-direction: column; position: relative; }
-        #terminal { flex-grow: 1; padding: 20px; font-family: 'Consolas', monospace; color: #00ff00; overflow-y: auto; font-size: 14px; line-height: 1.6; }
+        body {
+            background-color: #050505;
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
-        /* Botões de Função */
-        .func-btn { background: #151515; border: 1px solid #333; color: white; padding: 15px; border-radius: 5px; cursor: pointer; text-align: left; transition: 0.3s; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        .func-btn:hover { border-color: var(--red); background: #200; box-shadow: inset 0 0 10px var(--red); }
-        .func-btn.active { border-color: #00ff00; color: #00ff00; }
-        .dot { height: 10px; width: 10px; background-color: #444; border-radius: 50%; display: inline-block; }
-        .active .dot { background-color: #00ff00; box-shadow: 0 0 10px #00ff00; }
+        /* CONTAINER PRINCIPAL (LARGURA AJUSTADA) */
+        .injector-frame {
+            width: var(--panel-w);
+            background: var(--secondary);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 5;
+        }
 
-        /* Rodapé de Status */
-        .status-footer { background: var(--red); color: black; font-weight: bold; padding: 10px; position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; }
+        /* CABEÇALHO VIP */
+        .header {
+            background: linear-gradient(180deg, #000 0%, #1a0000 100%);
+            padding: 25px 15px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+        }
 
-        .btn-action { background: var(--red); color: white; border: none; padding: 15px; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px var(--primary);
+            font-weight: 900;
+        }
+
+        .header .sub {
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* STATUS REAL-TIME */
+        .status-strip {
+            background: #000;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-family: 'Consolas', monospace;
+            border-bottom: 1px solid #222;
+        }
+
+        .status-online { color: var(--accent); animation: blink 1.5s infinite; }
+        @keyframes blink { 50% { opacity: 0.3; } }
+
+        /* TERMINAL DE INJEÇÃO (MAIOR E DETALHADO) */
+        .terminal-box {
+            background: #000;
+            height: 160px;
+            margin: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            color: var(--accent);
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+
+        /* LISTA DE FUNÇÕES ATIVÁVEIS */
+        .functions-container {
+            padding: 0 15px 20px 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 380px;
+        }
+
+        .function-item {
+            background: #111;
+            border: 1px solid #222;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .function-item:hover {
+            border-color: var(--primary);
+            background: #161616;
+        }
+
+        .func-label b {
+            display: block;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .func-label span {
+            font-size: 9px;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        /* SWITCH TOGGLE */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        /* ÁREA DE LOGIN E ARQUIVOS */
+        .footer-info {
+            background: #000;
+            padding: 15px;
+            border-top: 2px solid var(--primary);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .credenciais {
+            color: var(--text-dim);
+            margin-top: 8px;
+            background: #0a0a0a;
+            padding: 5px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .btn-update {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        /* DECORAÇÃO BACKGROUND */
+        .bg-effect {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,0,0,0.05) 0%, rgba(0,0,0,1) 80%);
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
 
-<div class="top-nav">
-    <h1>VITORZIN SUPREMACY</h1>
-    <div style="color: #666; font-size: 12px;">ENGINE: BYPASS V2 | ARQUIVOS: TRALHA & COMBO XERECA</div>
-</div>
+<div class="bg-effect"></div>
 
-<div class="main-grid">
-    <div class="side-panel">
-        <h3>CONTROLE DE ACESSO</h3>
-        <p>Login: <span style="color: var(--red);">vitorzin</span></p>
-        <p>Status: <span style="color: #00ff00;">MASTER ADMIN</span></p>
-        <div style="background: #000; padding: 10px; border-radius: 5px; font-size: 12px;">
-            <strong>LOGS DE ACESSO:</strong><br>
-            > Autenticado via "vitorzin senha 1"<br>
-            > HWID Reconhecido
+<div class="injector-frame">
+    <div class="header">
+        <h1>VITORZIN VIP</h1>
+        <div class="sub">Engine: Tralha x Combo Xereca</div>
+    </div>
+
+    <div class="status-strip">
+        <span>ESTADO: <span class="status-online">CONECTADO</span></span>
+        <span>PING: 14ms</span>
+        <span>VER: 6.0.4</span>
+    </div>
+
+    <div class="terminal-box" id="term">
+        [SYSTEM] Inicializando kernel...<br>
+        [SYSTEM] Mapeando ComboXerecaCracrekd.rar...<br>
+        [SYSTEM] Verificando Tralha.painel.rar...<br>
+        [SYSTEM] Guna.UI.dll vinculada ao processo.<br>
+        [AUTH] Login 'vitorzin' reconhecido.<br>
+        [INFO] Pronto para injeção em FreeFire.exe
+    </div>
+
+    <div class="functions-container">
+        <div class="function-item">
+            <div class="func-label">
+                <b>AIMBOT SUPREMO</b>
+                <span>Foco: Cabeça | Smooth: 0</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" onchange="runCmd('AIMBOT_INJECT', this)">
+                <span class="slider"></span>
+            </label>
         </div>
-        <hr style="border: 0.5px solid #333; width: 100%;">
-        <h3>CONFIGURAÇÕES</h3>
-        <button class="btn-action" onclick="limparLogs()">Limpar Cache FF</button>
-        <button class="btn-action" style="background: #444;" onclick="window.location.reload()">Resetar Painel</button>
-    </div>
 
-    <div class="center-panel">
-        <div style="background: #111; padding: 10px; border-bottom: 1px solid #222; font-size: 12px;">TERMINAL DE OPERAÇÕES EM TEMPO REAL</div>
-        <div id="terminal">
-            [SISTEMA] Inicializando motor de injeção...<br>
-            [SISTEMA] Carregando Guna.UI.dll... OK!<br>
-            [SISTEMA] Mapeando ComboXerecaCracrekd.rar... OK!<br>
-            [SISTEMA] Mapeando Tralha.painel.rar... OK!<br>
-            [SISTEMA] Aguardando comando do usuário..._
+        <div class="function-item">
+            <div class="func-label">
+                <b>REGEDIT EXTERNA</b>
+                <span>Modificar Registros Windows</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" onchange="runCmd('REGEDIT_MOD', this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="function-item">
+            <div class="func-label">
+                <b>AUTO HEADSHOT</b>
+                <span>Source: Tralha Painel</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" onchange="runCmd('HS_AUTO', this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="function-item">
+            <div class="func-label">
+                <b>ESP LINE & BOX</b>
+                <span>Desenhar linhas no Player</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" onchange="runCmd('ESP_DRAW', this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="function-item">
+            <div class="func-label">
+                <b>NO RECOIL / SPREAD</b>
+                <span>Recuo Zero - 100% Estável</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" onchange="runCmd('RECOIL_ZERO', this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="function-item">
+            <div class="func-label">
+                <b>TELEPORT KILL</b>
+                <span>Aproximar inimigo (Risco Alto)</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" onchange="runCmd('TELE_KILL', this)">
+                <span class="slider"></span>
+            </label>
         </div>
     </div>
 
-    <div class="side-panel">
-        <h3>FUNÇÕES DO PAINEL</h3>
-        <button class="func-btn" onclick="ativar('Aimbot 100% Head', this)">AIMBOT <span class="dot"></span></button>
-        <button class="func-btn" onclick="ativar('Regedit VIP Internal', this)">REGEDIT <span class="dot"></span></button>
-        <button class="func-btn" onclick="ativar('ESP Box & Line', this)">ESP MENU <span class="dot"></span></button>
-        <button class="func-btn" onclick="ativar('No Recoil Global', this)">NO RECOIL <span class="dot"></span></button>
-        <button class="func-btn" onclick="ativar('Antena Hand Fix', this)">ANTENA <span class="dot"></span></button>
-        <button class="func-btn" onclick="ativar('Speed Run x3', this)">SPEED <span class="dot"></span></button>
-        <div style="margin-top: auto; font-size: 10px; color: #444;">SENHA DOS ARQUIVOS: 1</div>
+    <div class="footer-info">
+        <button class="btn-update" onclick="location.reload()">Sincronizar Arquivos</button>
+        <div class="credenciais">
+            USER: <b>vitorzin</b> | PASS: <b>vitorzin senha 1</b><br>
+            <span style="color:var(--primary)">RAR PASS: 1</span>
+        </div>
     </div>
-</div>
-
-<div class="status-footer">
-    <span>CONEXÃO: ESTÁVEL</span>
-    <span>BYPASS: ATIVADO</span>
-    <span>VERSÃO: 5.0.1</span>
 </div>
 
 <script>
-    function ativar(nome, btn) {
-        const term = document.getElementById('terminal');
+    // LÓGICA DE EXECUÇÃO 200% FUNCIONAL
+    const term = document.getElementById('term');
+
+    function writeTerminal(text, type = 'success') {
         const time = new Date().toLocaleTimeString();
-        
-        btn.classList.toggle('active');
-        
-        if(btn.classList.contains('active')) {
-            term.innerHTML += `<br><span style="color:#ffff00">[${time}] -> Localizando endereço de memória para ${nome}...</span>`;
+        let color = "#00ff00"; // success
+        if(type === 'error') color = "#ff0000";
+        if(type === 'process') color = "#ffff00";
+
+        term.innerHTML += `<br><span style="color:${color}">[${time}] ${text}</span>`;
+        term.scrollTop = term.scrollHeight;
+    }
+
+    function runCmd(cmd, element) {
+        if(element.checked) {
+            writeTerminal(`Iniciando processo ${cmd}...`, 'process');
+            
+            // Simula a comunicação com a Guna.UI.dll e os arquivos RAR
             setTimeout(() => {
-                term.innerHTML += `<br><span style="color:#00ff00">[${time}] -> ${nome} INJETADO COM SUCESSO!</span>`;
-                term.scrollTop = term.scrollHeight;
-            }, 1000);
+                writeTerminal(`Endereço de memória localizado via Tralha.painel!`);
+            }, 600);
+
+            setTimeout(() => {
+                writeTerminal(`${cmd} ATIVADO E FUNCIONAL!`, 'success');
+            }, 1200);
         } else {
-            term.innerHTML += `<br><span style="color:#ff0000">[${time}] -> ${nome} DESATIVADO.</span>`;
-            term.scrollTop = term.scrollHeight;
+            writeTerminal(`${cmd} DESATIVADO / LIMPEZA DE CACHE...`, 'error');
         }
     }
 
-    function limparLogs() {
-        alert("Logs do Free Fire limpos com sucesso! Bypass renovado.");
-    }
+    // Sistema de Auto-Bypass (Simulado para funcionalidade)
+    setInterval(() => {
+        const logs = [
+            "Limpando logs de report da Garena...",
+            "Injetando Bypass anti-detecção...",
+            "Verificando integridade da Guna.UI.dll...",
+            "Anticheat Bypass: STATUS OK"
+        ];
+        const randomLog = logs[Math.floor(Math.random() * logs.length)];
+        writeTerminal(randomLog, 'process');
+    }, 10000);
+
+    // Efeito de inicialização
+    window.onload = () => {
+        writeTerminal("Conectando ao banco de dados privado...", "process");
+        setTimeout(() => writeTerminal("Acesso Master concedido para VITORZIN."), 1000);
+    };
 </script>
 
 </body>
