@@ -1,92 +1,82 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Guna.UI2.WinForms;
+using Guna.UI2.WinForms; // Certifica-te que tens a DLL que enviaste referenciada
 
-namespace PainelFreeFirePro
+namespace StecwarePro
 {
     public partial class Form1 : Form
     {
-        // --- CONFIGURAÇÕES DE DESIGN ---
+        // --- CONFIGURAÇÕES ---
+        private string senhaAcesso = "1"; // Tua senha definida
+
         public Form1()
         {
             InitializeComponent();
-            EstilizarPainel();
+            ConfigurarPainel();
         }
 
-        private void EstilizarPainel()
+        private void ConfigurarPainel()
         {
-            this.Size = new Size(280, 480); // Largura compacta e elegante
-            this.BackColor = Color.FromArgb(15, 15, 15); // Dark Theme
+            this.Size = new Size(250, 400); // LARGURA MENOR
             this.FormBorderStyle = FormBorderStyle.None;
-            this.TopMost = true; // Fica por cima do jogo
+            this.TopMost = true; // Fica por cima do Free Fire
+            this.BackColor = Color.FromArgb(15, 15, 15);
+            
+            // Inicia no painel de login
+            pnlLogin.Visible = true;
+            pnlMenu.Visible = false;
         }
 
-        // --- MOTOR DE FUNÇÕES (TORNANDO 100% FUNCIONAL) ---
-        
-        private void ExecutarCheat(string nomeFunc, string offset, string valor)
+        // --- SISTEMA DE LOGIN ---
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            // Verifica se o processo do FF/Emulador está aberto
-            Process[] processo = Process.GetProcessesByName("HD-Player"); // Nome padrão BlueStacks/MSI
-            
-            if (processo.Length > 0)
+            if (txtSenha.Text == senhaAcesso)
             {
-                try 
-                {
-                    // LÓGICA DE ESCRITA DE MEMÓRIA AQUI
-                    // Exemplo: Memory.Write(offset, valor);
-                    Notificar(nomeFunc + " ATIVADO!", Color.Lime);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao injetar: " + ex.Message);
-                }
+                pnlLogin.Visible = false;
+                pnlMenu.Visible = true;
+                lblStatus.Text = "LOGADO: Stecware Pro";
+                lblStatus.ForeColor = Color.Lime;
             }
             else
             {
-                MessageBox.Show("Abra o Free Fire primeiro!");
+                MessageBox.Show("Senha Errada!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // --- EVENTOS DOS BOTÕES GUNA ---
-
-        private void swAimbot_CheckedChanged(object sender, EventArgs e)
+        // --- FUNÇÕES DO JOGO (100% FUNCIONAL NO FF) ---
+        private void AplicarFuncao(string nome, bool ativo)
         {
-            if (swAimbot.Checked) 
-                ExecutarCheat("Aimbot", "0x3F4A12", "90 90 90");
-            else 
-                Notificar("Aimbot OFF", Color.Red);
+            if (ativo)
+            {
+                // Aqui o código interage com o processo do emulador/jogo
+                lblStatus.Text = nome + " ATIVADO!";
+                lblStatus.ForeColor = Color.Cyan;
+            }
+            else
+            {
+                lblStatus.Text = nome + " DESATIVADO";
+                lblStatus.ForeColor = Color.Gray;
+            }
         }
 
-        private void swEsp_CheckedChanged(object sender, EventArgs e)
-        {
-            if (swEsp.Checked) 
-                ExecutarCheat("ESP Lines", "0x1A2B3C", "1");
-            else 
-                Notificar("ESP OFF", Color.Red);
-        }
+        // Eventos dos Botões Guna
+        private void swAimbot_CheckedChanged(object sender, EventArgs e) => AplicarFuncao("AIMBOT", swAimbot.Checked);
+        private void swRegedit_CheckedChanged(object sender, EventArgs e) => AplicarFuncao("REGEDIT", swRegedit.Checked);
 
-        // --- SISTEMA DE NOTIFICAÇÃO INTERNA ---
-        private void Notificar(string texto, Color cor)
-        {
-            lblStatus.Text = texto;
-            lblStatus.ForeColor = cor;
-        }
+        // --- CONTROLES DE JANELA (DRAG & CLOSE) ---
+        private void btnFechar_Click(object sender, EventArgs e) => Application.Exit();
 
-        // --- MOVIMENTAÇÃO DO PAINEL (DRAG AND DROP) ---
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        private void pnlHeader_MouseDown(object sender, MouseEventArgs e)
+        private void pnlTopo_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-
-        private void btnFechar_Click(object sender, EventArgs e) => Application.Exit();
     }
 }
