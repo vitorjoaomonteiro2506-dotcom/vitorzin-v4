@@ -1,97 +1,123 @@
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Guna.UI2.WinForms; 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StecwarePro - Painel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: rgba(10, 10, 10, 0.9); color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        .guna-card { background: #0f0f13; border: 1px solid #333; border-radius: 4px; position: relative; }
+        .guna-btn { background: #5d5fef; transition: 0.2s; }
+        .guna-btn:hover { background: #4749d1; }
+        .tab-content { display: none; }
+        .active-tab { display: block; }
+        .status-bar { font-size: 10px; font-weight: bold; letter-spacing: 1px; }
+        /* Estilo do Switch igual ao Guna */
+        .switch { position: relative; display: inline-block; width: 34px; height: 18px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 12px; width: 12px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #00f2ff; }
+        input:checked + .slider:before { transform: translateX(16px); }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
 
-namespace StecwarePro
-{
-    public partial class Form1 : Form
-    {
-        // 1. SENHA DEFINIDA
-        private string senhaMestra = "1";
+    <div id="login-screen" class="guna-card p-6 w-[240px] text-center">
+        <h2 class="text-indigo-500 font-bold mb-4">STECWARE LOGIN</h2>
+        <input type="password" id="password" class="w-full bg-[#1a1a24] border border-gray-800 p-2 rounded text-sm mb-4 focus:outline-none" placeholder="Senha">
+        <button onclick="checkLogin()" class="w-full guna-btn p-2 rounded text-xs font-bold uppercase">Entrar</button>
+        <p id="error-msg" class="text-red-500 text-[10px] mt-2 hidden">Senha incorreta!</p>
+    </div>
 
-        public Form1()
-        {
-            InitializeComponent();
-            ConfiguracaoInicial();
-        }
+    <div id="main-panel" class="guna-card w-[240px] h-[450px] flex flex-col hidden">
+        <div class="p-2 border-b border-gray-800 flex justify-between items-center bg-[#1a1a24]">
+            <span class="text-[10px] font-bold text-gray-400">STECWARE PRO</span>
+            <button onclick="location.reload()" class="text-gray-500 hover:text-red-500"><i class="fas fa-times"></i></button>
+        </div>
 
-        private void ConfiguracaoInicial()
-        {
-            // 2. LARGURA MENOR (220px) - Estilo Slim
-            this.Size = new Size(220, 430); 
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.TopMost = true; // Sempre acima do jogo
+        <div class="flex-1 p-3 overflow-y-auto">
+            
+            <div id="tab-home" class="tab-content active-tab space-y-4">
+                <div class="text-center py-4">
+                    <i class="fas fa-user-circle text-4xl text-indigo-500"></i>
+                    <p class="text-xs mt-2">Bem-vindo, Usuário</p>
+                </div>
+                <button onclick="showTab('tab-esp')" class="w-full bg-[#1a1a24] p-3 rounded border border-gray-800 text-left text-xs hover:border-indigo-500">
+                    <i class="fas fa-bolt mr-2 text-indigo-500"></i> ABRIR FUNÇÕES ESP
+                </button>
+                <button onclick="showTab('tab-config')" class="w-full bg-[#1a1a24] p-3 rounded border border-gray-800 text-left text-xs hover:border-indigo-500">
+                    <i class="fas fa-cog mr-2 text-indigo-500"></i> CONFIGURAÇÕES
+                </button>
+            </div>
 
-            // 3. ORGANIZAÇÃO DAS FUNÇÕES (DOCK FILL)
-            // Isso garante que todos os painéis fiquem no mesmo lugar
-            pnlLogin.Dock = DockStyle.Fill;
-            pnlMenu.Dock = DockStyle.Fill;
-            pnlESP.Dock = DockStyle.Fill;
-            pnlConfig.Dock = DockStyle.Fill;
+            <div id="tab-esp" class="tab-content space-y-3">
+                <button onclick="showTab('tab-home')" class="text-[10px] text-indigo-400 mb-2 font-bold"><i class="fas fa-arrow-left"></i> VOLTAR</button>
+                <h3 class="text-xs font-bold mb-3">FUNÇÕES VISUAIS</h3>
+                
+                <div class="flex justify-between items-center bg-[#1a1a24] p-2 rounded">
+                    <span class="text-xs text-gray-300">ESP Name</span>
+                    <label class="switch"><input type="checkbox" onchange="toggleHack('ESP Name', this)"><span class="slider"></span></label>
+                </div>
+                <div class="flex justify-between items-center bg-[#1a1a24] p-2 rounded">
+                    <span class="text-xs text-gray-300">ESP Box</span>
+                    <label class="switch"><input type="checkbox" onchange="toggleHack('ESP Box', this)"><span class="slider"></span></label>
+                </div>
+                <div class="flex justify-between items-center bg-[#1a1a24] p-2 rounded">
+                    <span class="text-xs text-gray-300">Aimbot 100%</span>
+                    <label class="switch"><input type="checkbox" onchange="toggleHack('Aimbot', this)"><span class="slider"></span></label>
+                </div>
+            </div>
 
-            // Começa mostrando apenas o Login
-            TrocarDeAba(pnlLogin);
-        }
+            <div id="tab-config" class="tab-content space-y-3">
+                <button onclick="showTab('tab-home')" class="text-[10px] text-indigo-400 mb-2 font-bold"><i class="fas fa-arrow-left"></i> VOLTAR</button>
+                <h3 class="text-xs font-bold mb-3">AJUSTES DO SISTEMA</h3>
+                <p class="text-[10px] text-gray-500 uppercase">Sensibilidade</p>
+                <input type="range" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                <div class="bg-[#1a1a24] p-2 rounded border border-gray-800 mt-4">
+                    <p class="text-[10px] text-gray-400">Arquivos: ComboXereca.rar verificado</p>
+                </div>
+            </div>
 
-        // --- SISTEMA DE LOGIN ---
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            if (txtSenha.Text == senhaMestra)
-            {
-                TrocarDeAba(pnlMenu);
-                lblStatus.Text = "STEWARE ATIVO";
-                lblStatus.ForeColor = Color.SpringGreen;
-            }
-            else
-            {
-                MessageBox.Show("Senha Incorreta! Use: 1", "Stecware");
-            }
-        }
+        </div>
 
-        // --- NAVEGAÇÃO (AQUI AS FUNÇÕES CLICAM E APARECEM) ---
-        private void btnAbaESP_Click(object sender, EventArgs e) => TrocarDeAba(pnlESP);
-        private void btnAbaConfig_Click(object sender, EventArgs e) => TrocarDeAba(pnlConfig);
-        private void btnVoltar_Click(object sender, EventArgs e) => TrocarDeAba(pnlMenu);
+        <div class="p-2 border-t border-gray-800 bg-[#0a0a0a]">
+            <div id="lblStatus" class="status-bar text-gray-500">STATUS: AGUARDANDO...</div>
+        </div>
+    </div>
 
-        private void TrocarDeAba(Panel abaAlvo)
-        {
-            // Esconde tudo para o clique não bugar
-            pnlLogin.Visible = false;
-            pnlMenu.Visible = false;
-            pnlESP.Visible = false;
-            pnlConfig.Visible = false;
-
-            // Mostra a aba clicada e joga ela pra frente de tudo
-            abaAlvo.Visible = true;
-            abaAlvo.BringToFront();
-            abaAlvo.Focus();
-        }
-
-        // --- LÓGICA DE FUNÇÕES FF (EXEMPLO) ---
-        private void swAimbot_CheckedChanged(object sender, EventArgs e)
-        {
-            if (swAimbot.Checked) {
-                lblStatus.Text = "AIMBOT: ON";
-                lblStatus.ForeColor = Color.Cyan;
+    <script>
+        function checkLogin() {
+            const pass = document.getElementById('password').value;
+            if(pass === "1") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-panel').classList.remove('hidden');
+                updateStatus("CONECTADO", "#00ff00");
             } else {
-                lblStatus.Text = "AIMBOT: OFF";
+                document.getElementById('error-msg').classList.remove('hidden');
             }
         }
 
-        // --- CONTROLE DE MOVIMENTAÇÃO DO PAINEL ---
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
-        private extern static void ReleaseCapture();
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-
-        private void pnlTopo_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active-tab'));
+            document.getElementById(tabId).classList.add('active-tab');
         }
 
-        private void btnFechar_Click(object sender, EventArgs e) => Application.Exit();
-    }
-}
+        function toggleHack(name, checkbox) {
+            if(checkbox.checked) {
+                updateStatus(name + " ATIVO", "#00f2ff");
+            } else {
+                updateStatus(name + " OFF", "#666");
+            }
+        }
+
+        function updateStatus(txt, color) {
+            const status = document.getElementById('lblStatus');
+            status.innerText = "STATUS: " + txt;
+            status.style.color = color;
+        }
+    </script>
+</body>
+</html>
