@@ -1,49 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle 100% Funcional</title>
     <style>
-        body { background: transparent; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; margin: 0; }
-        .menu { 
-            width: 240px; background: rgba(0, 0, 0, 0.95); border: 2px solid #00ffff; 
-            border-radius: 15px; padding: 15px; box-shadow: 0 0 20px #00ffff; margin-top: 20px;
+        :root {
+            --bg-dark: #020617;
+            --card-bg: #1e293b;
+            --primary: #3b82f6;
+            --accent: #ef4444;
+            --text: #f8fafc;
         }
-        h2 { color: #00ffff; text-align: center; font-size: 18px; text-shadow: 0 0 10px #00ffff; margin: 0 0 15px 0; }
-        .section { color: #555; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid #222; }
-        .grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 15px; }
-        button { 
-            background: #111; color: white; border: 1px solid #00ffff; padding: 10px; 
-            border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.3s;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        
+        body { background-color: var(--bg-dark); color: var(--text); overflow: hidden; }
+
+        /* TELA DE LOGIN */
+        #login-screen {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #1e293b 0%, #020617 100%);
         }
-        button:active { background: #00ffff; color: #000; box-shadow: 0 0 15px #00ffff; }
-        .btn-safe { border-color: #00ff00; color: #00ff00; }
-        .btn-danger { border-color: #ff0000; color: #ff0000; margin-top: 10px; width: 100%; }
+
+        .login-box {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 350px;
+            border: 1px solid #334155;
+        }
+
+        .login-box h1 { margin-bottom: 20px; font-size: 24px; }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover { background: #2563eb; transform: translateY(-2px); }
+
+        .msg-erro { color: var(--accent); display: none; margin-top: 15px; font-weight: bold; }
+
+        /* PAINEL */
+        #dashboard { display: none; height: 100vh; flex-direction: column; }
+
+        .navbar {
+            background: var(--card-bg);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .main-layout { display: flex; flex: 1; }
+
+        .sidebar {
+            width: 240px;
+            background: #0f172a;
+            padding: 20px;
+            border-right: 1px solid #334155;
+        }
+
+        .sidebar button {
+            width: 100%;
+            background: transparent;
+            color: #94a3b8;
+            border: none;
+            padding: 12px;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar button:hover, .sidebar button.active {
+            background: #1e293b;
+            color: white;
+        }
+
+        .content { flex: 1; padding: 40px; overflow-y: auto; }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            margin-top: 20px;
+        }
+
+        .btn-sair { background: var(--accent); border: none; color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
+
+        .status-badge { background: #22c55e; color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
+
     </style>
 </head>
 <body>
-    <div class="menu">
-        <h2>VITORZIN V30 VIP</h2>
-        
-        <div class="section">Segurança</div>
-        <div class="grid">
-            <button class="btn-safe" onclick="XitVitorzin.injetarFuncao('ANTI-BAN VIP')">🛡️ ATIVAR ANTI-BAN</button>
-            <button class="btn-safe" onclick="XitVitorzin.injetarFuncao('ANTI-BLACKLIST')">🧹 LIMPAR BLACKLIST</button>
-        </div>
 
-        <div class="section">Ajustes de Mira</div>
-        <div class="grid">
-            <button onclick="XitVitorzin.injetarFuncao('AIMBOT 100% HS')">🎯 AIMBOT MAGNÉTICO</button>
-            <button onclick="XitVitorzin.injetarFuncao('REGEDIT GRANEJO')">🔧 REGEDIT EXTREME</button>
+    <div id="login-screen">
+        <div class="login-box">
+            <h1>ADMIN LOGIN</h1>
+            <input type="password" id="passInput" placeholder="Palavra-passe" autofocus>
+            <button class="btn-login" onclick="validar()">ENTRAR NO PAINEL</button>
+            <p id="erro" class="msg-erro">Acesso Negado!</p>
         </div>
-
-        <div class="section">Visuais</div>
-        <div class="grid">
-            <button onclick="XitVitorzin.injetarFuncao('ANTENA HEAD')">📍 ANTENA NA CABEÇA</button>
-            <button onclick="XitVitorzin.injetarFuncao('ESP LINE')">🖼️ ESP LINHA (WALL)</button>
-        </div>
-
-        <button class="btn-danger" onclick="location.reload()">FECHAR PAINEL</button>
     </div>
+
+    <div id="dashboard">
+        <nav class="navbar">
+            <span style="font-weight: bold; letter-spacing: 1px;">SISTEMA V1 [ONLINE]</span>
+            <button class="btn-sair" onclick="logout()">Sair</button>
+        </nav>
+
+        <div class="main-layout">
+            <aside class="sidebar">
+                <button class="active">Painel Principal</button>
+                <button>Configurações</button>
+                <button>Gestão de Arquivos</button>
+                <button>Logs do Sistema</button>
+            </aside>
+
+            <main class="content">
+                <h2>Bem-vindo de volta!</h2>
+                <div class="card">
+                    <h3>Estado do Sistema</h3>
+                    <p style="margin-top: 10px; color: #94a3b8;">
+                        O servidor está pronto e a aguardar instruções.<br><br>
+                        Status: <span class="status-badge">Ativo</span>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Atalhos Rápidos</h3>
+                    <button class="btn-login" style="width: auto; margin-top: 15px; padding: 10px 20px;">Atualizar Dados</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // SENHA QUE VOCÊ PEDIU
+        const SENHA_SISTEMA = "1";
+
+        function validar() {
+            const input = document.getElementById('passInput').value;
+            const erro = document.getElementById('erro');
+
+            if (input === SENHA_SISTEMA) {
+                // Salva o login no navegador (Persistente)
+                sessionStorage.setItem('auth', 'true');
+                mostrarPainel();
+            } else {
+                erro.style.display = 'block';
+                document.getElementById('passInput').value = "";
+            }
+        }
+
+        function mostrarPainel() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'flex';
+            document.body.style.overflow = 'auto';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('auth');
+            window.location.reload();
+        }
+
+        // Verifica se já está logado ao carregar
+        window.onload = () => {
+            if (sessionStorage.getItem('auth') === 'true') {
+                mostrarPainel();
+            }
+        };
+
+        // Atalho tecla Enter
+        document.getElementById('passInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') validar();
+        });
+    </script>
 </body>
 </html>
+
