@@ -3,54 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Privado</title>
+    <title>VITORZIN VIP | PAINEL DE CONTROLE FF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background: #050505; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; alignItems: center; height: 100vh; margin: 0; }
-        .box { background: #111; border: 1px solid #0070f3; padding: 30px; border-radius: 10px; width: 320px; text-align: center; box-shadow: 0 0 20px rgba(0, 112, 243, 0.2); }
-        input { width: 90%; padding: 12px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #333; background: #000; color: #fff; text-align: center; }
-        button { width: 100%; padding: 12px; background: #0070f3; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 5px; transition: 0.3s; }
-        button:hover { background: #0056b3; }
-        .hidden { display: none; }
-        .func-btn { background: #222; margin-top: 10px; border: 1px solid #444; }
-        .func-btn:hover { border-color: #00ff00; color: #00ff00; }
-        #status { font-size: 12px; color: #888; margin-top: 15px; }
+        :root { --primary: #ff0000; --bg: #050505; --card: #111; }
+        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        .header { background: var(--card); border-bottom: 2px solid var(--primary); padding: 20px; text-align: center; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+        
+        /* Grid de Funções */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid #222; padding: 20px; border-radius: 8px; transition: 0.3s; }
+        .card:hover { border-color: var(--primary); box-shadow: 0 0 15px rgba(255,0,0,0.2); }
+        
+        h2 { color: var(--primary); text-transform: uppercase; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        
+        .status-badge { background: #00ff0022; color: #00ff00; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        
+        .btn-main { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; 
+                    cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; text-align: center; margin-top: 15px; }
+        .btn-main:hover { background: #cc0000; }
+
+        .info-box { background: #000; border-left: 4px solid var(--primary); padding: 15px; margin-top: 10px; font-size: 14px; }
+        .info-box b { color: var(--primary); }
+
+        .feature-list { list-style: none; padding: 0; font-size: 13px; color: #aaa; }
+        .feature-list li { margin: 5px 0; display: flex; align-items: center; gap: 8px; }
+        .feature-list li::before { content: '✓'; color: var(--primary); }
     </style>
 </head>
 <body>
 
-    <div id="login-screen" class="box">
-        <h2>LOGIN</h2>
-        <input type="password" id="pass" placeholder="SENHA">
-        <button onclick="logar()">ENTRAR</button>
+<div class="header">
+    <h1><i class="fa-solid fa-skull-crossbones"></i> VITORZIN PRIVATE PANEL</h1>
+    <span class="status-badge">SISTEMA ONLINE - BYPASS ATUALIZADO</span>
+</div>
+
+<div class="container">
+    <div class="grid">
+        
+        <div class="card">
+            <h2><i class="fa-solid fa-box-open"></i> COMBO CRACREKD</h2>
+            <ul class="feature-list">
+                <li>Aimbot 95% Smooth</li>
+                <li>Regedit Interna</li>
+                <li>Anti-Ban Temporário</li>
+                <li>Otimização de FPS</li>
+            </ul>
+            <div class="info-box">
+                Senha do Arquivo: <b>1</b>
+            </div>
+            <a href="ComboXerecaCracrekd.rar" class="btn-main"><i class="fa-solid fa-download"></i> BAIXAR COMBO COMPLETO</a>
+        </div>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-microchip"></i> TRALHA INJECTOR</h2>
+            <ul class="feature-list">
+                <li>Interface Guna UI VIP</li>
+                <li>ESP Line & Box</li>
+                <li>No Recoil 100%</li>
+                <li>Auto Headshot</li>
+            </ul>
+            <div class="info-box">
+                Senha do Arquivo: <b>1</b>
+            </div>
+            <a href="Tralha.painel.rar" class="btn-main"><i class="fa-solid fa-download"></i> BAIXAR INJETOR (.EXE)</a>
+        </div>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-user-lock"></i> CREDENCIAIS DE LOGIN</h2>
+            <p style="font-size: 14px; color: #ccc;">Use estes dados dentro dos executáveis:</p>
+            <div class="info-box" style="border-color: #555;">
+                USUÁRIO: <b>vitorzin</b><br>
+                SENHA: <b>vitorzin senha 1</b>
+            </div>
+            <p style="font-size: 12px; color: #777; margin-top: 10px;">
+                * Se o painel fechar sozinho, verifique se a <b>Guna.UI.dll</b> está na mesma pasta.
+            </p>
+        </div>
+
     </div>
 
-    <div id="panel-screen" class="box hidden">
-        <h2 style="color: #0070f3;">ADMIN PANEL</h2>
-        <p id="status">Sistema Online</p>
-        <button class="func-btn" onclick="acao('Otimização de FPS')">OTIMIZAR FPS</button>
-        <button class="func-btn" onclick="acao('Limpeza de Logs')">LIMPAR LOGS</button>
-        <button class="func-btn" onclick="acao('Bypass')">ATIVAR BYPASS</button>
-        <button onclick="location.reload()" style="margin-top: 20px; background: #444;">SAIR</button>
+    <div style="text-align: center; margin-top: 40px; color: #444; font-size: 12px;">
+        <p>Desenvolvido para uso privado. Todos os direitos reservados ao Vitorzin.</p>
     </div>
+</div>
 
-    <script>
-        function logar() {
-            const p = document.getElementById('pass').value;
-            if (p === "1") {
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('panel-screen').classList.remove('hidden');
-            } else {
-                alert("Senha errada!");
-            }
-        }
-
-        function acao(nome) {
-            document.getElementById('status').innerText = "Processando " + nome + "...";
-            setTimeout(() => {
-                document.getElementById('status').innerText = nome + " ATIVADO!";
-                alert(nome + " foi injetado com sucesso!");
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
