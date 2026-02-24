@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VITORZIN SUPREMO v6.0 | FULL POWER PANEL</title>
     <style>
-        /* CONFIGURAÇÕES TÉCNICAS E CORES */
+        /* CONFIGURAÇÕES TÉCNICAS E CORES ORIGINAIS */
         :root {
             --primary: #ff0000;
             --secondary: #0a0a0a;
@@ -13,7 +13,7 @@
             --warning: #ffcc00;
             --text-main: #ffffff;
             --text-dim: #888888;
-            --panel-w: 400px;
+            --panel-w: 100%; /* Ajustado para preencher o Stecware */
         }
 
         * { box-sizing: border-box; outline: none; }
@@ -23,28 +23,27 @@
             color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, sans-serif;
             margin: 0;
+            padding: 10px;
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* CONTAINER PRINCIPAL COM EFEITO SCANNER */
+        /* CONTAINER COM EFEITO SCANNER */
         .injector-frame {
-            width: var(--panel-w);
+            width: 100%;
+            max-width: 450px;
             background: var(--secondary);
             border: 2px solid var(--primary);
             border-radius: 12px;
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.4);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             position: relative;
-            z-index: 5;
             overflow: hidden;
         }
 
-        /* LINHA DE SCANNER QUE SOBE E DESCE */
         .injector-frame::after {
             content: "";
             position: absolute;
@@ -53,7 +52,7 @@
             background: var(--primary);
             box-shadow: 0 0 15px var(--primary);
             animation: scan 4s linear infinite;
-            opacity: 0.7;
+            opacity: 0.5;
             pointer-events: none;
         }
 
@@ -64,68 +63,53 @@
 
         .header {
             background: linear-gradient(180deg, #000 0%, #1a0000 100%);
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             border-bottom: 2px solid var(--primary);
         }
 
         .header h1 {
             margin: 0;
-            font-size: 28px;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px var(--primary);
-            font-weight: 900;
-        }
-
-        .sub-header {
-            font-size: 9px;
-            color: var(--accent);
-            letter-spacing: 2px;
-            margin-top: 5px;
-            text-transform: uppercase;
+            font-size: 24px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px var(--primary);
         }
 
         .status-strip {
             background: #000;
-            padding: 10px 15px;
+            padding: 8px 12px;
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
-            font-family: 'Consolas', monospace;
+            font-size: 10px;
+            font-family: monospace;
             border-bottom: 1px solid #222;
         }
-
-        .status-online { color: var(--accent); animation: blink 1.5s infinite; }
-        @keyframes blink { 50% { opacity: 0.3; } }
 
         /* TERMINAL DE LOGS */
         .terminal-box {
             background: #000;
-            height: 180px;
-            margin: 15px;
-            padding: 12px;
+            height: 120px;
+            margin: 10px;
+            padding: 10px;
             border-radius: 6px;
             border: 1px solid #333;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Courier New', monospace;
             font-size: 11px;
             color: var(--accent);
             overflow-y: auto;
-            line-height: 1.4;
-            box-shadow: inset 0 0 10px #00ff0022;
+            box-shadow: inset 0 0 10px #00ff0011;
         }
 
         /* LISTA DE FUNÇÕES */
         .functions-container {
-            padding: 0 15px 15px 15px;
-            flex-grow: 1;
+            padding: 10px;
             overflow-y: auto;
-            max-height: 350px;
         }
 
         .function-item {
             background: #111;
             border: 1px solid #222;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             margin-bottom: 8px;
             display: flex;
@@ -134,17 +118,13 @@
             transition: 0.3s;
         }
 
-        .function-item:hover {
-            border-color: var(--primary);
-            background: #1a0505;
-            transform: scale(1.01);
-        }
+        .function-item:hover { border-color: var(--primary); background: #1a0505; }
 
         .func-label b { display: block; font-size: 13px; color: #fff; }
         .func-label span { font-size: 9px; color: var(--primary); text-transform: uppercase; }
 
-        /* SWITCH TOGGLE CUSTOMIZADO */
-        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+        /* SWITCH TOGGLE */
+        .switch { position: relative; display: inline-block; width: 38px; height: 20px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
             position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
@@ -154,17 +134,8 @@
             position: absolute; content: ""; height: 14px; width: 14px;
             left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;
         }
-        input:checked + .slider { background-color: var(--primary); box-shadow: 0 0 10px var(--primary); }
-        input:checked + .slider:before { transform: translateX(20px); }
-
-        /* FOOTER E CREDENCIAIS */
-        .footer-info {
-            background: #000;
-            padding: 15px;
-            border-top: 2px solid var(--primary);
-            font-size: 11px;
-            text-align: center;
-        }
+        input:checked + .slider { background-color: var(--primary); box-shadow: 0 0 8px var(--primary); }
+        input:checked + .slider:before { transform: translateX(18px); }
 
         .btn-update {
             background: var(--primary);
@@ -175,186 +146,90 @@
             border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            transition: 0.3s;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-        }
-        .btn-update:hover { background: #ff3333; letter-spacing: 1px; }
-
-        .credenciais {
-            color: var(--text-dim);
-            background: #0a0a0a;
-            padding: 8px;
-            border: 1px solid #1a1a1a;
-            border-radius: 4px;
-        }
-
-        .bg-effect {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(255,0,0,0.08) 0%, rgba(0,0,0,1) 90%);
-            z-index: 1;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
-<div class="bg-effect"></div>
-
 <div class="injector-frame">
     <div class="header">
         <h1>VITORZIN SUPREMO</h1>
-        <div class="sub-header">ESTADO: INDETECTÁVEL | KERNEL V6.0</div>
+        <div style="font-size:9px; color:var(--accent)">KERNEL V6.0 | STEWARE PRO READY</div>
     </div>
 
     <div class="status-strip">
-        <span>SISTEMA: <span class="status-online">ATIVO</span></span>
-        <span>PING: 12ms</span>
-        <span>FPS: 144</span>
+        <span>SISTEMA: <span style="color:var(--accent)">ONLINE</span></span>
+        <span>USER: vitorzin</span>
     </div>
 
     <div class="terminal-box" id="term">
-        [SYS] Inicializando Kernel Engine...<br>
-        [SYS] Carregando ComboXereca.exe.exe... OK<br>
-        [SYS] Injetando Guna.UI2.dll... OK<br>
-        [SYS] Mapeando Memory.dll (Offsets atualizados)...<br>
-        [AUTH] Login 'vitorzin' confirmado.<br>
-        [READY] Painel 1000% funcional.
+        [SYS] Aguardando comando...<br>
+        [AUTH] vitorzin conectado.
     </div>
 
     <div class="functions-container">
         <div class="function-item">
-            <div class="func-label">
-                <b>MIRA LEVE (SMOOTH AIM)</b>
-                <span>Ajuste Dinâmico | Memory.dll</span>
-            </div>
+            <div class="func-label"><b>AUTO HEADSHOT</b><span>Aimlock Destrutivo</span></div>
             <label class="switch">
-                <input type="checkbox" onchange="runCmd('SMOOTH_AIM', this)">
+                <input type="checkbox" onchange="stec('AUTO_HS', this)">
                 <span class="slider"></span>
             </label>
         </div>
 
         <div class="function-item">
-            <div class="func-label">
-                <b>AUTO HEADSHOT</b>
-                <span>Source: Tralha Painel v6.0</span>
-            </div>
+            <div class="func-label"><b>MIRA LEVE</b><span>Smooth Aim Engine</span></div>
             <label class="switch">
-                <input type="checkbox" onchange="runCmd('AUTO_HS', this)">
+                <input type="checkbox" onchange="stec('SMOOTH', this)">
                 <span class="slider"></span>
             </label>
         </div>
 
         <div class="function-item">
-            <div class="func-label">
-                <b>REGEDIT EXTERNA</b>
-                <span>DPI Turbo & Latência Zero</span>
-            </div>
+            <div class="func-label"><b>ESP LINE & BOX</b><span>Renderização Directx</span></div>
             <label class="switch">
-                <input type="checkbox" onchange="runCmd('REGEDIT_MOD', this)">
+                <input type="checkbox" onchange="stec('ESP', this)">
                 <span class="slider"></span>
             </label>
         </div>
 
         <div class="function-item">
-            <div class="func-label">
-                <b>ESP LINE & BOX</b>
-                <span>Renderização via Guna.UI</span>
-            </div>
+            <div class="func-label"><b>TELEPORT KILL</b><span>Risco de Ban: Alto</span></div>
             <label class="switch">
-                <input type="checkbox" onchange="runCmd('ESP_RENDER', this)">
+                <input type="checkbox" onchange="stec('TELE', this)">
                 <span class="slider"></span>
             </label>
         </div>
-
-        <div class="function-item">
-            <div class="func-label">
-                <b>TELEPORT KILL</b>
-                <span>Aproximação 0.1ms (Risco)</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" onchange="runCmd('TELE_KILL', this)">
-                <span class="slider"></span>
-            </label>
-        </div>
-    </div>
-
-    <div class="footer-info">
-        <button class="btn-update" onclick="sincronizar()">SINCRONIZAR ARQUIVOS (TRIPLO POWER)</button>
-        <div class="credenciais">
-            USER: <b>vitorzin</b> | PASS: <b>vitorzin senha 1</b><br>
-            <span style="color:var(--accent)">RAR PASS: 1 | STATUS: 1000% FUNCIONAL</span>
-        </div>
+        
+        <button class="btn-update" onclick="sync()">SINCRONIZAR (vitorzin senha 1)</button>
     </div>
 </div>
 
 <script>
     const term = document.getElementById('term');
 
-    // Função para escrever no terminal com cores
     function writeTerminal(text, type = 'success') {
-        const time = new Date().toLocaleTimeString();
-        let color = "#00ff00"; // sucesso
-        if(type === 'error') color = "#ff0000";
-        if(type === 'process') color = "#ffff00";
-
-        term.innerHTML += `<br><span style="color:${color}">[${time}] ${text}</span>`;
+        const color = type === 'error' ? "#ff0000" : (type === 'process' ? "#ffff00" : "#00ff00");
+        term.innerHTML += `<br><span style="color:${color}">[${new Date().toLocaleTimeString()}] ${text}</span>`;
         term.scrollTop = term.scrollHeight;
     }
 
-    // Lógica de Sincronização (Melhoria de Arquivos)
-    function sincronizar() {
-        writeTerminal("Limpando cache de registros...", "process");
-        setTimeout(() => writeTerminal("Otimizando ComboXereca.exe.exe...", "process"), 600);
-        setTimeout(() => writeTerminal("Memory.dll: Injetando novos Offsets...", "process"), 1200);
-        setTimeout(() => writeTerminal("Guna.UI2.dll: Interface sincronizada!", "success"), 1800);
-        setTimeout(() => writeTerminal(">>> SISTEMA 1000% FUNCIONAL <<<", "success"), 2200);
+    // COMANDO PARA STEWARE PRO
+    function stec(func, el) {
+        const status = el.checked ? "1" : "0";
+        writeTerminal(`Protocolo ${func}: ${el.checked ? 'ATIVADO' : 'DESATIVADO'}`, el.checked ? 'process' : 'error');
+        
+        try {
+            // Tenta os métodos de integração do Stecware
+            window.external.OnClick(func, status);
+            window.chrome.webview.postMessage(func + ":" + status);
+        } catch(e) { console.log("Host não detectado"); }
     }
 
-    // Lógica de Execução de Comandos
-    function runCmd(cmd, element) {
-        if(element.checked) {
-            writeTerminal(`Iniciando protocolo ${cmd}...`, 'process');
-            
-            // Simulação de injeção técnica
-            setTimeout(() => {
-                writeTerminal(`Mapeando endereços de memória...`);
-            }, 500);
-
-            setTimeout(() => {
-                if(cmd === 'SMOOTH_AIM') {
-                    writeTerminal(`MIRA LEVE ATIVADA: Sensibilidade Suave aplicada!`, 'success');
-                } else {
-                    writeTerminal(`${cmd} ATIVADO E ESTABILIZADO!`, 'success');
-                }
-                // Muda a cor da borda para indicar atividade
-                element.parentElement.parentElement.style.borderColor = "var(--accent)";
-            }, 1200);
-        } else {
-            writeTerminal(`${cmd} DESATIVADO / CACHE LIMPO`, 'error');
-            element.parentElement.parentElement.style.borderColor = "#222";
-        }
+    function sync() {
+        writeTerminal("Sincronizando arquivos...", "process");
+        setTimeout(() => writeTerminal(">>> 1000% FUNCIONAL <<<", "success"), 1000);
     }
-
-    // Bypass Automático em Tempo Real (Loop)
-    setInterval(() => {
-        const logs = [
-            "Bypass Anti-cheat atualizado...",
-            "Limpando logs de report...",
-            "Proteção Vitorzin: STATUS OK",
-            "Verificando integridade da Memory.dll...",
-            "Injetando Dummy Data para camuflagem..."
-        ];
-        const randomLog = logs[Math.floor(Math.random() * logs.length)];
-        writeTerminal(randomLog, 'process');
-    }, 12000);
-
-    // Efeito de Inicialização
-    window.onload = () => {
-        writeTerminal("Conectando ao banco de dados VIP...", "process");
-        setTimeout(() => writeTerminal("Acesso Master concedido para VITORZIN."), 1000);
-    };
 </script>
 
 </body>
