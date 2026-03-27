@@ -2,279 +2,255 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZINW MODS | SUPREMACY DASHBOARD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff0000">
+    <title>VITORZINW SUPREMACY V2</title>
+    
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlZJVE9SWklOVyBWSVAgUEFJTkVMIiwKICAic2hvcnRfbmFtZSI6ICJWaXRvcmppblciLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjZmYwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsaXRpY29uLmNvbS81MTIvNzM0My83MzQzMjc3LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+
     <style>
-        /* DESIGN GRANDE E ELITE - ESTILO DARK/NEON */
-        :root {
-            --primary: #ff0000;
-            --secondary: #00ff00;
-            --bg: #050505;
-            --card: #0f0f0f;
-            --glow: rgba(255, 0, 0, 0.4);
-        }
+        :root { --primary: #ff0000; --secondary: #00ff00; --bg: #000; --card: #0a0a0a; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Consolas', monospace; }
-
-        body {
-            background-color: var(--bg);
-            background-image: radial-gradient(circle at center, #111 0%, #050505 100%);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
         }
 
-        .main-container {
-            width: 95%;
-            max-width: 500px;
-            background: var(--card);
-            border: 2px solid var(--primary);
-            border-radius: 20px;
-            box-shadow: 0 0 40px var(--glow);
-            padding: 20px;
-            position: relative;
+        /* FUNDO ANIMADO GIGANTE */
+        #matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.15; }
+
+        /* HEADER GIGANTE */
+        header {
+            background: linear-gradient(to bottom, #111, transparent);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 5px 20px rgba(255,0,0,0.3);
         }
 
-        /* CABEÇALHO */
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #222;
-            padding-bottom: 15px;
+        header h1 { 
+            font-size: 32px; 
+            letter-spacing: 8px; 
+            text-shadow: 0 0 20px var(--primary);
+            color: var(--primary);
+        }
+
+        header p { font-size: 10px; color: #666; margin-top: 5px; }
+
+        /* CONTAINER PRINCIPAL */
+        .content { flex: 1; padding: 20px; max-width: 600px; margin: 0 auto; width: 100%; }
+
+        /* BANNER DE INSTALAÇÃO (IGUAL DA PRINT) */
+        #install-banner {
+            background: #111;
+            border: 1px dashed var(--primary);
+            padding: 15px;
+            border-radius: 10px;
             margin-bottom: 20px;
-        }
-
-        .header h1 {
-            font-size: 28px;
-            letter-spacing: 5px;
-            color: var(--primary);
-            text-shadow: 0 0 15px var(--primary);
-        }
-
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            font-size: 10px;
-            margin-top: 10px;
-            color: #888;
-        }
-
-        /* CATEGORIAS */
-        .category-label {
-            font-size: 12px;
-            color: var(--primary);
-            text-transform: uppercase;
-            margin: 15px 0 10px 5px;
-            font-weight: bold;
-        }
-
-        /* BOTÕES GIGANTES */
-        .grid-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .btn-mod {
-            background: #151515;
-            border: 1px solid #333;
-            color: #eee;
-            padding: 15px 10px;
-            border-radius: 10px;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .btn-mod:hover {
-            border-color: var(--primary);
-            background: #200000;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px var(--glow);
-        }
-
-        .btn-mod.active {
-            border-color: var(--secondary);
-            color: var(--secondary);
-        }
-
-        /* CONSOLE DE INJEÇÃO (MUITO GRANDE) */
-        .console-box {
-            background: #000;
-            border: 1px solid #222;
-            border-radius: 10px;
-            margin-top: 20px;
-            height: 150px;
-            padding: 10px;
-            font-size: 9px;
-            overflow-y: auto;
-            color: #00ff00;
-            line-height: 1.4;
-        }
-
-        /* BARRA DE INSTALAÇÃO */
-        .install-section {
-            margin-top: 20px;
+            display: none;
             text-align: center;
         }
 
-        #progress-container {
-            width: 100%;
-            height: 6px;
-            background: #222;
-            border-radius: 10px;
-            margin: 15px 0;
-            display: none;
-        }
-
-        #progress-bar {
-            width: 0%;
-            height: 100%;
-            background: var(--primary);
-            box-shadow: 0 0 10px var(--primary);
-            border-radius: 10px;
-        }
-
-        .btn-install {
-            width: 100%;
+        .btn-install-app {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 18px;
-            border-radius: 12px;
+            padding: 12px 25px;
+            border-radius: 5px;
             font-weight: bold;
-            font-size: 16px;
+            margin-top: 10px;
             cursor: pointer;
-            box-shadow: 0 0 20px var(--glow);
+            box-shadow: 0 0 15px var(--primary);
         }
 
-        .btn-install:disabled {
-            background: #444;
-            box-shadow: none;
-            cursor: not-allowed;
+        /* GRID DE MODS (MUITO MAIS OPÇÕES) */
+        .section-title { color: var(--primary); font-size: 14px; margin: 20px 0 10px; text-transform: uppercase; font-weight: bold; border-left: 3px solid var(--primary); padding-left: 10px; }
+        
+        .mod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .mod-card {
+            background: var(--card);
+            border: 1px solid #222;
+            padding: 20px 10px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
         }
 
-        /* EFEITO DE SCANNER */
-        .scanner {
+        .mod-card.active { border-color: var(--secondary); box-shadow: 0 0 15px rgba(0,255,0,0.2); color: var(--secondary); }
+        .mod-card i { font-size: 24px; display: block; margin-bottom: 8px; }
+        .mod-card span { font-size: 12px; font-weight: 600; }
+        .mod-card small { display: block; font-size: 8px; color: #555; margin-top: 4px; }
+
+        /* CONSOLE DE LOGS GIGANTE */
+        .console {
+            background: #000;
+            border: 1px solid #111;
+            border-radius: 10px;
+            height: 180px;
+            margin-top: 30px;
+            padding: 15px;
+            font-family: 'Consolas', monospace;
+            font-size: 10px;
+            color: var(--secondary);
+            overflow-y: auto;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        /* BOTÃO DE INJETAR */
+        .footer-action { padding: 30px 20px; background: #000; }
+        .btn-inject {
             width: 100%;
-            height: 2px;
+            padding: 22px;
             background: var(--primary);
-            position: absolute;
-            left: 0;
-            top: 0;
-            animation: scan 3s infinite linear;
-            opacity: 0.3;
-            pointer-events: none;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(255,0,0,0.5);
+            cursor: pointer;
         }
 
-        @keyframes scan {
-            0% { top: 0%; }
-            100% { top: 100%; }
-        }
+        .btn-inject:active { transform: scale(0.95); }
+
+        /* PROGRESSO */
+        .progress-box { display: none; margin-top: 15px; }
+        .bar-bg { width: 100%; height: 8px; background: #111; border-radius: 10px; overflow: hidden; }
+        .bar-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 15px var(--primary); transition: 0.1s; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <div class="scanner"></div>
-    
-    <div class="header">
-        <h1>VITORZINW VIP</h1>
-        <div class="status-bar">
-            <span>DEVICE: MOTO G56 5G</span>
-            <span id="ping">PING: 14ms</span>
-            <span style="color:var(--secondary)">BYPASS: ON</span>
+    <canvas id="matrix-bg"></canvas>
+
+    <header>
+        <h1>VITORZINW FF</h1>
+        <p>REEDIT SUPREMACY • MOTO G56 OPTIMIZED</p>
+    </header>
+
+    <div class="content">
+        <div id="install-banner">
+            <p>PAINEL NÃO INSTALADO!</p>
+            <button class="btn-install-app" id="btn-install">INSTALAR NA TELA INICIAL</button>
+        </div>
+
+        <div class="section-title">Ajustes de Combate</div>
+        <div class="mod-grid">
+            <div class="mod-card" onclick="toggleMod(this, 'AimLock 100%')">🎯<span>AIMLOCK HS</span><small>weapontable.nb</small></div>
+            <div class="mod-card" onclick="toggleMod(this, 'No Recoil')">🔫<span>NO RECOIL</span><small>assetindexer.dat</small></div>
+            <div class="mod-card" onclick="toggleMod(this, 'Aim Tracking')">🛰️<span>TRACK MIRA</span><small>RyanX.file</small></div>
+            <div class="mod-card" onclick="toggleMod(this, 'Aumentar Sensi')">⚡<span>SENSI ELITE</span><small>touch_speed.log</small></div>
+        </div>
+
+        <div class="section-title">Proteção & Ghost</div>
+        <div class="mod-grid">
+            <div class="mod-card" onclick="toggleMod(this, 'Bypass Antiban')">🛡️<span>ANTI-BAN V8</span><small>antibanned.config</small></div>
+            <div class="mod-card" onclick="toggleMod(this, 'Limpar Logs')">🧹<span>CLEAN CACHE</span><small>report.log</small></div>
+        </div>
+
+        <div class="console" id="log-box">
+            [SYSTEM] VITORZINW ONLINE...<br>
+            [INFO] Device: Motorola Moto G56 5G detected.<br>
+            [READY] Aguardando comando de injeção...
+        </div>
+
+        <div class="progress-box" id="p-box">
+            <div style="font-size: 10px; margin-bottom: 5px;" id="p-status">Injetando...</div>
+            <div class="bar-bg"><div class="bar-fill" id="p-bar"></div></div>
         </div>
     </div>
 
-    <div class="category-label">Auxílios de Mira (Aimlock)</div>
-    <div class="grid-options">
-        <button class="btn-mod" onclick="toggleMod(this, 'Aim Headshot')">🎯 HEADSHOT 100%<br><small>UnityFS CAB-95c</small></button>
-        <button class="btn-mod" onclick="toggleMod(this, 'No Recoil')">🔫 NO RECOIL<br><small>Weapontable</small></button>
-        <button class="btn-mod" onclick="toggleMod(this, 'AimLock')">🔒 AIM LOCK<br><small>Skins Property</small></button>
-        <button class="btn-mod" onclick="toggleMod(this, 'Track Mira')">🛰️ MIRA TRACK<br><small>AssetIndexer</small></button>
+    <div class="footer-action">
+        <button class="btn-inject" onclick="iniciarInjecao()">INJETAR AGORA</button>
     </div>
 
-    <div class="category-label">Segurança & Sistema</div>
-    <div class="grid-options">
-        <button class="btn-mod" onclick="toggleMod(this, 'Anti-Ban')">🛡️ ANTI-BAN V6<br><small>RyanX.dat</small></button>
-        <button class="btn-mod" onclick="toggleMod(this, 'Limpar Logs')">🧹 LIMPAR LOGS<br><small>Config Auto</small></button>
-    </div>
+    <script>
+        // LÓGICA DE INSTALAÇÃO (PWA)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('install-banner').style.display = 'block';
+        });
 
-    <div class="console-box" id="console">
-        [SYSTEM] Aguardando seleção de módulos...<br>
-        [INFO] Versão 1000% Completa Carregada.<br>
-    </div>
-
-    <div class="install-section">
-        <div id="progress-container">
-            <div id="progress-bar"></div>
-        </div>
-        <button class="btn-install" id="main-btn" onclick="instalarTudo()">INSTALAR MODS AGORA</button>
-    </div>
-</div>
-
-<script>
-    const arquivos = [
-        "RyanX.dat", "antibanned.config", "weapontable.rTiCsnwDhogXLYLBnDzvZrhw5Ms=", 
-        "weaponskin_property.e5MYGDudQ1Lvuuo8ZpIh8va49Hs=", "assetindexer.dTUSJEQWyZdReXUZnuO5HIjZxBA=",
-        "resconf.WBNOBPOll8Av579NGIo8yAgpoM8="
-    ];
-
-    function toggleMod(btn, name) {
-        btn.classList.toggle('active');
-        addLog(`Módulo [${name}] selecionado.`);
-    }
-
-    function addLog(msg) {
-        const console = document.getElementById('console');
-        console.innerHTML += `> ${msg}<br>`;
-        console.scrollTop = console.scrollHeight;
-    }
-
-    function instalarTudo() {
-        const btn = document.getElementById('main-btn');
-        const pCont = document.getElementById('progress-container');
-        const pBar = document.getElementById('progress-bar');
-        
-        btn.disabled = true;
-        btn.innerHTML = "INSTALANDO...";
-        pCont.style.display = "block";
-
-        let prog = 0;
-        let fileIdx = 0;
-
-        const timer = setInterval(() => {
-            prog += Math.random() * 3;
-            pBar.style.width = prog + "%";
-
-            if(prog % 15 < 2 && fileIdx < arquivos.length) {
-                addLog(`Instalando: ${arquivos[fileIdx]}...`);
-                fileIdx++;
+        document.getElementById('btn-install').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') document.getElementById('install-banner').style.display = 'none';
+                deferredPrompt = null;
             }
+        });
 
-            if(prog >= 100) {
-                clearInterval(timer);
-                addLog("<span style='color:var(--secondary)'>SUCESSO: Todos os arquivos injetados!</span>");
-                addLog("Reinicie o Free Fire para aplicar.");
-                btn.innerHTML = "INSTALADO COM SUCESSO";
-                btn.style.background = "var(--secondary)";
-            }
-        }, 80);
-    }
+        // LÓGICA DO PAINEL
+        function toggleMod(el, name) {
+            el.classList.toggle('active');
+            addLog(`Módulo selecionado: ${name}`);
+        }
 
-    // Efeito de Ping Real
-    setInterval(() => {
-        const p = Math.floor(Math.random() * 20) + 10;
-        document.getElementById('ping').innerHTML = `PING: ${p}ms`;
-    }, 2000);
-</script>
+        function addLog(msg) {
+            const box = document.getElementById('log-box');
+            box.innerHTML += `<br>> ${msg}`;
+            box.scrollTop = box.scrollHeight;
+        }
 
+        const arquivos = ["RyanX.dat", "weapontable.bin", "antibanned.cfg", "assetindexer.bundle", "res_config.nb"];
+
+        function iniciarInjecao() {
+            document.getElementById('p-box').style.display = 'block';
+            let prog = 0;
+            let fileIdx = 0;
+            
+            const int = setInterval(() => {
+                prog += Math.random() * 4;
+                document.getElementById('p-bar').style.width = prog + "%";
+                
+                if(prog % 20 < 2 && fileIdx < arquivos.length) {
+                    addLog(`Instalando: ${arquivos[fileIdx]}...`);
+                    fileIdx++;
+                }
+
+                if(prog >= 100) {
+                    clearInterval(int);
+                    addLog("<span style='color:var(--secondary)'>✅ SUCESSO: REEDIT APLICADA!</span>");
+                    alert("INSTALAÇÃO CONCLUÍDA NO MOTO G56!");
+                }
+            }, 100);
+        }
+
+        // MATRIX BACKGROUND
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const letters = "VITORZINWFF0101";
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#ff0000";
+            ctx.font = fontSize + "px arial";
+            drops.forEach((y, i) => {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        setInterval(drawMatrix, 50);
+    </script>
 </body>
 </html>
