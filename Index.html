@@ -2,127 +2,279 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#00a8ff">
-    <title>JORDANX V4 | APK</title>
-    
-    <link rel="manifest" href="data:application/manifest+json,{'name':'JordanX V4','short_name':'JordanX','display':'standalone','start_url':'/','background_color':'#000000','theme_color':'#00a8ff'}">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITORZINW MODS | SUPREMACY DASHBOARD</title>
     <style>
-        :root { --blue: #00a8ff; --dark: #010101; --card: #0d0d0f; --green: #00ff41; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--dark); color: #fff; overflow-x: hidden; user-select: none; }
-
-        header { 
-            background: #000; padding: 25px; border-bottom: 2px solid var(--blue);
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 168, 255, 0.4);
-        }
-        .logo { font-weight: 900; font-size: 24px; letter-spacing: 3px; }
-        .logo span { color: var(--blue); text-shadow: 0 0 10px var(--blue); }
-
-        .panel { padding: 20px; max-width: 550px; margin: auto; }
-        .category-label { font-size: 11px; color: #444; text-transform: uppercase; margin: 15px 0 10px 5px; letter-spacing: 1px; }
-
-        .module {
-            background: var(--card); border: 1px solid #1a1a1e; padding: 22px;
-            border-radius: 16px; margin-bottom: 15px; display: flex;
-            justify-content: space-between; align-items: center;
-            transition: 0.3s;
-        }
-        .module:active { background: #121215; }
-        .info h3 { font-size: 15px; color: #fff; }
-        .info p { font-size: 11px; color: var(--blue); margin-top: 6px; font-weight: 700; text-transform: uppercase; }
-
-        .switch { position: relative; width: 50px; height: 26px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #222; transition: .4s; border-radius: 34px; border: 1px solid #333; }
-        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 2px; background: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background: var(--blue); box-shadow: 0 0 15px var(--blue); border-color: var(--blue); }
-        input:checked + .slider:before { transform: translateX(23px); }
-
-        #console {
-            background: #000; height: 350px; padding: 18px; border: 1px solid #1a1a1e;
-            border-radius: 12px; font-family: 'Courier New', monospace; font-size: 11px;
-            overflow-y: auto; color: var(--green); margin: 25px 0;
-            line-height: 1.7; box-shadow: inset 0 0 30px rgba(0, 255, 65, 0.05);
+        /* DESIGN GRANDE E ELITE - ESTILO DARK/NEON */
+        :root {
+            --primary: #ff0000;
+            --secondary: #00ff00;
+            --bg: #050505;
+            --card: #0f0f0f;
+            --glow: rgba(255, 0, 0, 0.4);
         }
 
-        .progress-wrap { width: 100%; background: #111; height: 10px; border-radius: 20px; margin-bottom: 25px; display: none; overflow: hidden; border: 1px solid #222; }
-        .progress-fill { width: 0%; height: 100%; background: var(--blue); transition: 0.1s; box-shadow: 0 0 15px var(--blue); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Consolas', monospace; }
 
-        .btn-inject {
-            background: var(--blue); color: #000; width: 100%; padding: 24px;
-            border: none; border-radius: 18px; font-weight: 900; font-size: 18px;
-            text-transform: uppercase; cursor: pointer; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.3);
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at center, #111 0%, #050505 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            width: 95%;
+            max-width: 500px;
+            background: var(--card);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            box-shadow: 0 0 40px var(--glow);
+            padding: 20px;
+            position: relative;
+        }
+
+        /* CABEÇALHO */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #222;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            letter-spacing: 5px;
+            color: var(--primary);
+            text-shadow: 0 0 15px var(--primary);
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            margin-top: 10px;
+            color: #888;
+        }
+
+        /* CATEGORIAS */
+        .category-label {
+            font-size: 12px;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin: 15px 0 10px 5px;
+            font-weight: bold;
+        }
+
+        /* BOTÕES GIGANTES */
+        .grid-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-mod {
+            background: #151515;
+            border: 1px solid #333;
+            color: #eee;
+            padding: 15px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-mod:hover {
+            border-color: var(--primary);
+            background: #200000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--glow);
+        }
+
+        .btn-mod.active {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        /* CONSOLE DE INJEÇÃO (MUITO GRANDE) */
+        .console-box {
+            background: #000;
+            border: 1px solid #222;
+            border-radius: 10px;
+            margin-top: 20px;
+            height: 150px;
+            padding: 10px;
+            font-size: 9px;
+            overflow-y: auto;
+            color: #00ff00;
+            line-height: 1.4;
+        }
+
+        /* BARRA DE INSTALAÇÃO */
+        .install-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #progress-container {
+            width: 100%;
+            height: 6px;
+            background: #222;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+            border-radius: 10px;
+        }
+
+        .btn-install {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .btn-install:disabled {
+            background: #444;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        /* EFEITO DE SCANNER */
+        .scanner {
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: scan 3s infinite linear;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">JORDANX <span>V4.0</span></div>
-    <div style="font-size: 11px; color: var(--green); font-weight: 900;">STATUS: 453L ACTIVE</div>
-</header>
-
-<div class="panel">
-    <div class="category-label">Aimbot & Combat (Funcional)</div>
-    <div class="module"><div class="info"><h3>AIMBOT HEAD VIP</h3><p>Inject: Headshotrick.xml</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-    <div class="module"><div class="info"><h3>NO RECOIL EXTREME</h3><p>Patch: Norecoilking11.so</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-
-    <div class="category-label">System & Scripts</div>
-    <div class="module"><div class="info"><h3>SENSI MOTO G56 5G</h3><p>Apply: Sensitivity.so</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-    <div class="module"><div class="info"><h3>10.000 AUXÍLIOS REG</h3><p>Load: 453 Lines Process</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-
-    <div id="console">
-        <div>[SYSTEM] JordanX Engine v4.0 Online...</div>
-        <div>[AUTH] Welcome, Vitorzinw</div>
-        <div>[INFO] Ready for functional injection.</div>
+<div class="main-container">
+    <div class="scanner"></div>
+    
+    <div class="header">
+        <h1>VITORZINW VIP</h1>
+        <div class="status-bar">
+            <span>DEVICE: MOTO G56 5G</span>
+            <span id="ping">PING: 14ms</span>
+            <span style="color:var(--secondary)">BYPASS: ON</span>
+        </div>
     </div>
 
-    <div class="progress-wrap" id="p-wrap"><div class="progress-fill" id="p-fill"></div></div>
+    <div class="category-label">Auxílios de Mira (Aimlock)</div>
+    <div class="grid-options">
+        <button class="btn-mod" onclick="toggleMod(this, 'Aim Headshot')">🎯 HEADSHOT 100%<br><small>UnityFS CAB-95c</small></button>
+        <button class="btn-mod" onclick="toggleMod(this, 'No Recoil')">🔫 NO RECOIL<br><small>Weapontable</small></button>
+        <button class="btn-mod" onclick="toggleMod(this, 'AimLock')">🔒 AIM LOCK<br><small>Skins Property</small></button>
+        <button class="btn-mod" onclick="toggleMod(this, 'Track Mira')">🛰️ MIRA TRACK<br><small>AssetIndexer</small></button>
+    </div>
 
-    <button class="btn-inject" id="main-btn">Injetar Tudo Agora</button>
+    <div class="category-label">Segurança & Sistema</div>
+    <div class="grid-options">
+        <button class="btn-mod" onclick="toggleMod(this, 'Anti-Ban')">🛡️ ANTI-BAN V6<br><small>RyanX.dat</small></button>
+        <button class="btn-mod" onclick="toggleMod(this, 'Limpar Logs')">🧹 LIMPAR LOGS<br><small>Config Auto</small></button>
+    </div>
+
+    <div class="console-box" id="console">
+        [SYSTEM] Aguardando seleção de módulos...<br>
+        [INFO] Versão 1000% Completa Carregada.<br>
+    </div>
+
+    <div class="install-section">
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <button class="btn-install" id="main-btn" onclick="instalarTudo()">INSTALAR MODS AGORA</button>
+    </div>
 </div>
 
 <script>
-    const terminal = document.getElementById('console');
-    const btn = document.getElementById('main-btn');
-    const pFill = document.getElementById('p-fill');
-    const pWrap = document.getElementById('p-wrap');
+    const arquivos = [
+        "RyanX.dat", "antibanned.config", "weapontable.rTiCsnwDhogXLYLBnDzvZrhw5Ms=", 
+        "weaponskin_property.e5MYGDudQ1Lvuuo8ZpIh8va49Hs=", "assetindexer.dTUSJEQWyZdReXUZnuO5HIjZxBA=",
+        "resconf.WBNOBPOll8Av579NGIo8yAgpoM8="
+    ];
 
-    function write(text, color = 'var(--green)') {
-        const line = document.createElement('div');
-        line.style.color = color;
-        line.innerText = `[${new Date().toLocaleTimeString()}] > ${text}`;
-        terminal.appendChild(line);
-        terminal.scrollTop = terminal.scrollHeight;
+    function toggleMod(btn, name) {
+        btn.classList.toggle('active');
+        addLog(`Módulo [${name}] selecionado.`);
     }
 
-    btn.onclick = async () => {
-        btn.disabled = true;
-        pWrap.style.display = 'block';
-        write("Iniciando injeção master funcional...", "#00a8ff");
+    function addLog(msg) {
+        const console = document.getElementById('console');
+        console.innerHTML += `> ${msg}<br>`;
+        console.scrollTop = console.scrollHeight;
+    }
+
+    function instalarTudo() {
+        const btn = document.getElementById('main-btn');
+        const pCont = document.getElementById('progress-container');
+        const pBar = document.getElementById('progress-bar');
         
-        // --- MOTOR DE 453 LINHAS DE COMANDO ---
-        for(let i = 1; i <= 453; i++) {
-            if(i % 25 === 0 || i === 453) {
-                write(`Executando comando de auxílio: ${i}/453...`, "#ffcc00");
-                pFill.style.width = (i / 453 * 100) + "%";
-                await new Promise(r => setTimeout(r, 40));
+        btn.disabled = true;
+        btn.innerHTML = "INSTALANDO...";
+        pCont.style.display = "block";
+
+        let prog = 0;
+        let fileIdx = 0;
+
+        const timer = setInterval(() => {
+            prog += Math.random() * 3;
+            pBar.style.width = prog + "%";
+
+            if(prog % 15 < 2 && fileIdx < arquivos.length) {
+                addLog(`Instalando: ${arquivos[fileIdx]}...`);
+                fileIdx++;
             }
-            if(i === 100) write("Injetando: Headshotrick.xml (zzzinnz active)", "white");
-            if(i === 250) write("Aplicando: Norecoilking11.so buffer", "white");
-            if(i === 400) write("Finalizando: 10.000 auxílios técnicos", "var(--blue)");
-        }
 
-        write(">>> TUDO FUNCIONAL: JORDANX V4 ATIVO <<<", "var(--green)");
-        btn.innerText = "SISTEMA INJETADO";
-        btn.style.background = "var(--green)";
-    };
+            if(prog >= 100) {
+                clearInterval(timer);
+                addLog("<span style='color:var(--secondary)'>SUCESSO: Todos os arquivos injetados!</span>");
+                addLog("Reinicie o Free Fire para aplicar.");
+                btn.innerHTML = "INSTALADO COM SUCESSO";
+                btn.style.background = "var(--secondary)";
+            }
+        }, 80);
+    }
 
-    window.onload = () => { write("Aguardando comando de ativação..."); };
+    // Efeito de Ping Real
+    setInterval(() => {
+        const p = Math.floor(Math.random() * 20) + 10;
+        document.getElementById('ping').innerHTML = `PING: ${p}ms`;
+    }, 2000);
 </script>
+
 </body>
 </html>
