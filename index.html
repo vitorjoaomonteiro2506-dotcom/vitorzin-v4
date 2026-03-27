@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#ff0000">
-    <title>VITORZINW SUPREMACY V2</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>VITORZINW SUPREMACY GIGANTE</title>
     
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlZJVE9SWklOVyBWSVAgUEFJTkVMIiwKICAic2hvcnRfbmFtZSI6ICJWaXRvcmppblciLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjZmYwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsaXRpY29uLmNvbS81MTIvNzM0My83MzQzMjc3LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlZJVE9SWklOVyBWSVAgUEFJTkVMIiwKICAic2hvcnRfbmFtZSI6ICJWaXRvcmppblciLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjZmYwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJsrcIjogImh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGl0aWNvbi5jb20vNTEyLzczNDMvNzM0MzI3Ny5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
 
     <style>
-        :root { --primary: #ff0000; --secondary: #00ff00; --bg: #000; --card: #0a0a0a; }
+        :root { --primary: #ff0000; --secondary: #00ff00; --bg: #000; --card: #0a0a0a; --neon: 0 0 15px var(--primary); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
@@ -23,179 +25,198 @@
             overflow-x: hidden;
         }
 
-        /* FUNDO ANIMADO GIGANTE */
-        #matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.15; }
+        /* FUNDO MATRIX VERMELHO */
+        #matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; opacity: 0.2; }
 
         /* HEADER GIGANTE */
         header {
             background: linear-gradient(to bottom, #111, transparent);
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
-            border-bottom: 2px solid var(--primary);
-            box-shadow: 0 5px 20px rgba(255,0,0,0.3);
+            border-bottom: 3px solid var(--primary);
+            box-shadow: 0 5px 30px rgba(255,0,0,0.5);
+            margin-bottom: 20px;
         }
 
         header h1 { 
-            font-size: 32px; 
-            letter-spacing: 8px; 
-            text-shadow: 0 0 20px var(--primary);
+            font-size: 38px; 
+            letter-spacing: 10px; 
+            text-shadow: 0 0 25px var(--primary);
             color: var(--primary);
+            font-weight: 900;
         }
 
-        header p { font-size: 10px; color: #666; margin-top: 5px; }
+        header p { font-size: 10px; color: #666; margin-top: 8px; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* CONTAINER PRINCIPAL */
-        .content { flex: 1; padding: 20px; max-width: 600px; margin: 0 auto; width: 100%; }
-
-        /* BANNER DE INSTALAÇÃO (IGUAL DA PRINT) */
-        #install-banner {
-            background: #111;
-            border: 1px dashed var(--primary);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        /* BANNER DE INSTALAÇÃO (VISUAL GIGANTE) */
+        #install-section {
             display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: #111;
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 20px;
             text-align: center;
+            z-index: 100;
+            box-shadow: 0 0 40px var(--primary);
         }
 
-        .btn-install-app {
+        .btn-install-giant {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 10px;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 16px;
+            margin-top: 15px;
             cursor: pointer;
             box-shadow: 0 0 15px var(--primary);
+            animation: pulse 1.5s infinite;
         }
 
-        /* GRID DE MODS (MUITO MAIS OPÇÕES) */
-        .section-title { color: var(--primary); font-size: 14px; margin: 20px 0 10px; text-transform: uppercase; font-weight: bold; border-left: 3px solid var(--primary); padding-left: 10px; }
+        /* CONTAINER PRINCIPAL GIGANTE */
+        .main-content { flex: 1; padding: 10px; }
+        .section-title { color: var(--primary); font-size: 16px; margin: 25px 0 12px; text-transform: uppercase; font-weight: bold; border-left: 4px solid var(--primary); padding-left: 12px; }
         
-        .mod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .mod-container { display: flex; flex-direction: column; gap: 12px; }
 
+        /* CARDS GIGANTES */
         .mod-card {
             background: var(--card);
             border: 1px solid #222;
-            padding: 20px 10px;
-            border-radius: 15px;
-            text-align: center;
+            padding: 25px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             transition: 0.3s;
             cursor: pointer;
         }
 
-        .mod-card.active { border-color: var(--secondary); box-shadow: 0 0 15px rgba(0,255,0,0.2); color: var(--secondary); }
-        .mod-card i { font-size: 24px; display: block; margin-bottom: 8px; }
-        .mod-card span { font-size: 12px; font-weight: 600; }
-        .mod-card small { display: block; font-size: 8px; color: #555; margin-top: 4px; }
+        .mod-card.active { border-color: var(--secondary); box-shadow: 0 0 20px rgba(0,255,0,0.3); }
+        .mod-info { text-align: left; }
+        .mod-name { font-size: 14px; font-weight: 700; color: white; display: block; }
+        .mod-file { font-size: 8px; color: #555; }
+        .status-dot { width: 15px; height: 15px; background: #222; border-radius: 50%; }
+        .mod-card.active .status-dot { background: var(--secondary); box-shadow: 0 0 10px var(--secondary); }
 
-        /* CONSOLE DE LOGS GIGANTE */
-        .console {
+        /* CONSOLE INFINITO GIGANTE */
+        .console-box {
             background: #000;
-            border: 1px solid #111;
-            border-radius: 10px;
-            height: 180px;
-            margin-top: 30px;
-            padding: 15px;
+            border: 2px solid #111;
+            border-radius: 15px;
+            height: 250px;
+            margin: 40px 10px;
+            padding: 20px;
             font-family: 'Consolas', monospace;
             font-size: 10px;
             color: var(--secondary);
             overflow-y: auto;
-            border-bottom: 3px solid var(--primary);
+            border-bottom: 4px solid var(--primary);
         }
 
-        /* BOTÃO DE INJETAR */
-        .footer-action { padding: 30px 20px; background: #000; }
-        .btn-inject {
+        /* BOTÃO DE INJETAR GIGANTE */
+        .btn-inject-giant {
             width: 100%;
-            padding: 22px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            padding: 30px;
             background: var(--primary);
             color: white;
             border: none;
-            border-radius: 15px;
-            font-size: 20px;
+            border-top: 2px solid white;
+            font-size: 24px;
             font-weight: 900;
             text-transform: uppercase;
-            box-shadow: 0 10px 30px rgba(255,0,0,0.5);
+            box-shadow: 0 -10px 40px rgba(255,0,0,0.6);
             cursor: pointer;
+            z-index: 10;
         }
 
-        .btn-inject:active { transform: scale(0.95); }
+        .btn-inject-giant:active { transform: scale(0.98); }
 
         /* PROGRESSO */
-        .progress-box { display: none; margin-top: 15px; }
-        .bar-bg { width: 100%; height: 8px; background: #111; border-radius: 10px; overflow: hidden; }
-        .bar-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 15px var(--primary); transition: 0.1s; }
+        .p-box { display: none; margin: 15px; }
+        .bar-bg { width: 100%; height: 12px; background: #111; border-radius: 10px; overflow: hidden; }
+        .bar-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 20px var(--primary); }
+
+        @keyframes pulse { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
     </style>
 </head>
 <body>
 
     <canvas id="matrix-bg"></canvas>
 
+    <div id="install-section">
+        <p style="font-size: 14px; font-weight: bold; color: var(--primary);">PAINEL NÃO INSTALADO!</p>
+        <p style="font-size: 11px; margin-top: 5px;">Abra as opções do Chrome e clique em 'Instalar aplicativo'.</p>
+        <button class="btn-install-giant" id="btn-show-install">MOSTRAR AJUDA DE INSTALAÇÃO</button>
+    </div>
+
     <header>
-        <h1>VITORZINW FF</h1>
-        <p>REEDIT SUPREMACY • MOTO G56 OPTIMIZED</p>
+        <h1>VITORZINW SUPREMACY</h1>
+        <p>REEDIT GIGANTE OPTIMIZED</p>
     </header>
 
-    <div class="content">
-        <div id="install-banner">
-            <p>PAINEL NÃO INSTALADO!</p>
-            <button class="btn-install-app" id="btn-install">INSTALAR NA TELA INICIAL</button>
+    <div class="main-content">
+        
+        <div class="section-title">Ajustes GIGANTES (Combate)</div>
+        <div class="mod-container">
+            <div class="mod-card" onclick="toggleGiantMod(this, 'AimLock Gigante')"><div class="mod-info"><span class="mod-name">🎯 AIMLOCK HEADSHOT (RyanX.nb)</span><small class="mod-file">UnityCAB-95c043</small></div><div class="status-dot"></div></div>
+            <div class="mod-card" onclick="toggleGiantMod(this, 'No Recoil Giga')"><div class="mod-info"><span class="mod-name">🔫 NO RECOIL FULL (assetindexer.nb)</span><small class="mod-file">config.dat.pwa</small></div><div class="status-dot"></div></div>
+            <div class="mod-card" onclick="toggleGiantMod(this, 'Aim Track')"><div class="mod-info"><span class="mod-name">🛰️ AIM TRACKING (RyanX.dat)</span><small class="mod-file">weapontable.nb</small></div><div class="status-dot"></div></div>
+            <div class="mod-card" onclick="toggleGiantMod(this, 'Sensi Elite')"><div class="mod-info"><span class="mod-name">⚡ SUPER SENSIBILIDADE</span><small class="mod-file">touch_scale.log</small></div><div class="status-dot"></div></div>
         </div>
 
-        <div class="section-title">Ajustes de Combate</div>
-        <div class="mod-grid">
-            <div class="mod-card" onclick="toggleMod(this, 'AimLock 100%')">🎯<span>AIMLOCK HS</span><small>weapontable.nb</small></div>
-            <div class="mod-card" onclick="toggleMod(this, 'No Recoil')">🔫<span>NO RECOIL</span><small>assetindexer.dat</small></div>
-            <div class="mod-card" onclick="toggleMod(this, 'Aim Tracking')">🛰️<span>TRACK MIRA</span><small>RyanX.file</small></div>
-            <div class="mod-card" onclick="toggleMod(this, 'Aumentar Sensi')">⚡<span>SENSI ELITE</span><small>touch_speed.log</small></div>
+        <div class="section-title">Ghost & Proteção</div>
+        <div class="mod-container">
+            <div class="mod-card" onclick="toggleGiantMod(this, 'AntiBan Full')"><div class="mod-info"><span class="mod-name">🛡️ BYPASS ANTIBAN V8</span><small class="mod-file">antibanned.config</small></div><div class="status-dot"></div></div>
+            <div class="mod-card" onclick="toggleGiantMod(this, 'Limpar Logs')"><div class="mod-info"><span class="mod-name">🧹 CLEAN REPORT LOGS</span><small class="mod-file">report.log</small></div><div class="status-dot"></div></div>
         </div>
 
-        <div class="section-title">Proteção & Ghost</div>
-        <div class="mod-grid">
-            <div class="mod-card" onclick="toggleMod(this, 'Bypass Antiban')">🛡️<span>ANTI-BAN V8</span><small>antibanned.config</small></div>
-            <div class="mod-card" onclick="toggleMod(this, 'Limpar Logs')">🧹<span>CLEAN CACHE</span><small>report.log</small></div>
+        <div class="console-box" id="log-box">
+            [SYSTEM] VITORZINW GIGANTE ONLINE...<br>
+            [READY] Aguardando comando de injeção...<br>
+            [DICA] Para instalar como APP, vá nas opções do Chrome.
         </div>
 
-        <div class="console" id="log-box">
-            [SYSTEM] VITORZINW ONLINE...<br>
-            [INFO] Device: Motorola Moto G56 5G detected.<br>
-            [READY] Aguardando comando de injeção...
-        </div>
-
-        <div class="progress-box" id="p-box">
-            <div style="font-size: 10px; margin-bottom: 5px;" id="p-status">Injetando...</div>
+        <div class="p-box" id="p-box">
+            <div style="font-size: 10px; margin-bottom: 5px;" id="p-status">Instalando...</div>
             <div class="bar-bg"><div class="bar-fill" id="p-bar"></div></div>
         </div>
     </div>
 
-    <div class="footer-action">
-        <button class="btn-inject" onclick="iniciarInjecao()">INJETAR AGORA</button>
-    </div>
+    <button class="btn-inject-giant" onclick="iniciarInjecaoGigante()">INJETAR GIGANTE AGORA</button>
 
     <script>
-        // LÓGICA DE INSTALAÇÃO (PWA)
+        // --- CONSERTA O 'ADICIONAR' PARA 'INSTALAR' (PWA REAL) ---
+        // Registrar Service Worker para ativar o modo PWA (Instalar app)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGZ1bmN0aW9uKGV2ZW50KSB7IH0pOw==');
+        }
+
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('install-banner').style.display = 'block';
+            document.getElementById('install-section').style.display = 'block';
         });
 
-        document.getElementById('btn-install').addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') document.getElementById('install-banner').style.display = 'none';
-                deferredPrompt = null;
-            }
+        document.getElementById('btn-show-install').addEventListener('click', () => {
+            alert("Para instalar:\n1. Clique nos três pontinhos do Chrome.\n2. Escolha 'Instalar aplicativo'.\nSe não aparecer, atualize a página.");
         });
 
-        // LÓGICA DO PAINEL
-        function toggleMod(el, name) {
+        // --- LÓGICA DO PAINEL GIGANTE ---
+        function toggleGiantMod(el, name) {
             el.classList.toggle('active');
-            addLog(`Módulo selecionado: ${name}`);
+            addLog(`Módulo GIGANTE selecionado: [${name}]`);
         }
 
         function addLog(msg) {
@@ -204,41 +225,42 @@
             box.scrollTop = box.scrollHeight;
         }
 
-        const arquivos = ["RyanX.dat", "weapontable.bin", "antibanned.cfg", "assetindexer.bundle", "res_config.nb"];
+        const arquivos = ["RyanX.nb", "weapontable.bin", "antibanned.cfg", "assetindexer.bundle", "report.log", "res_config.nb", "touch.log", "cab-95c.dat"];
 
-        function iniciarInjecao() {
+        function iniciarInjecaoGigante() {
             document.getElementById('p-box').style.display = 'block';
+            addLog("[SYSTEM] Iniciando injeção GIGANTE...");
             let prog = 0;
             let fileIdx = 0;
             
             const int = setInterval(() => {
-                prog += Math.random() * 4;
+                prog += Math.random() * 3;
                 document.getElementById('p-bar').style.width = prog + "%";
                 
-                if(prog % 20 < 2 && fileIdx < arquivos.length) {
-                    addLog(`Instalando: ${arquivos[fileIdx]}...`);
+                if(prog % 10 < 1 && fileIdx < arquivos.length) {
+                    addLog(`Instalando arquivo: ${arquivos[fileIdx]}...`);
                     fileIdx++;
                 }
 
                 if(prog >= 100) {
                     clearInterval(int);
-                    addLog("<span style='color:var(--secondary)'>✅ SUCESSO: REEDIT APLICADA!</span>");
-                    alert("INSTALAÇÃO CONCLUÍDA NO MOTO G56!");
+                    addLog("<span style='color:var(--secondary)'>✅ SUCESSO GIGANTE: REEDIT APLICADA!</span>");
+                    alert("INSTALAÇÃO CONCLUÍDA NO GIGANTE!");
                 }
-            }, 100);
+            }, 90);
         }
 
-        // MATRIX BACKGROUND
+        // MATRIX VERMELHO GIGANTE
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        const letters = "VITORZINWFF0101";
-        const fontSize = 10;
+        const letters = "VITORZINWFF";
+        const fontSize = 12;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
 
-        function drawMatrix() {
+        function drawGiantMatrix() {
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#ff0000";
@@ -250,7 +272,7 @@
                 drops[i]++;
             });
         }
-        setInterval(drawMatrix, 50);
+        setInterval(drawGiantMatrix, 60);
     </script>
 </body>
 </html>
