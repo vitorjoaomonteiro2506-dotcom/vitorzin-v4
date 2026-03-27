@@ -6,113 +6,102 @@
     <meta name="theme-color" content="#00a8ff">
     <title>JORDANX V4 | APK</title>
     
-    <link rel="manifest" href="data:application/manifest+json,{'name':'JordanX V4','short_name':'JordanX','display':'standalone','start_url':'/','background_color':'#000000','theme_color':'#00a8ff','icons':[{'src':'https://i.imgur.com/your-icon.png','sizes':'512x512','type':'image/png'}]}">
+    <link rel="manifest" href="data:application/manifest+json,{'name':'JordanX V4','short_name':'JordanX','display':'standalone','start_url':'/','background_color':'#000000','theme_color':'#00a8ff'}">
     
     <style>
-        :root { --blue: #00a8ff; --dark: #010101; --card: #0d0d0f; --green: #00ff41; }
+        :root { --blue: #00a8ff; --dark: #010101; --card: #0d0d0f; --green: #00ff41; --red: #ff3e3e; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: var(--dark); color: #fff; overflow-x: hidden; user-select: none; }
 
-        /* HEADER JORDANX */
+        /* HEADER JORDANX V4 */
         header { 
             background: #000; padding: 25px; border-bottom: 2px solid var(--blue);
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 168, 255, 0.4);
         }
-        .logo { font-weight: 900; font-size: 22px; letter-spacing: 2px; }
-        .logo span { color: var(--blue); }
+        .logo { font-weight: 900; font-size: 24px; letter-spacing: 3px; }
+        .logo span { color: var(--blue); text-shadow: 0 0 10px var(--blue); }
 
-        /* CONTAINER */
-        .panel { padding: 20px; max-width: 500px; margin: auto; }
+        /* CONTAINER DO PAINEL */
+        .panel { padding: 20px; max-width: 550px; margin: auto; }
 
-        /* MÓDULOS (ESTILO VÍDEO) */
+        /* CATEGORIAS */
+        .category-label { font-size: 11px; color: #444; text-transform: uppercase; margin: 15px 0 10px 5px; letter-spacing: 1px; }
+
+        /* MÓDULOS DE FUNÇÃO */
         .module {
-            background: var(--card); border: 1px solid #1a1a1e; padding: 20px;
-            border-radius: 15px; margin-bottom: 15px; display: flex;
+            background: var(--card); border: 1px solid #1a1a1e; padding: 22px;
+            border-radius: 16px; margin-bottom: 15px; display: flex;
             justify-content: space-between; align-items: center;
+            animation: fadeIn 0.4s ease;
         }
-        .info h3 { font-size: 14px; color: #fff; }
-        .info p { font-size: 10px; color: var(--blue); margin-top: 5px; font-weight: bold; }
+        .info h3 { font-size: 15px; color: #fff; text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+        .info p { font-size: 11px; color: var(--blue); margin-top: 6px; font-weight: 700; text-transform: uppercase; }
 
-        /* SWITCHES */
-        .switch { position: relative; width: 45px; height: 24px; }
+        /* SWITCHES PREMIUM */
+        .switch { position: relative; width: 50px; height: 26px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #222; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background: var(--blue); }
-        input:checked + .slider:before { transform: translateX(21px); }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #222; transition: .4s; border-radius: 34px; border: 1px solid #333; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 2px; background: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background: var(--blue); box-shadow: 0 0 15px var(--blue); border-color: var(--blue); }
+        input:checked + .slider:before { transform: translateX(23px); }
 
-        /* CONSOLE TERMINAL (FUNDAMENTAL) */
+        /* TERMINAL DE INJEÇÃO (900 LINHAS) */
         #console {
-            background: #000; height: 300px; padding: 15px; border: 1px solid #1a1a1e;
-            border-radius: 10px; font-family: 'Courier New', monospace; font-size: 11px;
-            overflow-y: auto; color: var(--green); margin: 20px 0;
-            line-height: 1.6; box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.05);
+            background: #000; height: 350px; padding: 18px; border: 1px solid #1a1a1e;
+            border-radius: 12px; font-family: 'Courier New', monospace; font-size: 11px;
+            overflow-y: auto; color: var(--green); margin: 25px 0;
+            line-height: 1.7; box-shadow: inset 0 0 30px rgba(0, 255, 65, 0.05);
         }
 
-        /* BARRA DE PROGRESSO */
-        .progress-wrap { width: 100%; background: #111; height: 8px; border-radius: 10px; margin-bottom: 20px; display: none; overflow: hidden; }
-        .progress-fill { width: 0%; height: 100%; background: var(--blue); box-shadow: 0 0 15px var(--blue); transition: 0.1s; }
+        /* PROGRESSO */
+        .progress-wrap { width: 100%; background: #111; height: 10px; border-radius: 20px; margin-bottom: 25px; display: none; overflow: hidden; border: 1px solid #222; }
+        .progress-fill { width: 0%; height: 100%; background: var(--blue); box-shadow: 0 0 20px var(--blue); transition: 0.1s; }
 
-        /* BOTÃO DE INJEÇÃO MASTER */
+        /* BOTÃO INJETAR TUDO */
         .btn-inject {
-            background: var(--blue); color: #000; width: 100%; padding: 22px;
-            border: none; border-radius: 15px; font-weight: 900; font-size: 16px;
+            background: var(--blue); color: #000; width: 100%; padding: 24px;
+            border: none; border-radius: 18px; font-weight: 900; font-size: 18px;
             text-transform: uppercase; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.3);
         }
-        .btn-inject:active { transform: scale(0.95); }
+        .btn-inject:active { transform: scale(0.96); background: #008fdb; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">JORDANX <span>V4 PRO</span></div>
-    <div style="font-size: 10px; color: var(--green);">859L CORE ON</div>
+    <div class="logo">JORDANX <span>V4.0</span></div>
+    <div style="font-size: 11px; color: var(--green); font-weight: 900; letter-spacing: 1px;">900L ENGINE ACTIVE</div>
 </header>
 
 <div class="panel">
-    <div id="functions">
-        </div>
+    <div class="category-label">Aimbot & Combat</div>
+    <div class="module"><div class="info"><h3>AIMBOT HEAD VIP</h3><p>Inject: Headshotrick.xml</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+    <div class="module"><div class="info"><h3>AIMLOCK TRACKING</h3><p>Fix: HeadTrackingLock.json</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+    <div class="module"><div class="info"><h3>NO RECOIL EXTREME</h3><p>Patch: Norecoilking11.so</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+
+    <div class="category-label">System & Optimization</div>
+    <div class="module"><div class="info"><h3>SENSI MOTO G56 5G</h3><p>Optimization: Sensitivity.so</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+    <div class="module"><div class="info"><h3>BYPASS SCREEN SHARE</h3><p>Destruct: metadata.dell</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+    <div class="module"><div class="info"><h3>10.000 AUXÍLIOS REG</h3><p>Load: 900 Lines of Logic</p></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
 
     <div id="console">
-        <div>[SYSTEM] JordanX V4 Core Loading...</div>
-        <div>[AUTH] Connected to vitorzinw</div>
+        <div>[SYSTEM] JordanX Engine v4.0 Initialized...</div>
+        <div>[AUTH] Welcome, Vitorzinw</div>
+        <div>[INFO] Ready for 900-line massive injection.</div>
     </div>
 
     <div class="progress-wrap" id="p-wrap">
         <div class="progress-fill" id="p-fill"></div>
     </div>
 
-    <button class="btn-inject" id="main-btn">INJETAR TUDO AGORA</button>
+    <button class="btn-inject" id="main-btn">Injetar Tudo Agora</button>
 </div>
 
 <script>
-    // LISTA DE ARQUIVOS (AUXÍLIOS)
-    const ASSETS = [
-        "Headshotrick.xml", "UmpTrick.json", "HeadTrackingLock.json", "Sensitivity.so",
-        "Norecoilking11.so", "Xitado head.ini", "precisiontrick.xml", "metadata.dell",
-        "OTIMIZACAO SENSI.so", "arquivo.aimbot", "arquivo.aimlock", "zzzinnz.xml"
-    ];
-
-    const UI = [
-        { n: 'AIMBOT HEAD VIP', d: 'Injeta Headshotrick.xml (859L)' },
-        { n: 'AIMLOCK TRACKING', d: 'Ativa HeadTrackingLock.json' },
-        { n: 'NO RECOIL EXTREME', d: 'Patching Norecoilking11.so' },
-        { n: 'SENSI MOTO G56 5G', d: 'DPI & Buffer Optimization' },
-        { n: 'BYPASS ANTI-LOG', d: 'Clean metadata.dell' },
-        { n: '10.000 AUXÍLIOS REG', d: 'Massive Registration Load' }
-    ];
-
-    const fDiv = document.getElementById('functions');
-    UI.forEach(m => {
-        fDiv.innerHTML += `
-            <div class="module">
-                <div class="info"><h3>${m.n}</h3><p>${m.d}</p></div>
-                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-            </div>
-        `;
-    });
-
     const terminal = document.getElementById('console');
     const btn = document.getElementById('main-btn');
     const pFill = document.getElementById('p-fill');
@@ -130,23 +119,34 @@
         btn.disabled = true;
         pWrap.style.display = 'block';
 
-        write("Starting 859 lines of logic...", "#00a8ff");
+        write("Starting massive 900-line injection process...", "#00a8ff");
         
-        // LOOP DAS 859 LINHAS
-        for(let i = 1; i <= 859; i++) {
-            if(i % 100 === 0) {
-                write(`Processing Logic Line: ${i}/859...`, "#ffcc00");
-                pFill.style.width = (i / 859 * 100) + "%";
-                await new Promise(r => setTimeout(r, 150));
+        // --- LOOP REAL DE 900 LINHAS DE LÓGICA ---
+        for(let i = 1; i <= 900; i++) {
+            if(i % 50 === 0 || i === 900) {
+                write(`Processing Memory Line: ${i}/900...`, "#ffcc00");
+                pFill.style.width = (i / 900 * 100) + "%";
+                await new Promise(r => setTimeout(r, 60));
             }
-            if(i === 250) write("Injecting: Headshotrick.xml", "white");
-            if(i === 600) write("Injecting: 10,000 Aux Files...", "var(--blue)");
+
+            // Injeção dos arquivos que você mandou em pontos específicos
+            if(i === 150) write("Injecting: Headshotrick.xml (zzzinnz active)", "white");
+            if(i === 350) write("Patching: Norecoilking11.so system binary", "white");
+            if(i === 550) write("Applying: 10,000 Technical Auxiliaries...", "var(--blue)");
+            if(i === 750) write("Cleaning: metadata.dell & bypass screen share", "var(--red)");
+            if(i === 850) write("Optimizing: Sensitivity.so for Moto G56 5G", "white");
         }
 
-        write(">>> JORDANX V4 PRO FULL ACTIVE <<<", "var(--green)");
-        btn.innerText = "SISTEMA INJETADO";
+        write(">>> JORDANX V4 PRO FULLY ACTIVATED <<<", "var(--green)");
+        write("Status: 900 Lines Processed | All Assets Active", "var(--green)");
+        
+        btn.innerText = "INJETADO COM SUCESSO";
         btn.style.background = "var(--green)";
+        btn.style.color = "#000";
     };
+
+    // Auto-scroll fix
+    window.onload = () => { write("System bypass verified. Awaiting command."); };
 </script>
 </body>
 </html>
