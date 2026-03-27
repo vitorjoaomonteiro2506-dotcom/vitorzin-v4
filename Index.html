@@ -3,301 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITORZIN SUPREMO v6.0 | FULL POWER PANEL</title>
+    <title>JORDANX V3 2.0 | SYSTEM OVERLAY</title>
     <style>
-        /* CONFIGURAÇÕES TÉCNICAS E CORES */
+        /* --- CSS: ESTILIZAÇÃO E ANIMAÇÕES (NÍVEL JORDANX) --- */
         :root {
-            --primary: #ff0000;
-            --secondary: #0a0a0a;
-            --accent: #00ff00;
-            --warning: #ffcc00;
-            --text-main: #ffffff;
-            --text-dim: #888888;
-            --panel-bg: rgba(10, 10, 10, 0.95);
+            --primary: #00ff00; /* Verde Neon */
+            --bg-dark: #050505;
+            --bg-panel: #101010;
+            --text: #e0e0e0;
+            --border: #333;
+            --shadow: rgba(0, 255, 0, 0.2);
+            --font-main: 'Courier New', Courier, monospace; /* Fonte Hack */
         }
 
-        * { box-sizing: border-box; outline: none; transition: all 0.2s ease-in-out; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
 
         body {
-            background-color: #050505;
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            font-family: var(--font-main);
+            height: 100vh;
             display: flex;
             justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* CONTAINER PRINCIPAL COM EFEITO SCANNER */
-        .injector-frame {
-            width: 100%;
-            max-width: 480px;
-            background: var(--panel-bg);
-            border: 2px solid var(--primary);
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            margin: 20px;
-            z-index: 5;
+            align-items: center;
             overflow: hidden;
+            background-image: radial-gradient(var(--bg-panel) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
-        /* LINHA DE SCANNER */
-        .injector-frame::after {
+        /* Scanlines Effect */
+        body::before {
             content: "";
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
-            background: var(--primary);
-            box-shadow: 0 0 20px var(--primary);
-            animation: scan 5s linear infinite;
-            opacity: 0.6;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 10;
             pointer-events: none;
         }
 
-        @keyframes scan {
-            0% { top: 0; }
-            100% { top: 100%; }
-        }
-
-        /* HEADER */
-        .header {
-            background: linear-gradient(180deg, #000 0%, #1a0000 100%);
-            padding: 25px 20px;
-            text-align: center;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 30px;
-            letter-spacing: 6px;
-            text-shadow: 0 0 20px var(--primary);
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        .sub-header {
-            font-size: 10px;
-            color: var(--accent);
-            letter-spacing: 3px;
-            margin-top: 8px;
-            text-transform: uppercase;
-        }
-
-        /* STATUS STRIP */
-        .status-strip {
-            background: #000;
-            padding: 12px 20px;
+        .main-container {
+            width: 850px;
+            height: 600px;
+            background-color: var(--bg-panel);
+            border: 2px solid var(--border);
+            border-radius: 5px;
+            position: relative;
             display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            font-family: 'Consolas', monospace;
-            border-bottom: 1px solid #222;
+            flex-direction: column;
+            box-shadow: 0 0 30px var(--shadow);
+            z-index: 20;
         }
 
-        .status-online { color: var(--accent); animation: blink 1.5s infinite; }
-        @keyframes blink { 50% { opacity: 0.4; } }
-
-        /* TERMINAL DE LOGS */
-        .terminal-box {
-            background: #000;
-            height: 140px;
-            margin: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 11px;
-            color: var(--accent);
-            overflow-y: auto;
-            line-height: 1.5;
-            box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.05);
-        }
-
-        /* SEÇÕES E FUNÇÕES */
-        .section-title {
-            padding: 0 20px;
-            font-size: 10px;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin: 15px 0 8px 0;
-        }
-
-        .functions-container {
-            padding: 0 15px 15px 15px;
-            flex-grow: 1;
-        }
-
-        .function-item {
-            background: #111;
-            border: 1px solid #222;
-            padding: 14px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+        /* --- Header --- */
+        header {
+            padding: 10px 15px;
+            border-bottom: 2px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: linear-gradient(90deg, #151515, #0a0a0a);
         }
 
-        .function-item:hover {
-            border-color: var(--primary);
-            background: #1a0505;
-            transform: translateY(-2px);
+        .brand h1 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px var(--primary);
         }
 
-        .func-label b { display: block; font-size: 14px; color: #fff; letter-spacing: 1px; }
-        .func-label span { font-size: 9px; color: var(--primary); text-transform: uppercase; font-weight: bold; }
+        .brand span { font-size: 0.7rem; color: #888; }
 
-        /* SWITCH TOGGLE */
-        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+        .system-stats { display: flex; gap: 15px; font-size: 0.8rem; color: #aaa; }
+        .stat-item span { color: var(--primary); font-weight: bold; }
+
+        /* --- Main Content Layout --- */
+        .content-wrapper { display: flex; flex: 1; overflow: hidden; }
+
+        /* --- Sidebar (Menu) --- */
+        nav.sidebar {
+            width: 200px;
+            border-right: 2px solid var(--border);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #aaa;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .menu-item:hover { color: var(--text); background-color: rgba(255,255,255,0.03); }
+        .menu-item.active { color: var(--primary); background-color: rgba(0,255,0,0.05); font-weight: bold; }
+        .menu-item.active::before {
+            content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
+            background-color: var(--primary); box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* --- Config Panels (Tab Content) --- */
+        .config-area { flex: 1; padding: 25px; overflow-y: auto; display: none; }
+        .config-area.active { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .panel-header { margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .panel-header h2 { font-size: 1rem; color: var(--primary); text-transform: uppercase; }
+
+        /* --- Control Elements --- */
+        .control-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
+        .control-label { font-size: 0.8rem; color: #bbb; display: flex; justify-content: space-between; }
+        .control-label span.value { color: var(--primary); }
+
+        /* Switch styling */
+        .switch {
+            position: relative; display: inline-block; width: 40px; height: 20px;
+        }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
             position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #333; border-radius: 34px;
+            background-color: #333; transition: .4s; border-radius: 20px;
         }
         .slider:before {
-            position: absolute; content: ""; height: 16px; width: 16px;
-            left: 3px; bottom: 3px; background-color: white; border-radius: 50%;
+            position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px;
+            background-color: #888; transition: .4s; border-radius: 50%;
         }
-        input:checked + .slider { background-color: var(--primary); box-shadow: 0 0 12px var(--primary); }
-        input:checked + .slider:before { transform: translateX(22px); }
+        input:checked + .slider { background-color: rgba(0,255,0,0.2); border: 1px solid var(--primary); }
+        input:checked + .slider:before { background-color: var(--primary); box-shadow: 0 0 5px var(--primary); }
 
-        /* FOOTER */
-        .footer-info {
-            background: #000;
-            padding: 20px;
-            border-top: 2px solid var(--primary);
-            text-align: center;
+        /* Range styling */
+        input[type=range] {
+            -webkit-appearance: none; width: 100%; background: transparent;
         }
-
-        .btn-update {
-            background: var(--primary);
-            color: #fff;
-            padding: 15px;
-            border: none;
-            width: 100%;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-            margin-bottom: 15px;
+        input[type=range]:focus { outline: none; }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 6px; cursor: pointer; background: #222; border-radius: 3px; border: 1px solid #333;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 16px; width: 16px; border-radius: 50%; background: var(--primary);
+            cursor: pointer; -webkit-appearance: none; margin-top: -6px;
+            box-shadow: 0 0 5px var(--primary);
         }
 
-        .btn-update:hover { background: #ff3333; transform: scale(1.02); }
-
-        .credenciais {
-            color: var(--text-dim);
-            font-size: 11px;
-            line-height: 1.6;
+        /* Color Picker & Select */
+        input[type=color] {
+            -webkit-appearance: none; border: 1px solid var(--border); width: 40px; height: 25px;
+            background: none; cursor: pointer;
         }
+        input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type=color]::-webkit-color-swatch { border: none; }
+
+        select {
+            background-color: #1a1a1a; color: var(--primary); border: 1px solid var(--border);
+            padding: 5px; font-family: var(--font-main); font-size: 0.8rem;
+        }
+
+        /* --- Crosshair Visualizer --- */
+        #visualizer-container {
+            width: 100%; height: 150px; background-color: #080808;
+            border: 1px solid var(--border); margin-top: 15px;
+            display: flex; justify-content: center; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        #visualizer-crosshair {
+            position: absolute; pointer-events: none;
+        }
+
+        /* --- Footer (Terminal) --- */
+        footer {
+            padding: 8px 15px; border-top: 2px solid var(--border);
+            background-color: #0a0a0a; font-size: 0.75rem; color: #666;
+            display: flex; justify-content: space-between;
+        }
+        #terminal-msg { color: #888; font-style: italic; }
+
     </style>
 </head>
 <body>
 
-<div class="injector-frame">
-    <div class="header">
-        <h1>VITORZIN SUPREMO</h1>
-        <div class="sub-header">ESTADO: INDETECTÁVEL | STEWARE PRO v6.0</div>
+    <div class="main-container">
+        <header>
+            <div class="brand">
+                <h1>JORDANX V3</h1>
+                <span>SYSTEM BYPASS & OPTIMIZATION</span>
+            </div>
+            <div class="system-stats">
+                <div class="stat-item">MS: <span id="ping-val">--</span></div>
+                <div class="stat-item">FPS: <span id="fps-val">--</span></div>
+                <div class="stat-item">SYS: <span>ACTIVE</span></div>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <nav class="sidebar">
+                <div class="menu-item active" onclick="showPanel('general')">Geral</div>
+                <div class="menu-item" onclick="showPanel('aim assist')">Auxílio Aim</div>
+                <div class="menu-item" onclick="showPanel('esp')">ESP Visual</div>
+                <div class="menu-item" onclick="showPanel('configs')">Sistema</div>
+                <div style="margin-top:auto" class="menu-item">Deslogar</div>
+            </nav>
+
+            <main>
+                <div id="panel-general" class="config-area active">
+                    <div class="panel-header"><h2>Módulo Principal</h2></div>
+                    <div class="control-group">
+                        <label class="control-label">Bypass Anti-Cheat<span>Master</span></label>
+                        <label class="switch">
+                            <input type="checkbox" checked onchange="logSys('Bypass status alterado')">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Otimização de Latência (NoLag)</label>
+                        <label class="switch">
+                            <input type="checkbox" onchange="logSys('Network opt toggled')">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="panel-aim-assist" class="config-area">
+                    <div class="panel-header"><h2>Auxílio de Mira Avançado</h2></div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Ativar Crosshair Overlay</label>
+                        <label class="switch">
+                            <input type="checkbox" id="crosshair-toggle" checked onchange="updateCrosshairView()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; gap: 15px;">
+                        <div class="control-group" style="flex: 1;">
+                            <label class="control-label">Cor da Mira</label>
+                            <input type="color" id="ch-color" value="#00ff00" onchange="updateCrosshairView()">
+                        </div>
+                        <div class="control-group" style="flex: 1;">
+                            <label class="control-label">Tipo de Mira</label>
+                            <select id="ch-type" onchange="updateCrosshairView()">
+                                <option value="dot">Ponto</option>
+                                <option value="cross">Cruz</option>
+                                <option value="circle">Círculo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Tamanho <span class="value" id="val-size">12px</span></label>
+                        <input type="range" id="ch-size" min="4" max="30" value="12" oninput="updateCrosshairView()">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Precisão do Lock (Simulação)</label>
+                        <select>
+                            <option>Cabeça (Head)</option>
+                            <option selected>Peito (Body)</option>
+                            <option>Dinâmico</option>
+                        </select>
+                    </div>
+
+                    <div id="visualizer-container">
+                        <div id="visualizer-crosshair"></div>
+                    </div>
+                </div>
+
+                <div id="panel-esp" class="config-area">
+                    <div class="panel-header"><h2>Visual ESP (Wallhack Sim)</h2></div>
+                    <p style="color:#666; font-size:0.8rem">Funções visuais injetadas no renderer.</p>
+                </div>
+                
+                <div id="panel-configs" class="config-area">
+                    <div class="panel-header"><h2>Configurações do Sistema</h2></div>
+                    <p style="color:#666; font-size:0.8rem">Configurações de conta e licença.</p>
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <div id="terminal-msg">Sistema JordanX V3 inicializado... Aguardando comandos.</div>
+            <div>USER: JORDANX_GUEST</div>
+        </footer>
     </div>
 
-    <div class="status-strip">
-        <span>SISTEMA: <span class="status-online">ATIVO</span></span>
-        <span>PING: 8ms</span>
-        <span>USER: vitorzin</span>
-    </div>
+    <script>
+        // Função para alternar entre as abas do painel
+        function showPanel(panelName) {
+            // Esconde todos os painéis
+            document.querySelectorAll('.config-area').forEach(p => p.classList.remove('active'));
+            // Remove 'active' de todos os itens do menu
+            document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
 
-    <div class="terminal-box" id="term">
-        [SYS] Inicializando Kernel Engine... OK<br>
-        [SYS] Mapeando Memory.dll e Guna.UI... OK<br>
-        [AUTH] Login 'vitorzin' confirmado.<br>
-        [READY] Pronto para sincronização direta.
-    </div>
+            // Mostra o painel selecionado
+            const targetPanel = document.getElementById('panel-' + panelName.replace(' ', '-'));
+            if (targetPanel) targetPanel.classList.add('active');
 
-    <div class="functions-container">
-        <div class="section-title">Combate & Mira</div>
-        
-        <div class="function-item">
-            <div class="func-label"><b>AUTO HEADSHOT</b><span>Ajuste de Offsets: 0.1ms</span></div>
-            <label class="switch"><input type="checkbox" onchange="stec('AUTO_HS', this)"><span class="slider"></span></label>
-        </div>
-
-        <div class="function-item">
-            <div class="func-label"><b>MIRA LEVE (SMOOTH)</b><span>Suavização Dinâmica</span></div>
-            <label class="switch"><input type="checkbox" onchange="stec('SMOOTH', this)"><span class="slider"></span></label>
-        </div>
-
-        <div class="section-title">Visual & Render</div>
-
-        <div class="function-item">
-            <div class="func-label"><b>ESP LINE & BOX</b><span>DirectX Render Hook</span></div>
-            <label class="switch"><input type="checkbox" onchange="stec('ESP', this)"><span class="slider"></span></label>
-        </div>
-
-        <div class="function-item">
-            <div class="func-label"><b>TELEPORT KILL</b><span>Aproximação de Kernel</span></div>
-            <label class="switch"><input type="checkbox" onchange="stec('TELE', this)"><span class="slider"></span></label>
-        </div>
-
-        <div class="section-title">Otimização & Regedit</div>
-
-        <div class="function-item">
-            <div class="func-label"><b>REGEDIT TURBO</b><span>Latência Zero & DPI</span></div>
-            <label class="switch"><input type="checkbox" onchange="stec('REGEDIT', this)"><span class="slider"></span></label>
-        </div>
-
-        <div class="function-item">
-            <div class="func-label"><b>BYPASS ANTI-CHEAT</b><span>Camuflagem de Logs</span></div>
-            <label class="switch"><input type="checkbox" onchange="stec('BYPASS', this)"><span class="slider"></span></label>
-        </div>
-    </div>
-
-    <div class="footer-info">
-        <button class="btn-update" onclick="sync()">SINCRONIZAR (vitorzin senha 1)</button>
-        <div class="credenciais">
-            USER: <b>vitorzin</b> | STATUS: <span style="color:var(--accent)">1000% FUNCIONAL</span><br>
-            STECWARE PRO SOURCE DIRECTLY
-        </div>
-    </div>
-</div>
-
-<script>
-    const term = document.getElementById('term');
-
-    function writeTerminal(text, type = 'success') {
-        const time = new Date().toLocaleTimeString();
-        let color = "#00ff00"; 
-        if(type === 'error') color = "#ff0000";
-        if(type === 'process') color = "#ffff00";
-        term.innerHTML += `<br><span style="color:${color}">[${time}] ${text}</span>`;
-        term.scrollTop = term.scrollHeight;
-    }
-
-    function stec(func, el) {
-        const status = el.checked ? "1" : "0";
-        writeTerminal(`Protocolo ${func}: ${el.checked ? 'INJETADO' : 'REMOVIDO'}`, el.checked ? 'process' : 'error');
-        
-        try {
-            // CONEXÃO STEWARE PRO
-            window.external.OnClick(func, status);
-            window.chrome.webview.postMessage(func + ":" + status);
-        } catch(e) { 
-            console.log("Simulando execução do Host..."); 
+            // Ativa o item do menu correspondente
+            event.currentTarget.classList.add('active');
+            
+            logSys(`Painel ${panelName.toUpperCase()} carregado.`);
         }
-    }
 
-    function sync() {
-        writeTerminal("Limpando cache de registros...", "process");
-        setTimeout(() => writeTerminal("Otimizando Memory.dll...", "process"), 600);
-        setTimeout(() => writeTerminal("SINCRONIZADO COM SUCESSO!", "success"), 1200);
-    }
-</script>
+        // Função de Log no rodapé (Terminal)
+        function logSys(message) {
+            const term = document.getElementById('terminal-msg');
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            term.textContent = `[${timeStr}] > ${message}`;
+        }
 
+        // Simulação de Estatísticas (Ping e FPS)
+        function updateStats() {
+            document.getElementById('ping-val').textContent = (Math.random() * 20 + 5).toFixed(0);
+            document.getElementById('fps-val').textContent = (Math.random() * 10 + 235).toFixed(0);
+        }
+        setInterval(updateStats, 1500); // Atualiza a cada 1.5s
+        updateStats(); // Inicializa
+
+        // --- Lógica do Visualizador de Mira ---
+        const chVisualizer = document.getElementById('visualizer-crosshair');
+
+        function updateCrosshairView() {
+            const active = document.getElementById('crosshair-toggle').checked;
+            const color = document.getElementById('ch-color').value;
+            const type = document.getElementById('ch-type').value;
+            const size = document.getElementById('ch-size').value;
+
+            // Atualiza exibição do valor numérico
+            document.getElementById('val-size').textContent = size + 'px';
+
+            if (!active) {
+                chVisualizer.style.display = 'none';
+                logSys('Overlay de mira desativado.');
+                return;
+            }
+
+            chVisualizer.style.display = 'block';
+            chVisualizer.style.width = size + 'px';
+            chVisualizer.style.height = size + 'px';
+            chVisualizer.style.backgroundColor = 'transparent';
+            chVisualizer.style.border = 'none';
+            chVisualizer.style.borderRadius = '0';
+            logSys('Mira atualizada visualmente.');
+
+            if (type === 'dot') {
+                chVisualizer.style.backgroundColor = color;
+                chVisualizer.style.borderRadius = '50%';
+                chVisualizer.style.border = '1px solid #000';
+            } else if (type === 'circle') {
+                chVisualizer.style.border = `2px solid ${color}`;
+                chVisualizer.style.borderRadius = '50%';
+                chVisualizer.style.boxShadow = `0 0 3px ${color}`;
+            } else if (type === 'cross') {
+                chVisualizer.style.width = size + 'px';
+                chVisualizer.style.height = size + 'px';
+                chVisualizer.style.position = 'relative';
+                
+                // Limpa conteúdo anterior
+                chVisualizer.innerHTML = '';
+
+                // Cria linhas da cruz
+                const horiz = document.createElement('div');
+                horiz.style.position = 'absolute';
+                horiz.style.backgroundColor = color;
+                horiz.style.width = '100%';
+                horiz.style.height = '2px';
+                horiz.style.top = 'calc(50% - 1px)';
+                horiz.style.left = '0';
+                
+                const vert = document.createElement('div');
+                vert.style.position = 'absolute';
+                vert.style.backgroundColor = color;
+                vert.style.width = '2px';
+                vert.style.height = '100%';
+                vert.style.left = 'calc(50% - 1px)';
+                vert.style.top = '0';
+
+                chVisualizer.appendChild(horiz);
+                chVisualizer.appendChild(vert);
+            }
+        }
+
+        // Inicializa a visualização da mira
+        updateCrosshairView();
+
+    </script>
 </body>
 </html>
