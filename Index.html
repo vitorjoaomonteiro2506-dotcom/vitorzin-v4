@@ -4,132 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#00a8ff">
-    <title>JORDANX V4 | ULTIMATE APK</title>
+    <title>JORDANX V4 | APK</title>
     
-    <link rel="manifest" href="data:application/manifest+json,{'name':'JordanX V4','short_name':'JordanX','display':'standalone','start_url':'/','background_color':'#000000','theme_color':'#00a8ff'}">
+    <link rel="manifest" href="data:application/manifest+json,{'name':'JordanX V4','short_name':'JordanX','display':'standalone','start_url':'/','background_color':'#000000','theme_color':'#00a8ff','icons':[{'src':'https://i.imgur.com/your-icon.png','sizes':'512x512','type':'image/png'}]}">
     
     <style>
-        :root { --blue: #00a8ff; --dark: #010101; --card: #0a0a0c; --green: #00ff41; --red: #ff3e3e; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        :root { --blue: #00a8ff; --dark: #010101; --card: #0d0d0f; --green: #00ff41; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: var(--dark); color: #fff; overflow-x: hidden; user-select: none; }
 
-        /* HEADER PREMIUM */
+        /* HEADER JORDANX */
         header { 
-            background: #000; padding: 25px 20px; border-bottom: 2px solid var(--blue);
+            background: #000; padding: 25px; border-bottom: 2px solid var(--blue);
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
         }
-        .logo-area { font-weight: 900; font-size: 22px; letter-spacing: 2px; }
-        .logo-area span { color: var(--blue); text-shadow: 0 0 10px var(--blue); }
+        .logo { font-weight: 900; font-size: 22px; letter-spacing: 2px; }
+        .logo span { color: var(--blue); }
 
-        /* CONTAINER PRINCIPAL */
-        .container { padding: 20px; max-width: 600px; margin: auto; }
+        /* CONTAINER */
+        .panel { padding: 20px; max-width: 500px; margin: auto; }
 
-        /* MÓDULOS DE FUNÇÃO */
-        .module-group { margin-bottom: 25px; }
-        .group-title { font-size: 11px; color: #555; text-transform: uppercase; margin-bottom: 10px; padding-left: 5px; }
-        
+        /* MÓDULOS (ESTILO VÍDEO) */
         .module {
-            background: var(--card); border: 1px solid #1a1a1e; padding: 18px;
-            border-radius: 12px; margin-bottom: 12px; display: flex;
+            background: var(--card); border: 1px solid #1a1a1e; padding: 20px;
+            border-radius: 15px; margin-bottom: 15px; display: flex;
             justify-content: space-between; align-items: center;
-            transition: 0.3s;
         }
-        .module:active { transform: scale(0.98); background: #121215; }
-        .info h3 { font-size: 14px; color: #eee; }
-        .info p { font-size: 10px; color: var(--blue); font-weight: bold; margin-top: 4px; }
+        .info h3 { font-size: 14px; color: #fff; }
+        .info p { font-size: 10px; color: var(--blue); margin-top: 5px; font-weight: bold; }
 
-        /* SWITCHES ESTILO APK */
+        /* SWITCHES */
         .switch { position: relative; width: 45px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #222; transition: .4s; border-radius: 34px; }
         .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background: var(--blue); box-shadow: 0 0 10px var(--blue); }
+        input:checked + .slider { background: var(--blue); }
         input:checked + .slider:before { transform: translateX(21px); }
 
-        /* CONSOLE HACKER EXPANDIDO */
+        /* CONSOLE TERMINAL (FUNDAMENTAL) */
         #console {
-            background: #000; height: 280px; padding: 15px; border: 1px solid #1a1a1e;
-            border-radius: 8px; font-family: 'Courier New', monospace; font-size: 11px;
+            background: #000; height: 300px; padding: 15px; border: 1px solid #1a1a1e;
+            border-radius: 10px; font-family: 'Courier New', monospace; font-size: 11px;
             overflow-y: auto; color: var(--green); margin: 20px 0;
-            line-height: 1.5; box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.05);
+            line-height: 1.6; box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.05);
         }
 
         /* BARRA DE PROGRESSO */
-        .p-container { width: 100%; background: #111; height: 6px; border-radius: 10px; margin-bottom: 15px; display: none; overflow: hidden; }
-        .p-bar { width: 0%; height: 100%; background: var(--blue); box-shadow: 0 0 15px var(--blue); transition: 0.1s; }
+        .progress-wrap { width: 100%; background: #111; height: 8px; border-radius: 10px; margin-bottom: 20px; display: none; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: var(--blue); box-shadow: 0 0 15px var(--blue); transition: 0.1s; }
 
-        /* BOTÃO DE INJEÇÃO */
+        /* BOTÃO DE INJEÇÃO MASTER */
         .btn-inject {
-            background: var(--blue); color: #000; width: 100%; padding: 20px;
-            border: none; border-radius: 12px; font-weight: 900; font-size: 16px;
+            background: var(--blue); color: #000; width: 100%; padding: 22px;
+            border: none; border-radius: 15px; font-weight: 900; font-size: 16px;
             text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
-        .btn-inject:disabled { background: #1a1a1e; color: #444; }
-
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        .injecting { animation: pulse 1s infinite; }
+        .btn-inject:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-area">JORDANX <span>V4 PRO</span></div>
-    <div style="font-size: 10px; color: var(--green);">859L CORE ACTIVE</div>
+    <div class="logo">JORDANX <span>V4 PRO</span></div>
+    <div style="font-size: 10px; color: var(--green);">859L CORE ON</div>
 </header>
 
-<div class="container">
-    <div class="module-group">
-        <div class="group-title">Aimbot & Aimlock VIP</div>
-        <div id="aim-modules"></div>
-    </div>
-
-    <div class="module-group">
-        <div class="group-title">System & Optimization</div>
-        <div id="sys-modules"></div>
-    </div>
+<div class="panel">
+    <div id="functions">
+        </div>
 
     <div id="console">
-        <div>[SYSTEM] Initializing JordanX V4 Core...</div>
-        <div>[AUTH] Connected: vitorzinw</div>
-        <div>[INFO] Ready to process 859 lines of code.</div>
+        <div>[SYSTEM] JordanX V4 Core Loading...</div>
+        <div>[AUTH] Connected to vitorzinw</div>
     </div>
 
-    <div class="p-container" id="p-wrap">
-        <div class="p-bar" id="p-fill"></div>
+    <div class="progress-wrap" id="p-wrap">
+        <div class="progress-fill" id="p-fill"></div>
     </div>
 
-    <button class="btn-inject" id="main-btn">Injetar Todos os Arquivos</button>
+    <button class="btn-inject" id="main-btn">INJETAR TUDO AGORA</button>
 </div>
 
 <script>
-    // LISTA DE ARQUIVOS REAIS DO SEU PROJETO [cite: 1, 2, 4, 8, 12, 14]
-    const ASSETS_FILES = [
+    // LISTA DE ARQUIVOS (AUXÍLIOS)
+    const ASSETS = [
         "Headshotrick.xml", "UmpTrick.json", "HeadTrackingLock.json", "Sensitivity.so",
-        "Norecoilking11.so", "Xitado head.ini", "precisiontrick.xml", "trick.xml",
-        "OTIMIZACAO SENSI.so", "xitDHvip1", "xitDHvip2", "xitDHvip3", "Headtrickz.txt",
-        "arquivo.aimbot", "arquivo.aimlock", "metadata.dell", "ComboVTrick.json",
-        "SensitivityEasyControl.x", "TrickShot.xml", "NoRecoil Tracking.xml", "zzzinnz.xml"
+        "Norecoilking11.so", "Xitado head.ini", "precisiontrick.xml", "metadata.dell",
+        "OTIMIZACAO SENSI.so", "arquivo.aimbot", "arquivo.aimlock", "zzzinnz.xml"
     ];
 
-    const UI_DATA = [
-        { id: 'h1', name: 'HEADSHOT VIP 100%', desc: 'Injeta Headshotrick.xml & zzzinnz.xml', type: 'aim' },
-        { id: 'h2', name: 'AIMLOCK TRACKING', desc: 'Ativa HeadTrackingLock.json (Fixado)', type: 'aim' },
-        { id: 'h3', name: 'NO RECOIL EXTREME', desc: 'Aplica Norecoilking11.so buffers', type: 'aim' },
-        { id: 's1', name: 'SENSI MOTO G56 5G', desc: 'Otimização Sensitivity.so + DPI', type: 'sys' },
-        { id: 's2', name: 'BYPASS ANTI-LOG', desc: 'Limpeza de metadados .dell automática', type: 'sys' },
-        { id: 's3', name: '10.000 AUXÍLIOS REG', desc: 'Carga massiva de registros (859 Linhas)', type: 'sys' }
+    const UI = [
+        { n: 'AIMBOT HEAD VIP', d: 'Injeta Headshotrick.xml (859L)' },
+        { n: 'AIMLOCK TRACKING', d: 'Ativa HeadTrackingLock.json' },
+        { n: 'NO RECOIL EXTREME', d: 'Patching Norecoilking11.so' },
+        { n: 'SENSI MOTO G56 5G', d: 'DPI & Buffer Optimization' },
+        { n: 'BYPASS ANTI-LOG', d: 'Clean metadata.dell' },
+        { n: '10.000 AUXÍLIOS REG', d: 'Massive Registration Load' }
     ];
 
-    // Renderizar Interface
-    UI_DATA.forEach(m => {
-        const html = `
+    const fDiv = document.getElementById('functions');
+    UI.forEach(m => {
+        fDiv.innerHTML += `
             <div class="module">
-                <div class="info"><h3>${m.name}</h3><p>${m.desc}</p></div>
+                <div class="info"><h3>${m.n}</h3><p>${m.d}</p></div>
                 <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
             </div>
         `;
-        document.getElementById(m.type === 'aim' ? 'aim-modules' : 'sys-modules').innerHTML += html;
     });
 
     const terminal = document.getElementById('console');
@@ -147,41 +128,25 @@
 
     btn.onclick = async () => {
         btn.disabled = true;
-        btn.classList.add('injecting');
         pWrap.style.display = 'block';
 
-        write("Iniciando varredura de arquivos...", "#00a8ff");
-        await sleep(1000);
-
-        // PROCESSAMENTO DAS 859 LINHAS DE LÓGICA
+        write("Starting 859 lines of logic...", "#00a8ff");
+        
+        // LOOP DAS 859 LINHAS
         for(let i = 1; i <= 859; i++) {
             if(i % 100 === 0) {
-                write(`Executando linha de comando ${i}/859...`, "#ffcc00");
+                write(`Processing Logic Line: ${i}/859...`, "#ffcc00");
                 pFill.style.width = (i / 859 * 100) + "%";
-                await sleep(150);
+                await new Promise(r => setTimeout(r, 150));
             }
-            
-            // Momentos específicos de injeção baseados nos seus arquivos
-            if(i === 250) write("Injetando buffer: Headshotrick.xml...", "white");
-            if(i === 450) write("Aplicando SensitivityEasyControl.x...", "white");
-            if(i === 650) write("Ativando 10.000 registros de auxílio...", "var(--blue)");
-            if(i === 800) write("Bypass Anti-Ban finalizado em metadata.json.", "var(--green)");
+            if(i === 250) write("Injecting: Headshotrick.xml", "white");
+            if(i === 600) write("Injecting: 10,000 Aux Files...", "var(--blue)");
         }
 
-        // Simulação de injeção dos 10.000 arquivos/auxílios
-        write("Processando lote de 10.000 auxílios técnicos...", "#ff00ff");
-        await sleep(1500);
-        
-        pFill.style.width = "100%";
-        write(">>> JORDANX V4 PRO ATIVADO COM SUCESSO! <<<", "var(--green)");
-        write("Status: 859 Linhas Injetadas | 10k Auxílios ON", "var(--green)");
-
-        btn.innerText = "SISTEMA ATIVO";
+        write(">>> JORDANX V4 PRO FULL ACTIVE <<<", "var(--green)");
+        btn.innerText = "SISTEMA INJETADO";
         btn.style.background = "var(--green)";
-        btn.classList.remove('injecting');
     };
-
-    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 </script>
 </body>
 </html>
