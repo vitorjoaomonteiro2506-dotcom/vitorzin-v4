@@ -3,276 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#ff0000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>VITORZINW SUPREMACY GIGANTE</title>
-    
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlZJVE9SWklOVyBWSVAgUEFJTkVMIiwKICAic2hvcnRfbmFtZSI6ICJWaXRvcmppblciLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjZmYwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJsrcIjogImh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGl0aWNvbi5jb20vNTEyLzczNDMvNzM0MzI3Ny5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
-
+    <meta name="theme-color" content="#00ff41">
+    <link rel="manifest" href="manifest.json">
+    <title>SISTEMA MESTRE v24 | MULTI-CORE</title>
     <style>
-        :root { --primary: #ff0000; --secondary: #00ff00; --bg: #000; --card: #0a0a0a; --neon: 0 0 15px var(--primary); }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        :root { --neon: #00ff41; --bg: #050505; --card: #121212; --danger: #ff3e3e; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; }
         
-        body { 
-            background: var(--bg); 
-            color: #fff; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-
-        /* FUNDO MATRIX VERMELHO */
-        #matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; opacity: 0.2; }
-
-        /* HEADER GIGANTE */
-        header {
-            background: linear-gradient(to bottom, #111, transparent);
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 3px solid var(--primary);
-            box-shadow: 0 5px 30px rgba(255,0,0,0.5);
-            margin-bottom: 20px;
-        }
-
-        header h1 { 
-            font-size: 38px; 
-            letter-spacing: 10px; 
-            text-shadow: 0 0 25px var(--primary);
-            color: var(--primary);
-            font-weight: 900;
-        }
-
-        header p { font-size: 10px; color: #666; margin-top: 8px; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* BANNER DE INSTALAÇÃO (VISUAL GIGANTE) */
-        #install-section {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            background: #111;
-            border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            z-index: 100;
-            box-shadow: 0 0 40px var(--primary);
-        }
-
-        .btn-install-giant {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-weight: 900;
-            font-size: 16px;
-            margin-top: 15px;
-            cursor: pointer;
-            box-shadow: 0 0 15px var(--primary);
-            animation: pulse 1.5s infinite;
-        }
-
-        /* CONTAINER PRINCIPAL GIGANTE */
-        .main-content { flex: 1; padding: 10px; }
-        .section-title { color: var(--primary); font-size: 16px; margin: 25px 0 12px; text-transform: uppercase; font-weight: bold; border-left: 4px solid var(--primary); padding-left: 12px; }
+        /* Telas */
+        .screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
         
-        .mod-container { display: flex; flex-direction: column; gap: 12px; }
+        /* Login */
+        .glow-logo { width: 100px; height: 100px; border-radius: 50%; background: var(--neon); box-shadow: 0 0 40px var(--neon); margin-bottom: 30px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
+        
+        .input-box { width: 100%; max-width: 300px; padding: 15px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 15px; text-align: center; }
+        .btn-auth { width: 100%; max-width: 300px; padding: 15px; background: var(--neon); color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-        /* CARDS GIGANTES */
-        .mod-card {
-            background: var(--card);
-            border: 1px solid #222;
-            padding: 25px 15px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: 0.3s;
-            cursor: pointer;
-        }
+        /* Painel Principal */
+        .panel-container { display: none; width: 100%; max-width: 500px; margin-top: 20px; }
+        .header { text-align: center; border-bottom: 1px solid #222; padding-bottom: 20px; margin-bottom: 20px; }
+        .status-badge { background: rgba(0,255,65,0.1); color: var(--neon); padding: 5px 15px; border-radius: 20px; font-size: 12px; border: 1px solid var(--neon); }
 
-        .mod-card.active { border-color: var(--secondary); box-shadow: 0 0 20px rgba(0,255,0,0.3); }
-        .mod-info { text-align: left; }
-        .mod-name { font-size: 14px; font-weight: 700; color: white; display: block; }
-        .mod-file { font-size: 8px; color: #555; }
-        .status-dot { width: 15px; height: 15px; background: #222; border-radius: 50%; }
-        .mod-card.active .status-dot { background: var(--secondary); box-shadow: 0 0 10px var(--secondary); }
+        .card-module { background: var(--card); border: 1px solid #222; border-radius: 12px; padding: 20px; margin-bottom: 15px; transition: 0.3s; }
+        .card-module:hover { border-color: var(--neon); }
+        .card-module h3 { margin: 0 0 10px 0; font-size: 16px; color: var(--neon); }
+        .card-module p { margin: 0 0 15px 0; font-size: 13px; color: #888; }
+        
+        .btn-inject { background: transparent; border: 1px solid var(--neon); color: var(--neon); width: 100%; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .btn-inject:active { background: var(--neon); color: black; }
 
-        /* CONSOLE INFINITO GIGANTE */
-        .console-box {
-            background: #000;
-            border: 2px solid #111;
-            border-radius: 15px;
-            height: 250px;
-            margin: 40px 10px;
-            padding: 20px;
-            font-family: 'Consolas', monospace;
-            font-size: 10px;
-            color: var(--secondary);
-            overflow-y: auto;
-            border-bottom: 4px solid var(--primary);
-        }
+        /* Terminal de Logs */
+        .terminal { background: black; border: 1px solid #333; border-radius: 8px; height: 180px; overflow-y: auto; padding: 15px; font-family: monospace; font-size: 11px; color: #00ff41; margin-bottom: 20px; box-shadow: inset 0 0 10px #000; }
+        .log-item { margin-bottom: 5px; border-left: 2px solid var(--neon); padding-left: 8px; }
 
-        /* BOTÃO DE INJETAR GIGANTE */
-        .btn-inject-giant {
-            width: 100%;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            padding: 30px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-top: 2px solid white;
-            font-size: 24px;
-            font-weight: 900;
-            text-transform: uppercase;
-            box-shadow: 0 -10px 40px rgba(255,0,0,0.6);
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .btn-inject-giant:active { transform: scale(0.98); }
-
-        /* PROGRESSO */
-        .p-box { display: none; margin: 15px; }
-        .bar-bg { width: 100%; height: 12px; background: #111; border-radius: 10px; overflow: hidden; }
-        .bar-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 20px var(--primary); }
-
-        @keyframes pulse { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
+        .btn-install { display: none; background: #fff; color: #000; padding: 10px 20px; border-radius: 20px; font-weight: bold; margin-bottom: 20px; cursor: pointer; }
+        .btn-clean { background: var(--danger); color: white; border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; margin-bottom: 50px; }
     </style>
 </head>
 <body>
 
-    <canvas id="matrix-bg"></canvas>
-
-    <div id="install-section">
-        <p style="font-size: 14px; font-weight: bold; color: var(--primary);">PAINEL NÃO INSTALADO!</p>
-        <p style="font-size: 11px; margin-top: 5px;">Abra as opções do Chrome e clique em 'Instalar aplicativo'.</p>
-        <button class="btn-install-giant" id="btn-show-install">MOSTRAR AJUDA DE INSTALAÇÃO</button>
+    <div id="loginPage" class="screen">
+        <div class="glow-logo"></div>
+        <h2 style="margin-bottom: 10px;">AUTHORIZED ACCESS</h2>
+        <p style="color: #666; margin-bottom: 30px; font-size: 13px;">JordanX | Igzim | Sleep FF</p>
+        <input type="password" id="passInput" class="input-box" placeholder="CHAVE DE ACESSO">
+        <button class="btn-auth" onclick="startSystem()">ENTRAR NO SISTEMA</button>
     </div>
 
-    <header>
-        <h1>VITORZINW SUPREMACY</h1>
-        <p>REEDIT GIGANTE OPTIMIZED</p>
-    </header>
-
-    <div class="main-content">
+    <div id="panelPage" class="screen" style="display: none; justify-content: flex-start;">
+        <div id="pwaBtn" class="btn-install" onclick="installNow()">📥 INSTALAR NA TELA INICIAL</div>
         
-        <div class="section-title">Ajustes GIGANTES (Combate)</div>
-        <div class="mod-container">
-            <div class="mod-card" onclick="toggleGiantMod(this, 'AimLock Gigante')"><div class="mod-info"><span class="mod-name">🎯 AIMLOCK HEADSHOT (RyanX.nb)</span><small class="mod-file">UnityCAB-95c043</small></div><div class="status-dot"></div></div>
-            <div class="mod-card" onclick="toggleGiantMod(this, 'No Recoil Giga')"><div class="mod-info"><span class="mod-name">🔫 NO RECOIL FULL (assetindexer.nb)</span><small class="mod-file">config.dat.pwa</small></div><div class="status-dot"></div></div>
-            <div class="mod-card" onclick="toggleGiantMod(this, 'Aim Track')"><div class="mod-info"><span class="mod-name">🛰️ AIM TRACKING (RyanX.dat)</span><small class="mod-file">weapontable.nb</small></div><div class="status-dot"></div></div>
-            <div class="mod-card" onclick="toggleGiantMod(this, 'Sensi Elite')"><div class="mod-info"><span class="mod-name">⚡ SUPER SENSIBILIDADE</span><small class="mod-file">touch_scale.log</small></div><div class="status-dot"></div></div>
-        </div>
+        <div class="panel-container" id="container">
+            <div class="header">
+                <span class="status-badge">SISTEMA v2.0 ONLINE</span>
+                <h1 style="font-size: 20px; margin-top: 15px;">CORE INJECTOR</h1>
+            </div>
 
-        <div class="section-title">Ghost & Proteção</div>
-        <div class="mod-container">
-            <div class="mod-card" onclick="toggleGiantMod(this, 'AntiBan Full')"><div class="mod-info"><span class="mod-name">🛡️ BYPASS ANTIBAN V8</span><small class="mod-file">antibanned.config</small></div><div class="status-dot"></div></div>
-            <div class="mod-card" onclick="toggleGiantMod(this, 'Limpar Logs')"><div class="mod-info"><span class="mod-name">🧹 CLEAN REPORT LOGS</span><small class="mod-file">report.log</small></div><div class="status-dot"></div></div>
-        </div>
+            <div class="terminal" id="term">
+                <div class="log-item">> Aguardando comando...</div>
+            </div>
 
-        <div class="console-box" id="log-box">
-            [SYSTEM] VITORZINW GIGANTE ONLINE...<br>
-            [READY] Aguardando comando de injeção...<br>
-            [DICA] Para instalar como APP, vá nas opções do Chrome.
-        </div>
+            <div class="card-module">
+                <h3>JORDANX MODULE</h3>
+                <p>Otimização de Headshot & Tracking (2022)</p>
+                <button class="btn-inject" onclick="processModule('jordan')">ATIVAR CORE</button>
+            </div>
 
-        <div class="p-box" id="p-box">
-            <div style="font-size: 10px; margin-bottom: 5px;" id="p-status">Instalando...</div>
-            <div class="bar-bg"><div class="bar-fill" id="p-bar"></div></div>
+            <div class="card-module">
+                <h3>IGZIM LEGACY</h3>
+                <p>Bypass Host & Anti-Logs Protection</p>
+                <button class="btn-inject" onclick="processModule('igzim')">ATIVAR BYPASS</button>
+            </div>
+
+            <div class="card-module">
+                <h3>SLEEP FF SENSI</h3>
+                <p>Ajuste de Regedit & DPI Virtual (.so)</p>
+                <button class="btn-inject" onclick="processModule('sleep')">ATIVAR SENSI</button>
+            </div>
+
+            <button class="btn-clean" onclick="clearSystem()">LIMPAR TODOS OS ARQUIVOS</button>
         </div>
     </div>
-
-    <button class="btn-inject-giant" onclick="iniciarInjecaoGigante()">INJETAR GIGANTE AGORA</button>
 
     <script>
-        // --- CONSERTA O 'ADICIONAR' PARA 'INSTALAR' (PWA REAL) ---
-        // Registrar Service Worker para ativar o modo PWA (Instalar app)
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGZ1bmN0aW9uKGV2ZW50KSB7IH0pOw==');
+        // BANCO DE DADOS DOS ARQUIVOS (Mapeado dos seus APKs)
+        const FILE_DATABASE = {
+            jordan: [
+                "HeadTrackingLock.json", "NoRecoil_Tracking.xml", "TrickShot.xml", 
+                "UmpTrick.json", "precisiontrick.xml", "trick.xml", "trickvipshot2x.xml"
+            ],
+            igzim: [
+                "com.android.battery_core.dts9", "host.conect.ff", "xitDHvip1", 
+                "xitDHvip2", "xitDHvip3", "metadata.dell"
+            ],
+            sleep: [
+                "OTIMIZACAO SENSI.so", "SensitivityEasyControl.xTRFs", 
+                "Xitado head.ini", "metedata.json", "Norecoilking11.so"
+            ]
+        };
+
+        // LÓGICA DE LOGIN
+        function startSystem() {
+            const pass = document.getElementById('passInput').value;
+            if (pass === "vitorzin senha 1") {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('panelPage').style.display = 'flex';
+                document.getElementById('container').style.display = 'block';
+                addLog("Acesso autorizado. Núcleos carregados.");
+            } else {
+                alert("Chave inválida!");
+            }
         }
 
+        // LÓGICA DE INJEÇÃO (SIMULAÇÃO DE 500 LINHAS)
+        async function processModule(mod) {
+            const files = FILE_DATABASE[mod];
+            addLog(`>> Iniciando Módulo: ${mod.toUpperCase()}`);
+            
+            for (let i = 0; i < files.length; i++) {
+                await new Promise(r => setTimeout(r, 800));
+                addLog(`[OK] Gravando: /files/${files[i]}`);
+            }
+            
+            addLog(`✅ Módulo ${mod.toUpperCase()} injetado com sucesso!`);
+            alert(`Otimização ${mod} Ativada!`);
+        }
+
+        function addLog(text) {
+            const term = document.getElementById('term');
+            const div = document.createElement('div');
+            div.className = 'log-item';
+            div.innerText = `> ${text}`;
+            term.appendChild(div);
+            term.scrollTop = term.scrollHeight;
+        }
+
+        function clearSystem() {
+            addLog("🧹 Iniciando limpeza profunda...");
+            setTimeout(() => {
+                addLog("Limpando cache de registros...");
+                addLog("Removendo arquivos temporários .so...");
+                addLog("✨ Sistema limpo!");
+                alert("Todos os arquivos foram removidos.");
+            }, 1500);
+        }
+
+        // --- SISTEMA PWA (INSTALAÇÃO) ---
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('install-section').style.display = 'block';
+            document.getElementById('pwaBtn').style.display = 'block';
         });
 
-        document.getElementById('btn-show-install').addEventListener('click', () => {
-            alert("Para instalar:\n1. Clique nos três pontinhos do Chrome.\n2. Escolha 'Instalar aplicativo'.\nSe não aparecer, atualize a página.");
-        });
-
-        // --- LÓGICA DO PAINEL GIGANTE ---
-        function toggleGiantMod(el, name) {
-            el.classList.toggle('active');
-            addLog(`Módulo GIGANTE selecionado: [${name}]`);
+        function installNow() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choice) => {
+                    if (choice.outcome === 'accepted') {
+                        document.getElementById('pwaBtn').style.display = 'none';
+                    }
+                });
+            }
         }
-
-        function addLog(msg) {
-            const box = document.getElementById('log-box');
-            box.innerHTML += `<br>> ${msg}`;
-            box.scrollTop = box.scrollHeight;
-        }
-
-        const arquivos = ["RyanX.nb", "weapontable.bin", "antibanned.cfg", "assetindexer.bundle", "report.log", "res_config.nb", "touch.log", "cab-95c.dat"];
-
-        function iniciarInjecaoGigante() {
-            document.getElementById('p-box').style.display = 'block';
-            addLog("[SYSTEM] Iniciando injeção GIGANTE...");
-            let prog = 0;
-            let fileIdx = 0;
-            
-            const int = setInterval(() => {
-                prog += Math.random() * 3;
-                document.getElementById('p-bar').style.width = prog + "%";
-                
-                if(prog % 10 < 1 && fileIdx < arquivos.length) {
-                    addLog(`Instalando arquivo: ${arquivos[fileIdx]}...`);
-                    fileIdx++;
-                }
-
-                if(prog >= 100) {
-                    clearInterval(int);
-                    addLog("<span style='color:var(--secondary)'>✅ SUCESSO GIGANTE: REEDIT APLICADA!</span>");
-                    alert("INSTALAÇÃO CONCLUÍDA NO GIGANTE!");
-                }
-            }, 90);
-        }
-
-        // MATRIX VERMELHO GIGANTE
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const letters = "VITORZINWFF";
-        const fontSize = 12;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function drawGiantMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#ff0000";
-            ctx.font = fontSize + "px arial";
-            drops.forEach((y, i) => {
-                const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillText(text, i * fontSize, y * fontSize);
-                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            });
-        }
-        setInterval(drawGiantMatrix, 60);
     </script>
 </body>
 </html>
