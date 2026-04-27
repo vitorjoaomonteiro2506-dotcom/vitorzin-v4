@@ -1,15 +1,173 @@
-{
-  "name": "Master Injector VIP",
-  "short_name": "InjectorVIP",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#050505",
-  "theme_color": "#00ff41",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/2586/2586488.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#00ff41">
+    <link rel="manifest" href="manifest.json">
+    <title>SISTEMA MESTRE v24 | MULTI-CORE</title>
+    <style>
+        :root { --neon: #00ff41; --bg: #050505; --card: #121212; --danger: #ff3e3e; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; }
+        
+        /* Telas */
+        .screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        
+        /* Login */
+        .glow-logo { width: 100px; height: 100px; border-radius: 50%; background: var(--neon); box-shadow: 0 0 40px var(--neon); margin-bottom: 30px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
+        
+        .input-box { width: 100%; max-width: 300px; padding: 15px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 15px; text-align: center; }
+        .btn-auth { width: 100%; max-width: 300px; padding: 15px; background: var(--neon); color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+        /* Painel Principal */
+        .panel-container { display: none; width: 100%; max-width: 500px; margin-top: 20px; }
+        .header { text-align: center; border-bottom: 1px solid #222; padding-bottom: 20px; margin-bottom: 20px; }
+        .status-badge { background: rgba(0,255,65,0.1); color: var(--neon); padding: 5px 15px; border-radius: 20px; font-size: 12px; border: 1px solid var(--neon); }
+
+        .card-module { background: var(--card); border: 1px solid #222; border-radius: 12px; padding: 20px; margin-bottom: 15px; transition: 0.3s; }
+        .card-module:hover { border-color: var(--neon); }
+        .card-module h3 { margin: 0 0 10px 0; font-size: 16px; color: var(--neon); }
+        .card-module p { margin: 0 0 15px 0; font-size: 13px; color: #888; }
+        
+        .btn-inject { background: transparent; border: 1px solid var(--neon); color: var(--neon); width: 100%; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .btn-inject:active { background: var(--neon); color: black; }
+
+        /* Terminal de Logs */
+        .terminal { background: black; border: 1px solid #333; border-radius: 8px; height: 180px; overflow-y: auto; padding: 15px; font-family: monospace; font-size: 11px; color: #00ff41; margin-bottom: 20px; box-shadow: inset 0 0 10px #000; }
+        .log-item { margin-bottom: 5px; border-left: 2px solid var(--neon); padding-left: 8px; }
+
+        .btn-install { display: none; background: #fff; color: #000; padding: 10px 20px; border-radius: 20px; font-weight: bold; margin-bottom: 20px; cursor: pointer; }
+        .btn-clean { background: var(--danger); color: white; border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; margin-bottom: 50px; }
+    </style>
+</head>
+<body>
+
+    <div id="loginPage" class="screen">
+        <div class="glow-logo"></div>
+        <h2 style="margin-bottom: 10px;">AUTHORIZED ACCESS</h2>
+        <p style="color: #666; margin-bottom: 30px; font-size: 13px;">JordanX | Igzim | Sleep FF</p>
+        <input type="password" id="passInput" class="input-box" placeholder="CHAVE DE ACESSO">
+        <button class="btn-auth" onclick="startSystem()">ENTRAR NO SISTEMA</button>
+    </div>
+
+    <div id="panelPage" class="screen" style="display: none; justify-content: flex-start;">
+        <div id="pwaBtn" class="btn-install" onclick="installNow()">📥 INSTALAR NA TELA INICIAL</div>
+        
+        <div class="panel-container" id="container">
+            <div class="header">
+                <span class="status-badge">SISTEMA v2.0 ONLINE</span>
+                <h1 style="font-size: 20px; margin-top: 15px;">CORE INJECTOR</h1>
+            </div>
+
+            <div class="terminal" id="term">
+                <div class="log-item">> Aguardando comando...</div>
+            </div>
+
+            <div class="card-module">
+                <h3>JORDANX MODULE</h3>
+                <p>Otimização de Headshot & Tracking (2022)</p>
+                <button class="btn-inject" onclick="processModule('jordan')">ATIVAR CORE</button>
+            </div>
+
+            <div class="card-module">
+                <h3>IGZIM LEGACY</h3>
+                <p>Bypass Host & Anti-Logs Protection</p>
+                <button class="btn-inject" onclick="processModule('igzim')">ATIVAR BYPASS</button>
+            </div>
+
+            <div class="card-module">
+                <h3>SLEEP FF SENSI</h3>
+                <p>Ajuste de Regedit & DPI Virtual (.so)</p>
+                <button class="btn-inject" onclick="processModule('sleep')">ATIVAR SENSI</button>
+            </div>
+
+            <button class="btn-clean" onclick="clearSystem()">LIMPAR TODOS OS ARQUIVOS</button>
+        </div>
+    </div>
+
+    <script>
+        // BANCO DE DADOS DOS ARQUIVOS (Mapeado dos seus APKs)
+        const FILE_DATABASE = {
+            jordan: [
+                "HeadTrackingLock.json", "NoRecoil_Tracking.xml", "TrickShot.xml", 
+                "UmpTrick.json", "precisiontrick.xml", "trick.xml", "trickvipshot2x.xml"
+            ],
+            igzim: [
+                "com.android.battery_core.dts9", "host.conect.ff", "xitDHvip1", 
+                "xitDHvip2", "xitDHvip3", "metadata.dell"
+            ],
+            sleep: [
+                "OTIMIZACAO SENSI.so", "SensitivityEasyControl.xTRFs", 
+                "Xitado head.ini", "metedata.json", "Norecoilking11.so"
+            ]
+        };
+
+        // LÓGICA DE LOGIN
+        function startSystem() {
+            const pass = document.getElementById('passInput').value;
+            if (pass === "vitorzin senha 1") {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('panelPage').style.display = 'flex';
+                document.getElementById('container').style.display = 'block';
+                addLog("Acesso autorizado. Núcleos carregados.");
+            } else {
+                alert("Chave inválida!");
+            }
+        }
+
+        // LÓGICA DE INJEÇÃO (SIMULAÇÃO DE 500 LINHAS)
+        async function processModule(mod) {
+            const files = FILE_DATABASE[mod];
+            addLog(`>> Iniciando Módulo: ${mod.toUpperCase()}`);
+            
+            for (let i = 0; i < files.length; i++) {
+                await new Promise(r => setTimeout(r, 800));
+                addLog(`[OK] Gravando: /files/${files[i]}`);
+            }
+            
+            addLog(`✅ Módulo ${mod.toUpperCase()} injetado com sucesso!`);
+            alert(`Otimização ${mod} Ativada!`);
+        }
+
+        function addLog(text) {
+            const term = document.getElementById('term');
+            const div = document.createElement('div');
+            div.className = 'log-item';
+            div.innerText = `> ${text}`;
+            term.appendChild(div);
+            term.scrollTop = term.scrollHeight;
+        }
+
+        function clearSystem() {
+            addLog("🧹 Iniciando limpeza profunda...");
+            setTimeout(() => {
+                addLog("Limpando cache de registros...");
+                addLog("Removendo arquivos temporários .so...");
+                addLog("✨ Sistema limpo!");
+                alert("Todos os arquivos foram removidos.");
+            }, 1500);
+        }
+
+        // --- SISTEMA PWA (INSTALAÇÃO) ---
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('pwaBtn').style.display = 'block';
+        });
+
+        function installNow() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choice) => {
+                    if (choice.outcome === 'accepted') {
+                        document.getElementById('pwaBtn').style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
