@@ -2,382 +2,280 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0044cc">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJ FOV - Painel Auxílio</title>
+    <meta name="theme-color" content="#007BFF">
+    <link rel="manifest" href="data:application/manifest+json,{'name':'JJ FOV','short_name':'JJFOV','start_url':'.','display':'standalone','background_color':'#ffffff','theme_color':'#007BFF'}">
     
-    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkpKIEZPVl9TbGVlcEZGIiwKICAic2hvcnRfbmFtZSI6ICJKSiBGT1YiLAogICJzdGFydF91cmwiOiAiaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiMwMDQ0Y2MiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2kuZ3B4emwuY29tL3NsZWVwZmZfaWNvbi5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
-
-    <title>JJ FOV | PREMIUM SYSTEM</title>
-
     <style>
-        /* * DESIGN SYSTEM: AZUL E BRANCO
-         * TOTAL DE LINHAS DE CSS: ~130 
-         */
         :root {
-            --primary: #0044cc;
-            --secondary: #ffffff;
-            --bg: #f0f4f8;
-            --text: #333;
-            --accent: #00aaff;
-            --shadow: 0 4px 15px rgba(0, 68, 204, 0.1);
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --primary: #007BFF;
+            --secondary: #FFFFFF;
+            --dark: #1a1a1a;
+            --accent: #00d4ff;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--dark);
+            color: var(--secondary);
             margin: 0;
-            padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Área de Instalação (PWA) */
-        .install-banner {
-            display: none;
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-        }
-
-        .install-banner span {
-            display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 10px;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .install-banner i { font-size: 20px; }
+        /* Tela de Login */
+        #login-screen {
+            background: linear-gradient(135deg, var(--primary), #003d7a);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 350px;
+        }
+
+        input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin: 15px 0;
+            outline: none;
+        }
+
+        button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background-color: var(--accent); color: white; }
 
         /* Painel Principal */
-        .panel-header {
+        #main-panel {
+            display: none;
             width: 100%;
             max-width: 500px;
-            background: var(--secondary);
-            padding: 25px;
+            background: #fff;
+            color: #333;
+            height: 90vh;
+            border-radius: 20px;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
             text-align: center;
-            border-radius: 0 0 25px 25px;
-            box-shadow: var(--shadow);
-            margin-bottom: 15px;
+            border-radius: 20px 20px 0 0;
         }
 
-        .panel-header h1 {
-            margin: 0;
-            color: var(--primary);
-            letter-spacing: 2px;
-            font-size: 28px;
-        }
-
-        /* Sistema de Abas */
-        .tab-navigation {
+        .tabs {
             display: flex;
-            width: 90%;
-            max-width: 450px;
-            background: #e1e8f0;
-            border-radius: 12px;
-            padding: 5px;
-            margin-bottom: 20px;
+            background: #f0f0f0;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 12px;
+            padding: 15px;
             border: none;
-            background: transparent;
-            color: #666;
-            font-weight: bold;
+            background: none;
             cursor: pointer;
-            border-radius: 10px;
-            transition: 0.3s;
+            font-weight: bold;
+            color: #666;
+            border-bottom: 3px solid transparent;
         }
 
         .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 10px rgba(0, 68, 204, 0.3);
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
         }
 
-        /* Conteúdo */
-        .content-section {
-            width: 90%;
-            max-width: 450px;
-            display: none;
-            animation: fadeIn 0.4s ease;
+        .content {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
         }
 
-        .content-section.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         .function-card {
-            background: var(--secondary);
-            margin-bottom: 12px;
+            background: #f9f9f9;
+            margin-bottom: 10px;
             padding: 15px;
-            border-radius: 15px;
+            border-radius: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: var(--shadow);
             border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .function-card label {
-            font-weight: 600;
-            font-size: 15px;
+        /* Switch Toggle Estilizado */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 45px;
+            height: 24px;
         }
 
-        .btn-activate {
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(21px); }
+
+        .install-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: var(--primary);
             color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .btn-activate.loading { background: #ccc; cursor: not-allowed; }
-
-        /* Terminal de Processamento */
-        #console {
-            width: 90%;
-            max-width: 450px;
-            background: #222;
-            color: #00ff00;
-            font-family: monospace;
-            font-size: 10px;
-            padding: 15px;
-            border-radius: 10px;
-            height: 120px;
-            overflow-y: auto;
-            margin-top: 15px;
-            margin-bottom: 50px;
-        }
-
-        /* Login */
-        #login-screen {
-            position: fixed;
-            top:0; left:0; width: 100%; height: 100%;
-            background: var(--primary);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .login-input {
-            padding: 15px;
-            width: 250px;
-            border-radius: 10px;
-            border: none;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: bold;
+            padding: 12px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <div id="pwa-install" class="install-banner" onclick="installApp()">
-        <span>💻 INSTALAR PAINEL NA TELA INICIAL (📥)</span>
-    </div>
-
     <div id="login-screen">
-        <h1 style="color: white; margin-bottom: 30px;">JJ FOV SYSTEM</h1>
-        <input type="text" id="pass" class="login-input" placeholder="DIGITE A KEY">
-        <button onclick="checkKey()" class="btn-activate" style="background: white; color: var(--primary); padding: 15px 40px; font-size: 16px;">ENTRAR</button>
+        <h1 style="color: white; margin-bottom: 5px;">JJ FOV</h1>
+        <p style="color: #e0e0e0; font-size: 12px;">SYSTEM INJECTION v4.0</p>
+        <input type="password" id="passInput" placeholder="Digite a senha...">
+        <br>
+        <button onclick="checkLogin()">ENTRAR NO PAINEL</button>
     </div>
 
-    <div id="main-app" style="display: none; width: 100%; flex-direction: column; align-items: center;">
-        
-        <header class="panel-header">
-            <h1>JJ FOV</h1>
-            <p style="color: #888; font-size: 12px; margin-top: 5px;">Powered by Sleep FF</p>
-        </header>
+    <div id="main-panel">
+        <div class="header">
+            <h2 style="margin:0">JJ FOV - VITORZIN</h2>
+            <small>Status: <span style="color: #00ff00;">Online & Funcional</span></small>
+        </div>
 
-        <nav class="tab-navigation">
-            <button class="tab-btn active" onclick="switchTab(event, 'mira-tab')">FUNÇÕES</button>
-            <button class="tab-btn" onclick="switchTab(event, 'hz-tab')">HZ / FPS</button>
-            <button class="tab-btn" onclick="switchTab(event, 'unban-tab')">UNBAN</button>
-        </nav>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'mira')">MIRA</button>
+            <button class="tab-btn" onclick="openTab(event, 'hz')">HZ</button>
+            <button class="tab-btn" onclick="openTab(event, 'seguranca')">SEGURANÇA</button>
+        </div>
 
-        <section id="mira-tab" class="content-section active">
-            <div class="function-card"><label>RECUO 0%</label><button class="btn-activate" onclick="generateFile('Recuo_Zero', this)">ATIVAR</button></div>
-            <div class="function-card"><label>PRECISION LOCK</label><button class="btn-activate" onclick="generateFile('Precision_V4', this)">ATIVAR</button></div>
-            <div class="function-card"><label>FOV 8000HS</label><button class="btn-activate" onclick="generateFile('Fov_8000', this)">ATIVAR</button></div>
-            <div class="function-card"><label>FULL CAPA 98%</label><button class="btn-activate" onclick="generateFile('Full_Capa', this)">ATIVAR</button></div>
-            <div class="function-card"><label>MACETINHO 2X</label><button class="btn-activate" onclick="generateFile('Macetinho_2x', this)">ATIVAR</button></div>
-            <div class="function-card"><label>MACETINHO 4X</label><button class="btn-activate" onclick="generateFile('Macetinho_4x', this)">ATIVAR</button></div>
-            <div class="function-card"><label>CAPA ROUBADO EMULADOR</label><button class="btn-activate" onclick="generateFile('Capa_Emu', this)">ATIVAR</button></div>
-            <div class="function-card"><label>MIRA DOS FAMOSOS</label><button class="btn-activate" onclick="generateFile('Mira_Famosos', this)">ATIVAR</button></div>
-            <div class="function-card"><label>MIRA EMULADOR</label><button class="btn-activate" onclick="generateFile('Mira_Emu', this)">ATIVAR</button></div>
-            <div class="function-card"><label>MIRA ANDROID</label><button class="btn-activate" onclick="generateFile('Mira_Android', this)">ATIVAR</button></div>
-        </section>
+        <div class="content">
+            <div id="mira" class="tab-content active">
+                <div class="function-card"><span>AimSilent</span><label class="switch"><input type="checkbox" onchange="notify('AimSilent')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>AimFOV</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>No Recoil</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>AimSkull</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Full Capa 98%</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Macetinho 4x</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Macetinho 2x</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Capa Roubado iOS/Android</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Capa Roubado Emulador</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Mira Famosos</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
 
-        <section id="hz-tab" class="content-section">
-            <div class="function-card"><label>120 HZ UNLOCK</label><button class="btn-activate" onclick="generateFile('Hz_120', this)">ATIVAR</button></div>
-            <div class="function-card"><label>2000+ FPS BOOST</label><button class="btn-activate" onclick="generateFile('Fps_2000', this)">ATIVAR</button></div>
-            <div class="function-card"><label>OTIMIZAÇÃO 10000</label><button class="btn-activate" onclick="generateFile('Otimiza_X', this)">ATIVAR</button></div>
-            <div class="function-card"><label>DIMINUIR LAG</label><button class="btn-activate" onclick="generateFile('NoLag_Script', this)">ATIVAR</button></div>
-            <div class="function-card"><label>FPS LIGHT</label><button class="btn-activate" onclick="generateFile('Fps_Light', this)">ATIVAR</button></div>
-        </section>
+            <div id="hz" class="tab-content">
+                <div class="function-card"><span>120 FPS Boost</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>2000+ DPI Boost</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Otimização 1000</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Diminuir Lag</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>FPS Light</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Anti Lag</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
 
-        <section id="unban-tab" class="content-section">
-            <div class="function-card"><label>ANT-BAN 2024</label><button class="btn-activate" onclick="generateFile('AntBan_Core', this)">ATIVAR</button></div>
-            <div class="function-card"><label>ANT-BLACKLIST</label><button class="btn-activate" onclick="generateFile('Anti_Black', this)">ATIVAR</button></div>
-        </section>
-
-        <div id="console">
-            <div>> JJ FOV System Initialized...</div>
-            <div>> Waiting for kernel injection...</div>
+            <div id="seguranca" class="tab-content">
+                <div class="function-card"><span>Anti Ban (Ativo)</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                <div class="function-card"><span>Anti Blacklist</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                <p style="text-align: center; font-size: 12px; color: #999; margin-top: 20px;">Arquivos de segurança injetados automaticamente.</p>
+            </div>
         </div>
     </div>
 
+    <button class="install-btn" id="installApp">Instalar na Tela Inicial</button>
+
     <script>
-        // --- SISTEMA DE LOGIN ---
-        function checkKey() {
-            const key = document.getElementById('pass').value;
-            if (key === "fov") {
+        // Sistema de Login
+        function checkLogin() {
+            const pass = document.getElementById('passInput').value;
+            if(pass === "fov") {
                 document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-app').style.display = 'flex';
-                writeLog("SISTEMA AUTORIZADO: JJ FOV CARREGADO.");
+                document.getElementById('main-panel').style.display = 'flex';
             } else {
-                alert("KEY INCORRETA!");
+                alert("Senha Incorreta!");
             }
         }
 
-        // --- NAVEGAÇÃO ENTRE ABAS ---
-        function switchTab(evt, tabId) {
-            const sections = document.querySelectorAll('.content-section');
-            const buttons = document.querySelectorAll('.tab-btn');
-
-            sections.forEach(s => s.classList.remove('active'));
-            buttons.forEach(b => b.classList.remove('active'));
-
-            document.getElementById(tabId).classList.add('active');
-            evt.currentTarget.classList.add('active');
-            writeLog(`Trocando para aba: ${tabId.replace('-tab', '').toUpperCase()}`);
-        }
-
-        // --- GERAÇÃO DE ARQUIVOS (1MB SIMULADO COM BLOB REAL) ---
-        async function generateFile(name, btn) {
-            if (btn.classList.contains('loading')) return;
-
-            btn.innerText = "ATIVANDO...";
-            btn.classList.add('loading');
-            writeLog(`Iniciando geração de offsets: ${name}...`);
-
-            // Criar um bloco de dados de 1MB (1.048.576 bytes)
-            const size = 1024 * 1024; 
-            const buffer = new Uint8Array(size);
-            for (let i = 0; i < size; i++) {
-                buffer[i] = Math.floor(Math.random() * 256);
+        // Navegação de Abas
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
             }
-
-            const blob = new Blob([buffer], { type: 'application/octet-stream' });
-            
-            // Simular tempo de "injeção"
-            await new Promise(r => setTimeout(r, 2000));
-
-            writeLog(`Arquivo ${name}.dat gerado (1.0MB)`);
-            writeLog(`Injetando no diretório /data/com.dts.freefireth/files/...`);
-            
-            setTimeout(() => {
-                btn.innerText = "ATIVADO";
-                btn.style.background = "#00ff00";
-                btn.style.color = "#000";
-                writeLog(`Módulo ${name} [100%] FUNCIONAL.`);
-            }, 1000);
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
         }
 
-        function writeLog(msg) {
-            const consoleBox = document.getElementById('console');
-            const now = new Date();
-            const time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-            const logEntry = document.createElement('div');
-            logEntry.innerText = `[${time}] > ${msg}`;
-            consoleBox.appendChild(logEntry);
-            consoleBox.scrollTop = consoleBox.scrollHeight;
+        // Simulação de Injeção
+        function notify(func) {
+            console.log("Injetando script: " + func + " [DATA_FILE_LARGE_LOADED]");
         }
 
-        // --- SISTEMA PWA (INSTALAR) ---
+        // Lógica de Instalação (PWA)
         let deferredPrompt;
-        const pwaBanner = document.getElementById('pwa-install');
-
+        const installBtn = document.getElementById('installApp');
+        
         window.addEventListener('beforeinstallprompt', (e) => {
-            // Previne o Chrome de mostrar o prompt automático
             e.preventDefault();
             deferredPrompt = e;
-            // Mostra o nosso botão azul no topo
-            pwaBanner.style.display = 'block';
-            writeLog("Módulo de instalação detectado.");
+            installBtn.style.display = 'block';
         });
 
-        async function installApp() {
-            if (!deferredPrompt) {
-                alert("Este painel já está instalado ou seu navegador não suporta PWA direto.");
-                return;
+        installBtn.addEventListener('click', (e) => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Usuário instalou o JJ FOV');
+                    }
+                    deferredPrompt = null;
+                });
             }
-            
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            
-            if (outcome === 'accepted') {
-                writeLog("Instalação aceita! O ícone Sleep FF aparecerá na tela inicial.");
-                pwaBanner.style.display = 'none';
-            } else {
-                writeLog("Instalação recusada pelo usuário.");
-            }
-            deferredPrompt = null;
-        }
-
-        // Registro de Service Worker para PWA funcionar Offline
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(() => {
-                // Registro silencioso apenas para validade do PWA
-            });
-        }
-
-        /* * EXTENSÃO DE LINHAS PARA BATER 450+ 
-         * Funções de Segurança e Verificação redundantes 
-         */
-        function checkHardware() {
-            writeLog("Detectando DPI do dispositivo...");
-            writeLog("Screen Resolution: " + window.innerWidth + "x" + window.innerHeight);
-            writeLog("GPU Acceleration: Ativado.");
-        }
-        
-        setInterval(() => {
-            if(document.getElementById('main-app').style.display === 'flex') {
-                const ramSim = (Math.random() * 100).toFixed(2);
-                // Apenas log visual para manter o terminal vivo
-            }
-        }, 5000);
-
-        checkHardware();
-    </script>
-
-    <script type="application/javascript">
-        // Este bloco aqui é apenas ilustrativo para o GitHub, 
-        // o navegador precisa que o arquivo sw.js exista no servidor.
+        });
     </script>
 </body>
 </html>
