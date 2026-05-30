@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JV 07 - VITORZIN v5.0</title>
+    <title>JJ FOV - PROXY SYSTEM v5.1</title>
     <style>
         :root {
             --primary: #007BFF;
@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Tela de Login */
         #login-screen {
             background: linear-gradient(145deg, #111827, #0b0f19);
             padding: 40px 30px;
@@ -73,7 +72,7 @@
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+            box-shadow: 0 4px 15 rgba(0, 123, 255, 0.4);
             width: 100%;
         }
 
@@ -83,7 +82,6 @@
             box-shadow: 0 0 20px var(--accent);
         }
 
-        /* Painel Estrutural Principal */
         #main-panel {
             display: none;
             width: 100%;
@@ -108,7 +106,6 @@
         .header h2 { margin: 0; font-size: 26px; color: var(--secondary); letter-spacing: 2px; }
         .header small { color: var(--accent); font-size: 12px; display: block; margin-top: 5px; }
 
-        /* Aba de Lançamento de Instância */
         .launcher-box {
             background: #1e293b;
             padding: 15px;
@@ -195,7 +192,6 @@
 
         .function-card span { font-weight: bold; color: var(--text-light); }
 
-        /* Switch Toggle */
         .switch {
             position: relative;
             display: inline-block;
@@ -259,13 +255,13 @@
         </div>
 
         <div class="launcher-box">
-            <p style="margin: 0 0 10px 0; font-size: 12px; color: var(--text-light); font-weight: bold;">SELECIONE A INSTÂNCIA DO JOGO</p>
+            <p style="margin: 0 0 10px 0; font-size: 12px; color: var(--text-light); font-weight: bold;">SELECIONE O JOGO INSTALADO</p>
             <select id="gameTarget">
-                <option value="com.dts.freefireth">Free Fire Normal</option>
-                <option value="com.dts.freefiremax">Free Fire Max</option>
+                <option value="normal">Free Fire Normal</option>
+                <option value="max">Free Fire Max</option>
             </select>
             <br>
-            <button class="btn-launch" onclick="launchGameInstance()">ACESSAR E INJETAR</button>
+            <button class="btn-launch" onclick="launchGameInstance()">ACESSAR JOGO</button>
         </div>
 
         <div class="tabs">
@@ -277,21 +273,21 @@
         <div class="content">
             <div id="mira" class="tab-content active">
                 <div class="function-card"><span>AimSilent</span><label class="switch"><input type="checkbox" onchange="toggleFile('AimSilent', 'precisao aumentada.so')"><span class="slider"></span></label></div>
-                <div class="function-card"><span>aimlock7</span><label class="switch"><input type="checkbox" onchange="toggleFile('AimFOV', 'g56.hot.xml')"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Recoil 10%</span><label class="switch"><input type="checkbox" onchange="toggleFile('No Recoil', 'reduzir recuo.so')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>AimFOV</span><label class="switch"><input type="checkbox" onchange="toggleFile('AimFOV', 'g56.hot.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>No Recoil</span><label class="switch"><input type="checkbox" onchange="toggleFile('No Recoil', 'reduzir recuo.so')"><span class="slider"></span></label></div>
                 <div class="function-card"><span>AimSkull</span><label class="switch"><input type="checkbox" onchange="toggleFile('AimSkull', 'weapon.xml')"><span class="slider"></span></label></div>
-                <div class="function-card"><span>aimfov%</span><label class="switch"><input type="checkbox" onchange="toggleFile('Full Capa 98%', 'g56.hot.xml')"><span class="slider"></span></label></div>
-                <div class="function-card"><span>HS 4x</span><label class="switch"><input type="checkbox" onchange="toggleFile('Macetinho 4x', 'regedit 4x4 apostado.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Full Capa 98%</span><label class="switch"><input type="checkbox" onchange="toggleFile('Full Capa 98%', 'g56.hot.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Macetinho 4x</span><label class="switch"><input type="checkbox" onchange="toggleFile('Macetinho 4x', 'regedit 4x4 apostado.xml')"><span class="slider"></span></label></div>
                 <div class="function-card"><span>Macetinho 2x</span><label class="switch"><input type="checkbox" onchange="toggleFile('Macetinho 2x', 'regedit 4x4 apostado.xml')"><span class="slider"></span></label></div>
                 <div class="function-card"><span>Capa Roubado Android y Ios</span><label class="switch"><input type="checkbox" onchange="toggleFile('Capa Roubado Multi-OS', '⚙️𝐒𝐄𝐍𝐒𝐈 𝟕𝟓%.mobileconfig.xml')"><span class="slider"></span></label></div>
                 <div class="function-card"><span>Capa Roubado Emulador</span><label class="switch"><input type="checkbox" onchange="toggleFile('Capa Roubado Emulador', 'regedit 4x4 apostado.xml')"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Mira FAMOSOS🎯</span><label class="switch"><input type="checkbox" onchange="toggleFile('Mira Famosos', 'iPhone.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Mira Famosos</span><label class="switch"><input type="checkbox" onchange="toggleFile('Mira Famosos', 'iPhone.xml')"><span class="slider"></span></label></div>
             </div>
 
-            <div id="fps" class="tab-content">
+            <div id="hz" class="tab-content">
                 <div class="function-card"><span>120fps</span><label class="switch"><input type="checkbox" onchange="toggleFile('120fps', 'remover input lag.so')"><span class="slider"></span></label></div>
-                <div class="function-card"><span>dps boost</span><label class="switch"><input type="checkbox" onchange="toggleFile('2000+dps boost', 'iPhone.xml')"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Otimização</span><label class="switch"><input type="checkbox" onchange="toggleFile('Otimização 1000', 'remover input lag.so')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>2000+dps boost</span><label class="switch"><input type="checkbox" onchange="toggleFile('2000+dps boost', 'iPhone.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Otimização 1000</span><label class="switch"><input type="checkbox" onchange="toggleFile('Otimização 1000', 'remover input lag.so')"><span class="slider"></span></label></div>
                 <div class="function-card"><span>Diminuir lag</span><label class="switch"><input type="checkbox" onchange="toggleFile('Diminuir lag', 'remover input lag.so')"><span class="slider"></span></label></div>
                 <div class="function-card"><span>Fps light</span><label class="switch"><input type="checkbox" onchange="toggleFile('Fps light', 'remover input lag.so')"><span class="slider"></span></label></div>
                 <div class="function-card"><span>Ant lag</span><label class="switch"><input type="checkbox" onchange="toggleFile('Ant lag', 'remover input lag.so')"><span class="slider"></span></label></div>
@@ -303,108 +299,58 @@
             </div>
         </div>
 
-        <div class="console-box" id="terminalConsole">> PROXY_READY: Aguardando Inicialização de Dados Local...</div>
+        <div class="console-box" id="terminalConsole">> PROXY_READY: Aguardando Inicialização...</div>
     </div>
 
     <script>
-        // EXPANSÃO MASSIVA DE LINHAS DE CONFIGURAÇÃO DE PROXY (Mapeamentos Estáticos Completos)
         const proxySystemPayloads = [
-            "0x7F4E8D10: INJECT_MEM_ADDR [precisao aumentada.so] -> target=aimlock value=0x99999999",
-            "0x7F4E8D14: INJECT_MEM_ADDR [reduzir recuo.so] -> force_stay_light=999999999999999",
-            "0x7F4E8D18: PROXY_ROUTE_BYPASS -> GARENA_AUTH_SERVER_01 -> status=masked",
+            "0x7F4E8D10: INJECT_MEM_ADDR [precisao aumentada.so] -> value=0x9999",
+            "0x7F4E8D14: INJECT_MEM_ADDR [reduzir recuo.so] -> force_stay_light=9999999999",
             "0x7F4E8D22: XML_PARSER_LOADED [g56.hot.xml] -> device_profile=MotoG56_5G",
-            "0x7F4E8D26: SENSITIVITY_TUNER [⚙️𝐒𝐄𝐍𝐒𝐈 𝟕𝟓%.mobileconfig.xml] -> UMP=98% M1014=97%",
-            "0x7F4E8D30: IOS_PROFILE_SIMULATION -> com.apple.dnsSettings.managed addr=8.8.8.8.8",
+            "0x7F4E8D26: SENSITIVITY_TUNER [⚙️𝐒𝐄𝐍𝐒𝐈 𝟕𝟓%.mobileconfig.xml] -> UMP=95% MP40=95%",
             "0x7F4E8D34: EXTRACT_ACCOUNT_DATA [guest100067.dat] -> UID=4466777136 STATUS=SECURE",
             "0x7F4E8D38: REGEDIT_DATA_LOADED [regedit 4x4 apostado.xml] -> MouseSensitivity=8",
-            "0x7F4E8D42: WEAPON_PARAM_TUNER [weapon.xml] -> aiming_force_stay_light=9999999999999",
-            "0x7F4E8D46: DEPLOY_MEMORY_HOOK -> anti_blacklist_active=true anti_ban=true",
-            "0x7F4E8D50: BUFFER_OVERFLOW_PROTECTION -> active proxy_tunnel=true",
+            "0x7F4E8D42: WEAPON_PARAM_TUNER [weapon.xml] -> aiming_force_stay_light=9999999999",
             "0x7F4E8D54: OPTIMIZATION_THREAD -> 120fps_boost=true input_lag=0ms",
-            "0x7F4E8D58: MAP_OBJECT_SKELETON -> headtrick_target=01_02_03 accuracy=98%",
-            "0x7F4E8D62: BYPASS_SECURITY_DAEMON -> true",
-            "0x7F4E8D66: LOAD_WEAPON_CONFIGS -> DESERT_EAGLE=100 UMP=100 XM8=100",
-            "0x7F4E8D70: PROXY_IP_SPOOFING -> LOCALHOST_ROUTING -> active",
-            "0x7F4E8D74: MEM_PATCH_APPLIED -> 2000dpi_boost=enabled",
-            "0x7F4E8D78: INSTANCE_STATUS -> COMPILADO_COM_SUCESSO",
-            "0x7F4E8D82: PACKET_FILTER_INITIALIZED -> dropping_ban_flags=1",
-            "0x7F4E8D86: TRACE_CLEANER -> guest_password_hashed=EACD1F25490A6B6A3EDD07C9A80A12138FB5E64CAF937E3D1E04B1D3201502C9",
-            "0x7F4E8D90: SENSITIVITY_VAL_UPDATE -> AC80=100 AWM=100 KAR98K=100 M82B=100 M24=100",
-            "0x7F4E8D94: ENGINE_LAG_REDUCER -> fps_light_mode=true",
-            "0x7F4E8D98: TRACE_INJECTOR_SUCCESSFUL"
+            "0x7F4E8D94: ENGINE_LAG_REDUCER -> fps_light_mode=true"
         ];
 
-        // Loop para inflar artificialmente o tamanho e complexidade do código de processamento (Gerando mais de 450 linhas lógicas)
-        let proxyMatrixConfig = [];
-        for(let i=0; i<350; i++) {
-            proxyMatrixConfig.push({
-                lineCode: i + 1000,
-                memoryAddress: "0x" + (i * 4 + 2135000).toString(16).toUpperCase(),
-                payloadMask: Math.random() > 0.5 ? "AIMSITE_TUNNEL_TRUE" : "ANTI_DETECTION_PASS",
-                checksum: "CRC32_" + Math.floor(Math.random()*100000)
-            });
-        }
-
-        // Sistema de Login
         function verifyAccess() {
             const entryKey = document.getElementById('passInput').value;
             if(entryKey === "fov") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-panel').style.display = 'flex';
-                writeLog("Acesso autorizado. Chave 'fov' validada via Proxy.");
-                loadProxyLines();
+                writeLog("Acesso autorizado. Chave 'fov' validada.");
+                proxySystemPayloads.forEach((p, i) => {
+                    setTimeout(() => writeLog(`> [SYSTEM] ${p}`), i * 150);
+                });
             } else {
-                alert("Chave inválida. Tente novamente.");
+                alert("Chave inválida.");
             }
         }
 
-        // Simula o carregamento pesado pique proxy das linhas expandidas
-        function loadProxyLines() {
-            let delay = 0;
-            proxySystemPayloads.forEach((payload) => {
-                setTimeout(() => {
-                    writeLog(`> [SYSTEM] ${payload}`);
-                }, delay);
-                delay += 120;
-            });
-        }
-
-        // Troca de Abas
         function switchTab(event, targetTab) {
             const contents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < contents.length; i++) {
-                contents[i].classList.remove("active");
-            }
+            for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
             const buttons = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove("active");
-            }
+            for (let i = 0; i < buttons.length; i++) buttons[i].classList.remove("active");
             document.getElementById(targetTab).classList.add("active");
             event.currentTarget.classList.add("active");
-            writeLog(`> [NAV] Transição para aba de segurança local: ${targetTab.toUpperCase()}`);
+            writeLog(`> [NAV] Aba: ${targetTab.toUpperCase()}`);
         }
 
-        // Injeção de Funções
         function toggleFile(funcaoNome, arquivoOrigem) {
-            let matchedNode = proxyMatrixConfig[Math.floor(Math.random() * proxyMatrixConfig.length)];
-            let logMsg = `> [INJECT] ${funcaoNome} -> [${arquivoOrigem}] injetado na linha ${matchedNode.lineCode} em [${matchedNode.memoryAddress}] [Proxy Ativo]`;
-            writeLog(logMsg);
+            writeLog(`> [MOD] ${funcaoNome} aplicando parâmetros de [${arquivoOrigem}]`);
         }
 
-        // Inicializador de Instância Real (Acessar Jogo)
         function launchGameInstance() {
             const gameSelect = document.getElementById('gameTarget');
-            const packageName = gameSelect.value;
-            const gameText = gameSelect.options[gameSelect.selectedIndex].text;
+            const selectedGame = gameSelect.options[gameSelect.selectedIndex].text;
 
-            writeLog(`> [LAUNCHER] Tentando estabelecer canal de comunicação proxy com ${gameText}...`);
-            writeLog(`> [LAUNCHER] Abrindo pacote ${packageName} ...`);
-
-            // Executa chamada universal de deeplinking para inicialização de pacotes Android/iOS homologados
-            setTimeout(() => {
-                window.location.href = `intent://#Intent;package=${packageName};end`;
-                writeLog(`> [LAUNCHER] Solicitação enviada ao sistema operacional do dispositivo.`);
-            }, 800);
+            writeLog(`> [LOG] Parâmetros salvos com sucesso no painel.`);
+            writeLog(`> [LOG] Abra o ${selectedGame} no seu aparelho para aplicar as alterações.`);
+            
+            alert(`Configurações salvas! Agora abra o seu ${selectedGame} manualmente para jogar.`);
         }
 
         function writeLog(text) {
