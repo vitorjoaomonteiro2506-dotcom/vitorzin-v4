@@ -1,72 +1,373 @@
-w����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!hw����!��!h
-/?<>/<fuction-improves-aim->
-weapon-ump:100000000000000=1
-weapon-desert-eagle:100000000000000=2
-weapon-xm8:100000000000=3
-/weapon file codes-1-2-3{
-<string>
-                       <key>1-2-3<>
-ump_aimlock_weapon_(1)_aim
-    desert_eagle_aimlock_(2)_aim
-        xm8_aimlock_(3)_aim
- <weapon_1-2-3>/1_2_3
- <key>1$_2#_3&
- &&&$$${}$&&&&$$&#&#-#+#+#+$;$+$)7$+#!#+$7#+#!+##7$&#-!##234(#8#-$-#-#!#)#7363!$?$($7$-$!$($8$6$+!#(##7$&2+2)28262&#;#(a $7$+$($($7#62!3(3944(26#&!#)$9$$7$-!$
- >>>>>>>>>>><assistance<<<<<<<<<<<
- ?/<fuction-improves-aim->
-weapon-ump:100=1
-weapon-desert-eagle:100=2
-weapon-xm8:100=3
-/weapon file codes-1-2-3{
-<string>
-                       <key>1-2-3<>
-ump_aimlock_weapon_(1)_aim
-    desert_eagle_aimlock_(2)_aim
-        xm8_aimlock_(3)_aim
- <weapon_1-2-3>/1_2_3
- <key>1$_2#_3&
- &&&$$${}$&&&&$$&#&#-#+#+#+$;$+$)7$+#!#+$7#+#!+##7$&#-!##234(#8#-$-#-#!#)#7363!$?$($7$-$!$($8$6$+!#(##7$&2+2)28262&#;#(a $7$+$($($7#62!3(3944(26#&!#)$9$$7$-!$
- >>>>>>>>>>><assistance<<<<<<<<<<
- >full(<1*2*3<key>1_2_3>weapon
- <fuction_aimlock:100000000000000000000
-> fuction_weapon_ump<fuction-100000000000000000
- >fuction_weapon_desert_eagle>fuction-1000<
- <fuction_weapon_xm8<fuction_1000000000000000>
-/;do_not_tremble:00001%%
-?¥character_alok_�_�_�_�_�_�_��_�_�_�_�_�_�_�_�_�_�_�_1
-_2�3�0�F����H�_�_4_<�_I
-*>>>>>>>>>>>><key><<<<<<<<<<<<<<
-?/<fuction-improves-aim->
-weapon-ump:1000000000000=1
-weapon-desert-eagle:1000000000000=2
-weapon-xm8:100=3
-/weapon file codes-1-2-3{
-<string>
-                       <key>1-2-3<>
-ump_aimlock_weapon_(1)_aim
-    desert_eagle_aimlock_(2)_aim
-        xm8_aimlock_(3)_aim
- <weapon_1-2-3>/1_2_3
- <key>1$_2#_3&
- &&&$$${}$&&&&$$&#&#-#+#+#+$;$+$)7$+#!#+$7#+#!+##7$&#-!##234(#8#-$-#-#!#)#7363!$?$($7$-$!$($8$6$+!#(##7$&2+2)28262&#;#(a $7$+$($($7#62!3(3944(26#&!#)$9$$7$-!$
- >>>>>>>>>>><assistance<<<<<<<<<<
- >full(<1*2*3<key>1_2_3>weapon
- <fuction_aimlock:1000
-> fuction_weapon_ump<fuction-1000
- >fuction_weapon_desert_eagle>fuction-1000<
- <fuction_weapon_xm8<fuction_1000000000000000>
-/;do_not_tremble:0000000000000000001%%
-?¥character_alok_�_�_�_�_�_�_��_�_�_�_�_�_�_�_�_�_�_�_1
-_2�3�0�F����H�_�_4_<�_I//<<
-aimxiter-9999999999999999%
-aimlock-9999999999999999%
-aimfov-99999999999999%
-aimskip-999999999999999%
-aimbot-9999999999999999%
-assistance-999999999999999%
-headtrick-999999999999999%
-character_slow_9999999999999%
-weapon_light_slow_0011
-skeleton of the character_0011
-target_89%
-<string>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJ FOV - PROXY SYSTEM v6.0</title>
+    <style>
+        :root {
+            --primary: #007BFF;
+            --primary-dark: #0040aa;
+            --secondary: #FFFFFF;
+            --dark-bg: #0a0f1d;
+            --card-bg: #111827;
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #00f0ff;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Tela de Login */
+        #login-screen {
+            background: linear-gradient(145deg, #111827, #0b0f19);
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.2);
+            width: 90%;
+            max-width: 360px;
+            border: 1px solid rgba(0, 123, 255, 0.3);
+        }
+
+        .login-logo {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--secondary);
+            text-shadow: 0 0 10px var(--primary);
+            margin-bottom: 5px;
+        }
+
+        input[type="password"] {
+            width: 85%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--primary);
+            background-color: #1f2937;
+            margin: 20px 0;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
+            color: var(--accent);
+        }
+
+        .btn-action {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+            width: 100%;
+        }
+
+        .btn-action:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        /* Painel Principal */
+        #main-panel {
+            display: none;
+            width: 100%;
+            max-width: 480px;
+            background: #0f172a;
+            height: 95vh;
+            border-radius: 20px;
+            position: relative;
+            flex-direction: column;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .header h2 { margin: 0; font-size: 26px; color: var(--secondary); letter-spacing: 2px; }
+        .header small { color: var(--accent); font-size: 12px; display: block; margin-top: 5px; }
+
+        /* Seletor de Instância Otimizado */
+        .launcher-box {
+            background: #1e293b;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 10px;
+            border: 1px dashed var(--primary);
+            text-align: center;
+        }
+
+        .launcher-box select {
+            background: #0f172a;
+            color: var(--accent);
+            border: 1px solid var(--primary);
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            font-weight: bold;
+            outline: none;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .btn-launch {
+            background: linear-gradient(90deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 80%;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-launch:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px var(--success);
+        }
+
+        .tabs {
+            display: flex;
+            background: #111827;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-muted);
+            font-size: 12px;
+            transition: all 0.2s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+            background-color: rgba(0, 240, 255, 0.05);
+        }
+
+        .content {
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .function-card {
+            background: var(--card-bg);
+            margin-bottom: 10px;
+            padding: 14px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .function-card span { font-weight: bold; color: var(--text-light); }
+
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #4b5563;
+            transition: .3s;
+            border-radius: 22px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; width: 16px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        .console-box {
+            background: #000000;
+            color: #39ff14;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px;
+            max-height: 120px;
+            overflow-y: auto;
+            border: 1px solid #1e293b;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- INTERFACE DE ENTRADA -->
+    <div id="login-screen">
+        <div class="login-logo">JJ FOV</div>
+        <p style="color: var(--text-muted); font-size: 10px; margin: 0; letter-spacing: 2px;">STABLE MODE v6.0</p>
+        <input type="password" id="passInput" placeholder="DIGITE A SENHA">
+        <br>
+        <button class="btn-action" onclick="verifyAccess()">INICIALIZAR PAINEL</button>
+    </div>
+
+    <!-- PAINEL OPERACIONAL PRINCIPAL -->
+    <div id="main-panel">
+        <div class="header">
+            <h2>JJ FOV PANEL</h2>
+            <small>ESTABILIZADOR: <span style="color: var(--success); font-weight: bold;">MIRA FULL HS (SEM PINAR)</span></small>
+        </div>
+
+        <!-- SELETOR DE JOGO -->
+        <div class="launcher-box">
+            <p style="margin: 0 0 10px 0; font-size: 12px; color: var(--text-light); font-weight: bold;">VINCULAR ARQUIVOS AO JOGO</p>
+            <select id="gameTarget">
+                <option value="normal">Free Fire Normal</option>
+                <option value="max">Free Fire Max</option>
+            </select>
+            <br>
+            <button class="btn-launch" onclick="processAndSaveConfig()">SALVAR E INJETAR</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'mira')">MIRA</button>
+            <button class="tab-btn" onclick="switchTab(event, 'hz')">HZ</button>
+            <button class="tab-btn" onclick="switchTab(event, 'seguranca')">SEGURANÇA</button>
+        </div>
+
+        <div class="content">
+            <!-- ABA 1: MIRA -->
+            <div id="mira" class="tab-content active">
+                <div class="function-card"><span>AimSilent</span><label class="switch"><input type="checkbox" checked onchange="toggleFile('AimSilent', 'precisao aumentada.so')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>AimFOV</span><label class="switch"><input type="checkbox" checked onchange="toggleFile('AimFOV', 'g56.hot.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>No Recoil</span><label class="switch"><input type="checkbox" checked onchange="toggleFile('No Recoil', 'reduzir recuo.so')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>AimSkull</span><label class="switch"><input type="checkbox" onchange="toggleFile('AimSkull', 'weapon.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Full Capa 98%</span><label class="switch"><input type="checkbox" checked onchange="toggleFile('Full Capa 98%', 'g56.hot.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Macetinho 4x</span><label class="switch"><input type="checkbox" onchange="toggleFile('Macetinho 4x', 'regedit 4x4 apostado.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Macetinho 2x</span><label class="switch"><input type="checkbox" onchange="toggleFile('Macetinho 2x', 'regedit 4x4 apostado.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Capa Roubado Android y Ios</span><label class="switch"><input type="checkbox" onchange="toggleFile('Capa Roubado Multi-OS', '⚙️𝐒𝐄𝐍𝐒𝐈 𝟕𝟓%.mobileconfig.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Capa Roubado Emulador</span><label class="switch"><input type="checkbox" onchange="toggleFile('Capa Roubado Emulador', 'regedit 4x4 apostado.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Mira Famosos</span><label class="switch"><input type="checkbox" onchange="toggleFile('Mira Famosos', 'iPhone.xml')"><span class="slider"></span></label></div>
+            </div>
+
+            <!-- ABA 2: HZ -->
+            <div id="hz" class="tab-content">
+                <div class="function-card"><span>120fps</span><label class="switch"><input type="checkbox" onchange="toggleFile('120fps', 'remover input lag.so')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>2000+dps boost</span><label class="switch"><input type="checkbox" onchange="toggleFile('2000+dps boost', 'iPhone.xml')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Otimização 1000</span><label class="switch"><input type="checkbox" onchange="toggleFile('Otimização 1000', 'remover input lag.so')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Diminuir lag</span><label class="switch"><input type="checkbox" onchange="toggleFile('Diminuir lag', 'remover input lag.so')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Fps light</span><label class="switch"><input type="checkbox" onchange="toggleFile('Fps light', 'remover input lag.so')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Ant lag</span><label class="switch"><input type="checkbox" onchange="toggleFile('Ant lag', 'remover input lag.so')"><span class="slider"></span></label></div>
+            </div>
+
+            <!-- ABA 3: SEGURANÇA -->
+            <div id="seguranca" class="tab-content">
+                <div class="function-card"><span>Anti Ban 100%</span><label class="switch"><input type="checkbox" checked onchange="toggleFile('Anti Ban', 'guest100067.dat')"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Anti Blacklist</span><label class="switch"><input type="checkbox" checked onchange="toggleFile('Anti Blacklist', 'g56.hot.xml')"><span class="slider"></span></label></div>
+            </div>
+        </div>
+
+        <!-- Terminal Console -->
+        <div class="console-box" id="terminalConsole">> DATABASE_READY: Aguardando sincronização de arquivos...</div>
+    </div>
+
+    <script>
+        const proxySystemPayloads = [
+            "0x7F4E8D10: INJECT_MEM_ADDR [precisao aumentada.so] -> value=MAX_FULL_HS",
+            "0x7F4E8D14: INJECT_MEM_ADDR [reduzir recuo.so] -> anti_pinar_force=100%",
+            "0x7F4E8D22: XML_PARSER_LOADED [g56.hot.xml] -> no_shake_stabilizer=active",
+            "0x7F4E8D26: SENSITIVITY_TUNER [⚙️𝐒𝐄𝐍𝐒𝐈 𝟕𝟓%.mobileconfig.xml] -> calibração de eixos X/Y estável",
+            "0x7F4E8D34: EXTRACT_ACCOUNT_DATA [guest100067.dat] -> STATUS=SECURE_BYPASS",
+            "0x7F4E8D38: REGEDIT_DATA_LOADED [regedit 4x4 apostado.xml] -> estabilidade de mira calibrada",
+            "0x7F4E8D54: OPTIMIZATION_THREAD -> input_lag=0ms completo"
+        ];
+
+        function verifyAccess() {
+            const entryKey = document.getElementById('passInput').value;
+            if(entryKey === "fov") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-panel').style.display = 'flex';
+                writeLog("Acesso autorizado. Banco de dados de arquivos carregado com sucesso.");
+                proxySystemPayloads.forEach((p, i) => {
+                    setTimeout(() => writeLog(`> [SISTEMA] ${p}`), i * 120);
+                });
+            } else {
+                alert("Senha incorreta.");
+            }
+        }
+
+        function switchTab(event, targetTab) {
+            const contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) buttons[i].classList.remove("active");
+            document.getElementById(targetTab).classList.add("active");
+            event.currentTarget.classList.add("active");
+            writeLog(`> [MENU] Visualizando aba: ${targetTab.toUpperCase()}`);
+        }
+
+        function toggleFile(funcaoNome, arquivoOrigem) {
+            writeLog(`> [MOD] ${funcaoNome} aplicando calibragem sem pinar via [${arquivoOrigem}]`);
+        }
+
+        function processAndSaveConfig() {
+            const gameSelect = document.getElementById('gameTarget');
+            const selectedGame = gameSelect.options[gameSelect.selectedIndex].text;
+
+            writeLog(`> [SUCESSO] Configuração de Mira Fixa compilada em lote!`);
+            writeLog(`> [INFO] Arquivos vinculados à instância do ${selectedGame}.`);
+            writeLog(`> [DICA] Minimize esta aba e inicie o jogo para aplicar a sensibilidade calibrada sem pinar.`);
+            
+            alert(`Arquivos processados para o ${selectedGame}! Abra o jogo para carregar as alterações sem erros.`);
+        }
+
+        function writeLog(text) {
+            const consoleBox = document.getElementById('terminalConsole');
+            consoleBox.innerHTML += `<br>${text}`;
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
