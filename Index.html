@@ -238,35 +238,17 @@
         .btn-ff-execute:active {
             transform: scale(0.97);
         }
-
-        /* TERMINAL OPERACIONAL DE HISTÓRICO */
-        .console-box {
-            background: #000000;
-            color: #39ff14;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 11px;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 15px;
-            height: 90px;
-            overflow-y: auto;
-            border: 1px solid #1e293b;
-            text-align: left;
-        }
     </style>
 </head>
 <body>
 
-    <!-- CONTAINER ESTRUTURAL DO PAINEL (HTML) -->
     <div class="panel-container">
         
-        <!-- CABEÇALHO -->
         <div class="header">
             <h2>JJ FOV PANEL</h2>
             <small>ESTABILIZADOR: <span style="color: var(--success); font-weight: bold;">JJ RLK77 (SEM PINAR)</span></small>
         </div>
 
-        <!-- SELETOR DE ALVO DO JOGO -->
         <div class="launcher-box">
             <p>VINCULAR ARQUIVOS AO JOGO</p>
             <select id="gameTarget">
@@ -277,7 +259,6 @@
             <button class="btn-launch" onclick="salvarConfiguracoes()">SALVAR E INJETAR</button>
         </div>
 
-        <!-- BOTÕES DAS ABAS MENU -->
         <div class="tabs">
             <button class="tab-btn active" onclick="mudarAba(event, 'aba-mira')">Mira</button>
             <button class="tab-btn" onclick="mudarAba(event, 'aba-hz')">Hz</button>
@@ -285,36 +266,31 @@
             <button class="tab-btn" style="color: #ff8c00;" onclick="mudarAba(event, 'aba-launcher')">Launcher FF</button>
         </div>
 
-        <!-- ÁREA DOS CARDS E SELEÇÕES -->
         <div class="content-area">
             
-            <!-- CONTEÚDO: MIRA -->
             <div id="aba-mira" class="tab-content active">
-                <div class="function-card"><span>Precision (V1)</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Precision V1', 'precision.txt', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Precision (V2)</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Precision V2', 'precision..txt', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Precision ESZX</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Precision ESZX', 'precision.eszx', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Precision SZXN</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Precision SZXN', 'precision.szxn', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>360°</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('360°', 'precisao aumentada.so', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>rlk77</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('rlk77', 'g56.hot.xml', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>trembala</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('trembala', 'reduzir recuo.so', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>023</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('023', 'weapon.xml', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Capa Android7 y Ios7</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Capa Android7 y Ios7', '⚙️𝐒𝐄𝐍𝐒𝐈 𝟕𝟓%.xml', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Precision (V1)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Precision (V2)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Precision ESZX</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Precision SZXN</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>360°</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>rlk77</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>trembala</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>023</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Capa Android7 y Ios7</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
             </div>
 
-            <!-- CONTEÚDO: HZ -->
             <div id="aba-hz" class="tab-content">
-                <div class="function-card"><span>120 FPS Boost</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('120 FPS Boost', 'remover input lag.so', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>2000+ DPS Boost</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('2000+ DPS Boost', 'iPhone.xml', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Otimização Touch</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Otimização Touch', 'remover input lag.so', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>120 FPS Boost</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>2000+ DPS Boost</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Otimização Touch</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
             </div>
 
-            <!-- CONTEÚDO: SEGURANÇA -->
             <div id="aba-seguranca" class="tab-content">
-                <div class="function-card"><span>Anti Ban 100%</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Anti Ban 100%', 'guest100067.dat', this)"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Anti Blacklist</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Anti Blacklist', 'g56.hot.xml', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Anti Ban 100%</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Anti Blacklist</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
             </div>
 
-            <!-- CONTEÚDO: LAUNCHER -->
             <div id="aba-launcher" class="tab-content">
                 <div class="ff-launcher-container">
                     <p>Ative as modificações desejadas, salve a instância no topo e clique abaixo para executar o comando de inicialização.</p>
@@ -324,15 +300,8 @@
 
         </div>
 
-        <!-- TERMINAL DE LOGS DO SISTEMA -->
-        <div class="console-box" id="terminal">
-            &gt; SENSITIVITY_TUNER: Carregando banco de dados de eixos X/Y estável...<br>
-            &gt; STATUS: Aguardando inicialização dos scripts.
-        </div>
-
     </div>
 
-    <!-- PROGRAMAÇÃO INTERNA DE FUNCIONAMENTO (JAVASCRIPT) -->
     <script>
         // Função para alternar entre as abas do painel de verdade
         function mudarAba(event, idAba) {
@@ -347,33 +316,18 @@
             // Mostra a aba clicada e ativa o botão correspondente
             document.getElementById(idAba).classList.add('active');
             event.currentTarget.classList.add('active');
-
-            adicionarLog(`Mudou para a aba: ${event.currentTarget.innerText}`);
-        }
-
-        // Função que detecta quando um switch liga ou desliga e joga no terminal nativo
-        function detectarModificacao(nomeFuncao, nomeArquivo, elemento) {
-            if(elemento.checked) {
-                adicionarLog(`[MOD] ${nomeFuncao} ATIVADO -> Mapeando arquivo [${nomeArquivo}]`);
-            } else {
-                adicionarLog(`[MOD] ${nomeFuncao} DESATIVADO pelo usuário.`);
-            }
         }
 
         // Função do botão Salvar e Injetar
         function salvarConfiguracoes() {
             const selectGame = document.getElementById('gameTarget');
             const jogoSelecionado = selectGame.options[selectGame.selectedIndex].text;
-            
-            adicionarLog(`[SUCESSO] Scripts compilados e vinculados ao ${jogoSelecionado}!`);
             alert(`Configurações injetadas para o ${jogoSelecionado}! Próximo passo: Vá na aba Launcher FF para abrir o jogo.`);
         }
 
         // Função do botão de abrir o Free Fire nativo
         function executarLauncher() {
             const alvoJogo = document.getElementById('gameTarget').value;
-            adicionarLog(`[LAUNCHER] Executando rotina bypass de eixos de mira...`);
-            adicionarLog(`[LAUNCHER] Abrindo o jogo com otimização ativa.`);
 
             setTimeout(() => {
                 if(alvoJogo === "max") {
@@ -381,15 +335,7 @@
                 } else {
                     window.location.href = 'intent://#Intent;package=com.dts.freefireth;end';
                 }
-            }, 500);
-        }
-
-        // Função auxiliar para escrever linhas no terminal de logs sem quebrar
-        function adicionarLog(texto) {
-            const terminal = document.getElementById('terminal');
-            terminal.innerHTML += `<br>&gt; ${texto}`;
-            // Faz o scroll automático do terminal sempre descer para o último log
-            terminal.scrollTop = terminal.scrollHeight;
+            }, 100);
         }
     </script>
 </body>
