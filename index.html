@@ -1,1 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJ FOV - BASE</title>
+    <style>
+        :root {
+            --primary: #007BFF;
+            --primary-dark: #0040aa;
+            --secondary: #FFFFFF;
+            --dark-bg: #0a0f1d;
+            --card-bg: #111827;
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #00f0ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Tela de Login */
+        #login-screen {
+            background: linear-gradient(145deg, #111827, #0b0f19);
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.2);
+            width: 90%;
+            max-width: 360px;
+            border: 1px solid rgba(0, 123, 255, 0.3);
+        }
+
+        .login-logo {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--secondary);
+            text-shadow: 0 0 10px var(--primary);
+            margin-bottom: 5px;
+        }
+
+        input[type="password"] {
+            width: 85%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--primary);
+            background-color: #1f2937;
+            margin: 20px 0;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
+            color: var(--accent);
+        }
+
+        .btn-action {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+            width: 100%;
+        }
+
+        .btn-action:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        /* Painel Estrutural Principal */
+        #main-panel {
+            display: none;
+            width: 100%;
+            max-width: 480px;
+            background: #0f172a;
+            height: 90vh;
+            border-radius: 20px;
+            position: relative;
+            flex-direction: column;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .header h2 { margin: 0; font-size: 26px; color: var(--secondary); letter-spacing: 2px; }
+
+        .tabs {
+            display: flex;
+            background: #111827;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-muted);
+            font-size: 12px;
+            transition: all 0.2s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+            background-color: rgba(0, 240, 255, 0.05);
+        }
+
+        .content {
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .function-card {
+            background: var(--card-bg);
+            margin-bottom: 10px;
+            padding: 14px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+        }
+
+        .function-card span { font-weight: bold; color: var(--text-light); }
+
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #4b5563;
+            transition: .3s;
+            border-radius: 22px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; width: 16px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(22px); }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-logo">JJ FOV</div>
+        <p style="color: var(--text-muted); font-size: 10px; margin: 0; letter-spacing: 2px;">BASE CARCAÇA</p>
+        <input type="password" id="passInput" placeholder="DIGITE A SENHA">
+        <br>
+        <button class="btn-action" onclick="verifyAccess()">ENTRAR</button>
+    </div>
+
+    <div id="main-panel">
+        <div class="header">
+            <h2>JJ FOV</h2>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'mira')">MIRA</button>
+            <button class="tab-btn" onclick="switchTab(event, 'hz')">HZ</button>
+            <button class="tab-btn" onclick="switchTab(event, 'seguranca')">SEGURANÇA</button>
+        </div>
+
+        <div class="content">
+            <div id="mira" class="tab-content active">
+                <div class="function-card"><span>Função 1</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Função 2</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+
+            <div id="hz" class="tab-content">
+                <div class="function-card"><span>Função 3</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+
+            <div id="seguranca" class="tab-content">
+                <div class="function-card"><span>Função 4</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function verifyAccess() {
+            const entryKey = document.getElementById('passInput').value;
+            if(entryKey === "fov") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-panel').style.display = 'flex';
+            } else {
+                alert("Senha incorreta.");
+            }
+        }
+
+        function switchTab(event, targetTab) {
+            const contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) buttons[i].classList.remove("active");
+            document.getElementById(targetTab).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
 
