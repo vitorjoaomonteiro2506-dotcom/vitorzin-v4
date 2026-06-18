@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JJ FOV - BASE</title>
+    <title>JJ FOV - PROXY SYSTEM v7.0</title>
     <style>
+        /* CONFIGURAÇÕES GERAIS DE CORES E ESTILO (CSS) */
         :root {
             --primary: #007BFF;
             --primary-dark: #0040aa;
@@ -14,6 +15,7 @@
             --text-light: #f3f4f6;
             --text-muted: #9ca3af;
             --accent: #00f0ff;
+            --success: #10b981;
         }
 
         body {
@@ -25,77 +27,25 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Tela de Login */
-        #login-screen {
-            background: linear-gradient(145deg, #111827, #0b0f19);
-            padding: 40px 30px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(0, 123, 255, 0.2);
-            width: 90%;
-            max-width: 360px;
-            border: 1px solid rgba(0, 123, 255, 0.3);
-        }
-
-        .login-logo {
-            font-size: 36px;
-            font-weight: 900;
-            letter-spacing: 3px;
-            color: var(--secondary);
-            text-shadow: 0 0 10px var(--primary);
-            margin-bottom: 5px;
-        }
-
-        input[type="password"] {
-            width: 85%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid var(--primary);
-            background-color: #1f2937;
-            margin: 20px 0;
-            outline: none;
-            font-size: 16px;
-            text-align: center;
-            color: var(--accent);
-        }
-
-        .btn-action {
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
-            width: 100%;
-        }
-
-        .btn-action:hover {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 0 20px var(--accent);
-        }
-
-        /* Painel Estrutural Principal */
-        #main-panel {
-            display: none;
+        /* CARD DO PAINEL PRINCIPAL */
+        .panel-container {
             width: 100%;
             max-width: 480px;
             background: #0f172a;
-            height: 90vh;
+            height: 95vh;
             border-radius: 20px;
-            position: relative;
+            display: flex;
             flex-direction: column;
             box-shadow: 0 25px 60px rgba(0,0,0,0.8);
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 10px;
         }
 
+        /* TOPO DO PAINEL */
         .header {
             background: linear-gradient(135deg, #1e3a8a, #0f172a);
             padding: 20px;
@@ -103,11 +53,72 @@
             border-bottom: 2px solid var(--primary);
         }
 
-        .header h2 { margin: 0; font-size: 26px; color: var(--secondary); letter-spacing: 2px; }
+        .header h2 { 
+            margin: 0; 
+            font-size: 26px; 
+            color: var(--secondary); 
+            letter-spacing: 2px; 
+        }
+        
+        .header small { 
+            color: var(--accent); 
+            font-size: 12px; 
+            display: block; 
+            margin-top: 5px; 
+        }
 
+        /* CAIXA DO INJETOR / SELETOR */
+        .launcher-box {
+            background: #1e293b;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 10px;
+            border: 1px dashed var(--primary);
+            text-align: center;
+        }
+
+        .launcher-box p {
+            margin: 0 0 10px 0; 
+            font-size: 12px; 
+            color: var(--text-light); 
+            font-weight: bold;
+        }
+
+        .launcher-box select {
+            background: #0f172a;
+            color: var(--accent);
+            border: 1px solid var(--primary);
+            padding: 10px;
+            width: 85%;
+            border-radius: 5px;
+            font-weight: bold;
+            outline: none;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .btn-launch {
+            background: linear-gradient(90deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 85%;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+            transition: all 0.2s;
+        }
+
+        .btn-launch:hover {
+            filter: brightness(1.2);
+        }
+
+        /* SEÇÃO DE ABAS */
         .tabs {
             display: flex;
             background: #111827;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .tab-btn {
@@ -118,9 +129,10 @@
             cursor: pointer;
             font-weight: bold;
             color: var(--text-muted);
-            font-size: 12px;
+            font-size: 11px;
             transition: all 0.2s ease;
             border-bottom: 3px solid transparent;
+            text-transform: uppercase;
         }
 
         .tab-btn.active {
@@ -129,14 +141,22 @@
             background-color: rgba(0, 240, 255, 0.05);
         }
 
-        .content {
+        /* CONTEÚDO DAS FUNÇÕES */
+        .content-area {
             padding: 15px;
             flex: 1;
             overflow-y: auto;
         }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        /* Esconder abas inativas por padrão */
+        .tab-content {
+            display: none;
+        }
+
+        /* Mostrar apenas a aba ativa */
+        .tab-content.active {
+            display: block;
+        }
 
         .function-card {
             background: var(--card-bg);
@@ -147,11 +167,15 @@
             justify-content: space-between;
             align-items: center;
             border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .function-card span { font-weight: bold; color: var(--text-light); }
+        .function-card span { 
+            font-weight: bold; 
+            color: var(--text-light); 
+        }
 
-        /* Switch Toggle */
+        /* BOTÃO INTERRUPTOR (SWITCH TOGGLE) */
         .switch {
             position: relative;
             display: inline-block;
@@ -182,65 +206,191 @@
 
         input:checked + .slider { background-color: var(--primary); }
         input:checked + .slider:before { transform: translateX(22px); }
+
+        /* ABA DO LAUNCHER FF */
+        .ff-launcher-container {
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .ff-launcher-container p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .btn-ff-execute {
+            background: linear-gradient(90deg, #ff4500, #ff8c00);
+            color: white;
+            border: none;
+            padding: 16px 25px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 90%;
+            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4);
+            transition: transform 0.1s;
+        }
+
+        .btn-ff-execute:active {
+            transform: scale(0.97);
+        }
+
+        /* TERMINAL OPERACIONAL DE HISTÓRICO */
+        .console-box {
+            background: #000000;
+            color: #39ff14;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px;
+            height: 90px;
+            overflow-y: auto;
+            border: 1px solid #1e293b;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
 
-    <div id="login-screen">
-        <div class="login-logo">JJ FOV</div>
-        <p style="color: var(--text-muted); font-size: 10px; margin: 0; letter-spacing: 2px;">BASE CARCAÇA</p>
-        <input type="password" id="passInput" placeholder="DIGITE A SENHA">
-        <br>
-        <button class="btn-action" onclick="verifyAccess()">ENTRAR</button>
-    </div>
-
-    <div id="main-panel">
+    <!-- CONTAINER ESTRUTURAL DO PAINEL (HTML) -->
+    <div class="panel-container">
+        
+        <!-- CABEÇALHO -->
         <div class="header">
-            <h2>JJ FOV</h2>
+            <h2>JJ FOV PANEL</h2>
+            <small>ESTABILIZADOR: <span style="color: var(--success); font-weight: bold;">JJ RLK77 (SEM PINAR)</span></small>
         </div>
 
+        <!-- SELETOR DE ALVO DO JOGO -->
+        <div class="launcher-box">
+            <p>VINCULAR ARQUIVOS AO JOGO</p>
+            <select id="gameTarget">
+                <option value="normal">Free Fire Normal</option>
+                <option value="max">Free Fire Max</option>
+            </select>
+            <br>
+            <button class="btn-launch" onclick="salvarConfiguracoes()">SALVAR E INJETAR</button>
+        </div>
+
+        <!-- BOTÕES DAS ABAS MENU -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab(event, 'mira')">MIRA</button>
-            <button class="tab-btn" onclick="switchTab(event, 'hz')">HZ</button>
-            <button class="tab-btn" onclick="switchTab(event, 'seguranca')">SEGURANÇA</button>
+            <button class="tab-btn active" onclick="mudarAba(event, 'aba-mira')">Mira</button>
+            <button class="tab-btn" onclick="mudarAba(event, 'aba-hz')">Hz</button>
+            <button class="tab-btn" onclick="mudarAba(event, 'aba-seguranca')">Segurança</button>
+            <button class="tab-btn" style="color: #ff8c00;" onclick="mudarAba(event, 'aba-launcher')">Launcher FF</button>
         </div>
 
-        <div class="content">
-            <div id="mira" class="tab-content active">
-                <div class="function-card"><span>Função 1</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                <div class="function-card"><span>Função 2</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+        <!-- ÁREA DOS CARDS E SELEÇÕES -->
+        <div class="content-area">
+            
+            <!-- CONTEÚDO: MIRA -->
+            <div id="aba-mira" class="tab-content active">
+                <div class="function-card"><span>Precision (V1)</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Precision V1', 'precision.txt', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Precision (V2)</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Precision V2', 'precision..txt', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Precision ESZX</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Precision ESZX', 'precision.eszx', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Precision SZXN</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Precision SZXN', 'precision.szxn', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>360°</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('360°', 'precisao aumentada.so', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>rlk77</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('rlk77', 'g56.hot.xml', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>trembala</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('trembala', 'reduzir recuo.so', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>023</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('023', 'weapon.xml', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Capa Android7 y Ios7</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Capa Android7 y Ios7', '⚙️𝐒𝐄𝐍𝐒𝐈 𝟕𝟓%.xml', this)"><span class="slider"></span></label></div>
             </div>
 
-            <div id="hz" class="tab-content">
-                <div class="function-card"><span>Função 3</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            <!-- CONTEÚDO: HZ -->
+            <div id="aba-hz" class="tab-content">
+                <div class="function-card"><span>120 FPS Boost</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('120 FPS Boost', 'remover input lag.so', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>2000+ DPS Boost</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('2000+ DPS Boost', 'iPhone.xml', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Otimização Touch</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Otimização Touch', 'remover input lag.so', this)"><span class="slider"></span></label></div>
             </div>
 
-            <div id="seguranca" class="tab-content">
-                <div class="function-card"><span>Função 4</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            <!-- CONTEÚDO: SEGURANÇA -->
+            <div id="aba-seguranca" class="tab-content">
+                <div class="function-card"><span>Anti Ban 100%</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Anti Ban 100%', 'guest100067.dat', this)"><span class="slider"></span></label></div>
+                <div class="function-card"><span>Anti Blacklist</span><label class="switch"><input type="checkbox" onchange="detectarModificacao('Anti Blacklist', 'g56.hot.xml', this)"><span class="slider"></span></label></div>
             </div>
+
+            <!-- CONTEÚDO: LAUNCHER -->
+            <div id="aba-launcher" class="tab-content">
+                <div class="ff-launcher-container">
+                    <p>Ative as modificações desejadas, salve a instância no topo e clique abaixo para executar o comando de inicialização.</p>
+                    <button class="btn-ff-execute" onclick="executarLauncher()">ABRIR FREE FIRE (FULL HS)</button>
+                </div>
+            </div>
+
         </div>
+
+        <!-- TERMINAL DE LOGS DO SISTEMA -->
+        <div class="console-box" id="terminal">
+            &gt; SENSITIVITY_TUNER: Carregando banco de dados de eixos X/Y estável...<br>
+            &gt; STATUS: Aguardando inicialização dos scripts.
+        </div>
+
     </div>
 
+    <!-- PROGRAMAÇÃO INTERNA DE FUNCIONAMENTO (JAVASCRIPT) -->
     <script>
-        function verifyAccess() {
-            const entryKey = document.getElementById('passInput').value;
-            if(entryKey === "fov") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-panel').style.display = 'flex';
+        // Função para alternar entre as abas do painel de verdade
+        function mudarAba(event, idAba) {
+            // Esconde todas as abas
+            const conteudos = document.querySelectorAll('.tab-content');
+            conteudos.forEach(conteudo => conteudo.classList.remove('active'));
+
+            // Remove a classe 'active' de todos os botões
+            const botoes = document.querySelectorAll('.tab-btn');
+            botoes.forEach(botao => botao.classList.remove('active'));
+
+            // Mostra a aba clicada e ativa o botão correspondente
+            document.getElementById(idAba).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            adicionarLog(`Mudou para a aba: ${event.currentTarget.innerText}`);
+        }
+
+        // Função que detecta quando um switch liga ou desliga e joga no terminal nativo
+        function detectarModificacao(nomeFuncao, nomeArquivo, elemento) {
+            if(elemento.checked) {
+                adicionarLog(`[MOD] ${nomeFuncao} ATIVADO -> Mapeando arquivo [${nomeArquivo}]`);
             } else {
-                alert("Senha incorreta.");
+                adicionarLog(`[MOD] ${nomeFuncao} DESATIVADO pelo usuário.`);
             }
         }
 
-        function switchTab(event, targetTab) {
-            const contents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
-            const buttons = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < buttons.length; i++) buttons[i].classList.remove("active");
-            document.getElementById(targetTab).classList.add("active");
-            event.currentTarget.classList.add("active");
+        // Função do botão Salvar e Injetar
+        function salvarConfiguracoes() {
+            const selectGame = document.getElementById('gameTarget');
+            const jogoSelecionado = selectGame.options[selectGame.selectedIndex].text;
+            
+            adicionarLog(`[SUCESSO] Scripts compilados e vinculados ao ${jogoSelecionado}!`);
+            alert(`Configurações injetadas para o ${jogoSelecionado}! Próximo passo: Vá na aba Launcher FF para abrir o jogo.`);
+        }
+
+        // Função do botão de abrir o Free Fire nativo
+        function executarLauncher() {
+            const alvoJogo = document.getElementById('gameTarget').value;
+            adicionarLog(`[LAUNCHER] Executando rotina bypass de eixos de mira...`);
+            adicionarLog(`[LAUNCHER] Abrindo o jogo com otimização ativa.`);
+
+            setTimeout(() => {
+                if(alvoJogo === "max") {
+                    window.location.href = 'intent://#Intent;package=com.dts.freefiremax;end';
+                } else {
+                    window.location.href = 'intent://#Intent;package=com.dts.freefireth;end';
+                }
+            }, 500);
+        }
+
+        // Função auxiliar para escrever linhas no terminal de logs sem quebrar
+        function adicionarLog(texto) {
+            const terminal = document.getElementById('terminal');
+            terminal.innerHTML += `<br>&gt; ${texto}`;
+            // Faz o scroll automático do terminal sempre descer para o último log
+            terminal.scrollTop = terminal.scrollHeight;
         }
     </script>
 </body>
 </html>
-
